@@ -898,6 +898,95 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "presha_reviews_press": {
+      "type": "presha-reviews-press",
+      "blocks": {
+        "press_1": {
+          "type": "press_logo",
+          "settings": { "name": "HYPEBEAST" }
+        },
+        "press_2": {
+          "type": "press_logo",
+          "settings": { "name": "GQ" }
+        },
+        "press_3": {
+          "type": "press_logo",
+          "settings": { "name": "VOGUE" }
+        },
+        "press_4": {
+          "type": "press_logo",
+          "settings": { "name": "HIGHSNOBIETY" }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Fastest shipping I've experienced in Dubai. The AJ1s were perfect and came with a certificate of authenticity. 10/10 service.",
+            "reviewer_name": "OMAR A.",
+            "reviewer_location": "Verified Buyer from Dubai"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Presha Trends is my go-to for Chrome Hearts. Impossible to find authentic pieces elsewhere, but their team always delivers.",
+            "reviewer_name": "SARAH L.",
+            "reviewer_location": "Verified Buyer from London"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "A massive selection of collectibles — I found the limited Pikachu piece I'd been hunting for months. Packaged beautifully too.",
+            "reviewer_name": "KEVIN M.",
+            "reviewer_location": "Verified Buyer from Singapore"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "The authentication process gave me complete confidence. My Off-White Dunks arrived in pristine condition with full documentation.",
+            "reviewer_name": "AISHA R.",
+            "reviewer_location": "Verified Buyer from Riyadh"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Best resell platform in the Middle East, hands down. The customer service team went above and beyond to help me find my size.",
+            "reviewer_name": "JAMES T.",
+            "reviewer_location": "Verified Buyer from Abu Dhabi"
+          }
+        }
+      },
+      "block_order": [
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "eyebrow_text": "TRUSTED WORLDWIDE",
+        "background_color": "#d5d5d5",
+        "eyebrow_color": "#7a8a9e",
+        "press_text_color": "#2c3e50",
+        "card_background": "#ffffff",
+        "star_color": "#f0b429",
+        "quote_color": "#1a1a1a",
+        "name_color": "#1a1a1a",
+        "location_color": "#6ba5a5",
+        "avatar_color": "#dde5ed"
+      }
     }
   },
   "order": [
@@ -908,6 +997,7 @@
     "product_list_fa6P9H",
     "176963640576d6ba6c",
     "176963643280a5b577",
-    "1769638870fca27272"
+    "1769638870fca27272",
+    "presha_reviews_press"
   ]
 }

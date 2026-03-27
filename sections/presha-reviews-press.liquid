@@ -1,0 +1,589 @@
+{% comment %}
+  Section: Reviews & Press
+  Displays press logos (as text) and horizontally scrolling customer review cards.
+  Design ref: /designrefs/Section - 11. Reviews & Press (1).png
+{% endcomment %}
+
+<style>
+  /* ============================================
+     REVIEWS & PRESS SECTION
+     ============================================ */
+  .presha-reviews-press {
+    background-color: {{ section.settings.background_color }};
+    padding: 80px 0 100px;
+    overflow: hidden;
+  }
+
+  .presha-reviews-press__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- Press Logos Area --- */
+  .presha-reviews-press__press {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .presha-reviews-press__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+    margin-bottom: 28px;
+  }
+
+  .presha-reviews-press__logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .presha-reviews-press__logo-name {
+    font-family: 'Jost', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: {{ section.settings.press_text_color }};
+    letter-spacing: 0.05em;
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+  }
+
+  .presha-reviews-press__logo-name:hover {
+    opacity: 1;
+  }
+
+  /* --- Reviews Scroll Area --- */
+  .presha-reviews-press__reviews-wrapper {
+    position: relative;
+  }
+
+  .presha-reviews-press__reviews-track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 8px 24px 8px;
+    cursor: grab;
+  }
+
+  .presha-reviews-press__reviews-track:active {
+    cursor: grabbing;
+  }
+
+  .presha-reviews-press__reviews-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* --- Individual Review Card --- */
+  .presha-reviews-press__card {
+    flex: 0 0 380px;
+    min-width: 320px;
+    background: {{ section.settings.card_background }};
+    border-radius: 12px;
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+
+  .presha-reviews-press__card:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Stars */
+  .presha-reviews-press__stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+
+  .presha-reviews-press__star {
+    color: {{ section.settings.star_color }};
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* Quote */
+  .presha-reviews-press__quote {
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: {{ section.settings.quote_color }};
+    margin-bottom: 28px;
+    flex-grow: 1;
+  }
+
+  /* Reviewer */
+  .presha-reviews-press__reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .presha-reviews-press__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: {{ section.settings.avatar_color }};
+    flex-shrink: 0;
+  }
+
+  .presha-reviews-press__reviewer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .presha-reviews-press__reviewer-name {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: {{ section.settings.name_color }};
+    letter-spacing: 0.02em;
+  }
+
+  .presha-reviews-press__reviewer-location {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: {{ section.settings.location_color }};
+  }
+
+  /* --- GSAP Animation States --- */
+  .presha-reviews-press__eyebrow,
+  .presha-reviews-press__logo-name,
+  .presha-reviews-press__card {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* --- Mobile Responsive --- */
+
+  /* Small phones (375px baseline) */
+  @media (max-width: 480px) {
+    .presha-reviews-press {
+      padding: 56px 0 72px;
+    }
+
+    .presha-reviews-press__container {
+      padding: 0 16px;
+    }
+
+    .presha-reviews-press__eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      margin-bottom: 20px;
+    }
+
+    .presha-reviews-press__logos {
+      gap: 24px 32px;
+    }
+
+    .presha-reviews-press__logo-name {
+      font-size: 16px;
+    }
+
+    .presha-reviews-press__press {
+      margin-bottom: 40px;
+    }
+
+    .presha-reviews-press__reviews-track {
+      gap: 16px;
+      padding: 8px 16px;
+    }
+
+    .presha-reviews-press__card {
+      flex: 0 0 300px;
+      min-width: 280px;
+      padding: 28px 24px 24px;
+      border-radius: 10px;
+    }
+
+    .presha-reviews-press__quote {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+  }
+
+  /* Tablets */
+  @media (min-width: 481px) and (max-width: 749px) {
+    .presha-reviews-press {
+      padding: 64px 0 80px;
+    }
+
+    .presha-reviews-press__logos {
+      gap: 32px 40px;
+    }
+
+    .presha-reviews-press__logo-name {
+      font-size: 18px;
+    }
+
+    .presha-reviews-press__card {
+      flex: 0 0 340px;
+    }
+  }
+
+  /* Large tablets / small desktop */
+  @media (min-width: 750px) and (max-width: 1024px) {
+    .presha-reviews-press__logos {
+      gap: 40px;
+    }
+  }
+</style>
+
+<section
+  class="presha-reviews-press"
+  id="presha-reviews-press"
+  data-section-id="{{ section.id }}"
+>
+  <div class="presha-reviews-press__container">
+
+    <!-- Press Logos -->
+    <div class="presha-reviews-press__press">
+      <p class="presha-reviews-press__eyebrow">
+        {{ section.settings.eyebrow_text }}
+      </p>
+      <div class="presha-reviews-press__logos">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'press_logo' -%}
+            <span
+              class="presha-reviews-press__logo-name"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.name }}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Reviews Horizontal Scroll -->
+    <div class="presha-reviews-press__reviews-wrapper">
+      <div class="presha-reviews-press__reviews-track" id="reviews-track-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div
+              class="presha-reviews-press__card"
+              {{ block.shopify_attributes }}
+            >
+              <!-- Stars -->
+              <div class="presha-reviews-press__stars">
+                {%- assign star_count = block.settings.stars | default: 5 -%}
+                {%- for i in (1..star_count) -%}
+                  <span class="presha-reviews-press__star">★</span>
+                {%- endfor -%}
+              </div>
+
+              <!-- Quote -->
+              <p class="presha-reviews-press__quote">
+                "{{ block.settings.quote }}"
+              </p>
+
+              <!-- Reviewer -->
+              <div class="presha-reviews-press__reviewer">
+                <div class="presha-reviews-press__avatar"></div>
+                <div class="presha-reviews-press__reviewer-info">
+                  <span class="presha-reviews-press__reviewer-name">
+                    {{ block.settings.reviewer_name }}
+                  </span>
+                  <span class="presha-reviews-press__reviewer-location">
+                    {{ block.settings.reviewer_location }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = document.querySelector('#presha-reviews-press');
+    if (!section) return;
+
+    const eyebrow = section.querySelector('.presha-reviews-press__eyebrow');
+    const logos = section.querySelectorAll('.presha-reviews-press__logo-name');
+    const cards = section.querySelectorAll('.presha-reviews-press__card');
+
+    /* --- Press entrance --- */
+    const pressTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        once: true,
+      },
+    });
+
+    pressTl.fromTo(
+      eyebrow,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+    );
+
+    pressTl.fromTo(
+      logos,
+      { opacity: 0, y: 16 },
+      { opacity: 0.75, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1 },
+      '-=0.3'
+    );
+
+    /* --- Review cards stagger entrance --- */
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: '.presha-reviews-press__reviews-wrapper',
+          start: 'top 85%',
+          once: true,
+        },
+      }
+    );
+
+    /* --- Drag-to-scroll on reviews track --- */
+    const track = document.querySelector('#reviews-track-{{ section.id }}');
+    if (!track) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      track.style.cursor = 'grabbing';
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', function () {
+      isDown = false;
+      track.style.cursor = 'grab';
+    });
+
+    track.addEventListener('mouseup', function () {
+      isDown = false;
+      track.style.cursor = 'grab';
+    });
+
+    track.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - track.offsetLeft;
+      var walk = (x - startX) * 1.5;
+      track.scrollLeft = scrollLeft - walk;
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Reviews & Press",
+  "tag": "section",
+  "class": "presha-reviews-press-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "TRUSTED WORLDWIDE"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#d5d5d5"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow text color",
+      "default": "#7a8a9e"
+    },
+    {
+      "type": "color",
+      "id": "press_text_color",
+      "label": "Press name color",
+      "default": "#2c3e50"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Review card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f0b429"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Reviewer name color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "location_color",
+      "label": "Location text color",
+      "default": "#6ba5a5"
+    },
+    {
+      "type": "color",
+      "id": "avatar_color",
+      "label": "Avatar placeholder color",
+      "default": "#dde5ed"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "press_logo",
+      "name": "Press Logo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Publication name",
+          "default": "HYPEBEAST"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review quote",
+          "default": "Fastest shipping I've experienced in Dubai. The AJ1s were perfect and came with a certificate of authenticity. 10/10 service."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "default": "OMAR A."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_location",
+          "label": "Reviewer location",
+          "default": "Verified Buyer from Dubai"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews & Press",
+      "blocks": [
+        {
+          "type": "press_logo",
+          "settings": { "name": "HYPEBEAST" }
+        },
+        {
+          "type": "press_logo",
+          "settings": { "name": "GQ" }
+        },
+        {
+          "type": "press_logo",
+          "settings": { "name": "VOGUE" }
+        },
+        {
+          "type": "press_logo",
+          "settings": { "name": "HIGHSNOBIETY" }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Fastest shipping I've experienced in Dubai. The AJ1s were perfect and came with a certificate of authenticity. 10/10 service.",
+            "reviewer_name": "OMAR A.",
+            "reviewer_location": "Verified Buyer from Dubai"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Presha Trends is my go-to for Chrome Hearts. Impossible to find authentic pieces elsewhere, but their team always delivers.",
+            "reviewer_name": "SARAH L.",
+            "reviewer_location": "Verified Buyer from London"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "A massive selection of collectibles — I found the limited Pikachu piece I'd been hunting for months. Packaged beautifully too.",
+            "reviewer_name": "KEVIN M.",
+            "reviewer_location": "Verified Buyer from Singapore"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "The authentication process gave me complete confidence. My Off-White Dunks arrived in pristine condition with full documentation.",
+            "reviewer_name": "AISHA R.",
+            "reviewer_location": "Verified Buyer from Riyadh"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Best resell platform in the Middle East, hands down. The customer service team went above and beyond to help me find my size.",
+            "reviewer_name": "JAMES T.",
+            "reviewer_location": "Verified Buyer from Abu Dhabi"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
