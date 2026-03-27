@@ -1,0 +1,500 @@
+{% doc %}
+  @prompt
+    Create a horizontal "Shop by Category" carousel positioned below the hero header. Use a premium glassmorphism design with soft blur, subtle transparency, smooth rounded corners, and floating cards with gentle shadows. Each card includes a category image thumbnail on the left, small uppercase "SHOP BY" label, and bold category title. Features horizontal scroll with snap scrolling, smooth swipe on mobile, arrow navigation on desktop. Medium-large cards, evenly spaced. Minimal editorial luxury aesthetic with neutral colors, soft gradients, clean modern typography. Optimized for fashion/sneaker/culture commerce like Nike SNKRS or StockX. Fully responsive, fast loading, accessible. No hard borders, premium brand perception focused on discovery., i want all collections on 1 page no scroll , Add CSS styling to force category boxes to display in a single horizontal line without wrapping. The CSS should target the category container and set flex-wrap to nowrap, ensure horizontal scrolling if needed on mobile, and keep all items on one row. Make the category boxes compact and evenly spaced in a single horizontal line.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-carousel-{{ ai_gen_id }} {
+    width: 100%;
+    display: block;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background: {{ block.settings.background_color }};
+  }
+
+  .ai-category-carousel-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-category-carousel-grid-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: {{ block.settings.card_gap }}px;
+    padding: 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+
+  .ai-category-carousel-grid-{{ ai_gen_id }}::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .ai-category-carousel-grid-{{ ai_gen_id }}::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .ai-category-carousel-grid-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  .ai-category-card-{{ ai_gen_id }} {
+    background: {{ block.settings.card_background }};
+    backdrop-filter: blur({{ block.settings.blur_amount }}px);
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: {{ block.settings.shadow_x }}px {{ block.settings.shadow_y }}px {{ block.settings.shadow_blur }}px {{ block.settings.shadow_color }};
+    flex-shrink: 0;
+    min-width: {{ block.settings.card_min_width }}px;
+    max-width: {{ block.settings.card_max_width }}px;
+  }
+
+  .ai-category-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: {{ block.settings.shadow_x }}px {{ block.settings.shadow_y | plus: 4 }}px {{ block.settings.shadow_blur | plus: 8 }}px {{ block.settings.shadow_color }};
+  }
+
+  .ai-category-image-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.image_size }}px;
+    height: {{ block.settings.image_size }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    background: {{ block.settings.image_placeholder_bg }};
+  }
+
+  .ai-category-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-category-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-category-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-category-content-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-category-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: {{ block.settings.label_color }};
+    margin: 0 0 4px 0;
+    opacity: 0.7;
+  }
+
+  .ai-category-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .ai-category-card-{{ ai_gen_id }} {
+      min-width: {{ block.settings.card_min_width_mobile }}px;
+      max-width: {{ block.settings.card_max_width_mobile }}px;
+    }
+
+    .ai-category-image-{{ ai_gen_id }} {
+      width: {{ block.settings.image_size_mobile }}px;
+      height: {{ block.settings.image_size_mobile }}px;
+    }
+
+    .ai-category-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size_mobile }}px;
+    }
+
+    .ai-category-label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_font_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-category-carousel-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-carousel-container-{{ ai_gen_id }}">
+    <div class="ai-category-carousel-grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign collection_key = 'collection_' | append: i
+          assign collection = block.settings[collection_key]
+        %}
+        
+        {% if collection != blank %}
+          <a href="{{ collection.url }}" class="ai-category-card-{{ ai_gen_id }}">
+            <div class="ai-category-image-{{ ai_gen_id }}">
+              {% if collection.image %}
+                <img
+                  src="{{ collection.image | image_url: width: 200 }}"
+                  alt="{{ collection.image.alt | escape }}"
+                  loading="lazy"
+                  width="200"
+                  height="200"
+                >
+              {% elsif collection.products.first.featured_image %}
+                <img
+                  src="{{ collection.products.first.featured_image | image_url: width: 200 }}"
+                  alt="{{ collection.products.first.featured_image.alt | escape }}"
+                  loading="lazy"
+                  width="200"
+                  height="200"
+                >
+              {% else %}
+                <div class="ai-category-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="ai-category-content-{{ ai_gen_id }}">
+              <div class="ai-category-label-{{ ai_gen_id }}">{{ block.settings.category_label }}</div>
+              <h3 class="ai-category-title-{{ ai_gen_id }}">{{ collection.title }}</h3>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop by category",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "category_label",
+      "label": "Category label",
+      "default": "SHOP BY"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Collection 5"
+    },
+    {
+      "type": "collection",
+      "id": "collection_6",
+      "label": "Collection 6"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_min_width",
+      "label": "Card min width (desktop)",
+      "min": 200,
+      "max": 400,
+      "step": 20,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "card_max_width",
+      "label": "Card max width (desktop)",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "card_min_width_mobile",
+      "label": "Card min width (mobile)",
+      "min": 200,
+      "max": 350,
+      "step": 10,
+      "unit": "px",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "card_max_width_mobile",
+      "label": "Card max width (mobile)",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "rgba(255, 255, 255, 0.7)"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "blur_amount",
+      "label": "Blur amount",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Image size (desktop)",
+      "min": 60,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "image_size_mobile",
+      "label": "Image size (mobile)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "image_placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label size (desktop)",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "label_font_size_mobile",
+      "label": "Label size (mobile)",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title size (desktop)",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Horizontal offset",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Vertical offset",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Blur",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by category"
+    }
+  ]
+}
+{% endschema %}

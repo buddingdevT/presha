@@ -1,0 +1,222 @@
+{% doc %}
+  @prompt
+    a - z for different brand names, A B C D E F G H I J K L M N O P Q R S T U V W X Y Z all in horizontal line, remove bold and exterior blocks
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-alphabet-nav-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding }}px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-alphabet-nav-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: {{ block.settings.alignment }};
+    align-items: center;
+    gap: {{ block.settings.letter_spacing }}px;
+    flex-wrap: {{ block.settings.wrap_on_mobile }};
+  }
+
+  .ai-alphabet-nav-letter-{{ ai_gen_id }} {
+    font-size: {{ block.settings.letter_size }}px;
+    color: {{ block.settings.letter_color }};
+    text-decoration: none;
+    font-weight: {{ block.settings.letter_weight }};
+    transition: all 0.3s ease;
+  }
+
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.letter_hover_color }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-alphabet-nav-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.6 }}px 16px;
+    }
+
+    .ai-alphabet-nav-container-{{ ai_gen_id }} {
+      gap: {{ block.settings.letter_spacing | times: 0.5 }}px;
+    }
+
+    .ai-alphabet-nav-letter-{{ ai_gen_id }} {
+      font-size: {{ block.settings.letter_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<alphabet-nav-{{ ai_gen_id }} class="ai-alphabet-nav-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-alphabet-nav-container-{{ ai_gen_id }}">
+    {% assign alphabet = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' %}
+    
+    {% for letter in alphabet %}
+      {% if block.settings.enable_links %}
+        <a 
+          href="{{ block.settings.link_prefix }}{{ letter | downcase }}" 
+          class="ai-alphabet-nav-letter-{{ ai_gen_id }}"
+        >
+          {{ letter }}
+        </a>
+      {% else %}
+        <span class="ai-alphabet-nav-letter-{{ ai_gen_id }}">{{ letter }}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+</alphabet-nav-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AlphabetNav{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('alphabet-nav-{{ ai_gen_id }}', AlphabetNav{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Alphabet navigation",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" },
+        { "value": "space-between", "label": "Space between" },
+        { "value": "space-around", "label": "Space around" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "wrap_on_mobile",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "nowrap", "label": "Single line" },
+        { "value": "wrap", "label": "Wrap to multiple lines" }
+      ],
+      "default": "wrap"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Letters"
+    },
+    {
+      "type": "range",
+      "id": "letter_size",
+      "label": "Letter size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 4,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "letter_weight",
+      "label": "Letter weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_links",
+      "label": "Enable links",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "link_prefix",
+      "label": "Link prefix",
+      "default": "/collections/",
+      "info": "Letters will be appended to this URL (e.g., /collections/a)"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "letter_color",
+      "label": "Letter",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "letter_hover_color",
+      "label": "Letter hover",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Alphabet navigation"
+    }
+  ]
+}
+{% endschema %}
