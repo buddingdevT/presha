@@ -1,0 +1,486 @@
+{% comment %}
+  ============================================================
+  PRESHA JOURNAL — Editorial Blog / Article Cards
+  ============================================================
+
+  HOW TO EDIT (Shopify Theme Editor):
+  ─────────────────────────────────────
+  1. Go to: Online Store > Themes > Customize > Homepage
+  2. Find "Presha Journal" section
+  3. Section-level settings:
+     - Eyebrow text (e.g. "EDITORIAL HUB")
+     - Heading (e.g. "PRESHA JOURNAL")
+     - "Read All" link text + URL
+     - Background color
+  4. Each "Article Card" block has:
+     - Image: upload the article's featured image
+     - Category: e.g. "VOLUME 01", "CHROME HEARTS"
+     - Read time: e.g. "6 MIN READ" (leave blank to hide)
+     - Title: the article headline
+     - Description: 1-2 line summary
+     - Link URL: where clicking the card goes
+  5. You can add up to 6 article card blocks, reorder or remove them
+
+  ============================================================
+{% endcomment %}
+
+<section
+  class="presha-journal"
+  style="background-color: {{ section.settings.bg_color }};"
+  data-section-id="{{ section.id }}"
+>
+  <div class="presha-journal__inner">
+
+    {%- comment -%} Header: eyebrow + heading left, read-all link right {%- endcomment -%}
+    <div class="presha-journal__header">
+      <div class="presha-journal__header-left">
+        <span class="presha-journal__eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="presha-journal__heading">{{ section.settings.heading }}</h2>
+      </div>
+      {% if section.settings.link_url != blank %}
+        <a href="{{ section.settings.link_url }}" class="presha-journal__link">
+          {{ section.settings.link_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    {%- comment -%} Article cards grid {%- endcomment -%}
+    <div class="presha-journal__grid">
+      {% for block in section.blocks %}
+        <a
+          href="{{ block.settings.link_url | default: '#' }}"
+          class="presha-journal__card"
+          {{ block.shopify_attributes }}
+        >
+          {%- comment -%} Image {%- endcomment -%}
+          <div class="presha-journal__img-wrap">
+            {% if block.settings.image != blank %}
+              <img
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                        {{ block.settings.image | image_url: width: 600 }} 600w,
+                        {{ block.settings.image | image_url: width: 800 }} 800w"
+                sizes="(max-width: 479px) 100vw, (max-width: 749px) 50vw, 33vw"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="800"
+                height="500"
+                class="presha-journal__img"
+              >
+            {% else %}
+              <div class="presha-journal__img-placeholder"></div>
+            {% endif %}
+          </div>
+
+          {%- comment -%} Meta + title + description {%- endcomment -%}
+          <div class="presha-journal__card-body">
+            <div class="presha-journal__meta">
+              <span class="presha-journal__category">{{ block.settings.category }}</span>
+              {% if block.settings.read_time != blank %}
+                <span class="presha-journal__separator">·</span>
+                <span class="presha-journal__read-time">{{ block.settings.read_time }}</span>
+              {% endif %}
+            </div>
+            <h3 class="presha-journal__title">{{ block.settings.title }}</h3>
+            {% if block.settings.description != blank %}
+              <p class="presha-journal__desc">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     PRESHA JOURNAL — Styles
+     Mobile-first: base → 480 → 749 → 1024 → 1280
+     ============================================================ */
+
+  .presha-journal {
+    padding: 48px 0;
+  }
+
+  .presha-journal__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Header ───────────────────────────────────────────── */
+
+  .presha-journal__header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .presha-journal__header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .presha-journal__eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #999;
+    line-height: 1;
+  }
+
+  .presha-journal__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+
+  .presha-journal__link {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: color 0.3s ease;
+  }
+
+  .presha-journal__link:hover {
+    color: #6B1A2A;
+  }
+
+  /* ── Grid ──────────────────────────────────────────────── */
+
+  .presha-journal__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* ── Card ──────────────────────────────────────────────── */
+
+  .presha-journal__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .presha-journal__img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #eee;
+    margin-bottom: 14px;
+  }
+
+  .presha-journal__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .presha-journal__card:hover .presha-journal__img {
+    transform: scale(1.03);
+  }
+
+  .presha-journal__img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+  }
+
+  /* Card body */
+
+  .presha-journal__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .presha-journal__meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .presha-journal__category {
+    color: #6B1A2A;
+  }
+
+  .presha-journal__separator {
+    color: #bbb;
+  }
+
+  .presha-journal__read-time {
+    color: #999;
+    font-weight: 400;
+  }
+
+  .presha-journal__title {
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .presha-journal__desc {
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #777;
+    margin: 0;
+  }
+
+  /* ── 480px ─────────────────────────────────────────────── */
+
+  @media (min-width: 480px) {
+    .presha-journal__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  /* ── 749px ─────────────────────────────────────────────── */
+
+  @media (min-width: 749px) {
+    .presha-journal {
+      padding: 64px 0;
+    }
+
+    .presha-journal__header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+
+    .presha-journal__link {
+      align-self: auto;
+    }
+
+    .presha-journal__heading {
+      font-size: 32px;
+    }
+
+    .presha-journal__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .presha-journal__title {
+      font-size: 16px;
+    }
+
+    .presha-journal__desc {
+      font-size: 13px;
+    }
+  }
+
+  /* ── 1024px ────────────────────────────────────────────── */
+
+  @media (min-width: 1024px) {
+    .presha-journal {
+      padding: 80px 0;
+    }
+
+    .presha-journal__inner {
+      padding: 0 40px;
+    }
+
+    .presha-journal__heading {
+      font-size: 36px;
+    }
+
+    .presha-journal__title {
+      font-size: 17px;
+    }
+
+    .presha-journal__desc {
+      font-size: 13.5px;
+    }
+  }
+
+  /* ── 1280px ────────────────────────────────────────────── */
+
+  @media (min-width: 1280px) {
+    .presha-journal__inner {
+      padding: 0 60px;
+    }
+
+    .presha-journal__heading {
+      font-size: 38px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var section = document.querySelector('.presha-journal[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 85%',
+        once: true
+      }
+    });
+
+    tl.from(section.querySelector('.presha-journal__eyebrow'), {
+      opacity: 0, y: 10, duration: 0.45, ease: 'power2.out'
+    });
+
+    tl.from(section.querySelector('.presha-journal__heading'), {
+      opacity: 0, y: 14, duration: 0.45, ease: 'power2.out'
+    }, '-=0.25');
+
+    var link = section.querySelector('.presha-journal__link');
+    if (link) {
+      tl.from(link, {
+        opacity: 0, x: -10, duration: 0.35, ease: 'power2.out'
+      }, '-=0.2');
+    }
+
+    tl.from(section.querySelectorAll('.presha-journal__card'), {
+      opacity: 0, y: 24, duration: 0.5, stagger: 0.12, ease: 'power2.out'
+    }, '-=0.15');
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Presha Journal",
+  "tag": "section",
+  "class": "presha-journal-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "EDITORIAL HUB"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "PRESHA JOURNAL"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "READ ALL ARTICLES"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article_card",
+      "name": "Article Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Article image"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category tag",
+          "default": "CATEGORY"
+        },
+        {
+          "type": "text",
+          "id": "read_time",
+          "label": "Read time (e.g. '6 MIN READ')"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Article title",
+          "default": "Article Title Goes Here"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short description"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Article link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Journal",
+      "blocks": [
+        {
+          "type": "article_card",
+          "settings": {
+            "category": "VOLUME 01",
+            "title": "THE EVOLUTION OF DUBAI'S STREETWEAR LANDSCAPE",
+            "description": "How the desert city became the global capital for luxury streetwear and limited drops."
+          }
+        },
+        {
+          "type": "article_card",
+          "settings": {
+            "category": "CHROME HEARTS",
+            "read_time": "6 MIN READ",
+            "title": "CHROME HEARTS: MORE THAN JUST SILVER",
+            "description": "Unpacking the mystique and enduring appeal of the world's most exclusive gothic label."
+          }
+        },
+        {
+          "type": "article_card",
+          "settings": {
+            "category": "COLLECTING GUIDE",
+            "read_time": "5 MIN READ",
+            "title": "THE BEGINNER'S GUIDE TO SNEAKER INVESTING",
+            "description": "A strategic look at assets you can wear — how to build a portfolio of authentic grails."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
