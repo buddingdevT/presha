@@ -1,221 +1,46 @@
-{% comment %}
-  Presha Trends — Announcement Bar
-  - Burgundy background hardcoded (#6d001a) — matches brand identity
-  - Vertical ticker rotation powered by GSAP
-  - No right-side nav links
-  - Blocks are editable in the theme editor via _announcement block type
-{% endcomment %}
-
 <aside
-  class="presha-ann-bar"
-  style="--ann-border: {{ section.settings.divider_width }}px;"
+  class="presha-announce"
   aria-label="Announcements"
 >
-  <div
-    class="presha-ann-bar__ticker"
-    aria-live="polite"
-    aria-atomic="true"
-    data-speed="{{ section.settings.speed | default: 5 }}"
-  >
-    {% for block in section.blocks %}
-      {%- assign plain = block.settings.text | strip_html | strip -%}
-      {%- unless plain == '' -%}
-        <div
-          class="presha-ann-bar__item"
-          {{ block.shopify_attributes }}
-        >
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="presha-ann-bar__link">
-              {{ block.settings.text }}
-            </a>
-          {%- else -%}
-            <span>{{ block.settings.text }}</span>
-          {%- endif -%}
-        </div>
-      {%- endunless -%}
-    {% endfor %}
-  </div>
+  Presha Verified Authenticity &nbsp;&nbsp;|&nbsp;&nbsp; Worldwide Shipping &nbsp;&nbsp;|&nbsp;&nbsp; Shop Our Latest &nbsp;&nbsp;|&nbsp;&nbsp; Looking for something specific? Whatsapp us!
 </aside>
 
 {% stylesheet %}
-  /* ── Announcement Bar ──────────────────────────────────── */
-  .presha-ann-bar {
+  .presha-announce {
+    height: 40px;
     background: #6d001a;
     color: #ffffff;
-    height: 40px;
-    position: relative;
-    overflow: hidden;
-    border-block-end: var(--ann-border) solid rgba(255, 255, 255, 0.15);
-  }
-
-  .presha-ann-bar__ticker {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .presha-ann-bar__item {
-    position: absolute;
-    inset-inline: 0;
     text-align: center;
-    font-family: var(--font-body--family, system-ui, sans-serif);
-    font-size: 12px;
-    letter-spacing: 0.07em;
-    line-height: 1;
-    padding: 0 20px;
-    will-change: transform, opacity;
-
-    /* Initial state — GSAP takes control on load */
-    opacity: 0;
-    transform: translateY(40px);
+    font-size: 11px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 0 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  /* Fallback: show first item if GSAP not yet ready */
-  .presha-ann-bar__item.is-fallback {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .presha-ann-bar__link {
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  .presha-ann-bar__link:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  @media screen and (max-width: 768px) {
+    .presha-announce {
+      font-size: 10px;
+      letter-spacing: .04em;
+    }
   }
 {% endstylesheet %}
-
-<script>
-  (function () {
-    var ticker = document.querySelector('.presha-ann-bar__ticker');
-    if (!ticker) return;
-
-    var items = Array.from(ticker.querySelectorAll('.presha-ann-bar__item'));
-    if (!items.length) return;
-
-    /* Speed in ms — pulled from data attribute */
-    var intervalMs = (parseInt(ticker.dataset.speed, 10) || 5) * 1000;
-    var current = 0;
-
-    /* Show first item as a CSS fallback while GSAP loads */
-    items[0].classList.add('is-fallback');
-
-    function startTicker() {
-      /* Remove fallback class — GSAP takes over */
-      items[0].classList.remove('is-fallback');
-
-      /* Set all items off-screen below */
-      gsap.set(items, { yPercent: 100, opacity: 0 });
-
-      /* Animate first item in */
-      gsap.to(items[0], {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.55,
-        ease: 'power3.out'
-      });
-
-      if (items.length <= 1) return;
-
-      setInterval(function () {
-        var next = (current + 1) % items.length;
-
-        /* Exit current item fading out */
-        gsap.to(items[current], {
-          yPercent: -20,
-          opacity: 0,
-          duration: 0.4,
-          ease: 'power2.out'
-        });
-
-        /* Enter next item from bottom */
-        gsap.fromTo(
-          items[next],
-          { yPercent: 60, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 }
-        );
-
-        current = next;
-      }, intervalMs);
-    }
-
-    /* Wait for GSAP — it loads via CDN so may not be instant */
-    if (typeof gsap !== 'undefined') {
-      startTicker();
-    } else {
-      var attempts = 0;
-      var check = setInterval(function () {
-        if (typeof gsap !== 'undefined') {
-          clearInterval(check);
-          startTicker();
-        }
-        if (++attempts > 40) clearInterval(check); /* give up after ~10s */
-      }, 250);
-    }
-  })();
-</script>
 
 {% schema %}
 {
   "name": "t:names.announcement_bar",
-  "blocks": [
-    {
-      "type": "_announcement"
-    }
-  ],
   "enabled_on": {
     "groups": ["header"]
   },
-  "settings": [
-    {
-      "type": "range",
-      "id": "speed",
-      "label": "t:settings.scroll_speed",
-      "min": 2,
-      "max": 10,
-      "default": 5,
-      "unit": "sec"
-    },
-    {
-      "type": "header",
-      "content": "t:content.appearance"
-    },
-    {
-      "type": "range",
-      "id": "divider_width",
-      "label": "t:settings.divider_thickness",
-      "min": 0,
-      "max": 5,
-      "step": 0.5,
-      "unit": "px",
-      "default": 0
-    }
-  ],
   "presets": [
     {
-      "name": "t:names.announcement_bar",
-      "blocks": {
-        "ann_1": {
-          "type": "_announcement",
-          "settings": { "text": "Presha Verified Authenticity" }
-        },
-        "ann_2": {
-          "type": "_announcement",
-          "settings": { "text": "Worldwide Shipping" }
-        },
-        "ann_3": {
-          "type": "_announcement",
-          "settings": { "text": "Dubai Based" }
-        }
-      },
-      "block_order": ["ann_1", "ann_2", "ann_3"]
+      "name": "t:names.announcement_bar"
     }
   ]
 }

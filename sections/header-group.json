@@ -18,55 +18,31 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "100% Authenticated — Presha Verified. Every Single Piece.",
-            "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Presha Verified Authenticity",
+            "link": ""
+          }
         },
         "announcement_xzzyBp": {
           "type": "_announcement",
           "settings": {
-            "text": "Looking for a specific item? WhatsApp us!",
-            "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Worldwide Shipping",
+            "link": ""
+          }
         },
         "announcement_Qq3hwG": {
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "New Drops Every Week — Shop The Latest",
-            "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Shop Our Latest",
+            "link": ""
+          }
         },
         "announcement_XaQ3ET": {
           "type": "_announcement",
           "settings": {
-            "text": "We Accept Tabby & Tamara | Easy Monthly Payments",
-            "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Looking for something specific? Whatsapp us!",
+            "link": ""
+          }
         }
       },
       "block_order": [
