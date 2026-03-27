@@ -164,6 +164,16 @@ class HeaderComponent extends Component {
         this.dataset.scrollDirection = 'down';
       }
 
+      // Ensure transparent header stays glassmorphic while over the hero section
+      if (this.hasAttribute('transparent')) {
+        const heroThreshold = Math.max(window.innerHeight * 0.85, 200); 
+        if (scrollTop < heroThreshold) {
+          this.dataset.stickyState = 'inactive';
+        } else {
+          this.dataset.stickyState = 'active';
+        }
+      }
+
       this.#lastScrollTop = scrollTop;
       return;
     }

@@ -10,6 +10,10 @@
 - Configured the Header to transition to a solid white background with a dark logo on scroll.
 - Integrated `logo-text-whitey.png` and `logo-text-blacky.png` directly into the logo block and section logic to ensure a seamless color swap.
 
+**Fixes:**
+- Modified `assets/header.js` to ensure the glassmorphic transparent state re-activates correctly when scrolling back up into the hero section.
+- Added top and bottom padding (`12px`) to the logo container in `blocks/_header-logo.liquid`.
+
 **Files changed:**
 - `assets/logo-text-whitey.png` (Added)
 - `assets/logo-text-blacky.png` (Added)
