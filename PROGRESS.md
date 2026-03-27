@@ -25,3 +25,17 @@
 - Section includes a preset so it can be added from the Theme Editor via "Add section"
 - Avatar placeholders are CSS circles — can be swapped for real images later if needed
 - Press logos are text-based (not images) matching the design ref's editorial approach
+
+---
+
+## 2026-03-27 — Reviews & Press: auto-scroll + reviewer photos
+
+**What was built:**
+- Auto-scroll on review cards every 3 seconds, loops back to start when reaching the end
+- Auto-scroll pauses on hover/touch, resumes 3s after user stops interacting
+- Added optional reviewer photo (image_picker) to the review block schema
+- Avatar now renders uploaded photo if set, falls back to plain circle placeholder
+- Added detailed comments at top of file explaining how to edit reviews, press logos, photos, and colors via Theme Editor
+
+**Files changed:**
+- `sections/presha-reviews-press.liquid` — Updated

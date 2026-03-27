@@ -2,6 +2,32 @@
   Section: Reviews & Press
   Displays press logos (as text) and horizontally scrolling customer review cards.
   Design ref: /designrefs/Section - 11. Reviews & Press (1).png
+
+  ============================================================
+  HOW TO EDIT THIS SECTION (via Shopify Theme Editor):
+  ============================================================
+
+  1. Go to: Online Store > Themes > Customize > Homepage
+  2. Find "Reviews & Press" in the left sidebar
+  3. Click it to see section-level settings (background color, star color, etc.)
+
+  TO ADD / EDIT A REVIEW:
+  - Click "Add block" > "Review"
+  - Fill in: Star rating, Review quote, Reviewer name, Reviewer location
+  - To add a reviewer photo: upload an image in the "Reviewer photo" field.
+    If left blank, a plain circle placeholder is shown instead.
+  - To reorder reviews, drag blocks up/down in the sidebar.
+  - To delete a review, click the block and hit "Remove block".
+
+  TO ADD / EDIT PRESS LOGOS:
+  - Click "Add block" > "Press Logo"
+  - Enter the publication name (e.g. "HYPEBEAST", "GQ", "VOGUE")
+  - These render as styled text, not images.
+
+  TO CHANGE COLORS:
+  - Click the section heading "Reviews & Press" in the sidebar
+  - All colors (background, stars, text, avatar, etc.) are editable there.
+  ============================================================
 {% endcomment %}
 
 <style>
@@ -140,6 +166,13 @@
     border-radius: 50%;
     background: {{ section.settings.avatar_color }};
     flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .presha-reviews-press__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .presha-reviews-press__reviewer-info {
@@ -294,9 +327,19 @@
                 "{{ block.settings.quote }}"
               </p>
 
-              <!-- Reviewer -->
+              <!-- Reviewer — avatar shows uploaded photo if set, otherwise a plain circle -->
               <div class="presha-reviews-press__reviewer">
-                <div class="presha-reviews-press__avatar"></div>
+                <div class="presha-reviews-press__avatar">
+                  {%- if block.settings.reviewer_image != blank -%}
+                    <img
+                      src="{{ block.settings.reviewer_image | image_url: width: 80 }}"
+                      alt="{{ block.settings.reviewer_name }}"
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </div>
                 <div class="presha-reviews-press__reviewer-info">
                   <span class="presha-reviews-press__reviewer-name">
                     {{ block.settings.reviewer_name }}
@@ -321,15 +364,15 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const section = document.querySelector('#presha-reviews-press');
+    var section = document.querySelector('#presha-reviews-press');
     if (!section) return;
 
-    const eyebrow = section.querySelector('.presha-reviews-press__eyebrow');
-    const logos = section.querySelectorAll('.presha-reviews-press__logo-name');
-    const cards = section.querySelectorAll('.presha-reviews-press__card');
+    var eyebrow = section.querySelector('.presha-reviews-press__eyebrow');
+    var logos = section.querySelectorAll('.presha-reviews-press__logo-name');
+    var cards = section.querySelectorAll('.presha-reviews-press__card');
 
-    /* --- Press entrance --- */
-    const pressTl = gsap.timeline({
+    /* --- Press entrance animation --- */
+    var pressTl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
@@ -368,16 +411,82 @@
       }
     );
 
-    /* --- Drag-to-scroll on reviews track --- */
-    const track = document.querySelector('#reviews-track-{{ section.id }}');
+    /* --- Reviews track: auto-scroll + drag-to-scroll --- */
+    var track = document.querySelector('#reviews-track-{{ section.id }}');
     if (!track) return;
 
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+    var cardEls = track.querySelectorAll('.presha-reviews-press__card');
+    if (cardEls.length === 0) return;
+
+    /* Auto-scroll: advances one card width every 3 seconds.
+       Pauses on hover/touch, resumes when user stops interacting. */
+    var autoScrollInterval = null;
+    var isUserInteracting = false;
+
+    function getCardScrollDistance() {
+      var card = cardEls[0];
+      var gap = 24;
+      if (window.innerWidth <= 480) gap = 16;
+      return card.offsetWidth + gap;
+    }
+
+    function autoScroll() {
+      if (isUserInteracting) return;
+
+      var distance = getCardScrollDistance();
+      var maxScroll = track.scrollWidth - track.clientWidth;
+
+      /* If we've reached the end, loop back to the start */
+      if (track.scrollLeft >= maxScroll - 2) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: distance, behavior: 'smooth' });
+      }
+    }
+
+    function startAutoScroll() {
+      stopAutoScroll();
+      autoScrollInterval = setInterval(autoScroll, 3000);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+
+    /* Pause auto-scroll on hover / touch, resume 3s after release */
+    var resumeTimeout = null;
+
+    function pauseAutoScroll() {
+      isUserInteracting = true;
+      stopAutoScroll();
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+    }
+
+    function resumeAutoScrollAfterDelay() {
+      isUserInteracting = false;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(startAutoScroll, 3000);
+    }
+
+    track.addEventListener('mouseenter', pauseAutoScroll);
+    track.addEventListener('mouseleave', resumeAutoScrollAfterDelay);
+    track.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+    track.addEventListener('touchend', resumeAutoScrollAfterDelay);
+
+    /* Start auto-scroll on page load */
+    startAutoScroll();
+
+    /* --- Drag-to-scroll (desktop mouse) --- */
+    var isDown = false;
+    var startX;
+    var scrollLeft;
 
     track.addEventListener('mousedown', function (e) {
       isDown = true;
+      pauseAutoScroll();
       track.style.cursor = 'grabbing';
       startX = e.pageX - track.offsetLeft;
       scrollLeft = track.scrollLeft;
@@ -391,6 +500,7 @@
     track.addEventListener('mouseup', function () {
       isDown = false;
       track.style.cursor = 'grab';
+      resumeAutoScrollAfterDelay();
     });
 
     track.addEventListener('mousemove', function (e) {
@@ -513,6 +623,12 @@
           "id": "reviewer_location",
           "label": "Reviewer location",
           "default": "Verified Buyer from Dubai"
+        },
+        {
+          "type": "image_picker",
+          "id": "reviewer_image",
+          "label": "Reviewer photo (optional)",
+          "info": "Upload a square photo. If left blank, a plain circle placeholder is shown."
         }
       ]
     }
