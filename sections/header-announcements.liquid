@@ -1,137 +1,166 @@
+{% comment %}
+  Presha Trends — Announcement Bar
+  - Burgundy background hardcoded (#6d001a) — matches brand identity
+  - Vertical ticker rotation powered by GSAP
+  - No right-side nav links
+  - Blocks are editable in the theme editor via _announcement block type
+{% endcomment %}
 
-
-{% if section.blocks.size > 1 %}
-  <script
-    src="{{ 'announcement-bar.js' | asset_url }}"
-    type="module"
-    fetchpriority="low"
-  ></script>
-{% endif %}
-
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
+  class="presha-ann-bar"
+  style="--ann-border: {{ section.settings.divider_width }}px;"
+  aria-label="Announcements"
 >
-  {% liquid
-    assign autoplay = false
-    assign show_arrows = false
-    if section.blocks.size > 1
-      assign autoplay = true
-      assign show_arrows = true
-    endif
-  %}
-
-  <announcement-bar-component
-    class="announcement-bar__slider"
-    {% if autoplay == true %}
-      autoplay="{{ section.settings.speed }}" aria-live="polite"
-    {% endif %}
+  <div
+    class="presha-ann-bar__ticker"
+    aria-live="polite"
+    aria-atomic="true"
+    data-speed="{{ section.settings.speed | default: 5 }}"
   >
-    {% if show_arrows %}
-      {% render 'slideshow-arrows', icon_style: 'chevron' %}
-    {% endif %}
-
-    <div class="announcement-bar__slides">
-      {% content_for 'blocks' %}
-    </div>
-  </announcement-bar-component>
-
-  <div class="announcement-nav-links">
-    <a href="/pages/sell-now" class="announcement-link">Sell Now</a>
-    <span class="announcement-divider">|</span>
-    <a href="/pages/find-a-store" class="announcement-link">Find a Store</a>
-    <span class="announcement-divider">|</span>
-    <a href="/pages/help" class="announcement-link">Help</a>
-    <span class="announcement-divider">|</span>
-    <a href="/blogs/news" class="announcement-link">Blog</a>
+    {% for block in section.blocks %}
+      {%- assign plain = block.settings.text | strip_html | strip -%}
+      {%- unless plain == '' -%}
+        <div
+          class="presha-ann-bar__item"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="presha-ann-bar__link">
+              {{ block.settings.text }}
+            </a>
+          {%- else -%}
+            <span>{{ block.settings.text }}</span>
+          {%- endif -%}
+        </div>
+      {%- endunless -%}
+    {% endfor %}
   </div>
-  
 </aside>
 
 {% stylesheet %}
-  .announcement-bar {
-    border-block-end: var(--border-bottom-width) solid var(--color-border);
-  }
-
-  .announcement-bar__slider {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  /* ── Announcement Bar ──────────────────────────────────── */
+  .presha-ann-bar {
+    background: #6d001a;
+    color: #ffffff;
+    height: 40px;
     position: relative;
-
-    @media screen and (max-width: 749px) {
-      grid-column: 1 / -1;
-    }
+    overflow: hidden;
+    border-block-end: var(--ann-border) solid rgba(255, 255, 255, 0.15);
   }
 
-  .announcement-bar__slides {
-    display: grid;
-    grid: [stack] auto / [stack] auto;
-    width: calc(100% - var(--button-size) * 2);
-    max-width: 680px;
-    margin-inline: auto;
-  }
-
-  .announcement-bar__slides > * {
-    grid-area: stack;
-  }
-
-  .announcement-bar__slide {
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-
-    &[aria-hidden='true'] {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-
-  .announcement-bar__slider slideshow-arrows {
-    padding: 0;
-    mix-blend-mode: normal;
-  }
-
-  .announcement-bar__slider slideshow-arrows .slideshow-control {
-    color: var(--color-foreground);
-  }
-
-  .announcement-bar__slider .slideshow-control {
+  .presha-ann-bar__ticker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     display: flex;
-    padding: 0;
-    width: var(--button-size);
-    height: var(--button-size);
     align-items: center;
     justify-content: center;
-    opacity: 1;
-    animation: none;
-
-    @media screen and (min-width: 750px) {
-      --slideshow-control-offset: calc((var(--button-size) - var(--icon-size-xs)) / 2);
-
-      .section--page-width &.slideshow-control--previous {
-        transform: translateX(var(--slideshow-control-offset));
-      }
-    }
   }
 
-  .announcement-bar__slider .slideshow-control .svg-wrapper {
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
-  }
-
-  .announcement-bar__slide {
-    place-content: center;
-  }
-
-  .announcement-bar__text:first-child {
-    margin: 0;
-  }
-
-  .announcement-bar__link {
+  .presha-ann-bar__item {
     position: absolute;
-    inset: 0;
+    inset-inline: 0;
+    text-align: center;
+    font-family: var(--font-body--family, system-ui, sans-serif);
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    padding: 0 20px;
+    will-change: transform, opacity;
+
+    /* Initial state — GSAP takes control on load */
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  /* Fallback: show first item if GSAP not yet ready */
+  .presha-ann-bar__item.is-fallback {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .presha-ann-bar__link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .presha-ann-bar__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 {% endstylesheet %}
+
+<script>
+  (function () {
+    var ticker = document.querySelector('.presha-ann-bar__ticker');
+    if (!ticker) return;
+
+    var items = Array.from(ticker.querySelectorAll('.presha-ann-bar__item'));
+    if (!items.length) return;
+
+    /* Speed in ms — pulled from data attribute */
+    var intervalMs = (parseInt(ticker.dataset.speed, 10) || 5) * 1000;
+    var current = 0;
+
+    /* Show first item as a CSS fallback while GSAP loads */
+    items[0].classList.add('is-fallback');
+
+    function startTicker() {
+      /* Remove fallback class — GSAP takes over */
+      items[0].classList.remove('is-fallback');
+
+      /* Set all items off-screen below */
+      gsap.set(items, { yPercent: 100, opacity: 0 });
+
+      /* Animate first item in */
+      gsap.to(items[0], {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.55,
+        ease: 'power3.out'
+      });
+
+      if (items.length <= 1) return;
+
+      setInterval(function () {
+        var next = (current + 1) % items.length;
+
+        /* Exit current item upward */
+        gsap.to(items[current], {
+          yPercent: -100,
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power2.in'
+        });
+
+        /* Enter next item from below */
+        gsap.fromTo(
+          items[next],
+          { yPercent: 100, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.45, ease: 'power2.out', delay: 0.15 }
+        );
+
+        current = next;
+      }, intervalMs);
+    }
+
+    /* Wait for GSAP — it loads via CDN so may not be instant */
+    if (typeof gsap !== 'undefined') {
+      startTicker();
+    } else {
+      var attempts = 0;
+      var check = setInterval(function () {
+        if (typeof gsap !== 'undefined') {
+          clearInterval(check);
+          startTicker();
+        }
+        if (++attempts > 40) clearInterval(check); /* give up after ~10s */
+      }, 250);
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -159,28 +188,6 @@
       "content": "t:content.appearance"
     },
     {
-      "type": "select",
-      "id": "section_width",
-      "label": "t:settings.section_width",
-      "options": [
-        {
-          "value": "page-width",
-          "label": "t:options.page"
-        },
-        {
-          "value": "full-width",
-          "label": "t:options.full"
-        }
-      ],
-      "default": "page-width"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "default": "scheme-4",
-      "label": "t:settings.color_scheme"
-    },
-    {
       "type": "range",
       "id": "divider_width",
       "label": "t:settings.divider_thickness",
@@ -189,44 +196,31 @@
       "step": 0.5,
       "unit": "px",
       "default": 0
-    },
-    {
-      "type": "header",
-      "content": "t:content.padding"
-    },
-    {
-      "type": "range",
-      "id": "padding-block-start",
-      "label": "t:settings.top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "padding-block-end",
-      "label": "t:settings.bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 15
     }
   ],
   "presets": [
     {
       "name": "t:names.announcement_bar",
       "blocks": {
-        "announcement_1": {
-          "type": "_announcement"
+        "ann_1": {
+          "type": "_announcement",
+          "settings": { "text": "100% Authenticated — Presha Verified. Every Single Piece." }
+        },
+        "ann_2": {
+          "type": "_announcement",
+          "settings": { "text": "Looking for a specific item? WhatsApp us!" }
+        },
+        "ann_3": {
+          "type": "_announcement",
+          "settings": { "text": "New Drops Every Week — Shop The Latest" }
+        },
+        "ann_4": {
+          "type": "_announcement",
+          "settings": { "text": "We Accept Tabby & Tamara | Easy Monthly Payments" }
         }
       },
-      "block_order": ["announcement_1"]
+      "block_order": ["ann_1", "ann_2", "ann_3", "ann_4"]
     }
   ]
-
-
 }
 {% endschema %}

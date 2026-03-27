@@ -1,0 +1,347 @@
+{% comment %}
+  Presha Trends — Custom Footer
+  Exact build from Footer.png design ref.
+  4-column layout: Brand column + SHOP + SUPPORT + COMPANY
+  Icons: Globe, Email (@), Instagram
+  Bottom bar: copyright left, secure payments right
+{% endcomment %}
+
+<footer class="pf" aria-label="Site footer">
+
+  <!-- ── Main body ────────────────────────────────────── -->
+  <div class="pf__body">
+    <div class="pf__inner">
+
+      <!-- Brand column -->
+      <div class="pf__brand">
+        <p class="pf__brand-name">PRESHA TRENDS</p>
+        <p class="pf__brand-desc">{{ section.settings.description }}</p>
+
+        <div class="pf__icons" aria-label="Connect with us">
+
+          <!-- Instagram icon -->
+          <a
+            href="{{ section.settings.instagram_url | default: 'https://www.instagram.com/' }}"
+            class="pf__icon-btn"
+            aria-label="Follow on Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- SHOP nav column -->
+      <nav class="pf__col" aria-label="Shop">
+        <h3 class="pf__col-heading">SHOP</h3>
+        <ul class="pf__links">
+          <li><a href="/collections/new-arrivals">New Arrivals</a></li>
+          <li><a href="/collections/sneakers">Sneakers</a></li>
+          <li><a href="/collections/apparel">Apparel</a></li>
+          <li><a href="/collections/accessories">Accessories</a></li>
+          <li><a href="/collections/collectibles">Collectibles</a></li>
+        </ul>
+      </nav>
+
+      <!-- SUPPORT nav column -->
+      <nav class="pf__col" aria-label="Support">
+        <h3 class="pf__col-heading">SUPPORT</h3>
+        <ul class="pf__links">
+          <li><a href="/pages/authentication">Authentication</a></li>
+          <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+          <li><a href="/pages/returns-refunds">Returns &amp; Refunds</a></li>
+          <li><a href="/pages/track-order">Track Order</a></li>
+          <li><a href="/pages/contact-us">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- COMPANY nav column -->
+      <nav class="pf__col" aria-label="Company">
+        <h3 class="pf__col-heading">COMPANY</h3>
+        <ul class="pf__links">
+          <li><a href="/pages/our-story">Our Story</a></li>
+          <li><a href="/blogs/journal">Journal</a></li>
+          <li><a href="/pages/careers">Careers</a></li>
+          <li><a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a></li>
+          <li><a href="{{ routes.root_url }}policies/terms-of-service">Terms of Service</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- ── Bottom bar ───────────────────────────────────── -->
+  <div class="pf__bottom">
+    <div class="pf__bottom-inner">
+
+      <p class="pf__copy">
+        &copy; {{ 'now' | date: '%Y' }} PRESHA TRENDS. ALL RIGHTS RESERVED. POWERED BY HOLLOWKRAFT COLLECTIVE
+      </p>
+
+      <div class="pf__payments">
+        <span class="pf__payments-label">SECURE PAYMENTS</span>
+        <div class="pf__payment-icons" aria-hidden="true">
+          <!-- Credit card -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+          <!-- Bank / transfer -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="22" x2="21" y2="22"/>
+            <line x1="6" y1="18" x2="6" y2="11"/>
+            <line x1="10" y1="18" x2="10" y2="11"/>
+            <line x1="14" y1="18" x2="14" y2="11"/>
+            <line x1="18" y1="18" x2="18" y2="11"/>
+            <polygon points="12 2 20 7 4 7"/>
+          </svg>
+          <!-- Shield / secure -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
+
+{% stylesheet %}
+  /* ── Presha Footer — Design-exact build ───────────────── */
+
+  .pf {
+    background: #0f1117;
+    color: #ffffff;
+  }
+
+  /* ── Main body ──────────────────────────────────────── */
+  .pf__body {
+    padding: 80px 0 64px;
+  }
+
+  .pf__inner {
+    max-width: var(--page-width, 1280px);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 60px);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media screen and (max-width: 749px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  /* Brand column spans full width only on tablet */
+  @media screen and (max-width: 1023px) and (min-width: 750px) {
+    .pf__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ── Brand column ───────────────────────────────────── */
+  .pf__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pf__brand-name {
+    font-family: var(--font-heading--family, serif);
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 20px;
+    line-height: 1.1;
+  }
+
+  .pf__brand-desc {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.62);
+    margin: 0 0 28px;
+    max-width: 340px;
+
+    @media screen and (max-width: 749px) {
+      max-width: 100%;
+    }
+  }
+
+  /* ── Icon row ───────────────────────────────────────── */
+  .pf__icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pf__icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.09);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .pf__icon-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .pf__icon-btn svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+  }
+
+  /* ── Nav columns ────────────────────────────────────── */
+  .pf__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pf__col-heading {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 0 20px;
+    padding: 0;
+  }
+
+  .pf__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pf__links a {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.68);
+    text-decoration: none;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+
+  .pf__links a:hover {
+    color: #ffffff;
+  }
+
+  /* ── Bottom bar ─────────────────────────────────────── */
+  .pf__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pf__bottom-inner {
+    max-width: var(--page-width, 1280px);
+    margin: 0 auto;
+    padding: 22px clamp(20px, 5vw, 60px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 749px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+
+  .pf__copy {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.32);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .pf__payments {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+
+  .pf__payments-label {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .pf__payment-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pf__payment-icons svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presha Footer",
+  "tag": "div",
+  "class": "presha-footer-wrapper",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand description",
+      "default": "The ultimate destination for authenticated luxury streetwear and rare collectibles. Based in Dubai, shipping worldwide."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Footer"
+    }
+  ]
+}
+{% endschema %}
