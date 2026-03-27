@@ -379,8 +379,11 @@
     --language-button-background-color: transparent;
     --language-button-border-color: transparent;
 
-    /* used to apply transparency to .header__row, will only ever be transparent or unset */
-    --header-bg-color: transparent;
+    /* Glassmorphism */
+    --header-bg-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 
     /* used to display the appropriate logo based on transparency state */
     --header-logo-display: none;

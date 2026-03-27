@@ -127,19 +127,19 @@
       setInterval(function () {
         var next = (current + 1) % items.length;
 
-        /* Exit current item upward */
+        /* Exit current item fading out */
         gsap.to(items[current], {
-          yPercent: -100,
+          yPercent: -20,
           opacity: 0,
-          duration: 0.45,
-          ease: 'power2.in'
+          duration: 0.4,
+          ease: 'power2.out'
         });
 
-        /* Enter next item from below */
+        /* Enter next item from bottom */
         gsap.fromTo(
           items[next],
-          { yPercent: 100, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.45, ease: 'power2.out', delay: 0.15 }
+          { yPercent: 60, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 }
         );
 
         current = next;
@@ -204,22 +204,18 @@
       "blocks": {
         "ann_1": {
           "type": "_announcement",
-          "settings": { "text": "100% Authenticated — Presha Verified. Every Single Piece." }
+          "settings": { "text": "Presha Verified Authenticity" }
         },
         "ann_2": {
           "type": "_announcement",
-          "settings": { "text": "Looking for a specific item? WhatsApp us!" }
+          "settings": { "text": "Worldwide Shipping" }
         },
         "ann_3": {
           "type": "_announcement",
-          "settings": { "text": "New Drops Every Week — Shop The Latest" }
-        },
-        "ann_4": {
-          "type": "_announcement",
-          "settings": { "text": "We Accept Tabby & Tamara | Easy Monthly Payments" }
+          "settings": { "text": "Dubai Based" }
         }
       },
-      "block_order": ["ann_1", "ann_2", "ann_3", "ann_4"]
+      "block_order": ["ann_1", "ann_2", "ann_3"]
     }
   ]
 }

@@ -2,6 +2,25 @@
 
 ---
 
+## 2026-03-27 — Header & Announcement Bar
+
+**What was built:**
+- Customized the GSAP-powered Announcement Bar (`header-announcements.liquid`) to fade out old text and slide in new text from below, matching the requested content ("Presha Verified...", "Worldwide Shipping", "Dubai Based").
+- Implemented a premium glassmorphic effect for the Header when over the hero section (using `backdrop-filter` and translucent background).
+- Configured the Header to transition to a solid white background with a dark logo on scroll.
+- Integrated `logo-text-whitey.png` and `logo-text-blacky.png` directly into the logo block and section logic to ensure a seamless color swap.
+
+**Files changed:**
+- `assets/logo-text-whitey.png` (Added)
+- `assets/logo-text-blacky.png` (Added)
+- `sections/header-announcements.liquid` — GSAP tweaks and default blocks updated.
+- `sections/header.liquid` — Added glassmorphism to `.header[transparent]`.
+- `sections/header-group.json` — Enabled `enable_transparent_header_home`.
+- `blocks/_header-logo.liquid` — Hardcoded Presha logos with auto-width CSS logic.
+- `sections/logo.liquid` — Updated logo logic similarly.
+
+---
+
 ## 2026-03-27 — Reviews & Press Section
 
 **What was built:**
