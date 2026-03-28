@@ -1,0 +1,375 @@
+<section class="presha-auth" style="background-color: {{ section.settings.bg_color }};">
+  <div class="presha-auth-container">
+    
+    <!-- Left: Image & Badge -->
+    <div class="presha-auth-left">
+      <div class="presha-auth-image-wrap">
+        {%- if section.settings.image != blank -%}
+          <img 
+            src="{{ section.settings.image | image_url: width: 1000 }}" 
+            alt="{{ section.settings.image.alt | escape }}" 
+            class="presha-auth-image" 
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ 'product-3' | placeholder_svg_tag: 'presha-auth-placeholder' }}
+        {%- endif -%}
+
+        <!-- Overlay Badge -->
+        <div class="presha-auth-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="presha-auth-badge-icon">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
+          <span class="presha-auth-badge-text">100% GUARANTEED<br>AUTHENTIC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Text & Features -->
+    <div class="presha-auth-right">
+      <span class="presha-auth-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="presha-auth-heading">{{ section.settings.heading }}</h2>
+      <div class="presha-auth-desc">{{ section.settings.description }}</div>
+
+      <!-- Feature Blocks -->
+      <div class="presha-auth-features">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="presha-auth-feature" {{ block.shopify_attributes }}>
+              <div class="presha-auth-feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="presha-auth-feature-text">
+                <h4 class="presha-auth-feature-title">{{ block.settings.title }}</h4>
+                <p class="presha-auth-feature-subtext">{{ block.settings.subtext }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- CTA Button -->
+      {%- if section.settings.btn_label != blank and section.settings.btn_link != blank -%}
+        <div class="presha-auth-action">
+          <a href="{{ section.settings.btn_link }}" class="presha-auth-btn">
+            {{ section.settings.btn_label }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+    
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-auth {
+    width: 100%;
+    padding: 80px 20px;
+    font-family: var(--font-body--family, system-ui, -apple-system, sans-serif);
+    color: #ffffff;
+    overflow: hidden;
+  }
+  .presha-auth-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  /* Left Column */
+  .presha-auth-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .presha-auth-image-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 4 / 5;
+    background-color: #111;
+  }
+  .presha-auth-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .presha-auth-placeholder {
+    width: 100%;
+    height: 100%;
+    fill: #333;
+    object-fit: cover;
+  }
+
+  /* Overlay Badge */
+  .presha-auth-badge {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background-color: #6d001a;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    min-width: 200px;
+    min-height: 200px;
+  }
+  .presha-auth-badge-icon {
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  .presha-auth-badge-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* Right Column */
+  .presha-auth-right {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  .presha-auth-eyebrow {
+    font-size: 11px;
+    color: #6d001a;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .presha-auth-heading {
+    margin: 0 0 24px 0;
+    font-family: var(--font-heading--family, 'Impact', system-ui, sans-serif);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+  .presha-auth-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 40px;
+    max-width: 580px;
+  }
+
+  /* Features */
+  .presha-auth-features {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .presha-auth-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .presha-auth-feature-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    color: #6d001a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .presha-auth-feature-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .presha-auth-feature-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+  .presha-auth-feature-subtext {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+  }
+
+  /* Button */
+  .presha-auth-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6d001a;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 18px 32px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .presha-auth-btn:hover {
+    background-color: #8a0022;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Constraints */
+  @media screen and (max-width: 989px) {
+    .presha-auth-container {
+      flex-direction: column;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    .presha-auth-left {
+      width: 100%;
+      padding-right: 30px; /* Leave space for badge overhang */
+    }
+    .presha-auth-image-wrap {
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    .presha-auth-badge {
+      right: -20px;
+      bottom: -20px;
+      min-width: 160px;
+      min-height: 160px;
+      padding: 20px;
+    }
+    .presha-auth-right {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .presha-auth {
+      padding: 60px 20px 80px;
+    }
+    .presha-auth-badge {
+      right: 0;
+      bottom: 0;
+      transform: translate(10px, 10px);
+      min-width: 140px;
+      min-height: 140px;
+    }
+    .presha-auth-badge-icon {
+      width: 28px;
+      height: 28px;
+    }
+    .presha-auth-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Authentication",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1c1516"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "THE PRESHA PROMISE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PRESHA VERIFIED"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.</p>"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "LEARN ABOUT AUTHENTICATION"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "EXPERT MULTI-POINT INSPECTION"
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Thorough physical inspection by certified specialists."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Authentication Feature",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "EXPERT MULTI-POINT INSPECTION",
+            "subtext": "Thorough physical inspection by certified specialists."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "BLOCKCHAIN VERIFICATION",
+            "subtext": "Digital certificates of authenticity for select premium items."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

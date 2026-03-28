@@ -30,3 +30,9 @@
 - [ ] Create at least 3 featured articles with high-quality Featured Images and short excerpts.
 - [ ] Tag the articles appropriately (e.g., "CULTURE", "DESIGN", "GUIDES") so the section fetches the tags to use as the metadata label.
 - [ ] Go to Theme Editor > Homepage > "Featured Journal" section over the left sidebar, and select your newly created Blog under the "Blog" setting. This will swap out the static mockup blocks for your live Shopify articles!
+
+---
+
+## Authentication Section (2026-03-28)
+- [ ] Action Needed: No functional actions are strictly required because the layout elements are baked into blocks.
+- [ ] (Optional): You can modify the "PRESHA VERIFIED" heading, background color, and main image. You can also edit, duplicate, or delete the check-marked feature rows (like "EXPERT MULTI-POINT INSPECTION") in the Theme Editor > Authentication Feature section.

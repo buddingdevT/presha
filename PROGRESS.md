@@ -16,11 +16,13 @@
 - `assets/header.js` (Modified)
 - `sections/presha-trust-bar.liquid` (Added)
 - `sections/presha-featured-journal.liquid` (Added)
+- `sections/presha-authentication.liquid` (Added)
 - Added top and bottom padding (`12px`) to the logo container in `blocks/_header-logo.liquid`.
 - Replaced the GSAP `sections/header-announcements.liquid` completely with the static, extracted Announcement Bar from Password template.
 - Refined Header layout and navigation.
 - Built a 3-column Trust Bar (`presha-trust-bar.liquid`) with custom diamond SVGs, placing it beneath the reviews section.
 - Built a 3-column Editorial Hub `presha-featured-journal.liquid` that renders dynamic Blog Articles or design-accurate fallbacks.
+- Built a 2-column Authentication split-layout `presha-authentication.liquid` styled with a dark `#1c1516` theme and the floating burgundy guaranteed badge.
 
 **Files changed:**
 - `assets/logo-text-whitey.png` (Added)
@@ -51,7 +53,8 @@
 - `sections/presha-reviews-press.liquid` — New section file (created)
 - `sections/presha-trust-bar.liquid` — New section file
 - `sections/presha-featured-journal.liquid` — New section file
-- `templates/index.json` (Modified: Added presha_trust_bar and presha_featured_journal)
+- `sections/presha-authentication.liquid` — New section file
+- `templates/index.json` (Modified: Added presha_trust_bar, presha_featured_journal, presha_authentication)
 
 **Next Steps:**
 - GSAP now globally available for all future sections via theme.liquid

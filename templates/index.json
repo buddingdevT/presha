@@ -1031,6 +1031,37 @@
         "link_label": "READ ALL ARTICLES",
         "link_url": ""
       }
+    },
+    "presha_authentication": {
+      "type": "presha-authentication",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "EXPERT MULTI-POINT INSPECTION",
+            "subtext": "Thorough physical inspection by certified specialists."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "BLOCKCHAIN VERIFICATION",
+            "subtext": "Digital certificates of authenticity for select premium items."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2"
+      ],
+      "settings": {
+        "bg_color": "#1c1516",
+        "eyebrow": "THE PRESHA PROMISE",
+        "heading": "PRESHA VERIFIED",
+        "description": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.<\/p>",
+        "btn_label": "LEARN ABOUT AUTHENTICATION",
+        "btn_link": ""
+      }
     }
   },
   "order": [
@@ -1042,6 +1073,7 @@
     "176963640576d6ba6c",
     "176963643280a5b577",
     "1769638870fca27272",
+    "presha_authentication",
     "presha_featured_journal",
     "presha_reviews_press",
     "presha_trust_bar"
