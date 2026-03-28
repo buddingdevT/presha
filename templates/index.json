@@ -987,6 +987,41 @@
         "location_color": "#6ba5a5",
         "avatar_color": "#dde5ed"
       }
+    },
+    "presha_trust_bar": {
+      "type": "presha-trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "heading": "AUTHENTICITY GUARANTEED",
+            "subtext": "Every piece in our collection is 100% authentic and verified by experts."
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "globe",
+            "heading": "GLOBAL SHIPPING",
+            "subtext": "Luxury streetwear delivered to your doorstep, anywhere in the world."
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "support",
+            "heading": "EXCLUSIVE SUPPORT",
+            "subtext": "24/7 concierge service for our community members and VIP clients."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -998,6 +1033,7 @@
     "176963640576d6ba6c",
     "176963643280a5b577",
     "1769638870fca27272",
-    "presha_reviews_press"
+    "presha_reviews_press",
+    "presha_trust_bar"
   ]
 }

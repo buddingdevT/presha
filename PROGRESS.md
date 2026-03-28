@@ -13,9 +13,12 @@
 **Fixes:**
 - Added the missing `text` and `link` settings back into the `_announcement` block schema in `header-announcements.liquid`, which was causing Shopify to strip the actual block content and rendering the bar invisible.
 - Corrected `header-group.json` to include the final 4 exact Announcement texts.
-- Modified `assets/header.js` to ensure the glassmorphic transparent state re-activates correctly when scrolling back up into the hero section.
+- Modified `assets/header.js` (Modified)
+- `sections/presha-trust-bar.liquid` (Added)
 - Added top and bottom padding (`12px`) to the logo container in `blocks/_header-logo.liquid`.
-- Replaced the GSAP `sections/header-announcements.liquid` completely with the static, stable announcement bar from the Password Page as a temporary fallback to unblock progress.
+- Replaced the GSAP `sections/header-announcements.liquid` completely with the static, - Extracted Announcement Bar from Password template.
+- Refined Header layout and navigation.
+- Built a 3-column Trust Bar (`presha-trust-bar.liquid`) with custom diamond SVGs, placing it beneath the reviews section.
 
 **Files changed:**
 - `assets/logo-text-whitey.png` (Added)
@@ -44,9 +47,9 @@
 **Files changed:**
 - `layout/theme.liquid` — Added GSAP + ScrollTrigger CDN (defer loaded)
 - `sections/presha-reviews-press.liquid` — New section file (created)
-- `templates/index.json` — Added section to homepage with all block data
+- `templates/index.json` (Modified: Added presha_trust_bar at the end)
 
-**Notes:**
+**Next Steps:**
 - GSAP now globally available for all future sections via theme.liquid
 - Section includes a preset so it can be added from the Theme Editor via "Add section"
 - Avatar placeholders are CSS circles — can be swapped for real images later if needed
