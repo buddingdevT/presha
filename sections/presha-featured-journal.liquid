@@ -1,0 +1,305 @@
+<section class="presha-journal">
+  <div class="presha-journal-container">
+    
+    <!-- Section Header -->
+    <div class="presha-journal-header">
+      <div class="presha-journal-titles">
+        <span class="presha-journal-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="presha-journal-heading">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+        <div class="presha-journal-link-wrap">
+          <a href="{{ section.settings.link_url }}" class="presha-journal-link">
+            {{ section.settings.link_label }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="presha-journal-grid">
+      {%- assign blog = blogs[section.settings.blog] -%}
+      
+      {%- if section.settings.blog != blank and blog.articles_count > 0 -%}
+        {%- for article in blog.articles limit: 3 -%}
+          <a href="{{ article.url }}" class="presha-journal-card">
+            <div class="presha-journal-img-wrap">
+              {%- if article.image -%}
+                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | escape }}" loading="lazy" class="presha-journal-img">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'presha-journal-placeholder' }}
+              {%- endif -%}
+            </div>
+            
+            <div class="presha-journal-content">
+              {%- assign read_time = article.content | strip_html | split: ' ' | size | divided_by: 200 | at_least: 1 -%}
+              {%- assign tag = article.tags.first | default: 'EDITORIAL' | upcase -%}
+              <p class="presha-journal-meta">{{ tag }} &bull; {{ read_time }} MIN READ</p>
+              
+              <h3 class="presha-journal-title">{{ article.title | escape }}</h3>
+              
+              <p class="presha-journal-excerpt">
+                {%- if article.excerpt.size > 0 -%}
+                  {{ article.excerpt | strip_html | truncatewords: 25 }}
+                {%- else -%}
+                  {{ article.content | strip_html | truncatewords: 25 }}
+                {%- endif -%}
+              </p>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback/Placeholder blocks to match the design EXACTLY -->
+        <div class="presha-journal-card">
+          <div class="presha-journal-img-wrap presha-bg-light">
+            <!-- Simulated image from mockup -->
+            <img src="https://cdn.shopify.com/s/files/1/0688/1756/7821/files/sneaker-dummy.jpg?v=1711612800" onerror="this.style.display='none';" alt="Sneaker placeholder" class="presha-journal-img">
+            <div class="presha-journal-placeholder-text" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:absolute; inset:0; background:#f4f4f4; z-index:-1;">
+               {{ 'product-1' | placeholder_svg_tag: 'presha-journal-placeholder' }}
+            </div>
+          </div>
+          <div class="presha-journal-content">
+            <p class="presha-journal-meta">CULTURE &bull; 5 MIN READ</p>
+            <h3 class="presha-journal-title">THE EVOLUTION OF DUBAI'S STREETWEAR LANDSCAPE</h3>
+            <p class="presha-journal-excerpt">How the desert city became the global capital for archival luxury and limited drops.</p>
+          </div>
+        </div>
+
+        <div class="presha-journal-card">
+          <div class="presha-journal-img-wrap presha-bg-dark">
+            <img src="https://cdn.shopify.com/s/files/1/0688/1756/7821/files/leather-dummy.jpg?v=1711612800" onerror="this.style.display='none';" alt="Leather placeholder" class="presha-journal-img">
+            <div class="presha-journal-placeholder-text" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; position:absolute; inset:0; background:#111; z-index:-1;">
+               {{ 'collection-1' | placeholder_svg_tag: 'presha-journal-placeholder' }}
+            </div>
+          </div>
+          <div class="presha-journal-content">
+            <p class="presha-journal-meta">DESIGN &bull; 8 MIN READ</p>
+            <h3 class="presha-journal-title">CHROME HEARTS: MORE THAN JUST SILVER</h3>
+            <p class="presha-journal-excerpt">Unpacking the mystique and lasting appeal of the world's most exclusive gothic label.</p>
+          </div>
+        </div>
+
+        <div class="presha-journal-card">
+          <div class="presha-journal-img-wrap presha-bg-green" style="background: #396a58;">
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; color:white; text-align:center; padding:20px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" style="margin-bottom:16px;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <h4 style="margin:0; font-size:14px; letter-spacing:0.1em; text-transform:uppercase;">COLLECTING GUIDE</h4>
+              <div style="width:40px; height:1px; background:white; margin:16px auto; opacity:0.3;"></div>
+              <p style="margin:0; font-size:8px; opacity:0.7; max-width:80%;">Essential knowledge for building a certified portfolio.</p>
+            </div>
+          </div>
+          <div class="presha-journal-content">
+            <p class="presha-journal-meta">GUIDES &bull; 12 MIN READ</p>
+            <h3 class="presha-journal-title">THE BEGINNER'S GUIDE TO SNEAKER INVESTING</h3>
+            <p class="presha-journal-excerpt">A strategic look at assets you can wear—how to build a portfolio of authentic grails.</p>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-journal {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 80px 20px 100px;
+    font-family: var(--font-body--family, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif);
+  }
+  .presha-journal-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  
+  /* Header */
+  .presha-journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .presha-journal-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .presha-journal-eyebrow {
+    font-size: 13px;
+    color: #6d001a;
+    letter-spacing: 0.25em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .presha-journal-heading {
+    margin: 0;
+    font-family: var(--font-heading--family, 'Impact', system-ui, sans-serif);
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: #111827;
+    text-transform: uppercase;
+  }
+  .presha-journal-link {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #111827;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #111827;
+    transition: opacity 0.2s ease;
+  }
+  .presha-journal-link:hover {
+    opacity: 0.6;
+  }
+
+  /* Grid */
+  .presha-journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  /* Card */
+  .presha-journal-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+  }
+  .presha-journal-card:hover {
+    transform: translateY(-4px);
+  }
+  .presha-journal-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #f4f4f4;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .presha-journal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .presha-journal-card:hover .presha-journal-img {
+    transform: scale(1.03);
+  }
+  .presha-journal-placeholder {
+    width: 100%;
+    height: 100%;
+    fill: #ccc;
+    object-fit: cover;
+  }
+  
+  /* Card Content */
+  .presha-journal-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .presha-journal-meta {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6d001a;
+    letter-spacing: 0.12em;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+  }
+  .presha-journal-title {
+    margin: 0 0 12px 0;
+    font-family: var(--font-heading--family, 'Impact', system-ui, sans-serif);
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #111827;
+    text-transform: uppercase;
+  }
+  .presha-journal-excerpt {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6b7280;
+  }
+
+  @media screen and (max-width: 989px) {
+    .presha-journal {
+      padding: 60px 20px 80px;
+    }
+    .presha-journal-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .presha-journal-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .presha-journal-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .presha-journal-title {
+      font-size: 22px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Journal",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "EDITORIAL HUB"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PRESHA JOURNAL"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "READ ALL ARTICLES"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog",
+      "info": "Leave blank to show the designer placeholders."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Journal"
+    }
+  ]
+}
+{% endschema %}

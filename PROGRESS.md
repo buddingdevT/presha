@@ -13,12 +13,14 @@
 **Fixes:**
 - Added the missing `text` and `link` settings back into the `_announcement` block schema in `header-announcements.liquid`, which was causing Shopify to strip the actual block content and rendering the bar invisible.
 - Corrected `header-group.json` to include the final 4 exact Announcement texts.
-- Modified `assets/header.js` (Modified)
+- `assets/header.js` (Modified)
 - `sections/presha-trust-bar.liquid` (Added)
+- `sections/presha-featured-journal.liquid` (Added)
 - Added top and bottom padding (`12px`) to the logo container in `blocks/_header-logo.liquid`.
-- Replaced the GSAP `sections/header-announcements.liquid` completely with the static, - Extracted Announcement Bar from Password template.
+- Replaced the GSAP `sections/header-announcements.liquid` completely with the static, extracted Announcement Bar from Password template.
 - Refined Header layout and navigation.
 - Built a 3-column Trust Bar (`presha-trust-bar.liquid`) with custom diamond SVGs, placing it beneath the reviews section.
+- Built a 3-column Editorial Hub `presha-featured-journal.liquid` that renders dynamic Blog Articles or design-accurate fallbacks.
 
 **Files changed:**
 - `assets/logo-text-whitey.png` (Added)
@@ -47,7 +49,9 @@
 **Files changed:**
 - `layout/theme.liquid` — Added GSAP + ScrollTrigger CDN (defer loaded)
 - `sections/presha-reviews-press.liquid` — New section file (created)
-- `templates/index.json` (Modified: Added presha_trust_bar at the end)
+- `sections/presha-trust-bar.liquid` — New section file
+- `sections/presha-featured-journal.liquid` — New section file
+- `templates/index.json` (Modified: Added presha_trust_bar and presha_featured_journal)
 
 **Next Steps:**
 - GSAP now globally available for all future sections via theme.liquid

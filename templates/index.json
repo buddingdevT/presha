@@ -1022,6 +1022,15 @@
         "trust_3"
       ],
       "settings": {}
+    },
+    "presha_featured_journal": {
+      "type": "presha-featured-journal",
+      "settings": {
+        "eyebrow": "EDITORIAL HUB",
+        "heading": "PRESHA JOURNAL",
+        "link_label": "READ ALL ARTICLES",
+        "link_url": ""
+      }
     }
   },
   "order": [
@@ -1033,6 +1042,7 @@
     "176963640576d6ba6c",
     "176963643280a5b577",
     "1769638870fca27272",
+    "presha_featured_journal",
     "presha_reviews_press",
     "presha_trust_bar"
   ]
