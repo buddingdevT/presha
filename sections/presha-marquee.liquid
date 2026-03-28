@@ -1,0 +1,173 @@
+{% stylesheet %}
+  /* =============================================
+     PRESHA MARQUEE — Scrolling Trust Strip
+  ============================================= */
+
+  .presha-marquee {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    cursor: default;
+  }
+
+  .presha-marquee__track {
+    display: flex;
+    width: fit-content;
+    white-space: nowrap;
+    animation: presha-marquee-scroll linear infinite;
+    animation-duration: var(--marquee-speed, 40s);
+    will-change: transform;
+  }
+
+  /* Pause animation on hover */
+  .presha-marquee:hover .presha-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .presha-marquee__content {
+    display: flex;
+    align-items: center;
+  }
+
+  .presha-marquee__item {
+    font-family: var(--font-body--family);
+    font-weight: 700;
+    font-size: clamp(11px, 1.2vw, 14px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 20px 28px;
+    display: inline-block;
+  }
+
+  .presha-marquee__sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  @keyframes presha-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .presha-marquee__track {
+      animation-play-state: paused;
+    }
+  }
+{% endstylesheet %}
+
+<section
+  class="presha-marquee"
+  data-section-id="{{ section.id }}"
+  style="background-color: {{ section.settings.bg_color }}; --marquee-speed: {{ section.settings.speed }}s;"
+>
+  <div class="presha-marquee__track">
+
+    <!-- Primary set of items -->
+    <div class="presha-marquee__content">
+      {%- for block in section.blocks -%}
+        <span class="presha-marquee__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        <span class="presha-marquee__sep" aria-hidden="true">•</span>
+      {%- endfor -%}
+    </div>
+
+    <!-- Duplicate set — creates the seamless loop (aria-hidden so screen readers skip it) -->
+    <div class="presha-marquee__content" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="presha-marquee__item">{{ block.settings.text }}</span>
+        <span class="presha-marquee__sep" aria-hidden="true">•</span>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var section = document.querySelector('.presha-marquee[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    gsap.from(section, {
+      opacity: 0,
+      y: 10,
+      duration: 0.5,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 95%',
+        once: true
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Presha Marquee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll Speed (seconds per loop)",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "MARQUEE ITEM"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Marquee",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": { "text": "PRESHA VERIFIED AUTHENTICITY" }
+        },
+        {
+          "type": "item",
+          "settings": { "text": "WORLDWIDE SHIPPING" }
+        },
+        {
+          "type": "item",
+          "settings": { "text": "TRUSTED GLOBAL RESALE PLATFORM" }
+        },
+        {
+          "type": "item",
+          "settings": { "text": "LUXURY STREETWEAR" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

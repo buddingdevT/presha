@@ -66,6 +66,24 @@
 
 ---
 
+## 2026-03-28 — Scrolling Marquee Section
+
+**What was built:**
+- Full-width infinitely scrolling trust strip (`presha-marquee.liquid`) placed after the hero in the homepage order
+- Dark navy background (`#111827`), white bold uppercase text, bullet `•` separators
+- 4 default items: PRESHA VERIFIED AUTHENTICITY / WORLDWIDE SHIPPING / TRUSTED GLOBAL RESALE PLATFORM / LUXURY STREETWEAR
+- Seamless CSS loop: two identical content sets rendered side by side, `translateX(0 → -50%)` keyframe creates a gapless infinite scroll — no JS needed for the animation
+- Hover-pause: `animation-play-state: paused` on `.presha-marquee:hover .presha-marquee__track`
+- Reduced motion: animation auto-paused via `@media (prefers-reduced-motion: reduce)`
+- GSAP ScrollTrigger entrance: section fades in from `y:10, opacity:0` when it enters the viewport
+- Fully editable from Theme Editor: background color, scroll speed (20–120s), text items (add/remove/edit blocks)
+
+**Files changed:**
+- `sections/presha-marquee.liquid` — New section file (created)
+- `templates/index.json` — Added `presha_marquee` section entry + inserted into order array after hero
+
+---
+
 ## 2026-03-27 — Reviews & Press: auto-scroll + reviewer photos
 
 **What was built:**
