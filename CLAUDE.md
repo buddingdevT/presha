@@ -232,19 +232,19 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 > **Note:** Section order and content are subject to change as designs are confirmed. Treat this as the current working structure, not a final spec.
 
 ### Homepage — Section Order
-1. - [ ] Announcement Bar
-2. - [ ] Navigation / Header
+1. - [x] Announcement Bar
+2. - [x] Navigation / Header
 3. - [ ] Hero Section
 4. - [ ] Scrolling Marquee
 5. - [ ] Shop by Brands
 6. - [ ] Trending Now
 7. - [ ] Gifts for Her / Him
 8. - [ ] Shop by Category
-9. - [ ] Presha Authentication
-10. - [ ] Journal
-11. - [ ] Reviews
+9. - [x] Presha Authentication
+10. - [x] Journal
+11. - [x] Reviews
 12. - [ ] Email Signup
-13. - [ ] Trust Bar
+13. - [x] Trust Bar
 14. - [ ] Footer
 
 ### Other Pages
