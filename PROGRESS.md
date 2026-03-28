@@ -23,6 +23,7 @@
 - Built a 3-column Trust Bar (`presha-trust-bar.liquid`) with custom diamond SVGs, placing it beneath the reviews section.
 - Built a 3-column Editorial Hub `presha-featured-journal.liquid` that renders dynamic Blog Articles or design-accurate fallbacks.
 - Built a 2-column Authentication split-layout `presha-authentication.liquid` styled with a dark `#1c1516` theme and the floating burgundy guaranteed badge.
+  - *Fix:* Reconfigured CSS to allow the dark maroon background to bleed 100vw while keeping content constrained to the 1200px site grid.
 
 **Files changed:**
 - `assets/logo-text-whitey.png` (Added)
