@@ -36,3 +36,9 @@
 ## Authentication Section (2026-03-28)
 - [ ] Action Needed: No functional actions are strictly required because the layout elements are baked into blocks.
 - [ ] (Optional): You can modify the "PRESHA VERIFIED" heading, background color, and main image. You can also edit, duplicate, or delete the check-marked feature rows (like "EXPERT MULTI-POINT INSPECTION") in the Theme Editor > Authentication Feature section.
+
+---
+
+## Email Signup Section (2026-03-28)
+- [ ] Action Needed: The form is natively integrated with Shopify! Any emails entered here will automatically populate your Shopify Admin > Customers tab with the "newsletter" tag. 
+- [ ] (Optional): You can customize the giant display heading, subtext, button label, and placeholder text directly inside the Theme Editor.

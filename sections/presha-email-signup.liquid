@@ -1,0 +1,256 @@
+<section class="presha-newsletter" style="background-color: {{ section.settings.bg_color }};">
+  <div class="presha-newsletter-container">
+    
+    <!-- Left Column: Typography -->
+    <div class="presha-newsletter-text">
+      <h2 class="presha-newsletter-heading">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- if section.settings.subtext != blank -%}
+        <p class="presha-newsletter-subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: Form -->
+    <div class="presha-newsletter-form-wrap">
+      {% form 'customer', class: 'presha-newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        <div class="presha-newsletter-input-group">
+          <input
+            id="NewsletterForm--{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="presha-newsletter-input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            placeholder="{{ section.settings.placeholder }}"
+            required
+          >
+          <button type="submit" class="presha-newsletter-btn" name="commit" id="Subscribe">
+            {{ section.settings.btn_label }}
+          </button>
+        </div>
+
+        {%- if form.errors -%}
+          <small class="presha-newsletter-msg error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+        {%- endif -%}
+        
+        {%- if form.posted_successfully? -%}
+          <small class="presha-newsletter-msg success">Thanks for subscribing!</small>
+        {%- endif -%}
+      {% endform %}
+      
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="presha-newsletter-disclaimer">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-newsletter {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 80px 20px;
+    font-family: var(--font-body--family, system-ui, -apple-system, sans-serif);
+    overflow: hidden;
+  }
+  .presha-newsletter-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  /* Left: Typography */
+  .presha-newsletter-text {
+    flex: 1;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .presha-newsletter-heading {
+    margin: 0;
+    font-family: 'Impact', 'Oswald', system-ui, sans-serif;
+    font-size: clamp(48px, 6vw, 76px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: #111827;
+    text-transform: uppercase;
+  }
+  .presha-newsletter-subtext {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+
+  /* Right: Form */
+  .presha-newsletter-form-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .presha-newsletter-form {
+    width: 100%;
+    display: block;
+  }
+  .presha-newsletter-input-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .presha-newsletter-input {
+    flex: 1;
+    padding: 20px 28px;
+    font-size: 16px;
+    color: #111827;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s ease;
+  }
+  .presha-newsletter-input::placeholder {
+    color: #9ca3af;
+  }
+  .presha-newsletter-input:focus {
+    box-shadow: 0 0 0 2px #6d001a;
+  }
+
+  .presha-newsletter-btn {
+    flex-shrink: 0;
+    padding: 20px 40px;
+    background-color: #6d001a;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .presha-newsletter-btn:hover {
+    background-color: #8a0022;
+    transform: translateY(-2px);
+  }
+
+  .presha-newsletter-disclaimer {
+    margin: 0 0 0 20px;
+    font-size: 12px;
+    color: #9ca3af;
+  }
+  
+  .presha-newsletter-msg {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .presha-newsletter-msg.success { color: #059669; }
+  .presha-newsletter-msg.error { color: #dc2626; }
+
+  /* Responsive Constraints */
+  @media screen and (max-width: 989px) {
+    .presha-newsletter-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .presha-newsletter-text, .presha-newsletter-form-wrap {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .presha-newsletter {
+      padding: 60px 20px;
+    }
+    .presha-newsletter-input-group {
+      flex-direction: column;
+    }
+    .presha-newsletter-input, .presha-newsletter-btn {
+      width: 100%;
+    }
+    .presha-newsletter-btn {
+      padding: 16px 40px;
+    }
+    .presha-newsletter-disclaimer {
+      margin: 8px 0 0 0;
+      text-align: center;
+    }
+    .presha-newsletter-heading {
+      font-size: 42px;
+    }
+    .presha-newsletter-subtext {
+      font-size: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Email Signup",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#eeeeee"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "JOIN THE PRESHA\nCOMMUNITY!"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Get exclusive access to rare drops, member-only collections, and the latest from the Presha Journal."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "jane@email.com"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer Text",
+      "default": "Weekly newsletter. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email Signup Block"
+    }
+  ]
+}
+{% endschema %}

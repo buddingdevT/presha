@@ -1062,6 +1062,17 @@
         "btn_label": "LEARN ABOUT AUTHENTICATION",
         "btn_link": ""
       }
+    },
+    "presha_email_signup": {
+      "type": "presha-email-signup",
+      "settings": {
+        "bg_color": "#eeeeee",
+        "heading": "JOIN THE PRESHA\nCOMMUNITY!",
+        "subtext": "Get exclusive access to rare drops, member-only collections, and the latest from the Presha Journal.",
+        "placeholder": "jane@email.com",
+        "btn_label": "Subscribe",
+        "disclaimer": "Weekly newsletter. Unsubscribe anytime."
+      }
     }
   },
   "order": [
@@ -1076,6 +1087,7 @@
     "presha_authentication",
     "presha_featured_journal",
     "presha_reviews_press",
+    "presha_email_signup",
     "presha_trust_bar"
   ]
 }
