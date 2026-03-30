@@ -1073,11 +1073,27 @@
         "btn_label": "Subscribe",
         "disclaimer": "Weekly newsletter. Unsubscribe anytime."
       }
+    },
+    "presha_marquee": {
+      "type": "presha-marquee",
+      "blocks": {
+        "mq_1": { "type": "item", "settings": { "text": "PRESHA VERIFIED AUTHENTICITY" } },
+        "mq_2": { "type": "item", "settings": { "text": "WORLDWIDE SHIPPING" } },
+        "mq_3": { "type": "item", "settings": { "text": "TRUSTED GLOBAL RESALE PLATFORM" } },
+        "mq_4": { "type": "item", "settings": { "text": "LUXURY STREETWEAR" } }
+      },
+      "block_order": ["mq_1", "mq_2", "mq_3", "mq_4"],
+      "settings": {
+        "bg_color": "#111827",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
     }
   },
   "order": [
     "slideshow_thBVtw",
     "hero_jVaWmY",
+    "presha_marquee",
     "1769647631664937e5",
     "blocks_fdCed7",
     "product_list_fa6P9H",

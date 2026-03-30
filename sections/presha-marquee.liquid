@@ -1,140 +1,142 @@
 {%- comment -%}
-  ============================================================
-  PRESHA MARQUEE — Infinite Scrolling Trust Strip
-  Uses the same proven technique as the password page marquee.
-  ============================================================
+  PRESHA MARQUEE — JS-driven infinite scroll ticker
+  Uses requestAnimationFrame for guaranteed cross-browser scrolling.
 {%- endcomment -%}
 
-<div class="pm-section" style="background-color: {{ section.settings.bg_color }};">
-  <div class="pm-track">
-    {%- comment -%}
-      We render 4 copies of the same items so the scrolling strip
-      always appears full — no matter how wide the screen is.
-      The CSS animation translates -25% per loop (= one copy).
-    {%- endcomment -%}
-    <div class="pm-inner" style="animation-duration: {{ section.settings.speed }}s;">
-      {%- assign copies = "1,2,3,4" | split: "," -%}
-      {%- for copy in copies -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'item' -%}
-            <span class="pm-item">{{ block.settings.text }}</span>
-            <span class="pm-sep" aria-hidden="true">•</span>
-          {%- endif -%}
-        {%- endfor -%}
+<div id="preshaMarqueeSection-{{ section.id }}" class="presha-marquee-section" style="background-color: {{ section.settings.bg_color }};">
+  <div class="presha-marquee-clip">
+    <div id="preshaMarqueeTrack-{{ section.id }}" class="presha-marquee-row">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' -%}
+          <span class="presha-marquee-item" {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+          </span>
+          <span class="presha-marquee-bullet" aria-hidden="true">&nbsp;•&nbsp;</span>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
 </div>
 
 <style>
-  /* ── Full-width section strip ──────────────────────────── */
-  .pm-section {
-    width: 100vw;
+  /* Full-width section bleed */
+  .presha-marquee-section {
     position: relative;
+    width: 100vw;
     left: 50%;
-    right: 50%;
     margin-left: -50vw;
-    margin-right: -50vw;
+    padding: 18px 0;    /* ← EDIT: strip height */
     overflow: hidden;
-    padding: 20px 0;    /* ← EDIT: strip height */
   }
 
-  /* ── Outer clip container ─────────────────────────────── */
-  .pm-track {
+  .presha-marquee-clip {
     overflow: hidden;
-    white-space: nowrap;
+    width: 100%;
   }
 
-  /* ── Scrolling inner row ─────────────────────────────────
-     IMPORTANT: display must be inline-flex for the animation
-     to work correctly. Do not change this.                  */
-  .pm-inner {
+  /* The scrolling row — JS moves this via translateX */
+  .presha-marquee-row {
     display: inline-flex;
+    white-space: nowrap;
     align-items: center;
-    gap: 0;
     will-change: transform;
-    animation: pmScroll linear infinite;
-    /* duration is set inline from section settings */
   }
 
-  /* ── Pause on hover ──────────────────────────────────────
-     Remove this rule to keep scrolling even on hover.       */
-  .pm-section:hover .pm-inner {
-    animation-play-state: paused;
-  }
-
-  /* ── Text items ──────────────────────────────────────────
-     font-size:     ← EDIT e.g. 12px, 14px, 16px
-     font-weight:   ← EDIT 400=normal 700=bold 900=black
-     letter-spacing:← EDIT e.g. 0.08em, 0.15em, 0.2em
-     color:         ← EDIT text colour
-     padding:       ← EDIT left/right breathing room          */
-  .pm-item {
+  /* Text items */
+  .presha-marquee-item {
     display: inline-block;
     font-family: var(--font-body--family, system-ui, sans-serif);
-    font-size: 13px;          /* ← EDIT text size */
-    font-weight: 700;         /* ← EDIT text weight */
-    letter-spacing: 0.12em;   /* ← EDIT letter spacing */
+    font-size: 13px;          /* ← EDIT: text size */
+    font-weight: 700;         /* ← EDIT: text weight */
+    letter-spacing: 0.12em;   /* ← EDIT: letter spacing */
     text-transform: uppercase;
-    color: #ffffff;           /* ← EDIT text colour */
-    padding: 0 28px;          /* ← EDIT space around each phrase */
-    white-space: nowrap;
+    color: {{ section.settings.text_color }};
+    padding: 0 24px;          /* ← EDIT: spacing per phrase */
   }
 
-  /* ── Bullet ──────────────────────────────────────────────
-     font-size: match to .pm-item for visual alignment
-     opacity:   0=invisible 1=full                           */
-  .pm-sep {
+  .presha-marquee-bullet {
     display: inline-block;
-    flex-shrink: 0;
-    font-size: 10px;    /* ← EDIT bullet size */
-    color: #ffffff;     /* ← EDIT bullet colour */
-    opacity: 0.4;       /* ← EDIT bullet visibility */
+    color: {{ section.settings.text_color }};
+    opacity: 0.4;
+    font-size: 10px;
   }
 
-  /* ── Keyframe ────────────────────────────────────────────
-     We use 4 copies → translate 25% = one copy scrolls out.
-     DO NOT change the 25% value if you keep 4 copies.      */
-  @keyframes pmScroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-25%); }
-  }
-
-  /* ── Reduced motion ──────────────────────────────────── */
-  @media (prefers-reduced-motion: reduce) {
-    .pm-inner { animation: none; }
-  }
-
-  /* ── Mobile ──────────────────────────────────────────── */
   @media screen and (max-width: 749px) {
-    .pm-section { padding: 14px 0; } /* ← EDIT mobile strip height */
-    .pm-item {
-      font-size: 12px;   /* ← EDIT mobile text size */
-      padding: 0 18px;   /* ← EDIT mobile phrase spacing */
+    .presha-marquee-section { padding: 14px 0; }
+    .presha-marquee-item {
+      font-size: 12px;   /* ← EDIT: mobile text size */
+      padding: 0 16px;
     }
   }
 </style>
 
 <script>
-  // GSAP ScrollTrigger entrance — delete this block if not needed
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-    gsap.registerPlugin(ScrollTrigger);
-    var el = document.querySelector('.pm-section');
-    if (!el) return;
-    gsap.from(el, {
-      opacity: 0,
-      y: 10,             // ← EDIT slide distance (px)
-      duration: 0.6,     // ← EDIT entrance speed (seconds)
-      ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 95%', once: true }
-    });
-  });
+(function() {
+  var speed = {{ section.settings.speed }};   // px per second — higher = faster
+  var sectionEl = document.getElementById('preshaMarqueeSection-{{ section.id }}');
+  var track = document.getElementById('preshaMarqueeTrack-{{ section.id }}');
+
+  if (!sectionEl || !track) return;
+
+  // Clone the row so it loops seamlessly
+  var clone = track.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.setAttribute('aria-hidden', 'true');
+  track.parentNode.appendChild(clone);
+
+  // Wrap both in a flex container so they sit side by side
+  var wrapper = document.createElement('div');
+  wrapper.style.cssText = 'display:flex; width:max-content; will-change:transform;';
+  track.parentNode.insertBefore(wrapper, track);
+  wrapper.appendChild(track);
+  wrapper.appendChild(clone);
+
+  var offset = 0;
+  var trackWidth = 0;
+  var paused = false;
+  var lastTime = null;
+
+  function getTrackWidth() {
+    trackWidth = track.offsetWidth;
+  }
+
+  function step(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    var delta = (timestamp - lastTime) / 1000; // seconds
+    lastTime = timestamp;
+
+    if (!paused && trackWidth > 0) {
+      offset += speed * delta;
+      if (offset >= trackWidth) {
+        offset -= trackWidth;
+      }
+      wrapper.style.transform = 'translateX(-' + offset + 'px)';
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // Pause on hover
+  sectionEl.addEventListener('mouseenter', function() { paused = true; });
+  sectionEl.addEventListener('mouseleave', function() { paused = false; lastTime = null; });
+
+  // Respect reduced motion preference
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Wait for fonts to load before measuring
+  document.fonts ? document.fonts.ready.then(function() {
+    getTrackWidth();
+    requestAnimationFrame(step);
+  }) : (getTrackWidth(), requestAnimationFrame(step));
+
+})();
 </script>
 
 {% schema %}
 {
-  "name": "Presha Marquee",
+  "name": "Scrolling Marquee",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -145,15 +147,20 @@
       "default": "#111827"
     },
     {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
       "type": "range",
       "id": "speed",
-      "label": "Scroll Speed (lower = faster)",
-      "min": 10,
-      "max": 120,
-      "step": 5,
-      "unit": "s",
-      "default": 30,
-      "info": "Duration in seconds for one full loop. 15 = fast, 60 = slow."
+      "label": "Scroll Speed (px per second)",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "default": 80,
+      "info": "Higher = faster scroll. 80 is a good default."
     }
   ],
   "blocks": [
@@ -172,7 +179,7 @@
   ],
   "presets": [
     {
-      "name": "Presha Marquee",
+      "name": "Scrolling Marquee",
       "blocks": [
         { "type": "item", "settings": { "text": "PRESHA VERIFIED AUTHENTICITY" } },
         { "type": "item", "settings": { "text": "WORLDWIDE SHIPPING" } },

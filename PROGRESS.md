@@ -66,21 +66,21 @@
 
 ---
 
-## 2026-03-28 — Scrolling Marquee Section
+## 2026-03-30 — Scrolling Marquee Section ⚠️ IN PROGRESS
 
-**What was built:**
-- Full-width infinitely scrolling trust strip (`presha-marquee.liquid`) placed after the hero in the homepage order
-- Dark navy background (`#111827`), white bold uppercase text, bullet `•` separators
-- 4 default items: PRESHA VERIFIED AUTHENTICITY / WORLDWIDE SHIPPING / TRUSTED GLOBAL RESALE PLATFORM / LUXURY STREETWEAR
-- Seamless CSS loop: two identical content sets rendered side by side, `translateX(0 → -50%)` keyframe creates a gapless infinite scroll — no JS needed for the animation
-- Hover-pause: `animation-play-state: paused` on `.presha-marquee:hover .presha-marquee__track`
-- Reduced motion: animation auto-paused via `@media (prefers-reduced-motion: reduce)`
-- GSAP ScrollTrigger entrance: section fades in from `y:10, opacity:0` when it enters the viewport
-- Fully editable from Theme Editor: background color, scroll speed (20–120s), text items (add/remove/edit blocks)
+**Status: Known Issue — scrolling animation not rendering on the live preview.**
 
-**Files changed:**
-- `sections/presha-marquee.liquid` — New section file (created)
-- `templates/index.json` — Added `presha_marquee` section entry + inserted into order array after hero
+**What was attempted:**
+- Multiple CSS keyframe approaches (`{% stylesheet %}`, `<style>` tags, inline-flex, various translateX techniques)
+- Switched to JavaScript `requestAnimationFrame` scrolling as a final attempt
+- Section structure, full-width bleed, and text content display correctly
+- The scroll motion itself does not animate — root cause not yet identified
+
+**Files:**
+- `sections/presha-marquee.liquid` — Exists but scroll is non-functional
+- `templates/index.json` — Section is injected after hero
+
+**To revisit:** Investigate whether Shopify's `overflow: hidden` on parent containers or JS execution order is blocking the animation.
 
 ---
 

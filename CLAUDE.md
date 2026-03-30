@@ -235,7 +235,7 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 1. - [x] Announcement Bar
 2. - [x] Navigation / Header
 3. - [ ] Hero Section
-4. - [ ] Scrolling Marquee
+4. - [/] Scrolling Marquee (⚠️ animation not working — revisit)
 5. - [ ] Shop by Brands
 6. - [ ] Trending Now
 7. - [ ] Gifts for Her / Him
