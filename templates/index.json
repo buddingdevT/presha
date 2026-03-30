@@ -1203,6 +1203,80 @@
         "show_badge": true,
         "product_limit": 12
       }
+    },
+    "presha_featured_categories": {
+      "type": "presha-featured-categories",
+      "blocks": {
+        "cat_jordan": {
+          "type": "category",
+          "settings": {
+            "category_name": "Air Jordan",
+            "collection_url": "/collections/jordan"
+          }
+        },
+        "cat_nike": {
+          "type": "category",
+          "settings": {
+            "category_name": "Nike",
+            "collection_url": "/collections/nike"
+          }
+        },
+        "cat_on_running": {
+          "type": "category",
+          "settings": {
+            "category_name": "On Running",
+            "collection_url": "/collections/on-running"
+          }
+        },
+        "cat_onitsuka": {
+          "type": "category",
+          "settings": {
+            "category_name": "Onitsuka Tiger",
+            "collection_url": "/collections/onitsuka-tiger"
+          }
+        },
+        "cat_adidas": {
+          "type": "category",
+          "settings": {
+            "category_name": "Adidas",
+            "collection_url": "/collections/adidas"
+          }
+        },
+        "cat_new_balance": {
+          "type": "category",
+          "settings": {
+            "category_name": "New Balance",
+            "collection_url": "/collections/new-balance"
+          }
+        },
+        "cat_yeezy": {
+          "type": "category",
+          "settings": {
+            "category_name": "Yeezy",
+            "collection_url": "/collections/yeezy"
+          }
+        },
+        "cat_asics": {
+          "type": "category",
+          "settings": {
+            "category_name": "Asics",
+            "collection_url": "/collections/asics"
+          }
+        }
+      },
+      "block_order": [
+        "cat_jordan",
+        "cat_nike",
+        "cat_on_running",
+        "cat_onitsuka",
+        "cat_adidas",
+        "cat_new_balance",
+        "cat_yeezy",
+        "cat_asics"
+      ],
+      "settings": {
+        "heading": "Featured Categories"
+      }
     }
   },
   "order": [
@@ -1219,6 +1293,7 @@
     "176963643280a5b577",
     "1769638870fca27272",
     "presha_authentication",
+    "presha_featured_categories",
     "presha_featured_journal",
     "presha_reviews_press",
     "presha_email_signup",

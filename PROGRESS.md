@@ -127,3 +127,25 @@
 - Chrome Hearts and Yeezy SVGs are `<text>` elements, not actual vector logos — replace with proper vector files when available
 - Source SVGs live in `brand logos/` folder (not committed to theme)
 
+---
+
+## 2026-03-30 — Featured Categories Section
+
+**What was built:**
+- New "Featured Categories" section (`presha-featured-categories.liquid`) matching the user-provided design reference
+- Italic serif heading ("Featured Categories") using Cormorant Garamond, left-aligned
+- Horizontal scrollable row of portrait (3:4 aspect ratio) category cards
+- Each card: rounded corners (12px), lifestyle photo via `image_picker`, category name below in sans-serif
+- 8 default categories pre-populated: Air Jordan, Nike, On Running, Onitsuka Tiger, Adidas, New Balance, Yeezy, Asics
+- Hover: card lifts 4px + image scales subtly (1.04x), label turns burgundy
+- Placeholder gradient shown when no image uploaded
+- GSAP ScrollTrigger: heading fades in, cards stagger up on scroll
+- Fully responsive: desktop (260px cards) → tablet (220px) → mobile (180px)
+- Scroll-snap on all viewports, hidden scrollbar
+- Positioned after Presha Authentication section in homepage order
+
+**Files changed:**
+- `sections/presha-featured-categories.liquid` — New section file
+- `templates/index.json` — Added `presha_featured_categories` section + placed in order after authentication
+- `CLAUDE.md` — Updated homepage section tracker
+

@@ -65,3 +65,15 @@
 - [ ] **Action Required — Upload images:** Go to Theme Editor → Homepage → "Gifts For Her / Him" section. Upload a lifestyle image for each tile (e.g. Goyard bags for "Her", streetwear/sneakers for "Him").
 - [ ] **Action Required — Set link URLs:** In each tile block, set the Link to point to your gift collections (e.g. `/collections/gifts-for-her`, `/collections/gifts-for-him`). Create these collections in **Shopify Admin → Products → Collections** if they don't exist yet.
 - [ ] (Optional): Update the eyebrow text, heading, or button label per tile via Theme Editor.
+
+---
+
+## Featured Categories Section (2026-03-30)
+- [ ] **Action Required — Upload category images:** Go to **Theme Editor → Homepage → Featured Categories** section. For each category block (Air Jordan, Nike, On Running, Onitsuka Tiger, Adidas, New Balance, Yeezy, Asics), click the block and upload a lifestyle photo via **"Category Image"** image picker.
+  - Recommended: portrait orientation (3:4 aspect ratio), min 800px wide
+  - Lifestyle sneaker photography (feet wearing shoes, editorial-style product shots)
+- [ ] **Action Required — Create collections:** The category cards link to collection pages. Create these in **Shopify Admin → Products → Collections** if they don't exist:
+  - `/collections/jordan`, `/collections/nike`, `/collections/on-running`, `/collections/onitsuka-tiger`
+  - `/collections/adidas`, `/collections/new-balance`, `/collections/yeezy`, `/collections/asics`
+- [ ] (Optional): Add, remove, or reorder categories via Theme Editor → Featured Categories → Add/reorder blocks. Up to 10 categories supported.
+

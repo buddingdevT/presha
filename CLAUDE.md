@@ -51,12 +51,14 @@ to check what's already in place before writing new code.
 
 ## Competitor Reference — Mad Kicks (madkicks.com)
 Mad Kicks is the closest competitor in the UAE/Dubai luxury sneaker resell space.
-They operate in the same market as Presha Trends. Use their site in two ways:
+They operate in the same market as Presha Trends. Use their site in 4 ways:
 1. **Structural reference** — understand how they organise navigation, pages, 
    collections, and content so Presha can match or exceed that coverage
 2. **Design reference** — study their layout patterns, section ordering, and UX 
    conventions as a baseline. Presha Trends must be significantly superior in 
    design quality, interaction, animation, and overall brand feel.
+3. **Content reference** — understand how they organise content so Presha can match or exceed that coverage
+4. **Design Inspiration**
 We are NOT copying Mad Kicks. We are studying the category standard and exceeding it.
 
 ### Mad Kicks — Full Navigation Structure
@@ -236,11 +238,11 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 2. - [x] Navigation / Header
 3. - [ ] Hero Section
 4. - [/] Scrolling Marquee (⚠️ animation not working — revisit)
-5. - [ ] Shop by Brands
-6. - [ ] Trending Now
-7. - [ ] Gifts for Her / Him
-8. - [ ] Shop by Category
-9. - [x] Presha Authentication
+5. - [x] Shop by Brands
+6. - [ ] Gifts for Her / Him
+7. - [ ] Trending Now
+8. - [x] Presha Authentication
+9. - [x] Featured Categories
 10. - [x] Journal
 11. - [x] Reviews
 12. - [ ] Email Signup
