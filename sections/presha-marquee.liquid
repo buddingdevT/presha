@@ -7,13 +7,18 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    width: 100%;
     cursor: default;
+    /* Break out of page container to full viewport width */
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
   }
 
   .presha-marquee__track {
     display: flex;
-    width: fit-content;
+    width: max-content;
     white-space: nowrap;
     animation: presha-marquee-scroll linear infinite;
     animation-duration: var(--marquee-speed, 40s);
