@@ -42,3 +42,19 @@
 ## Email Signup Section (2026-03-28)
 - [ ] Action Needed: The form is natively integrated with Shopify! Any emails entered here will automatically populate your Shopify Admin > Customers tab with the "newsletter" tag. 
 - [ ] (Optional): You can customize the giant display heading, subtext, button label, and placeholder text directly inside the Theme Editor.
+
+---
+
+## Shop by Brand — Logo Strip (2026-03-30)
+- [ ] **Action Required — Upload real brand logos:**
+  - Go to **Theme Editor → Homepage → Brand Logos section**
+  - For each brand block (Jordan, Nike, Adidas, New Balance, Yeezy, Chrome Hearts), click the block and upload a logo via the **"Brand Logo"** image picker
+  - Logos must be **black on transparent background**, PNG or SVG format, max 400px wide
+  - **Where to get them (free):**
+    - [Brandfetch.com](https://brandfetch.com) — search brand name, download SVG/PNG (recommended)
+    - [Brands of the World](https://www.brandsoftheworld.com/) — free AI/EPS/SVG downloads
+    - Nike/Jordan official press kit: newsroom.nike.com
+  - Until real logos are uploaded, section displays crisp inline SVG fallbacks (Jumpman, Swoosh, etc.)
+- [ ] **Action Required — Create collections:** The logo links point to `/collections/jordan`, `/collections/nike`, `/collections/adidas`, `/collections/new-balance`, `/collections/yeezy`, `/collections/chrome-hearts`. Create these collections in Shopify Admin → Products → Collections so the links are live.
+- [ ] (Optional): Add or remove brands via Theme Editor → Brand Logos → Add block. Up to 12 brands supported.
+- [ ] (Optional): Update collection URLs per brand block if your collection handles are different.

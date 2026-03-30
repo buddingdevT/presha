@@ -1088,12 +1088,69 @@
         "text_color": "#ffffff",
         "speed": 30
       }
+    },
+    "presha_brand_logos": {
+      "type": "presha-brand-logos",
+      "blocks": {
+        "brand_jordan": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Jordan",
+            "collection_url": "/collections/jordan"
+          }
+        },
+        "brand_nike": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Nike",
+            "collection_url": "/collections/nike"
+          }
+        },
+        "brand_adidas": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Adidas",
+            "collection_url": "/collections/adidas"
+          }
+        },
+        "brand_new_balance": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "New Balance",
+            "collection_url": "/collections/new-balance"
+          }
+        },
+        "brand_yeezy": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Yeezy",
+            "collection_url": "/collections/yeezy"
+          }
+        },
+        "brand_chrome_hearts": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Chrome Hearts",
+            "collection_url": "/collections/chrome-hearts"
+          }
+        }
+      },
+      "block_order": [
+        "brand_jordan",
+        "brand_nike",
+        "brand_adidas",
+        "brand_new_balance",
+        "brand_yeezy",
+        "brand_chrome_hearts"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "slideshow_thBVtw",
     "hero_jVaWmY",
     "presha_marquee",
+    "presha_brand_logos",
     "1769647631664937e5",
     "blocks_fdCed7",
     "product_list_fa6P9H",
