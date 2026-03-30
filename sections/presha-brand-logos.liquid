@@ -1,14 +1,45 @@
 {%- comment -%}
-  PRESHA BRAND LOGOS — Shop By Brand / Featured Brands strip
-  ─────────────────────────────────────────────────────────
-  Desktop  : Horizontal flex row, logos space-evenly, opacity 0.7 → 1 on hover
-  Mobile   : Horizontally scrollable row with scroll-snap
-  Borders  : 1px solid #E2E2E2 top and bottom
-  Padding  : 64px vertical (desktop), 40px (mobile)
-  Logo height: max 40px, width auto
-  Each brand block: image_picker (upload the real logo) + url (collection link)
-  Falls back to inline SVG if no image uploaded.
-  GSAP ScrollTrigger: section header fades in, logos stagger in from below.
+  ============================================================================
+  PRESHA BRAND LOGOS — Shop By Brand
+  ============================================================================
+
+  PURPOSE:
+  Displays partner brand logos in a horizontally scrollable row of cards.
+  Each card links to the brand's collection page.
+
+  LAYOUT:
+  - "AUTHENTICATED PARTNERSHIPS" eyebrow above heading
+  - Left-aligned heading "SHOP BY BRAND"
+  - Horizontal row of uniform white cards with subtle border
+  - Each card contains either a logo SVG/image OR text fallback
+  - Row scrolls horizontally on all viewports (hidden scrollbar, touch-friendly)
+  - Cards snap to center on scroll
+
+  INTERACTIONS:
+  - Hover: card lifts slightly + drop shadow appears
+  - GSAP ScrollTrigger: heading fades in, cards stagger up on scroll
+
+  CUSTOMISATION (Theme Editor):
+  - section.settings.eyebrow  → small text above heading (leave blank to hide)
+  - section.settings.heading  → main heading text
+  - Each block has: brand_name, logo_asset (filename), logo (image_picker), collection_url
+
+  LOGO PRIORITY (per card):
+  1. logo_asset → SVG file in assets/ folder (e.g. "brand-nike.svg")
+  2. logo       → image_picker upload via Theme Editor
+  3. brand_name → bold text fallback
+
+  TO ADD BRAND LOGOS:
+  1. Place the SVG file in the assets/ folder with "brand-" prefix
+  2. In Theme Editor → this section → click a Brand block
+  3. Enter the filename in "Logo Asset Filename" (e.g. "brand-nike.svg")
+  4. OR upload an image to the "Brand Logo" image picker field
+
+  FILES RELATED:
+  - templates/index.json  → block data (brand names, URLs, block order)
+  - assets/brand-*.svg    → brand logo SVG files
+  - This file only        → all HTML, CSS, JS are self-contained
+  ============================================================================
 {%- endcomment -%}
 
 <section
@@ -16,25 +47,43 @@
   class="presha-brand-logos"
   aria-label="Shop by Brand"
 >
-  {%- comment -%} Section header eyebrow / label {%- endcomment -%}
-  <div class="presha-brand-logos__header">
-    <span class="presha-brand-logos__eyebrow">SHOP BY BRAND</span>
-    <span class="presha-brand-logos__line" aria-hidden="true"></span>
+
+  {%- comment -%} ── Heading block ── {%- endcomment -%}
+  <div class="presha-brand-logos__heading-wrap">
+
+    {%- comment -%} Eyebrow — only renders if text is provided in Theme Editor {%- endcomment -%}
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="presha-brand-logos__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h2 class="presha-brand-logos__title">{{ section.settings.heading }}</h2>
   </div>
 
+  {%- comment -%} ── Scrollable brand card row ── {%- endcomment -%}
   <div class="presha-brand-logos__inner">
     <div class="presha-brand-logos__track" role="list">
 
       {%- for block in section.blocks -%}
         {%- if block.type == 'brand' -%}
           <a
-            class="presha-brand-logos__item"
+            class="presha-brand-logos__card"
             href="{{ block.settings.collection_url | default: '#' }}"
             aria-label="Shop {{ block.settings.brand_name }}"
             role="listitem"
             {{ block.shopify_attributes }}
           >
-            {%- if block.settings.logo != blank -%}
+            {%- if block.settings.logo_asset != blank -%}
+              {%- comment -%} SVG logo from assets/ folder — highest priority {%- endcomment -%}
+              <img
+                class="presha-brand-logos__img"
+                src="{{ block.settings.logo_asset | asset_url }}"
+                alt="{{ block.settings.brand_name }}"
+                loading="lazy"
+                width="130"
+                height="50"
+              >
+            {%- elsif block.settings.logo != blank -%}
+              {%- comment -%} Logo image — uploaded via Theme Editor {%- endcomment -%}
               {{
                 block.settings.logo
                 | image_url: width: 400
@@ -46,97 +95,8 @@
                   height: block.settings.logo.height
               }}
             {%- else -%}
-              {%- comment -%} Inline SVG fallbacks — replace once real logos are uploaded {%- endcomment -%}
-              {%- case block.settings.brand_name -%}
-
-                {%- when 'Jordan' -%}
-                  {%- comment -%} Air Jordan Jumpman silhouette {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path fill="#111111" d="
-                      M40,4 C43,4 46,6.5 46,10 C46,13.5 43,16 40,16 C37,16 34,13.5 34,10 C34,6.5 37,4 40,4 Z
-                      M35,18 L45,18 C45,18 50,26 55,32 C59,37 68,30 70,32 C72,34 63,43 57,40
-                      C53.5,38.5 50,48 47,55 L53,62 L60,80 L55,80 L49,65 L40,56
-                      L31,65 L25,80 L20,80 L27,62 L33,55
-                      C30,48 26.5,38.5 23,40 C17,43 8,34 10,32 C12,30 21,37 25,32
-                      C30,26 35,18 35,18 Z
-                    "/>
-                  </svg>
-
-                {%- when 'Nike' -%}
-                  {%- comment -%} Nike Swoosh {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path fill="#111111" d="M6,54 C38,12 130,-2 194,28 C148,34 92,48 70,58 C52,66 40,74 26,66 C12,58 6,54 6,54 Z"/>
-                  </svg>
-
-                {%- when 'Adidas' -%}
-                  {%- comment -%} Adidas three-stripe mountain logo + wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 130 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <polygon fill="#111111" points="65,8 94,60 36,60"/>
-                    <rect fill="#111111" x="28" y="66" width="74" height="7" rx="1"/>
-                    <text x="65" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="0" fill="#111111">adidas</text>
-                    <!-- Three stripes overlaid on the triangle -->
-                    <rect fill="#ffffff" x="51" y="36" width="5" height="20" transform="rotate(-30,53.5,46)"/>
-                    <rect fill="#ffffff" x="62" y="28" width="5" height="28" transform="rotate(-30,64.5,42)"/>
-                    <rect fill="#ffffff" x="73" y="20" width="5" height="36" transform="rotate(-30,75.5,38)"/>
-                  </svg>
-
-                {%- when 'New Balance' -%}
-                  {%- comment -%} NB stacked wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <!-- N letterform -->
-                    <path fill="#111111" d="M5,8 L5,52 L17,52 L17,26 L35,52 L47,52 L47,8 L35,8 L35,34 L17,8 Z"/>
-                    <!-- B letterform -->
-                    <path fill="#111111" d="M55,8 L55,52 L82,52 C91,52 98,46 98,38 C98,33 95,29 90,27 C94,25 97,21 97,16 C97,11 91,8 84,8 Z M67,18 L82,18 C85,18 87,20 87,23 C87,26 85,28 82,28 L67,28 Z M67,38 L67,43 L84,43 C87,43 89,41 89,40 C89,39 87,37 84,37 L67,37 Z"/>
-                    <!-- "new balance" wordmark below -->
-                    <text x="5" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="1.5" fill="#111111" text-transform="uppercase">NEW BALANCE</text>
-                  </svg>
-
-                {%- when 'Yeezy' -%}
-                  {%- comment -%} YEEZY stark wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="100" y="46" text-anchor="middle" font-family="Arial Black, 'Arial Bold', Gadget, sans-serif" font-weight="900" font-size="48" fill="#111111" letter-spacing="8">YEEZY</text>
-                  </svg>
-
-                {%- when 'Chrome Hearts' -%}
-                  {%- comment -%} Chrome Hearts gothic cross + wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <!-- Gothic Cross -->
-                    <path fill="#111111" d="
-                      M18,16 L22,16 L22,10 C22,8 24,6 26,6 L30,6 C32,6 34,8 34,10 L34,16 L38,16 C40,16 42,18 42,20 L42,24 C42,26 40,28 38,28 L34,28 L34,46 C34,48 32,50 30,50 L26,50 C24,50 22,48 22,46 L22,28 L18,28 C16,28 14,26 14,24 L14,20 C14,18 16,16 18,16 Z
-                    "/>
-                    <!-- CH wordmark -->
-                    <text x="56" y="36" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="22" fill="#111111" letter-spacing="0.5">CHROME</text>
-                    <text x="56" y="58" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="22" fill="#111111" letter-spacing="0.5">HEARTS</text>
-                  </svg>
-
-                {%- when 'Goyard' -%}
-                  {%- comment -%} Goyard stylised wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="100" y="44" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="40" fill="#111111" letter-spacing="4">GOYARD</text>
-                  </svg>
-
-                {%- when 'Off-White' -%}
-                  {%- comment -%} Off-White quoted wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="120" y="44" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="28" fill="#111111" letter-spacing="2">&quot;OFF-WHITE™&quot;</text>
-                  </svg>
-
-                {%- when 'Asics' -%}
-                  {%- comment -%} ASICS wordmark {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="90" y="46" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="46" fill="#111111" letter-spacing="3">ASICS</text>
-                  </svg>
-
-                {%- else -%}
-                  {%- comment -%} Generic text fallback for any other brand {%- endcomment -%}
-                  <svg class="presha-brand-logos__svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
-                      font-family="Arial Black, sans-serif" font-weight="900" font-size="26"
-                      fill="#111111" letter-spacing="2">
-                      {{ block.settings.brand_name | upcase | truncate: 14, '' }}
-                    </text>
-                  </svg>
-              {%- endcase -%}
+              {%- comment -%} Text fallback — shown until a logo is uploaded {%- endcomment -%}
+              <span class="presha-brand-logos__brand-name">{{ block.settings.brand_name }}</span>
             {%- endif -%}
           </a>
         {%- endif -%}
@@ -148,243 +108,314 @@
 
 {% stylesheet %}
 
-  /* ─── Section wrapper ──────────────────────────────────────────── */
+  /* ============================================================================
+     SHOP BY BRAND — Styles
+     ============================================================================
+     STRUCTURE:
+     .presha-brand-logos              → section wrapper (white bg, reduced padding)
+       __heading-wrap                 → heading container (left-aligned)
+         __eyebrow                    → small burgundy label above heading
+         __title                      → "SHOP BY BRAND" heading
+       __inner                        → scroll container (hides overflow chrome)
+         __track                      → flex row, overflow-x scroll, hidden scrollbar
+           __card                     → individual brand card (white, border, rounded)
+             __img                    → logo image (SVG or uploaded)
+             __brand-name             → text fallback (when no logo)
+
+     SPACING:
+     - Section padding: 40px top, 48px bottom (desktop)
+     - Heading margin-bottom: 28px
+     - Card gap: 18px
+     - Card internal padding: 32px (centers the logo/text)
+
+     HOVER:
+     - Card lifts 3px + drop shadow appears
+     - Text turns burgundy / logo darkens
+
+     To change card size → edit width/height on .__card
+     To change gap       → edit gap on .__track
+     To change shadow    → edit box-shadow on .__card:hover
+     ============================================================================ */
+
+  /* ── Section wrapper ─────────────────────────────────────────────────────── */
+  /* White background, tight vertical padding to reduce section height         */
   .presha-brand-logos {
     width: 100%;
     background-color: #ffffff;
-    border-top: 1px solid #E2E2E2;
-    border-bottom: 1px solid #E2E2E2;
-    padding: 48px 0 64px;
+    padding: 40px 0 48px;        /* CHANGE: reduce top/bottom padding here    */
     box-sizing: border-box;
     overflow: hidden;
   }
 
-  /* ─── Section header / eyebrow ─────────────────────────────────── */
-  .presha-brand-logos__header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    max-width: 1280px;
-    margin: 0 auto 44px;
+  /* ── Heading block — left-aligned ────────────────────────────────────────── */
+  /* Matches design ref: heading sits left within the content area             */
+  .presha-brand-logos__heading-wrap {
+    text-align: center;
+    margin-bottom: 28px;         /* CHANGE: space between heading and cards   */
     padding: 0 40px;
-    opacity: 0; /* starting state — GSAP animates to 1 */
+    max-width: 1380px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;                  /* GSAP animates this to 1 on scroll         */
+    will-change: opacity, transform;
   }
 
+  /* Eyebrow — small burgundy label (optional, hidden if blank in Liquid)     */
   .presha-brand-logos__eyebrow {
     font-family: var(--font-body--family, 'Jost', system-ui, sans-serif);
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #888888;
-    white-space: nowrap;
-    flex-shrink: 0;
+    color: #6B1A2A;              /* Presha burgundy                           */
+    margin: 0 0 8px;
+    line-height: 1;
   }
 
-  .presha-brand-logos__line {
-    flex: 1;
-    height: 1px;
-    background: #E2E2E2;
-    display: block;
+  /* Main heading — bold, uppercase, dark                                      */
+  .presha-brand-logos__title {
+    font-family: var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: clamp(22px, 2.5vw, 32px);  /* CHANGE: heading size            */
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #1e2235;              /* dark navy                                  */
+    margin: 0;
+    line-height: 1.15;
   }
 
-  /* ─── Inner container ──────────────────────────────────────────── */
+  /* ── Scroll container ────────────────────────────────────────────────────── */
+  /* Constrains the track width and hides any overflow chrome                  */
   .presha-brand-logos__inner {
-    max-width: 1280px;
+    max-width: 1380px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0;
+    overflow: hidden;
   }
 
-  /* ─── Desktop: horizontal flex row ────────────────────────────── */
+  /* ── Card track — horizontal scroll on ALL viewports ─────────────────────── */
+  /* Flex row, no wrap, scrolls horizontally, scrollbar hidden                  */
+  /* CHANGE: adjust gap to change space between cards                           */
+  /* CHANGE: adjust padding to change edge insets                               */
   .presha-brand-logos__track {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
+    align-items: stretch;
+    gap: 18px;                   /* CHANGE: gap between cards                  */
     flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 40px 16px;      /* top/sides/bottom — extra bottom for shadow */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  .presha-brand-logos__item {
-    display: inline-flex;
+  .presha-brand-logos__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Brand card ──────────────────────────────────────────────────────────── */
+  /* White card with subtle gray border, rounded corners                       */
+  /* Sized wider to match design ref — generous padding around logos            */
+  /* CHANGE: width/height to resize cards                                      */
+  /* CHANGE: border-radius for corner roundness                                */
+  /* CHANGE: border color for card outline                                     */
+  .presha-brand-logos__card {
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    scroll-snap-align: center;
     text-decoration: none;
-    opacity: 0; /* GSAP stagger start state */
-    transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+    width: 200px;                /* CHANGE: card width                         */
+    height: 130px;               /* CHANGE: card height                        */
+    padding: 20px;               /* CHANGE: internal padding around logo       */
+    background: #ffffff;
+    border: 1px solid #e5e5e8;   /* subtle light gray border                   */
+    border-radius: 12px;         /* CHANGE: card corner radius                 */
+    opacity: 0;                  /* GSAP animates to 1                         */
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    will-change: opacity, transform;
+    will-change: opacity, transform, box-shadow;
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.3s ease;
   }
 
-  /* Hover: full opacity + subtle lift */
-  .presha-brand-logos__item:hover,
-  .presha-brand-logos__item:focus-visible {
-    opacity: 1 !important;
-    transform: translateY(-2px) scale(1.06);
+  /* ── Card hover — lift + drop shadow ─────────────────────────────────────── */
+  /* CHANGE: box-shadow values to adjust shadow intensity/spread                */
+  /* CHANGE: translateY to adjust lift distance                                 */
+  .presha-brand-logos__card:hover,
+  .presha-brand-logos__card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
     outline: none;
-    filter: none;
   }
 
-  /* ─── Logo images (uploaded via Theme Editor) ──────────────────── */
+  /* ── Brand name text (fallback until logo is uploaded) ───────────────────── */
+  /* Bold uppercase text centered inside the card                               */
+  /* CHANGE: font-size for text size, color for text color                      */
+  .presha-brand-logos__brand-name {
+    font-family: var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 14px;             /* CHANGE: fallback text size                 */
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1e2235;              /* dark navy                                  */
+    line-height: 1.25;
+    text-align: center;
+    display: block;
+    white-space: nowrap;
+    padding: 0 12px;
+    transition: color 0.3s ease;
+  }
+
+  /* Text turns burgundy on hover                                               */
+  .presha-brand-logos__card:hover .presha-brand-logos__brand-name,
+  .presha-brand-logos__card:focus-visible .presha-brand-logos__brand-name {
+    color: #6B1A2A;
+  }
+
+  /* ── Logo images (SVG from assets/ or uploaded via Theme Editor) ────────── */
+  /* Black logos displayed at a max size to fit uniformly inside cards           */
+  /* CHANGE: max-height to resize logos, max-width to constrain width           */
   .presha-brand-logos__img {
     display: block;
-    max-height: 40px;
+    max-height: 55px;            /* CHANGE: logo max height inside card        */
+    max-width: 140px;            /* CHANGE: logo max width inside card         */
     width: auto;
+    height: auto;
     object-fit: contain;
-    /* desaturate images to unify the look until real black-format logos are uploaded */
-    filter: grayscale(100%);
-    transition: filter 0.35s ease;
+    transition: opacity 0.3s ease;
   }
 
-  .presha-brand-logos__item:hover .presha-brand-logos__img,
-  .presha-brand-logos__item:focus-visible .presha-brand-logos__img {
-    filter: grayscale(0%);
-  }
-
-  /* ─── SVG fallback logos ───────────────────────────────────────── */
-  .presha-brand-logos__svg {
-    display: block;
-    height: 38px;
-    width: auto;
-    max-width: 180px;
-    flex-shrink: 0;
-  }
-
-  /* ─── Tablet: two-row wrap ─────────────────────────────────────── */
-  @media screen and (min-width: 750px) and (max-width: 1023px) {
-    .presha-brand-logos {
-      padding: 40px 0 56px;
-    }
-
-    .presha-brand-logos__inner {
-      padding: 0 24px;
-    }
-
-    .presha-brand-logos__header {
-      padding: 0 24px;
-      margin-bottom: 32px;
-    }
-
-    .presha-brand-logos__track {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px 48px;
-    }
-
-    .presha-brand-logos__item {
-      flex: 0 0 calc(33% - 32px);
-      justify-content: center;
-    }
-  }
-
-  /* ─── Mobile: horizontal scroll with snap ──────────────────────── */
-  @media screen and (max-width: 749px) {
+  /* ── Tablet (750px–1079px) ───────────────────────────────────────────────── */
+  @media screen and (min-width: 750px) and (max-width: 1079px) {
     .presha-brand-logos {
       padding: 36px 0 44px;
     }
 
-    .presha-brand-logos__header {
-      padding: 0 20px;
+    .presha-brand-logos__heading-wrap {
+      padding: 0 32px;
       margin-bottom: 24px;
     }
 
-    .presha-brand-logos__inner {
-      padding: 0;
-      overflow: hidden;
-    }
-
     .presha-brand-logos__track {
-      justify-content: flex-start;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 8px 20px 12px;
       gap: 16px;
-      /* Hide scrollbar cosmetically */
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      padding: 8px 32px 16px;
     }
 
-    .presha-brand-logos__track::-webkit-scrollbar {
-      display: none;
-    }
-
-    .presha-brand-logos__item {
-      scroll-snap-align: center;
-      flex: 0 0 auto;
-      min-width: 80px;
-    }
-
-    .presha-brand-logos__img,
-    .presha-brand-logos__svg {
-      max-height: 30px;
+    .presha-brand-logos__card {
+      width: 180px;
+      height: 120px;
+      padding: 18px;
     }
   }
 
-  /* ─── Reduced motion ───────────────────────────────────────────── */
+  /* ── Mobile (under 750px) ────────────────────────────────────────────────── */
+  @media screen and (max-width: 749px) {
+    .presha-brand-logos {
+      padding: 32px 0 40px;      /* CHANGE: mobile section padding             */
+    }
+
+    .presha-brand-logos__heading-wrap {
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    .presha-brand-logos__title {
+      font-size: 20px;           /* CHANGE: mobile heading size                */
+    }
+
+    .presha-brand-logos__track {
+      gap: 12px;                 /* CHANGE: mobile gap between cards           */
+      padding: 6px 20px 14px;
+    }
+
+    .presha-brand-logos__card {
+      width: 150px;              /* CHANGE: mobile card width                  */
+      height: 105px;             /* CHANGE: mobile card height                 */
+      padding: 16px;
+      border-radius: 10px;
+    }
+
+    .presha-brand-logos__brand-name {
+      font-size: 12px;           /* CHANGE: mobile text fallback size          */
+    }
+
+    .presha-brand-logos__img {
+      max-height: 40px;          /* CHANGE: mobile logo max height             */
+      max-width: 110px;
+    }
+  }
+
+  /* ── Reduced motion ──────────────────────────────────────────────────────── */
+  /* Respects user's OS-level "reduce motion" preference                        */
   @media (prefers-reduced-motion: reduce) {
-    .presha-brand-logos__item,
-    .presha-brand-logos__item:hover {
-      transition: opacity 0.1s ease;
+    .presha-brand-logos__card {
+      transition: box-shadow 0.1s ease;
       transform: none !important;
     }
   }
 
 {% endstylesheet %}
 
-<script>
-(function() {
-  /* ── GSAP ScrollTrigger entrance animation ── */
-  /* Guard: GSAP + ScrollTrigger must be loaded (in theme.liquid) */
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    /* Fallback: make everything visible immediately */
-    var sectionEl = document.getElementById('presha-brand-logos-{{ section.id }}');
-    if (!sectionEl) return;
-    sectionEl.querySelectorAll('.presha-brand-logos__header, .presha-brand-logos__item').forEach(function(el) {
-      el.style.opacity = '1';
-    });
-    return;
-  }
+{%- comment -%}
+  ============================================================================
+  GSAP ANIMATION
+  ============================================================================
+  - Heading: fades in + slides up when section enters viewport
+  - Cards: stagger fade in + slide up, landing at full opacity
+  - Graceful fallback: if GSAP isn't loaded, items show immediately
+  - ScrollTrigger fires once (no replay on scroll back)
 
+  CHANGE: duration/ease/stagger values below to adjust animation feel
+  CHANGE: scrollTrigger.start to adjust when animation triggers
+  ============================================================================
+{%- endcomment -%}
+<script>
+(function () {
   var sectionEl = document.getElementById('presha-brand-logos-{{ section.id }}');
   if (!sectionEl) return;
 
-  var header  = sectionEl.querySelector('.presha-brand-logos__header');
-  var items   = sectionEl.querySelectorAll('.presha-brand-logos__item');
+  var headingWrap = sectionEl.querySelector('.presha-brand-logos__heading-wrap');
+  var cards = sectionEl.querySelectorAll('.presha-brand-logos__card');
 
-  /* Register ScrollTrigger if not already registered */
-  if (!ScrollTrigger.isRegistered) {
-    gsap.registerPlugin(ScrollTrigger);
+  /* ── Fallback if GSAP/ScrollTrigger not loaded ── */
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    if (headingWrap) headingWrap.style.opacity = '1';
+    cards.forEach(function (el) { el.style.opacity = '1'; });
+    return;
   }
 
-  /* 1. Eyebrow header fades in */
-  gsap.fromTo(header,
-    { opacity: 0, y: 16 },
+  /* ── Heading entrance: fade + slide up ── */
+  gsap.fromTo(headingWrap,
+    { opacity: 0, y: 18 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.7,
+      duration: 0.65,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: sectionEl,
-        start: 'top 85%',
+        start: 'top 85%',         /* fires when section top hits 85% viewport */
         once: true
       }
     }
   );
 
-  /* 2. Logo items stagger in from below */
-  gsap.fromTo(items,
-    { opacity: 0, y: 24 },
+  /* ── Cards entrance: stagger fade + slide up ── */
+  gsap.fromTo(cards,
+    { opacity: 0, y: 20 },
     {
-      opacity: 0.7, /* resting opacity = 0.7 per spec */
+      opacity: 1,                 /* cards rest at full opacity                */
       y: 0,
-      duration: 0.55,
+      duration: 0.45,
       ease: 'power2.out',
-      stagger: 0.08,
+      stagger: 0.06,              /* delay between each card animation        */
       scrollTrigger: {
         trigger: sectionEl,
         start: 'top 80%',
@@ -392,16 +423,48 @@
       }
     }
   );
-})();
+}());
 </script>
 
+{%- comment -%}
+  ============================================================================
+  SCHEMA — Theme Editor Configuration
+  ============================================================================
+  SECTION SETTINGS:
+  - eyebrow  → optional small text above heading (leave blank to hide)
+  - heading  → main heading text
+
+  BLOCK SETTINGS (per brand):
+  - brand_name      → text label (used as fallback + aria-label)
+  - logo_asset      → SVG filename in assets/ folder (e.g. "brand-nike.svg")
+  - logo            → image picker for brand logo (overrides text)
+  - collection_url  → link to the brand's collection page
+
+  PRESETS:
+  - Default brands pre-populated for quick setup
+  - max_blocks: 12 — increase if you need more brand slots
+  ============================================================================
+{%- endcomment -%}
 {% schema %}
 {
   "name": "Brand Logos",
   "tag": "section",
   "class": "section",
   "max_blocks": 12,
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "info": "Small label above the heading. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "SHOP BY BRAND"
+    }
+  ],
   "blocks": [
     {
       "type": "brand",
@@ -411,20 +474,26 @@
           "type": "text",
           "id": "brand_name",
           "label": "Brand Name",
-          "info": "Used for alt text and SVG fallback if no logo image is uploaded.",
+          "info": "Displayed as bold text until a logo is provided.",
           "default": "Nike"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo Asset Filename",
+          "info": "SVG filename in assets/ folder (e.g. 'brand-nike.svg'). Takes priority over image picker."
         },
         {
           "type": "image_picker",
           "id": "logo",
-          "label": "Brand Logo",
-          "info": "Upload a black PNG or SVG logo. Recommended: transparent background, max 400px wide."
+          "label": "Brand Logo (optional)",
+          "info": "Upload a black-on-transparent PNG or SVG. Max 400px wide. Used if no asset filename is set."
         },
         {
           "type": "url",
           "id": "collection_url",
           "label": "Collection URL",
-          "info": "Link this logo to a brand collection page."
+          "info": "Links this brand to its collection page."
         }
       ]
     }
@@ -432,49 +501,19 @@
   "presets": [
     {
       "name": "Brand Logos",
+      "settings": {
+        "eyebrow": "AUTHENTICATED PARTNERSHIPS",
+        "heading": "SHOP BY BRAND"
+      },
       "blocks": [
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Jordan",
-            "collection_url": "/collections/jordan"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Nike",
-            "collection_url": "/collections/nike"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Adidas",
-            "collection_url": "/collections/adidas"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "New Balance",
-            "collection_url": "/collections/new-balance"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Yeezy",
-            "collection_url": "/collections/yeezy"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Chrome Hearts",
-            "collection_url": "/collections/chrome-hearts"
-          }
-        }
+        { "type": "brand", "settings": { "brand_name": "Nike", "logo_asset": "brand-nike.svg", "collection_url": "/collections/nike" } },
+        { "type": "brand", "settings": { "brand_name": "Air Jordan", "logo_asset": "brand-air-jordan.svg", "collection_url": "/collections/jordan" } },
+        { "type": "brand", "settings": { "brand_name": "Adidas", "logo_asset": "brand-adidas.svg", "collection_url": "/collections/adidas" } },
+        { "type": "brand", "settings": { "brand_name": "Chrome Hearts", "logo_asset": "brand-chrome-hearts.svg", "collection_url": "/collections/chrome-hearts" } },
+        { "type": "brand", "settings": { "brand_name": "Goyard", "logo_asset": "brand-goyard.svg", "collection_url": "/collections/goyard" } },
+        { "type": "brand", "settings": { "brand_name": "New Balance", "logo_asset": "brand-new-balance.svg", "collection_url": "/collections/new-balance" } },
+        { "type": "brand", "settings": { "brand_name": "On Running", "logo_asset": "brand-on-running.svg", "collection_url": "/collections/on-running" } },
+        { "type": "brand", "settings": { "brand_name": "Yeezy", "logo_asset": "brand-yeezy.svg", "collection_url": "/collections/yeezy" } }
       ]
     }
   ]

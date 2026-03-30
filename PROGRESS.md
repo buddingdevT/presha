@@ -101,27 +101,29 @@
 ## 2026-03-30 — Shop by Brand / Brand Logo Strip
 
 **What was built:**
-- Full "Shop By Brand" section (`presha-brand-logos.liquid`) built as a standalone Shopify section
-- Section header with "SHOP BY BRAND" eyebrow + decorative line separator matching Presha design language
-- Desktop layout: `display: flex` with `justify-content: space-between`, logos at `opacity: 0.7` → `opacity: 1` on hover with subtle `translateY(-2px) scale(1.06)` lift
-- Top + bottom `1px solid #E2E2E2` borders, 64px vertical padding (desktop)
-- Mobile layout: horizontally scrollable row with `scroll-snap-type: x mandatory`, hidden scrollbar, 16px gap, `scroll-snap-align: center` per item
-- Tablet layout: two-row flex-wrap centered layout
-- Logo image placeholder: `<image_picker>` in each brand block — supports lazy-loaded uploaded PNGs/SVGs; falls back to crisp inline SVGs per brand
-- SVG fallbacks built for: Jordan (Jumpman silhouette), Nike (Swoosh), Adidas (Three-stripe triangle), New Balance (NB letterform), Yeezy (wordmark), Chrome Hearts (gothic cross + wordmark), Goyard, Off-White, Asics, plus a generic text fallback for any others
-- GSAP ScrollTrigger entrance: eyebrow fades in first, then logos stagger in from below (0.08s per item). Graceful fallback if GSAP not loaded.
-- `filter: grayscale(100%)` on uploaded images so logos look unified in black-on-white format until the real black-format assets are in
-- Theme Editor: each brand block is fully configurable (name, logo image, collection URL) — up to 12 brands max
-- Section pre-populated with 6 brands in `index.json`: Jordan, Nike, Adidas, New Balance, Yeezy, Chrome Hearts
+- Full "Shop By Brand" section (`presha-brand-logos.liquid`) with "AUTHENTICATED PARTNERSHIPS" eyebrow + "SHOP BY BRAND" heading, centered
+- 8 brand SVG logos integrated from local files: Nike, Air Jordan, Adidas, Chrome Hearts, Goyard, New Balance, On Running, Yeezy
+- SVGs copied to `assets/` folder and referenced via `logo_asset` text setting + `asset_url` filter (no manual upload needed)
+- Three-tier logo rendering: `logo_asset` (SVG file) → `logo` (image_picker) → text fallback
+- White cards (200x130px desktop) with 12px border-radius, 20px internal padding, subtle gray border
+- Horizontal scroll on all viewports with hidden scrollbar and scroll-snap
+- Hover: card lifts 3px + drop shadow (preserved from original design)
+- GSAP ScrollTrigger: heading fades in, cards stagger up on scroll
+- Fully responsive: desktop → tablet (180x120) → mobile (150x105)
 
 **Files changed:**
-- `sections/presha-brand-logos.liquid` — Rebuilt with header, GSAP animation, improved SVGs, full responsiveness
-- `templates/index.json` — Added `presha_brand_logos` section + wired into homepage order after the marquee
+- `sections/presha-brand-logos.liquid` — Rebuilt with SVG asset support, centered heading, card styling
+- `templates/index.json` — Updated brand blocks with 8 new brands + logo_asset filenames + eyebrow text
+- `assets/brand-nike.svg` — Nike swoosh (vector)
+- `assets/brand-air-jordan.svg` — Jumpman silhouette (vector)
+- `assets/brand-adidas.svg` — Adidas trefoil (vector)
+- `assets/brand-chrome-hearts.svg` — Chrome Hearts (text-based SVG, needs real vector later)
+- `assets/brand-goyard.svg` — Goyard crest (vector)
+- `assets/brand-new-balance.svg` — NB logo (vector)
+- `assets/brand-on-running.svg` — On logo (vector)
+- `assets/brand-yeezy.svg` — Yeezy (text-based SVG, needs real vector later)
 
-**Logo sources — where to get black format logos:**
-- **Instant SVG/PNG (recommended):** [Brandfetch](https://brandfetch.com) — free high-res brand marks in SVG format
-- **Alternative:** [Brands of the World](https://www.brandsoftheworld.com/) — free logo downloads in AI/EPS/SVG
-- **Nike, Jordan, Adidas:** Official press kits at their brand newsroom sites (newsroom.nike.com, etc.)
-- **Chrome Hearts:** Brand assets are usually only available through official press. Use the inline SVG fallback for now.
-- When uploading: export logos in **black on transparent PNG** or **SVG** format, max 400px wide. Upload via Theme Editor → Homepage → Brand Logos → each brand block → "Brand Logo" image picker.
+**Notes:**
+- Chrome Hearts and Yeezy SVGs are `<text>` elements, not actual vector logos — replace with proper vector files when available
+- Source SVGs live in `brand logos/` folder (not committed to theme)
 

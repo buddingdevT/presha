@@ -46,15 +46,15 @@
 ---
 
 ## Shop by Brand — Logo Strip (2026-03-30)
-- [ ] **Action Required — Upload real brand logos:**
-  - Go to **Theme Editor → Homepage → Brand Logos section**
-  - For each brand block (Jordan, Nike, Adidas, New Balance, Yeezy, Chrome Hearts), click the block and upload a logo via the **"Brand Logo"** image picker
-  - Logos must be **black on transparent background**, PNG or SVG format, max 400px wide
-  - **Where to get them (free):**
-    - [Brandfetch.com](https://brandfetch.com) — search brand name, download SVG/PNG (recommended)
-    - [Brands of the World](https://www.brandsoftheworld.com/) — free AI/EPS/SVG downloads
-    - Nike/Jordan official press kit: newsroom.nike.com
-  - Until real logos are uploaded, section displays crisp inline SVG fallbacks (Jumpman, Swoosh, etc.)
-- [ ] **Action Required — Create collections:** The logo links point to `/collections/jordan`, `/collections/nike`, `/collections/adidas`, `/collections/new-balance`, `/collections/yeezy`, `/collections/chrome-hearts`. Create these collections in Shopify Admin → Products → Collections so the links are live.
+- [ ] **Action Required — Create collections:** The brand cards link to collection pages. Create these collections in **Shopify Admin → Products → Collections**:
+  - `/collections/nike`
+  - `/collections/jordan`
+  - `/collections/adidas`
+  - `/collections/chrome-hearts`
+  - `/collections/goyard`
+  - `/collections/new-balance`
+  - `/collections/on-running`
+  - `/collections/yeezy`
+- [ ] **Action Required — Replace text-based SVGs:** Chrome Hearts and Yeezy logos are currently text-based SVGs (not actual vector logos). Source proper vector SVG files and replace `assets/brand-chrome-hearts.svg` and `assets/brand-yeezy.svg`.
+- [ ] (Optional): Update collection URLs per brand block in Theme Editor if your collection handles differ from above.
 - [ ] (Optional): Add or remove brands via Theme Editor → Brand Logos → Add block. Up to 12 brands supported.
-- [ ] (Optional): Update collection URLs per brand block if your collection handles are different.

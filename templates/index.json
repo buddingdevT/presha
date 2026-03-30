@@ -1092,58 +1092,85 @@
     "presha_brand_logos": {
       "type": "presha-brand-logos",
       "blocks": {
-        "brand_jordan": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Jordan",
-            "collection_url": "/collections/jordan"
-          }
-        },
         "brand_nike": {
           "type": "brand",
           "settings": {
             "brand_name": "Nike",
+            "logo_asset": "brand-nike.svg",
             "collection_url": "/collections/nike"
+          }
+        },
+        "brand_jordan": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Air Jordan",
+            "logo_asset": "brand-air-jordan.svg",
+            "collection_url": "/collections/jordan"
           }
         },
         "brand_adidas": {
           "type": "brand",
           "settings": {
             "brand_name": "Adidas",
+            "logo_asset": "brand-adidas.svg",
             "collection_url": "/collections/adidas"
-          }
-        },
-        "brand_new_balance": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "New Balance",
-            "collection_url": "/collections/new-balance"
-          }
-        },
-        "brand_yeezy": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Yeezy",
-            "collection_url": "/collections/yeezy"
           }
         },
         "brand_chrome_hearts": {
           "type": "brand",
           "settings": {
             "brand_name": "Chrome Hearts",
+            "logo_asset": "brand-chrome-hearts.svg",
             "collection_url": "/collections/chrome-hearts"
+          }
+        },
+        "brand_goyard": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Goyard",
+            "logo_asset": "brand-goyard.svg",
+            "collection_url": "/collections/goyard"
+          }
+        },
+        "brand_new_balance": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "New Balance",
+            "logo_asset": "brand-new-balance.svg",
+            "collection_url": "/collections/new-balance"
+          }
+        },
+        "brand_on_running": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "On Running",
+            "logo_asset": "brand-on-running.svg",
+            "collection_url": "/collections/on-running"
+          }
+        },
+        "brand_yeezy": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Yeezy",
+            "logo_asset": "brand-yeezy.svg",
+            "collection_url": "/collections/yeezy"
           }
         }
       },
       "block_order": [
-        "brand_jordan",
         "brand_nike",
+        "brand_jordan",
         "brand_adidas",
+        "brand_chrome_hearts",
+        "brand_goyard",
         "brand_new_balance",
-        "brand_yeezy",
-        "brand_chrome_hearts"
+        "brand_on_running",
+        "brand_yeezy"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "AUTHENTICATED PARTNERSHIPS",
+        "heading": "SHOP BY BRAND"
+      }
     }
   },
   "order": [
