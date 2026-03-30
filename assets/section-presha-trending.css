@@ -1,0 +1,266 @@
+/* ============================================================
+   PRESHA TRENDING NOW — Product Carousel
+============================================================ */
+
+.presha-trending {
+  padding: 48px 0;
+}
+
+.presha-trending__container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* --- Header row ------------------------------------------- */
+.presha-trending__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+  gap: 16px;
+}
+
+.presha-trending__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.presha-trending__eyebrow {
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.presha-trending__heading {
+  font-family: var(--font-heading--family, 'Cormorant Garamond', serif);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.05;
+  margin: 0;
+  text-transform: uppercase;
+  color: #111;
+}
+
+/* --- Arrows ----------------------------------------------- */
+.presha-trending__arrows {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.presha-trending__arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.presha-trending__arrow:hover {
+  border-color: #111;
+  color: #111;
+}
+
+.presha-trending__arrow--disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* --- Track ------------------------------------------------ */
+.presha-trending__track-wrapper {
+  overflow: hidden;
+}
+
+.presha-trending__track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.presha-trending__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Card ------------------------------------------------- */
+.presha-trending__card {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.presha-trending__card:hover .presha-trending__img {
+  transform: scale(1.04);
+}
+
+/* --- Image wrap ------------------------------------------- */
+.presha-trending__img-wrap {
+  position: relative;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 12px;
+}
+
+.presha-trending__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.presha-trending__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ebebeb;
+}
+
+.presha-trending__placeholder-svg {
+  width: 60%;
+  height: auto;
+  opacity: 0.35;
+}
+
+/* --- Badge ------------------------------------------------ */
+.presha-trending__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 20px;
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #222;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* --- Product info ----------------------------------------- */
+.presha-trending__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 2px;
+}
+
+.presha-trending__vendor {
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B1A2A;
+}
+
+.presha-trending__title {
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.presha-trending__price {
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   TABLET — 750px+
+============================================================ */
+@media (min-width: 750px) {
+  .presha-trending {
+    padding: 64px 0;
+  }
+
+  .presha-trending__container {
+    padding: 0 40px;
+  }
+
+  .presha-trending__heading {
+    font-size: 42px;
+  }
+
+  .presha-trending__card {
+    flex: 0 0 260px;
+  }
+
+  .presha-trending__track {
+    gap: 20px;
+  }
+}
+
+/* ============================================================
+   DESKTOP — 1024px+
+============================================================ */
+@media (min-width: 1024px) {
+  .presha-trending__heading {
+    font-size: 48px;
+  }
+
+  .presha-trending__card {
+    flex: 0 0 calc((100% - 60px) / 4);
+  }
+
+  .presha-trending__track {
+    gap: 20px;
+  }
+
+  .presha-trending__eyebrow {
+    font-size: 12px;
+  }
+
+  .presha-trending__title {
+    font-size: 15px;
+  }
+}
+
+/* ============================================================
+   WIDE — 1280px+
+============================================================ */
+@media (min-width: 1280px) {
+  .presha-trending__card {
+    flex: 0 0 calc((100% - 80px) / 4.3);
+  }
+}

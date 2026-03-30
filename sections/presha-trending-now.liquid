@@ -1,0 +1,210 @@
+<!-- ============================================================
+  PRESHA TRENDING NOW — Product Carousel
+  Horizontal scrollable product carousel pulled from a collection.
+  Fully editable from Theme Editor (collection, texts, badge).
+============================================================ -->
+
+{{ 'section-presha-trending.css' | asset_url | stylesheet_tag }}
+
+{%- assign collection = section.settings.collection -%}
+{%- assign product_limit = section.settings.product_limit | default: 12 -%}
+
+<section class="presha-trending" id="presha-trending">
+  <div class="presha-trending__container">
+
+    <!-- Header row: eyebrow + heading on left, arrows on right -->
+    <div class="presha-trending__header">
+      <div class="presha-trending__header-text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="presha-trending__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="presha-trending__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      <div class="presha-trending__arrows">
+        <button class="presha-trending__arrow presha-trending__arrow--prev" aria-label="Previous" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="presha-trending__arrow presha-trending__arrow--next" aria-label="Next" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product carousel track -->
+    <div class="presha-trending__track-wrapper">
+      <div class="presha-trending__track">
+
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- for product in collection.products limit: product_limit -%}
+            <a href="{{ product.url }}" class="presha-trending__card">
+              <div class="presha-trending__img-wrap">
+                {%- if product.featured_image != blank -%}
+                  <img class="presha-trending__img"
+                       src="{{ product.featured_image | image_url: width: 480 }}"
+                       srcset="{{ product.featured_image | image_url: width: 320 }} 320w,
+                               {{ product.featured_image | image_url: width: 480 }} 480w,
+                               {{ product.featured_image | image_url: width: 640 }} 640w"
+                       sizes="(max-width: 480px) 70vw, (max-width: 749px) 45vw, 280px"
+                       alt="{{ product.title | escape }}"
+                       loading="lazy"
+                       width="480" height="480">
+                {%- else -%}
+                  <div class="presha-trending__img-placeholder">
+                    {{ 'product-1' | placeholder_svg_tag: 'presha-trending__placeholder-svg' }}
+                  </div>
+                {%- endif -%}
+
+                {%- if section.settings.show_badge -%}
+                  <span class="presha-trending__badge">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a3a"/><path d="M4 7.2L6.2 9.4L10 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    PRESHA VERIFIED
+                  </span>
+                {%- endif -%}
+              </div>
+
+              <div class="presha-trending__info">
+                {%- if product.vendor != blank -%}
+                  <span class="presha-trending__vendor">{{ product.vendor | upcase }}</span>
+                {%- endif -%}
+                <span class="presha-trending__title">{{ product.title }}</span>
+                <span class="presha-trending__price">{{ product.price | money }}</span>
+              </div>
+            </a>
+          {%- endfor -%}
+
+        {%- else -%}
+          <!-- Fallback: static placeholder cards when no collection is selected -->
+          {%- for i in (1..5) -%}
+            {%- assign placeholder_brands = 'JORDAN BRAND,SUPREME,OFF-WHITE™,CHROME HEARTS,NEW BALANCE' | split: ',' -%}
+            {%- assign placeholder_titles = "Retro High OG 'Chicago',Box Logo Hooded Sweatshirt,Classic Industrial Belt,Floral Cross Ring,550 'White Grey'" | split: ',' -%}
+            {%- assign placeholder_prices = '$1,450.00,$680.00,$245.00,$985.00,$320.00' | split: ',' -%}
+            {%- assign idx = forloop.index0 -%}
+            <div class="presha-trending__card">
+              <div class="presha-trending__img-wrap">
+                <div class="presha-trending__img-placeholder">
+                  {{ 'product-1' | placeholder_svg_tag: 'presha-trending__placeholder-svg' }}
+                </div>
+                {%- if section.settings.show_badge -%}
+                  <span class="presha-trending__badge">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a3a"/><path d="M4 7.2L6.2 9.4L10 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    PRESHA VERIFIED
+                  </span>
+                {%- endif -%}
+              </div>
+              <div class="presha-trending__info">
+                <span class="presha-trending__vendor">{{ placeholder_brands[idx] }}</span>
+                <span class="presha-trending__title">{{ placeholder_titles[idx] }}</span>
+                <span class="presha-trending__price">{{ placeholder_prices[idx] }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var section = document.getElementById('presha-trending');
+    if (!section) return;
+
+    var track = section.querySelector('.presha-trending__track');
+    var prevBtn = section.querySelector('.presha-trending__arrow--prev');
+    var nextBtn = section.querySelector('.presha-trending__arrow--next');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    /* --- Arrow navigation: scroll by one card width --- */
+    function getScrollAmount() {
+      var card = track.querySelector('.presha-trending__card');
+      if (!card) return 300;
+      var style = getComputedStyle(track);
+      var gap = parseFloat(style.columnGap) || parseFloat(style.gap) || 16;
+      return card.offsetWidth + gap;
+    }
+
+    prevBtn.addEventListener('click', function () {
+      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', function () {
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+
+    /* --- Update arrow opacity at edges --- */
+    function updateArrows() {
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      prevBtn.classList.toggle('presha-trending__arrow--disabled', track.scrollLeft <= 2);
+      nextBtn.classList.toggle('presha-trending__arrow--disabled', track.scrollLeft >= maxScroll - 2);
+    }
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    updateArrows();
+
+    /* --- GSAP entrance --- */
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from(section.querySelector('.presha-trending__header'), {
+        y: 30, opacity: 0, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: section, start: 'top 85%', once: true }
+      });
+
+      gsap.from(track.querySelectorAll('.presha-trending__card'), {
+        y: 40, opacity: 0, duration: 0.6, ease: 'power2.out',
+        stagger: 0.1,
+        scrollTrigger: { trigger: track, start: 'top 85%', once: true }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Trending Now",
+  "tag": "section",
+  "class": "presha-trending-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "HOT THIS WEEK"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "TRENDING NOW"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Max Products",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show 'Presha Verified' badge",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending Now"
+    }
+  ]
+}
+{% endschema %}

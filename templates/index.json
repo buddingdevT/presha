@@ -1194,6 +1194,15 @@
       },
       "block_order": ["gift_her", "gift_him"],
       "settings": {}
+    },
+    "presha_trending": {
+      "type": "presha-trending-now",
+      "settings": {
+        "eyebrow": "HOT THIS WEEK",
+        "heading": "TRENDING NOW",
+        "show_badge": true,
+        "product_limit": 12
+      }
     }
   },
   "order": [
@@ -1202,6 +1211,7 @@
     "presha_marquee",
     "presha_brand_logos",
     "presha_gifts",
+    "presha_trending",
     "1769647631664937e5",
     "blocks_fdCed7",
     "product_list_fa6P9H",
