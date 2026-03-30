@@ -58,3 +58,10 @@
 - [ ] **Action Required — Replace text-based SVGs:** Chrome Hearts and Yeezy logos are currently text-based SVGs (not actual vector logos). Source proper vector SVG files and replace `assets/brand-chrome-hearts.svg` and `assets/brand-yeezy.svg`.
 - [ ] (Optional): Update collection URLs per brand block in Theme Editor if your collection handles differ from above.
 - [ ] (Optional): Add or remove brands via Theme Editor → Brand Logos → Add block. Up to 12 brands supported.
+
+---
+
+## Gifts For Her / Him Section (2026-03-30)
+- [ ] **Action Required — Upload images:** Go to Theme Editor → Homepage → "Gifts For Her / Him" section. Upload a lifestyle image for each tile (e.g. Goyard bags for "Her", streetwear/sneakers for "Him").
+- [ ] **Action Required — Set link URLs:** In each tile block, set the Link to point to your gift collections (e.g. `/collections/gifts-for-her`, `/collections/gifts-for-him`). Create these collections in **Shopify Admin → Products → Collections** if they don't exist yet.
+- [ ] (Optional): Update the eyebrow text, heading, or button label per tile via Theme Editor.

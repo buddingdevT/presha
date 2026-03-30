@@ -1,0 +1,141 @@
+<!-- ============================================================
+  PRESHA GIFTS FOR HER / HIM — Editorial Split Tiles
+  Two side-by-side lifestyle image tiles with text overlay.
+  Fully editable from Theme Editor (images, text, links).
+============================================================ -->
+
+{{ 'section-presha-gifts.css' | asset_url | stylesheet_tag }}
+
+<section class="presha-gifts" id="presha-gifts">
+  <div class="presha-gifts__grid">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link | default: '#' }}"
+         class="presha-gifts__tile"
+         {{ block.shopify_attributes }}>
+
+        {%- if block.settings.image != blank -%}
+          <img class="presha-gifts__img"
+               src="{{ block.settings.image | image_url: width: 960 }}"
+               srcset="{{ block.settings.image | image_url: width: 480 }} 480w,
+                       {{ block.settings.image | image_url: width: 720 }} 720w,
+                       {{ block.settings.image | image_url: width: 960 }} 960w,
+                       {{ block.settings.image | image_url: width: 1200 }} 1200w"
+               sizes="(max-width: 749px) 100vw, 50vw"
+               alt="{{ block.settings.heading | escape }}"
+               loading="lazy"
+               width="960" height="640">
+        {%- else -%}
+          <div class="presha-gifts__placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'presha-gifts__placeholder-svg' }}
+          </div>
+        {%- endif -%}
+
+        <div class="presha-gifts__overlay"></div>
+
+        <div class="presha-gifts__content">
+          {%- if block.settings.eyebrow != blank -%}
+            <span class="presha-gifts__eyebrow">{{ block.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h3 class="presha-gifts__heading">{{ block.settings.heading }}</h3>
+          {%- endif -%}
+          {%- if block.settings.button_text != blank -%}
+            <span class="presha-gifts__btn">{{ block.settings.button_text }}</span>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var tiles = document.querySelectorAll('.presha-gifts__tile');
+    if (!tiles.length) return;
+
+    gsap.from(tiles, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: '#presha-gifts',
+        start: 'top 85%',
+        once: true
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Gifts For Her / Him",
+  "tag": "section",
+  "class": "presha-gifts-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "gift_tile",
+      "name": "Gift Tile",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow Text",
+          "default": "FIND HER PERFECT GIFT"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Gifts for Her"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gifts For Her / Him",
+      "blocks": [
+        {
+          "type": "gift_tile",
+          "settings": {
+            "eyebrow": "FIND HER PERFECT GIFT",
+            "heading": "Gifts for Her",
+            "button_text": "SHOP NOW"
+          }
+        },
+        {
+          "type": "gift_tile",
+          "settings": {
+            "eyebrow": "FIND HIS PERFECT PAIR",
+            "heading": "Gifts for Him",
+            "button_text": "SHOP NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

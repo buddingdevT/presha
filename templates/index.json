@@ -1171,6 +1171,29 @@
         "eyebrow": "AUTHENTICATED PARTNERSHIPS",
         "heading": "SHOP BY BRAND"
       }
+    },
+    "presha_gifts": {
+      "type": "presha-gifts",
+      "blocks": {
+        "gift_her": {
+          "type": "gift_tile",
+          "settings": {
+            "eyebrow": "FIND HER PERFECT GIFT",
+            "heading": "Gifts for Her",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "gift_him": {
+          "type": "gift_tile",
+          "settings": {
+            "eyebrow": "FIND HIS PERFECT PAIR",
+            "heading": "Gifts for Him",
+            "button_text": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": ["gift_her", "gift_him"],
+      "settings": {}
     }
   },
   "order": [
@@ -1178,6 +1201,7 @@
     "hero_jVaWmY",
     "presha_marquee",
     "presha_brand_logos",
+    "presha_gifts",
     "1769647631664937e5",
     "blocks_fdCed7",
     "product_list_fa6P9H",
