@@ -236,7 +236,7 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 ### Homepage — Section Order
 1. - [x] Announcement Bar
 2. - [x] Navigation / Header
-3. - [ ] Hero Section
+3. - [x] Hero Section
 4. - [/] Scrolling Marquee (⚠️ animation not working — revisit)
 5. - [x] Shop by Brands
 6. - [ ] Gifts for Her / Him

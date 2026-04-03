@@ -168,3 +168,36 @@
 **Notes:**
 - Brand Guidelines PDF (`designassets/Logo/Brand Guidelines Presentation (Presha Trends).pdf`) is intentionally excluded from git via `.gitignore`
 
+---
+
+## 2026-04-03 — Hero Carousel Section
+
+**What was built:**
+- New full-bleed hero carousel section (`sections/presha-hero-carousel.liquid`) — Liquid + scoped CSS + GSAP JavaScript, all in one self-contained section file
+- 3 slides managed as Shopify blocks: slide image (image_picker), label (text), headline (textarea), CTA text + link — fully editable and reorderable via Theme Editor
+- Slide transitions: GSAP crossfade (opacity, 0.8s power2.inOut) + Ken Burns zoom (scale 1→1.08, GPU-composited)
+- Text stagger entrance per slide: label → headline → CTA (power3.out, `"-=0.35"` overlap)
+- Text exit before slide change: label/headline/CTA individually faded out (0.3s power2.in)
+- Animated progress indicators: 64×2px bars, GSAP scaleX 0→1 over slide duration — freeze on hover/touch, resume from exact position
+- Discovery rail: 4 default cards as Shopify blocks (unlimited, editable, reorderable) — dark frosted bar pinned to bottom; desktop: flex; mobile: horizontal scroll with snap and hidden scrollbar
+- Rail entrance: ScrollTrigger stagger (0.08s) from `opacity:0, y:16`
+- Auto-play: 5 s default (theme editor setting), pauses on hover/touchstart, resumes on leave/touchend (400 ms delay for touch)
+- `prefers-reduced-motion`: all GSAP animations disabled, instant transitions via `gsap.set`, setTimeout-based autoplay
+- Performance: `fetchpriority="high"` + `loading="eager"` on first slide image; `loading="lazy"` on slides 2–3; `will-change: transform` only on active slide image, cleared on deactivate
+- Accessibility: `role="region"` + `aria-label`, per-slide `aria-hidden`, indicator `role="tablist"` + `role="tab"` + `aria-selected`, rail link `aria-label` with `| escape` filter
+- Shopify theme editor hot-reload: `shopify:section:load` listener with full `_destroy()` cleanup before re-init (kills tweens, clears timers, removes all event listeners)
+- Robustness: zero-slide guard, GSAP null guard, tween kill before new transitions (`crossfadeTween`, `textTl`, `progressTween`, `kenBurnsTween`, `gsap.killTweensOf(slides)`)
+- Replaced the old `slideshow_thBVtw` and `hero_jVaWmY` placeholder sections in `templates/index.json`
+
+**Files changed:**
+- `sections/presha-hero-carousel.liquid` — New section file
+- `templates/index.json` — Added `presha_hero_carousel` at position 0; removed old placeholder hero/slideshow sections
+- `docs/superpowers/specs/2026-04-03-hero-carousel-design.md` — Approved design spec
+- `docs/superpowers/plans/2026-04-03-hero-carousel.md` — Implementation plan
+- `docs/backlog/hero-clean-no-rail.md` — Parked: clean no-rail hero variant (toggle via `show_discovery_rail`)
+
+**Notes:**
+- Slide images (`slide1.webp`, `slide2.webp`, `slide3.webp`) must be uploaded via Theme Editor image pickers — see ADMIN_TODOS
+- Rail card thumbnails also uploaded via Theme Editor per block
+- Collections for rail cards need to be created in Shopify Admin — see ADMIN_TODOS
+
