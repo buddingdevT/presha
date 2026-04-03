@@ -503,6 +503,287 @@
 }
 </style>
 
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     PreshaHeroCarousel
+     Handles: GSAP crossfade, Ken Burns, progress bars,
+              pause/resume on hover/touch, indicator clicks.
+  ============================================================ */
+  class PreshaHeroCarousel {
+    constructor(el) {
+      this.el             = el;
+      this.slides         = Array.from(el.querySelectorAll('.presha-hero__slide'));
+      this.indicators     = Array.from(el.querySelectorAll('.presha-hero__indicator'));
+      this.fills          = Array.from(el.querySelectorAll('.presha-hero__indicator-fill'));
+      this.speed          = parseInt(el.dataset.autoplaySpeed, 10) || 5000;
+      this.current        = 0;
+      this.progressTween  = null;
+      this.kenBurnsTween  = null;
+      this._autoplayTimeout = null;
+      this.isPaused       = false;
+      this.reducedMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (this.slides.length < 2) {
+        // Single slide — still run Ken Burns, skip carousel logic
+        this._startKenBurns(this.slides[0]);
+        return;
+      }
+
+      this._bindEvents();
+      this._activateSlide(0, true);
+    }
+
+    /* ── Event binding ── */
+    _bindEvents() {
+      this.el.addEventListener('mouseenter', () => this._pause());
+      this.el.addEventListener('mouseleave', () => this._resume());
+      this.el.addEventListener('touchstart', () => this._pause(), { passive: true });
+      this.el.addEventListener('touchend',   () => setTimeout(() => this._resume(), 400), { passive: true });
+
+      this.indicators.forEach((btn, i) => {
+        btn.addEventListener('click', () => this._goTo(i));
+      });
+    }
+
+    /* ── Activate a slide by index ── */
+    _activateSlide(index, isFirst = false) {
+      const outgoing = this.slides[this.current];
+      const prevIndex = this.current;
+
+      // Update current index
+      this.current = index;
+
+      // Kill running tweens and timers
+      if (this.progressTween)    { this.progressTween.kill();  this.progressTween  = null; }
+      if (this.kenBurnsTween)    { this.kenBurnsTween.kill();   this.kenBurnsTween  = null; }
+      if (this._autoplayTimeout) { clearTimeout(this._autoplayTimeout); this._autoplayTimeout = null; }
+
+      const incoming = this.slides[index];
+
+      /* ── Update indicators ── */
+      this.indicators.forEach((btn, i) => {
+        const isActive = i === index;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      /* ── Reset all fills ── */
+      this.fills.forEach((fill, i) => {
+        gsap.set(fill, { scaleX: i < index ? 1 : 0 });
+      });
+
+      /* ── Exit outgoing slide ── */
+      if (!isFirst) {
+        const outgoingContent = outgoing.querySelector('.presha-hero__content');
+        const outgoingImg     = outgoing.querySelector('.presha-hero__slide-img');
+
+        if (!this.reducedMotion) {
+          if (outgoingContent) {
+            gsap.to(outgoingContent, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+          }
+          gsap.to(outgoing, {
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.inOut',
+            onComplete: () => {
+              outgoing.classList.remove('is-active');
+              outgoing.setAttribute('aria-hidden', 'true');
+              gsap.set(outgoing, { zIndex: 0 });
+              if (outgoingImg) outgoingImg.style.willChange = 'auto';
+            }
+          });
+        } else {
+          // Reduced motion — instant exit
+          gsap.set(outgoing, { opacity: 0, zIndex: 0 });
+          outgoing.classList.remove('is-active');
+          outgoing.setAttribute('aria-hidden', 'true');
+          if (outgoingImg) outgoingImg.style.willChange = 'auto';
+        }
+      }
+
+      /* ── Activate incoming slide ── */
+      gsap.set(incoming, { zIndex: 2 });
+      incoming.classList.add('is-active');
+      incoming.setAttribute('aria-hidden', 'false');
+
+      if (!this.reducedMotion && !isFirst) {
+        gsap.fromTo(incoming,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.inOut',
+            onComplete: () => gsap.set(incoming, { zIndex: 1 })
+          }
+        );
+      } else {
+        gsap.set(incoming, { opacity: 1, zIndex: 1 });
+      }
+
+      /* ── Ken Burns on incoming slide ── */
+      this._startKenBurns(incoming);
+
+      /* ── Text entrance animation ── */
+      const inContent = incoming.querySelector('.presha-hero__content');
+      if (inContent) {
+        const label    = inContent.querySelector('.presha-hero__label');
+        const headline = inContent.querySelector('.presha-hero__headline');
+        const cta      = inContent.querySelector('.presha-hero__cta');
+        const textEls  = [label, headline, cta].filter(Boolean);
+
+        gsap.set(inContent, { opacity: 1 });
+
+        if (!this.reducedMotion) {
+          // Reset text elements before animating in
+          gsap.set(textEls, { opacity: 0, y: 0 });
+
+          const tl = gsap.timeline({ delay: isFirst ? 0.4 : 0.55 });
+
+          if (label) {
+            tl.fromTo(label,
+              { opacity: 0, y: 14 },
+              { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }
+            );
+          }
+          if (headline) {
+            tl.fromTo(headline,
+              { opacity: 0, y: 18 },
+              { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+              '-=0.3'
+            );
+          }
+          if (cta) {
+            tl.fromTo(cta,
+              { opacity: 0, y: 14 },
+              { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+              '-=0.3'
+            );
+          }
+        } else {
+          // Reduced motion — snap in
+          gsap.set(textEls, { opacity: 1, y: 0 });
+        }
+      }
+
+      /* ── Progress bar ── */
+      const activeFill = this.fills[index];
+      if (activeFill) {
+        if (!this.reducedMotion) {
+          this.progressTween = gsap.fromTo(activeFill,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              duration: this.speed / 1000,
+              ease: 'none',
+              onComplete: () => this._next()
+            }
+          );
+        } else {
+          gsap.set(activeFill, { scaleX: 1 });
+          this._autoplayTimeout = setTimeout(() => this._next(), this.speed);
+        }
+      }
+    }
+
+    /* ── Ken Burns effect ── */
+    _startKenBurns(slide) {
+      const img = slide.querySelector('.presha-hero__slide-img');
+      if (!img || this.reducedMotion) return;
+
+      img.style.willChange = 'transform';
+      gsap.set(img, { scale: 1 });
+      this.kenBurnsTween = gsap.to(img, {
+        scale: 1.08,
+        duration: this.speed / 1000,
+        ease: 'none'
+      });
+    }
+
+    /* ── Advance to next slide ── */
+    _next() {
+      this._goTo((this.current + 1) % this.slides.length);
+    }
+
+    /* ── Go to a specific slide ── */
+    _goTo(index) {
+      if (index === this.current) return;
+      this._activateSlide(index);
+    }
+
+    /* ── Pause (hover/touch start) ── */
+    _pause() {
+      if (this.isPaused) return;
+      this.isPaused = true;
+      this.progressTween?.pause();
+      this.kenBurnsTween?.pause();
+      clearTimeout(this._autoplayTimeout);
+    }
+
+    /* ── Resume (hover/touch end) ── */
+    _resume() {
+      if (!this.isPaused) return;
+      this.isPaused = false;
+      this.progressTween?.resume();
+      this.kenBurnsTween?.resume();
+    }
+  }
+
+  /* ============================================================
+     Rail entrance animation via ScrollTrigger
+  ============================================================ */
+  function initRailEntrance() {
+    const cards = document.querySelectorAll('.presha-hero__rail-card');
+    if (!cards.length || !window.ScrollTrigger) return;
+
+    gsap.fromTo(cards,
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power3.out',
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: '.presha-hero',
+          start: 'top 90%',
+          once: true
+        }
+      }
+    );
+  }
+
+  /* ============================================================
+     Initialise all hero carousels on the page
+  ============================================================ */
+  function init() {
+    if (typeof gsap === 'undefined') {
+      console.warn('[PreshaHero] GSAP not loaded — animations skipped.');
+      return;
+    }
+    document.querySelectorAll('.presha-hero').forEach(el => new PreshaHeroCarousel(el));
+    initRailEntrance();
+  }
+
+  /* ── Boot on DOMContentLoaded or immediately if already ready ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  /* ── Shopify theme editor hot-reload support ── */
+  if (window.Shopify && window.Shopify.designMode) {
+    document.addEventListener('shopify:section:load', (e) => {
+      if (e.target.querySelector('.presha-hero')) init();
+    });
+  }
+
+})();
+</script>
+
 {% schema %}
 {
   "name": "Presha Hero Carousel",
