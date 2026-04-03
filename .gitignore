@@ -1,0 +1,10 @@
+# Brand assets — do not commit
+designassets/Logo/Brand Guidelines Presentation (Presha Trends).pdf
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+bash.exe.stackdump
+.playwright-mcp/

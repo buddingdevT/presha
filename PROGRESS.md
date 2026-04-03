@@ -149,3 +149,22 @@
 - `templates/index.json` — Added `presha_featured_categories` section + placed in order after authentication
 - `CLAUDE.md` — Updated homepage section tracker
 
+---
+
+## 2026-04-03 — Repo Housekeeping & Design System
+
+**What was added:**
+- `.gitignore` — Excludes brand guidelines PDF, `.playwright-mcp/`, `bash.exe.stackdump`, and OS files from version control
+- `DESIGN-SYSTEM.md` — Design system source of truth document (v1.0, March 2026) covering brand identity, typography, color, and component guidelines
+- `brand logos/` — Source SVG logo files for all 8 brands (Nike, Air Jordan, Adidas, Chrome Hearts, Goyard, New Balance, On Running, Yeezy)
+- `madkicks-hero-breakdown.md` — Competitor hero section analysis notes
+- `image.png` — Reference image asset
+
+**Config updates (from Shopify admin/editor):**
+- `templates/index.json` — Homepage template updated with latest section order and settings
+- `sections/header-group.json` — Header section config synced with latest admin settings
+- `config/settings_data.json` — Theme settings synced
+
+**Notes:**
+- Brand Guidelines PDF (`designassets/Logo/Brand Guidelines Presentation (Presha Trends).pdf`) is intentionally excluded from git via `.gitignore`
+

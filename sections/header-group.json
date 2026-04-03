@@ -13,49 +13,8 @@
   "sections": {
     "header_announcements_yRQdMB": {
       "type": "header-announcements",
-      "blocks": {
-        "announcement_WwQhEL": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
-          "settings": {
-            "text": "Presha Verified Authenticity",
-            "link": ""
-          }
-        },
-        "announcement_xzzyBp": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Worldwide Shipping",
-            "link": ""
-          }
-        },
-        "announcement_Qq3hwG": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
-          "settings": {
-            "text": "Shop Our Latest",
-            "link": ""
-          }
-        },
-        "announcement_XaQ3ET": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Looking for something specific? Whatsapp us!",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_WwQhEL",
-        "announcement_xzzyBp",
-        "announcement_Qq3hwG",
-        "announcement_XaQ3ET"
-      ],
       "name": "t:names.announcement_bar",
-      "settings": {
-        "speed": 5,
-        "divider_width": 0
-      }
+      "settings": {}
     },
     "header_section": {
       "type": "header",
@@ -76,7 +35,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu",
+            "menu": "main-menu-copy",
             "color_scheme": "scheme-red-hover",
             "type_font_primary_size": "0.75rem",
             "menu_font_style": "inverse",

@@ -16,6 +16,7 @@
           "type": "_slide",
           "settings": {
             "media_type_1": "image",
+            "image_1": "shopify://shop_images/ChatGPT_Image_Mar_30_2026_06_36_51_PM.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -55,9 +56,9 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 0,
+                "padding-block-start": 42,
                 "padding-block-end": 0,
-                "padding-inline-start": 12,
+                "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
@@ -65,7 +66,7 @@
             "text_3FbAmN": {
               "type": "text",
               "settings": {
-                "text": "<h4>GOYARD INTO THE ABYS COLLECTION</h4>",
+                "text": "<h4>GOYARD BONBONNIERE BAG</h4>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -81,8 +82,8 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 12,
+                "padding-block-end": 45,
+                "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
@@ -437,6 +438,213 @@
         "padding-block-end": 72
       }
     },
+    "presha_marquee": {
+      "type": "presha-marquee",
+      "blocks": {
+        "mq_1": {
+          "type": "item",
+          "settings": {
+            "text": "PRESHA VERIFIED AUTHENTICITY"
+          }
+        },
+        "mq_2": {
+          "type": "item",
+          "settings": {
+            "text": "WORLDWIDE SHIPPING"
+          }
+        },
+        "mq_3": {
+          "type": "item",
+          "settings": {
+            "text": "TRUSTED GLOBAL RESALE PLATFORM"
+          }
+        },
+        "mq_4": {
+          "type": "item",
+          "settings": {
+            "text": "LUXURY STREETWEAR"
+          }
+        }
+      },
+      "block_order": [
+        "mq_1",
+        "mq_2",
+        "mq_3",
+        "mq_4"
+      ],
+      "settings": {
+        "bg_color": "#111827",
+        "text_color": "#ffffff",
+        "speed": 30
+      }
+    },
+    "presha_brand_logos": {
+      "type": "presha-brand-logos",
+      "blocks": {
+        "brand_chrome_hearts": {
+          "type": "brand",
+          "name": "Chrome Hearts",
+          "settings": {
+            "brand_name": "Chrome Hearts",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/chrome-hearts-logo.avif",
+            "collection_url": "/collections/chrome-hearts"
+          }
+        },
+        "brand_goyard": {
+          "type": "brand",
+          "name": "Go Yard",
+          "settings": {
+            "brand_name": "Goyard",
+            "logo_asset": "brand-goyard.svg",
+            "collection_url": "/collections/goyard"
+          }
+        },
+        "brand_adidas": {
+          "type": "brand",
+          "name": "Nocta",
+          "settings": {
+            "brand_name": "NOCTA",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/nike-nocta-logo-freelogovectors.net.png",
+            "collection_url": "shopify://collections/nocta"
+          }
+        },
+        "brand_nike": {
+          "type": "brand",
+          "name": "Supreme",
+          "settings": {
+            "brand_name": "SUPREME",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/supreme-logo-brand-black-symbol-clothes-design-icon-abstract-illustration-free-vector.jpg",
+            "collection_url": "shopify://collections/supreme"
+          }
+        },
+        "brand_yXGDXD": {
+          "type": "brand",
+          "name": "Gallery Dept.",
+          "settings": {
+            "brand_name": "GALLERY DEPT.",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/gallery.webp",
+            "collection_url": "shopify://collections/gallery-dept"
+          }
+        },
+        "brand_jordan": {
+          "type": "brand",
+          "name": "Nike",
+          "settings": {
+            "brand_name": "Nike",
+            "logo_asset": "brand-nike.svg",
+            "collection_url": "/collections/jordan"
+          }
+        },
+        "brand_wFLdCt": {
+          "type": "brand",
+          "name": "Air Jordan",
+          "settings": {
+            "brand_name": "Air Jordan",
+            "logo_asset": "brand-air-jordan.svg",
+            "collection_url": "/collections/jordan"
+          }
+        },
+        "brand_new_balance": {
+          "type": "brand",
+          "name": "New Balance",
+          "settings": {
+            "brand_name": "New Balance",
+            "logo_asset": "brand-new-balance.svg",
+            "collection_url": "/collections/new-balance"
+          }
+        },
+        "brand_on_running": {
+          "type": "brand",
+          "name": "Loewe X On",
+          "settings": {
+            "brand_name": "On Running",
+            "logo_asset": "brand-on-running.svg",
+            "collection_url": "/collections/on-running"
+          }
+        },
+        "brand_yeezy": {
+          "type": "brand",
+          "name": "Yeezy",
+          "settings": {
+            "brand_name": "Yeezy",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/adidas-yeezy-logo-png_seeklogo-453635.avif",
+            "collection_url": "/collections/yeezy"
+          }
+        },
+        "brand_EFgd7j": {
+          "type": "brand",
+          "name": "Channel",
+          "settings": {
+            "brand_name": "Channel",
+            "logo_asset": "",
+            "logo": "shopify://shop_images/chanel-logo-black-image-4.png",
+            "collection_url": "/collections/yeezy"
+          }
+        }
+      },
+      "block_order": [
+        "brand_chrome_hearts",
+        "brand_goyard",
+        "brand_adidas",
+        "brand_nike",
+        "brand_yXGDXD",
+        "brand_jordan",
+        "brand_wFLdCt",
+        "brand_new_balance",
+        "brand_on_running",
+        "brand_yeezy",
+        "brand_EFgd7j"
+      ],
+      "settings": {
+        "eyebrow": "AUTHENTICATED PARTNERSHIPS",
+        "heading": "SHOP BY BRAND"
+      }
+    },
+    "presha_gifts": {
+      "type": "presha-gifts",
+      "blocks": {
+        "gift_her": {
+          "type": "gift_tile",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Mar_30_2026_07_20_52_PM.png",
+            "eyebrow": "FIND HER PERFECT GIFT",
+            "heading": "Gifts for Her",
+            "button_text": "SHOP NOW",
+            "link": ""
+          }
+        },
+        "gift_him": {
+          "type": "gift_tile",
+          "settings": {
+            "image": "shopify://shop_images/IMG_9174.jpg",
+            "eyebrow": "FIND HIS PERFECT PAIR",
+            "heading": "Gifts for Him",
+            "button_text": "SHOP NOW",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "gift_her",
+        "gift_him"
+      ],
+      "settings": {}
+    },
+    "presha_trending": {
+      "type": "presha-trending-now",
+      "settings": {
+        "eyebrow": "HOT THIS WEEK",
+        "heading": "TRENDING NOW",
+        "collection": "trending-now",
+        "product_limit": 12,
+        "show_badge": true
+      }
+    },
     "1769647631664937e5": {
       "type": "_blocks",
       "blocks": {
@@ -656,7 +864,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>New in</h3>",
+                "text": "<h3>GO YARD</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -788,7 +996,8 @@
           ]
         }
       },
-      "name": "Featured collection",
+      "disabled": true,
+      "name": "GO YARD Featured collection",
       "settings": {
         "collection": "goyard",
         "layout_type": "grid",
@@ -809,227 +1018,392 @@
         "padding-block-end": 48
       }
     },
-    "176963640576d6ba6c": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "176963643280a5b577": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "1769638870fca27272": {
-      "type": "_blocks",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "presha_reviews_press": {
-      "type": "presha-reviews-press",
+    "product_list_jFQpmj": {
+      "type": "product-list",
       "blocks": {
-        "press_1": {
-          "type": "press_logo",
-          "settings": { "name": "HYPEBEAST" }
-        },
-        "press_2": {
-          "type": "press_logo",
-          "settings": { "name": "GQ" }
-        },
-        "press_3": {
-          "type": "press_logo",
-          "settings": { "name": "VOGUE" }
-        },
-        "press_4": {
-          "type": "press_logo",
-          "settings": { "name": "HIGHSNOBIETY" }
-        },
-        "review_1": {
-          "type": "review",
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
           "settings": {
-            "stars": 5,
-            "quote": "Fastest shipping I've experienced in Dubai. The AJ1s were perfect and came with a certificate of authenticity. 10/10 service.",
-            "reviewer_name": "OMAR A.",
-            "reviewer_location": "Verified Buyer from Dubai"
-          }
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_dgp6rG": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>GOYARD</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_w7R478": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_dgp6rG",
+            "product_list_button_w7R478"
+          ]
         },
-        "review_2": {
-          "type": "review",
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
           "settings": {
-            "stars": 5,
-            "quote": "Presha Trends is my go-to for Chrome Hearts. Impossible to find authentic pieces elsewhere, but their team always delivers.",
-            "reviewer_name": "SARAH L.",
-            "reviewer_location": "Verified Buyer from London"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "A massive selection of collectibles — I found the limited Pikachu piece I'd been hunting for months. Packaged beautifully too.",
-            "reviewer_name": "KEVIN M.",
-            "reviewer_location": "Verified Buyer from Singapore"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "The authentication process gave me complete confidence. My Off-White Dunks arrived in pristine condition with full documentation.",
-            "reviewer_name": "AISHA R.",
-            "reviewer_location": "Verified Buyer from Riyadh"
-          }
-        },
-        "review_5": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Best resell platform in the Middle East, hands down. The customer service team went above and beyond to help me find my size.",
-            "reviewer_name": "JAMES T.",
-            "reviewer_location": "Verified Buyer from Abu Dhabi"
-          }
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_6gpBEn": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_FpdnQ3": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_ciKjAp": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_6gpBEn",
+            "product_title_FpdnQ3",
+            "price_ciKjAp"
+          ]
         }
       },
-      "block_order": [
-        "press_1",
-        "press_2",
-        "press_3",
-        "press_4",
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4",
-        "review_5"
-      ],
+      "name": "GOYARD Featured collection",
       "settings": {
-        "eyebrow_text": "TRUSTED WORLDWIDE",
-        "background_color": "#d5d5d5",
-        "eyebrow_color": "#7a8a9e",
-        "press_text_color": "#2c3e50",
-        "card_background": "#ffffff",
-        "star_color": "#f0b429",
-        "quote_color": "#1a1a1a",
-        "name_color": "#1a1a1a",
-        "location_color": "#6ba5a5",
-        "avatar_color": "#dde5ed"
+        "collection": "goyard",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 3,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 30,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-end",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     },
-    "presha_trust_bar": {
-      "type": "presha-trust-bar",
+    "product_list_i3bdF7": {
+      "type": "product-list",
       "blocks": {
-        "trust_1": {
-          "type": "trust_item",
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
           "settings": {
-            "icon": "shield",
-            "heading": "AUTHENTICITY GUARANTEED",
-            "subtext": "Every piece in our collection is 100% authentic and verified by experts."
-          }
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_kBXcUn": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>AIR JORDAN</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_tcc9rA": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kBXcUn",
+            "product_list_button_tcc9rA"
+          ]
         },
-        "trust_2": {
-          "type": "trust_item",
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
           "settings": {
-            "icon": "globe",
-            "heading": "GLOBAL SHIPPING",
-            "subtext": "Luxury streetwear delivered to your doorstep, anywhere in the world."
-          }
-        },
-        "trust_3": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "support",
-            "heading": "EXCLUSIVE SUPPORT",
-            "subtext": "24/7 concierge service for our community members and VIP clients."
-          }
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_peQYDC": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_JyRXpX": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_3KR3ca": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_peQYDC",
+            "product_title_JyRXpX",
+            "price_3KR3ca"
+          ]
         }
       },
-      "block_order": [
-        "trust_1",
-        "trust_2",
-        "trust_3"
-      ],
-      "settings": {}
-    },
-    "presha_featured_journal": {
-      "type": "presha-featured-journal",
+      "name": "AIR JORDAN Featured collection",
       "settings": {
-        "eyebrow": "EDITORIAL HUB",
-        "heading": "PRESHA JOURNAL",
-        "link_label": "READ ALL ARTICLES",
-        "link_url": ""
+        "collection": "jordan",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 3,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 30,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     },
     "presha_authentication": {
@@ -1058,150 +1432,9 @@
         "bg_color": "#201416",
         "eyebrow": "THE PRESHA PROMISE",
         "heading": "PRESHA VERIFIED",
-        "description": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.<\/p>",
+        "description": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.</p>",
         "btn_label": "LEARN ABOUT AUTHENTICATION",
         "btn_link": ""
-      }
-    },
-    "presha_email_signup": {
-      "type": "presha-email-signup",
-      "settings": {
-        "bg_color": "#eeeeee",
-        "heading": "JOIN THE PRESHA\nCOMMUNITY!",
-        "subtext": "Get exclusive access to rare drops, member-only collections, and the latest from the Presha Journal.",
-        "placeholder": "jane@email.com",
-        "btn_label": "Subscribe",
-        "disclaimer": "Weekly newsletter. Unsubscribe anytime."
-      }
-    },
-    "presha_marquee": {
-      "type": "presha-marquee",
-      "blocks": {
-        "mq_1": { "type": "item", "settings": { "text": "PRESHA VERIFIED AUTHENTICITY" } },
-        "mq_2": { "type": "item", "settings": { "text": "WORLDWIDE SHIPPING" } },
-        "mq_3": { "type": "item", "settings": { "text": "TRUSTED GLOBAL RESALE PLATFORM" } },
-        "mq_4": { "type": "item", "settings": { "text": "LUXURY STREETWEAR" } }
-      },
-      "block_order": ["mq_1", "mq_2", "mq_3", "mq_4"],
-      "settings": {
-        "bg_color": "#111827",
-        "text_color": "#ffffff",
-        "speed": 30
-      }
-    },
-    "presha_brand_logos": {
-      "type": "presha-brand-logos",
-      "blocks": {
-        "brand_nike": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Nike",
-            "logo_asset": "brand-nike.svg",
-            "collection_url": "/collections/nike"
-          }
-        },
-        "brand_jordan": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Air Jordan",
-            "logo_asset": "brand-air-jordan.svg",
-            "collection_url": "/collections/jordan"
-          }
-        },
-        "brand_adidas": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Adidas",
-            "logo_asset": "brand-adidas.svg",
-            "collection_url": "/collections/adidas"
-          }
-        },
-        "brand_chrome_hearts": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Chrome Hearts",
-            "logo_asset": "brand-chrome-hearts.svg",
-            "collection_url": "/collections/chrome-hearts"
-          }
-        },
-        "brand_goyard": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Goyard",
-            "logo_asset": "brand-goyard.svg",
-            "collection_url": "/collections/goyard"
-          }
-        },
-        "brand_new_balance": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "New Balance",
-            "logo_asset": "brand-new-balance.svg",
-            "collection_url": "/collections/new-balance"
-          }
-        },
-        "brand_on_running": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "On Running",
-            "logo_asset": "brand-on-running.svg",
-            "collection_url": "/collections/on-running"
-          }
-        },
-        "brand_yeezy": {
-          "type": "brand",
-          "settings": {
-            "brand_name": "Yeezy",
-            "logo_asset": "brand-yeezy.svg",
-            "collection_url": "/collections/yeezy"
-          }
-        }
-      },
-      "block_order": [
-        "brand_nike",
-        "brand_jordan",
-        "brand_adidas",
-        "brand_chrome_hearts",
-        "brand_goyard",
-        "brand_new_balance",
-        "brand_on_running",
-        "brand_yeezy"
-      ],
-      "settings": {
-        "eyebrow": "AUTHENTICATED PARTNERSHIPS",
-        "heading": "SHOP BY BRAND"
-      }
-    },
-    "presha_gifts": {
-      "type": "presha-gifts",
-      "blocks": {
-        "gift_her": {
-          "type": "gift_tile",
-          "settings": {
-            "eyebrow": "FIND HER PERFECT GIFT",
-            "heading": "Gifts for Her",
-            "button_text": "SHOP NOW"
-          }
-        },
-        "gift_him": {
-          "type": "gift_tile",
-          "settings": {
-            "eyebrow": "FIND HIS PERFECT PAIR",
-            "heading": "Gifts for Him",
-            "button_text": "SHOP NOW"
-          }
-        }
-      },
-      "block_order": ["gift_her", "gift_him"],
-      "settings": {}
-    },
-    "presha_trending": {
-      "type": "presha-trending-now",
-      "settings": {
-        "eyebrow": "HOT THIS WEEK",
-        "heading": "TRENDING NOW",
-        "show_badge": true,
-        "product_limit": 12
       }
     },
     "presha_featured_categories": {
@@ -1277,6 +1510,159 @@
       "settings": {
         "heading": "Featured Categories"
       }
+    },
+    "presha_featured_journal": {
+      "type": "presha-featured-journal",
+      "settings": {
+        "eyebrow": "EDITORIAL HUB",
+        "heading": "PRESHA JOURNAL",
+        "link_label": "READ ALL ARTICLES",
+        "link_url": "",
+        "blog": ""
+      }
+    },
+    "presha_reviews_press": {
+      "type": "presha-reviews-press",
+      "blocks": {
+        "press_1": {
+          "type": "press_logo",
+          "settings": {
+            "name": "HYPEBEAST"
+          }
+        },
+        "press_2": {
+          "type": "press_logo",
+          "settings": {
+            "name": "GQ"
+          }
+        },
+        "press_3": {
+          "type": "press_logo",
+          "settings": {
+            "name": "VOGUE"
+          }
+        },
+        "press_4": {
+          "type": "press_logo",
+          "settings": {
+            "name": "HIGHSNOBIETY"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Fastest shipping I've experienced in Dubai. The AJ1s were perfect and came with a certificate of authenticity. 10/10 service.",
+            "reviewer_name": "OMAR A.",
+            "reviewer_location": "Verified Buyer from Dubai"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Presha Trends is my go-to for Chrome Hearts. Impossible to find authentic pieces elsewhere, but their team always delivers.",
+            "reviewer_name": "SARAH L.",
+            "reviewer_location": "Verified Buyer from London"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "A massive selection of collectibles — I found the limited Pikachu piece I'd been hunting for months. Packaged beautifully too.",
+            "reviewer_name": "KEVIN M.",
+            "reviewer_location": "Verified Buyer from Singapore"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "The authentication process gave me complete confidence. My Off-White Dunks arrived in pristine condition with full documentation.",
+            "reviewer_name": "AISHA R.",
+            "reviewer_location": "Verified Buyer from Riyadh"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Best resell platform in the Middle East, hands down. The customer service team went above and beyond to help me find my size.",
+            "reviewer_name": "JAMES T.",
+            "reviewer_location": "Verified Buyer from Abu Dhabi"
+          }
+        }
+      },
+      "block_order": [
+        "press_1",
+        "press_2",
+        "press_3",
+        "press_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "eyebrow_text": "TRUSTED WORLDWIDE",
+        "background_color": "#d5d5d5",
+        "eyebrow_color": "#7a8a9e",
+        "press_text_color": "#2c3e50",
+        "card_background": "#ffffff",
+        "star_color": "#f0b429",
+        "quote_color": "#1a1a1a",
+        "name_color": "#1a1a1a",
+        "location_color": "#6ba5a5",
+        "avatar_color": "#dde5ed"
+      }
+    },
+    "presha_email_signup": {
+      "type": "presha-email-signup",
+      "settings": {
+        "bg_color": "#eeeeee",
+        "heading": "JOIN THE PRESHA\nCOMMUNITY!",
+        "subtext": "Get exclusive access to rare drops, member-only collections, and the latest from the Presha Journal.",
+        "placeholder": "jane@email.com",
+        "btn_label": "Subscribe",
+        "disclaimer": "Weekly newsletter. Unsubscribe anytime."
+      }
+    },
+    "presha_trust_bar": {
+      "type": "presha-trust-bar",
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "heading": "AUTHENTICITY GUARANTEED",
+            "subtext": "Every piece in our collection is 100% authentic and verified by experts."
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "globe",
+            "heading": "GLOBAL SHIPPING",
+            "subtext": "Luxury streetwear delivered to your doorstep, anywhere in the world."
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "support",
+            "heading": "EXCLUSIVE SUPPORT",
+            "subtext": "24/7 concierge service for our community members and VIP clients."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -1289,9 +1675,8 @@
     "1769647631664937e5",
     "blocks_fdCed7",
     "product_list_fa6P9H",
-    "176963640576d6ba6c",
-    "176963643280a5b577",
-    "1769638870fca27272",
+    "product_list_jFQpmj",
+    "product_list_i3bdF7",
     "presha_authentication",
     "presha_featured_categories",
     "presha_featured_journal",
