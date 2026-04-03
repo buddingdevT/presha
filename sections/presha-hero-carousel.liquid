@@ -1,0 +1,134 @@
+{% comment %} ============================================================
+  PRESHA HERO CAROUSEL
+  Custom full-bleed hero carousel with GSAP crossfade + Ken Burns
+  Slides and rail cards are Shopify blocks — fully theme-editor managed
+  Spec: docs/superpowers/specs/2026-04-03-hero-carousel-design.md
+============================================================ {% endcomment %}
+
+{%- assign slide_blocks = section.blocks | where: "type", "slide" -%}
+{%- assign rail_blocks  = section.blocks | where: "type", "rail_card" -%}
+
+<section
+  class="presha-hero"
+  id="presha-hero-{{ section.id }}"
+  role="region"
+  aria-label="Hero slideshow"
+  data-autoplay-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+>
+  <p style="color:white;padding:40px;background:#6D001A;font-family:sans-serif;">
+    ✓ Presha Hero Carousel — scaffold loaded. Blocks: {{ section.blocks.size }}
+  </p>
+</section>
+
+<style>
+  .presha-hero {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Presha Hero Carousel",
+  "settings": [
+    {
+      "type": "number",
+      "id": "autoplay_speed",
+      "label": "Slide duration (ms)",
+      "default": 5000,
+      "info": "How long each slide is shown before advancing. Default: 5000ms (5 seconds)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discovery_rail",
+      "label": "Show discovery rail",
+      "default": true,
+      "info": "Show the dark 'Shop By' bar overlaid at the bottom of the hero."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide image",
+          "info": "Recommended: landscape, minimum 1920x1080px, WebP format."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (overline)",
+          "default": "New Arrival",
+          "info": "Short uppercase label above the headline. E.g. 'New Arrival', 'LA Exclusive'."
+        },
+        {
+          "type": "textarea",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Own the Dark"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA button link"
+        }
+      ]
+    },
+    {
+      "type": "rail_card",
+      "name": "Rail Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail image",
+          "info": "Recommended: square, minimum 120x120px."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top label",
+          "default": "SHOP BY",
+          "info": "Small uppercase label above the name. E.g. 'SHOP BY', 'EXPLORE'."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Category / brand name",
+          "default": "Trending Now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Hero Carousel",
+      "blocks": [
+        { "type": "slide", "settings": { "label": "New Arrival",   "headline": "Own the Dark",              "cta_text": "Shop Air Jordan 4"   } },
+        { "type": "slide", "settings": { "label": "LA Exclusive",  "headline": "Not for Everyone",          "cta_text": "Shop the Collection" } },
+        { "type": "slide", "settings": { "label": "Now At Presha", "headline": "Five Colors. One Obsession","cta_text": "Shop Goyard"         } },
+        { "type": "rail_card", "settings": { "label": "SHOP BY", "name": "Trending Now"         } },
+        { "type": "rail_card", "settings": { "label": "SHOP BY", "name": "Pokémon Collectibles"  } },
+        { "type": "rail_card", "settings": { "label": "SHOP BY", "name": "Rare Find"            } },
+        { "type": "rail_card", "settings": { "label": "SHOP BY", "name": "Loewe × On"           } }
+      ]
+    }
+  ]
+}
+{% endschema %}
