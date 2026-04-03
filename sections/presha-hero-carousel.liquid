@@ -562,6 +562,7 @@
 
     /* ── Destroy instance (used by theme editor hot-reload) ── */
     _destroy() {
+      gsap.killTweensOf(this.slides);
       clearTimeout(this._autoplayTimeout);
       clearTimeout(this._touchTimer);
       this.progressTween?.kill();
@@ -646,7 +647,7 @@
       incoming.setAttribute('aria-hidden', 'false');
 
       if (!this.reducedMotion && !isFirst) {
-        gsap.fromTo(incoming,
+        this.crossfadeTween = gsap.fromTo(incoming,
           { opacity: 0 },
           {
             opacity: 1,
