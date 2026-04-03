@@ -13,19 +13,488 @@
   id="presha-hero-{{ section.id }}"
   role="region"
   aria-label="Hero slideshow"
-  data-autoplay-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
 >
-  <p style="color:white;padding:40px;background:#6D001A;font-family:sans-serif;">
-    ✓ Presha Hero Carousel — scaffold loaded. Blocks: {{ section.blocks.size }}
-  </p>
+
+  {%- if slide_blocks.size > 0 -%}
+
+    {% comment %} ── SLIDES ── {% endcomment %}
+    <div class="presha-hero__slides">
+      {%- for block in slide_blocks -%}
+        {%- assign is_first = forloop.first -%}
+        <div
+          class="presha-hero__slide{% if is_first %} is-active{% endif %}"
+          aria-hidden="{% if is_first %}false{% else %}true{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.image != blank -%}
+            {%- if is_first -%}
+              {{
+                block.settings.image
+                | image_url: width: 3840
+                | image_tag:
+                  class: 'presha-hero__slide-img',
+                  widths: '750, 1100, 1500, 1780, 2000, 3000, 3840',
+                  sizes: '100vw',
+                  fetchpriority: 'high',
+                  loading: 'eager',
+                  alt: block.settings.headline
+              }}
+            {%- else -%}
+              {{
+                block.settings.image
+                | image_url: width: 3840
+                | image_tag:
+                  class: 'presha-hero__slide-img',
+                  widths: '750, 1100, 1500, 1780, 2000, 3000, 3840',
+                  sizes: '100vw',
+                  loading: 'lazy',
+                  alt: block.settings.headline
+              }}
+            {%- endif -%}
+          {%- else -%}
+            <div class="presha-hero__slide-img presha-hero__slide-img--placeholder"></div>
+          {%- endif -%}
+
+          <div class="presha-hero__overlay" aria-hidden="true"></div>
+          <div class="presha-hero__overlay-bottom" aria-hidden="true"></div>
+
+          <div class="presha-hero__content">
+            {%- if block.settings.label != blank -%}
+              <span class="presha-hero__label">{{ block.settings.label }}</span>
+            {%- endif -%}
+            {%- if block.settings.headline != blank -%}
+              <h2 class="presha-hero__headline">{{ block.settings.headline }}</h2>
+            {%- endif -%}
+            {%- if block.settings.cta_text != blank -%}
+              <a
+                href="{{ block.settings.cta_link | default: '#' }}"
+                class="presha-hero__cta"
+              >{{ block.settings.cta_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {% comment %} ── PROGRESS INDICATORS ── {% endcomment %}
+    {%- if slide_blocks.size > 1 -%}
+      <div class="presha-hero__indicators" role="tablist" aria-label="Slide indicators">
+        {%- for block in slide_blocks -%}
+          <button
+            class="presha-hero__indicator{% if forloop.first %} is-active{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="Go to slide {{ forloop.index }}"
+            data-slide-index="{{ forloop.index0 }}"
+          >
+            <span class="presha-hero__indicator-fill"></span>
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  {%- endif -%}
+
+  {% comment %} ── DISCOVERY RAIL ── {% endcomment %}
+  {%- if section.settings.show_discovery_rail and rail_blocks.size > 0 -%}
+    <nav class="presha-hero__rail" aria-label="Shop by category">
+      <div class="presha-hero__rail-inner">
+        {%- for block in rail_blocks -%}
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="presha-hero__rail-card"
+            aria-label="{{ block.settings.label | default: 'Shop' }} {{ block.settings.name }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="presha-hero__rail-thumb">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 120
+                  | image_tag:
+                    class: 'presha-hero__rail-img',
+                    widths: '60, 120',
+                    sizes: '52px',
+                    loading: 'lazy',
+                    alt: block.settings.name
+                }}
+              {%- else -%}
+                <div class="presha-hero__rail-img--placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="presha-hero__rail-text">
+              <span class="presha-hero__rail-label">{{ block.settings.label | default: 'SHOP BY' }}</span>
+              <span class="presha-hero__rail-name">{{ block.settings.name }}</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </nav>
+  {%- endif -%}
+
 </section>
 
 <style>
-  .presha-hero {
-    position: relative;
-    width: 100%;
-    min-height: 200px;
+/* ============================================================
+   PRESHA HERO CAROUSEL — scoped styles
+   Breakpoints: 749px (tablet), 480px (mobile)
+============================================================ */
+
+/* ── Container ── */
+.presha-hero {
+  position: relative;
+  width: 100%;
+  height: 92svh;
+  min-height: 500px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* ── Slides stack ── */
+.presha-hero__slides {
+  position: absolute;
+  inset: 0;
+}
+
+.presha-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.presha-hero__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* ── Slide image ── */
+.presha-hero__slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.presha-hero__slide-img--placeholder {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+/* ── Gradient overlays ── */
+.presha-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.22) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 1;
+}
+
+.presha-hero__overlay-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.40) 0%,
+    transparent 35%
+  );
+  z-index: 1;
+}
+
+/* ── Slide content block ── */
+.presha-hero__content {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  z-index: 2;
+  max-width: 600px;
+}
+
+/* ── Label pill ── */
+.presha-hero__label {
+  display: inline-block;
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6d001a;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 3px 10px;
+  margin-bottom: 14px;
+}
+
+/* ── Headline ── */
+.presha-hero__headline {
+  display: block;
+  font-family: var(--font-heading--family, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* ── CTA button ── */
+.presha-hero__cta {
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #6d001a;
+  padding: 13px 28px;
+  border-radius: 0;
+  border: none;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.presha-hero__cta:hover,
+.presha-hero__cta:focus {
+  background: #580015;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ── Progress indicators ── */
+.presha-hero__indicators {
+  position: absolute;
+  bottom: calc(90px + 18px);
+  left: 5%;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.presha-hero__indicator {
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  border: none;
+  border-radius: 1px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Extended tap target for mobile without changing visual size */
+.presha-hero__indicator::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  bottom: -12px;
+  left: 0;
+  right: 0;
+}
+
+.presha-hero__indicator-fill {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ── Discovery rail ── */
+.presha-hero__rail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: rgba(10, 10, 10, 0.90);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 3;
+}
+
+.presha-hero__rail-inner {
+  display: flex;
+  height: 100%;
+}
+
+.presha-hero__rail-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  min-width: 0;
+}
+
+.presha-hero__rail-card:last-child {
+  border-right: none;
+}
+
+.presha-hero__rail-card:hover,
+.presha-hero__rail-card:focus {
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+}
+
+.presha-hero__rail-thumb {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1a1a1a;
+}
+
+.presha-hero__rail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.presha-hero__rail-img--placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #222 0%, #333 100%);
+}
+
+.presha-hero__rail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.presha-hero__rail-label {
+  display: block;
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888888;
+  line-height: 1;
+}
+
+.presha-hero__rail-name {
+  display: block;
+  font-family: var(--font-body--family, 'Jost', sans-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #f5f1ec;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media screen and (max-width: 1024px) {
+  .presha-hero__rail-card {
+    padding: 0 14px;
+    gap: 10px;
   }
+}
+
+@media screen and (max-width: 749px) {
+  .presha-hero {
+    height: 92svh;
+    min-height: 480px;
+  }
+
+  .presha-hero__content {
+    bottom: 22%;
+    left: 5%;
+    max-width: 85vw;
+  }
+
+  .presha-hero__cta {
+    padding: 11px 20px;
+    font-size: 10px;
+  }
+
+  .presha-hero__rail {
+    height: 68px;
+  }
+
+  .presha-hero__rail-inner {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .presha-hero__rail-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .presha-hero__rail-card {
+    flex: 0 0 auto;
+    min-width: 148px;
+    scroll-snap-align: start;
+    padding: 0 14px;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .presha-hero__rail-card:last-child {
+    border-right: none;
+  }
+
+  .presha-hero__rail-thumb {
+    width: 36px;
+    height: 36px;
+  }
+
+  .presha-hero__rail-name {
+    font-size: 11px;
+  }
+
+  .presha-hero__indicators {
+    bottom: calc(68px + 14px);
+  }
+
+  .presha-hero__indicator {
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .presha-hero__headline {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presha-hero__slide-img {
+    transition: none !important;
+  }
+}
 </style>
 
 {% schema %}
@@ -88,6 +557,7 @@
     {
       "type": "rail_card",
       "name": "Rail Card",
+      "limit": 6,
       "settings": [
         {
           "type": "image_picker",
