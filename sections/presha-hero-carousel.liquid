@@ -522,9 +522,14 @@
       this.current        = 0;
       this.progressTween  = null;
       this.kenBurnsTween  = null;
+      this.crossfadeTween = null;
+      this.textTl         = null;
       this._autoplayTimeout = null;
       this.isPaused       = false;
       this.reducedMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Bug 1 guard: no slides at all — nothing to initialise
+      if (this.slides.length === 0) return;
 
       if (this.slides.length < 2) {
         // Single slide — still run Ken Burns, skip carousel logic
@@ -538,13 +543,37 @@
 
     /* ── Event binding ── */
     _bindEvents() {
-      this.el.addEventListener('mouseenter', () => this._pause());
-      this.el.addEventListener('mouseleave', () => this._resume());
-      this.el.addEventListener('touchstart', () => this._pause(), { passive: true });
-      this.el.addEventListener('touchend',   () => setTimeout(() => this._resume(), 400), { passive: true });
+      // Store bound handlers so they can be removed in _destroy()
+      this._onMouseEnter = () => this._pause();
+      this._onMouseLeave = () => this._resume();
+      this._onTouchStart = () => this._pause();
+      this._onTouchEnd   = () => { clearTimeout(this._touchTimer); this._touchTimer = setTimeout(() => this._resume(), 400); };
+
+      this.el.addEventListener('mouseenter', this._onMouseEnter);
+      this.el.addEventListener('mouseleave', this._onMouseLeave);
+      this.el.addEventListener('touchstart', this._onTouchStart, { passive: true });
+      this.el.addEventListener('touchend',   this._onTouchEnd,   { passive: true });
 
       this.indicators.forEach((btn, i) => {
-        btn.addEventListener('click', () => this._goTo(i));
+        btn._preshaClick = () => this._goTo(i);
+        btn.addEventListener('click', btn._preshaClick);
+      });
+    }
+
+    /* ── Destroy instance (used by theme editor hot-reload) ── */
+    _destroy() {
+      clearTimeout(this._autoplayTimeout);
+      clearTimeout(this._touchTimer);
+      this.progressTween?.kill();
+      this.kenBurnsTween?.kill();
+      this.crossfadeTween?.kill();
+      this.textTl?.kill();
+      this.el.removeEventListener('mouseenter', this._onMouseEnter);
+      this.el.removeEventListener('mouseleave', this._onMouseLeave);
+      this.el.removeEventListener('touchstart', this._onTouchStart);
+      this.el.removeEventListener('touchend',   this._onTouchEnd);
+      this.indicators.forEach(btn => {
+        if (btn._preshaClick) btn.removeEventListener('click', btn._preshaClick);
       });
     }
 
@@ -560,6 +589,10 @@
       if (this.progressTween)    { this.progressTween.kill();  this.progressTween  = null; }
       if (this.kenBurnsTween)    { this.kenBurnsTween.kill();   this.kenBurnsTween  = null; }
       if (this._autoplayTimeout) { clearTimeout(this._autoplayTimeout); this._autoplayTimeout = null; }
+      // Bug 4: kill any in-flight crossfade opacity tweens and the text timeline
+      this.crossfadeTween?.kill(); this.crossfadeTween = null;
+      this.textTl?.kill();         this.textTl = null;
+      gsap.killTweensOf(this.slides);
 
       const incoming = this.slides[index];
 
@@ -643,7 +676,8 @@
           // Reset text elements before animating in
           gsap.set(textEls, { opacity: 0, y: 0 });
 
-          const tl = gsap.timeline({ delay: isFirst ? 0.4 : 0.55 });
+          this.textTl = gsap.timeline({ delay: isFirst ? 0.4 : 0.55 });
+          const tl = this.textTl;
 
           if (label) {
             tl.fromTo(label,
@@ -728,6 +762,11 @@
     _resume() {
       if (!this.isPaused) return;
       this.isPaused = false;
+      // Bug 2: reduced-motion uses setTimeout for autoplay — must restart it on resume
+      if (this.reducedMotion) {
+        this._autoplayTimeout = setTimeout(() => this._next(), this.speed);
+        return;
+      }
       this.progressTween?.resume();
       this.kenBurnsTween?.resume();
     }
@@ -765,7 +804,11 @@
       console.warn('[PreshaHero] GSAP not loaded — animations skipped.');
       return;
     }
-    document.querySelectorAll('.presha-hero').forEach(el => new PreshaHeroCarousel(el));
+    document.querySelectorAll('.presha-hero').forEach(el => {
+      // Bug 3: destroy previous instance before creating a new one (theme editor hot-reload)
+      if (el._preshaCarousel) el._preshaCarousel._destroy();
+      el._preshaCarousel = new PreshaHeroCarousel(el);
+    });
     initRailEntrance();
   }
 
