@@ -13,7 +13,7 @@
   id="presha-hero-{{ section.id }}"
   role="region"
   aria-label="Hero slideshow"
-  data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  data-autoplay-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
 
   {%- if slide_blocks.size > 0 -%}
@@ -104,7 +104,7 @@
           <a
             href="{{ block.settings.link | default: '#' }}"
             class="presha-hero__rail-card"
-            aria-label="{{ block.settings.label | default: 'Shop' }} {{ block.settings.name }}"
+            aria-label="{{ block.settings.label | default: 'Shop' | escape }} {{ block.settings.name | escape }}"
             {{ block.shopify_attributes }}
           >
             <div class="presha-hero__rail-thumb">
@@ -138,13 +138,14 @@
 <style>
 /* ============================================================
    PRESHA HERO CAROUSEL — scoped styles
-   Breakpoints: 749px (tablet), 480px (mobile)
+   Breakpoints: 1024px (tablet), 749px (mobile), 480px (small mobile)
 ============================================================ */
 
 /* ── Container ── */
 .presha-hero {
   position: relative;
   width: 100%;
+  height: 92vh;    /* fallback for browsers without svh support */
   height: 92svh;
   min-height: 500px;
   overflow: hidden;
@@ -213,7 +214,7 @@
 /* ── Slide content block ── */
 .presha-hero__content {
   position: absolute;
-  bottom: 20%;
+  bottom: 18%;
   left: 5%;
   z-index: 2;
   max-width: 600px;
@@ -244,6 +245,11 @@
   color: #ffffff;
   margin: 0 0 20px;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* Reinforcing scope — prevents Horizon base.css h2 color cascade from overriding */
+.presha-hero__content .presha-hero__headline {
+  color: #ffffff;
 }
 
 /* ── CTA button ── */
@@ -434,7 +440,7 @@
   }
 
   .presha-hero__cta {
-    padding: 11px 20px;
+    padding: 11px 22px;
     font-size: 10px;
   }
 
