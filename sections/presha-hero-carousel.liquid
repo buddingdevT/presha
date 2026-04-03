@@ -582,7 +582,10 @@
 
         if (!this.reducedMotion) {
           if (outgoingContent) {
-            gsap.to(outgoingContent, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+            const label    = outgoingContent.querySelector('.presha-hero__label');
+            const headline = outgoingContent.querySelector('.presha-hero__headline');
+            const cta      = outgoingContent.querySelector('.presha-hero__cta');
+            gsap.to([label, headline, cta].filter(Boolean), { opacity: 0, duration: 0.3, ease: 'power2.in' });
           }
           gsap.to(outgoing, {
             opacity: 0,
@@ -652,14 +655,14 @@
             tl.fromTo(headline,
               { opacity: 0, y: 18 },
               { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-              '-=0.3'
+              '-=0.35'
             );
           }
           if (cta) {
             tl.fromTo(cta,
               { opacity: 0, y: 14 },
               { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
-              '-=0.3'
+              '-=0.35'
             );
           }
         } else {
@@ -694,8 +697,7 @@
       if (!img || this.reducedMotion) return;
 
       img.style.willChange = 'transform';
-      gsap.set(img, { scale: 1 });
-      this.kenBurnsTween = gsap.to(img, {
+      this.kenBurnsTween = gsap.fromTo(img, { scale: 1 }, {
         scale: 1.08,
         duration: this.speed / 1000,
         ease: 'none'
@@ -748,7 +750,7 @@
         stagger: 0.08,
         scrollTrigger: {
           trigger: '.presha-hero',
-          start: 'top 90%',
+          start: 'top 80%',
           once: true
         }
       }
