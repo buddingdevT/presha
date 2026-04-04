@@ -145,8 +145,8 @@
 .presha-hero {
   position: relative;
   width: 100%;
-  height: 92vh;    /* fallback for browsers without svh support */
-  height: 92svh;
+  height: calc(100vh - 100px);    /* fallback — 100px = 40px announcement bar + 60px header */
+  height: calc(100svh - 100px);
   min-height: 500px;
   overflow: hidden;
   background: #0a0a0a;
@@ -282,7 +282,7 @@
 /* ── Progress indicators ── */
 .presha-hero__indicators {
   position: absolute;
-  bottom: calc(90px + 18px);
+  bottom: calc(90px + 28px);   /* 28px gap above the 90px rail */
   left: 5%;
   z-index: 3;
   display: flex;
@@ -319,8 +319,8 @@
   inset: 0;
   background: #ffffff;
   border-radius: 1px;
-  transform: scaleX(0);
   transform-origin: left center;
+  /* transform managed entirely by GSAP — no CSS transform here */
 }
 
 /* ── Discovery rail ── */
@@ -525,7 +525,6 @@
       this.crossfadeTween = null;
       this.textTl         = null;
       this._autoplayTimeout = null;
-      this.isPaused       = false;
       this.reducedMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Bug 1 guard: no slides at all — nothing to initialise
@@ -543,17 +542,7 @@
 
     /* ── Event binding ── */
     _bindEvents() {
-      // Store bound handlers so they can be removed in _destroy()
-      this._onMouseEnter = () => this._pause();
-      this._onMouseLeave = () => this._resume();
-      this._onTouchStart = () => this._pause();
-      this._onTouchEnd   = () => { clearTimeout(this._touchTimer); this._touchTimer = setTimeout(() => this._resume(), 400); };
-
-      this.el.addEventListener('mouseenter', this._onMouseEnter);
-      this.el.addEventListener('mouseleave', this._onMouseLeave);
-      this.el.addEventListener('touchstart', this._onTouchStart, { passive: true });
-      this.el.addEventListener('touchend',   this._onTouchEnd,   { passive: true });
-
+      // Carousel runs continuously — no hover/touch pause
       this.indicators.forEach((btn, i) => {
         btn._preshaClick = () => this._goTo(i);
         btn.addEventListener('click', btn._preshaClick);
@@ -569,10 +558,6 @@
       this.kenBurnsTween?.kill();
       this.crossfadeTween?.kill();
       this.textTl?.kill();
-      this.el.removeEventListener('mouseenter', this._onMouseEnter);
-      this.el.removeEventListener('mouseleave', this._onMouseLeave);
-      this.el.removeEventListener('touchstart', this._onTouchStart);
-      this.el.removeEventListener('touchend',   this._onTouchEnd);
       this.indicators.forEach(btn => {
         if (btn._preshaClick) btn.removeEventListener('click', btn._preshaClick);
       });
@@ -606,7 +591,7 @@
 
       /* ── Reset all fills ── */
       this.fills.forEach((fill, i) => {
-        gsap.set(fill, { scaleX: i < index ? 1 : 0 });
+        gsap.set(fill, { scaleX: i < index ? 1 : 0, transformOrigin: 'left center' });
       });
 
       /* ── Exit outgoing slide ── */
@@ -711,9 +696,10 @@
       if (activeFill) {
         if (!this.reducedMotion) {
           this.progressTween = gsap.fromTo(activeFill,
-            { scaleX: 0 },
+            { scaleX: 0, transformOrigin: 'left center' },
             {
               scaleX: 1,
+              transformOrigin: 'left center',
               duration: this.speed / 1000,
               ease: 'none',
               onComplete: () => this._next()
@@ -750,27 +736,6 @@
       this._activateSlide(index);
     }
 
-    /* ── Pause (hover/touch start) ── */
-    _pause() {
-      if (this.isPaused) return;
-      this.isPaused = true;
-      this.progressTween?.pause();
-      this.kenBurnsTween?.pause();
-      clearTimeout(this._autoplayTimeout);
-    }
-
-    /* ── Resume (hover/touch end) ── */
-    _resume() {
-      if (!this.isPaused) return;
-      this.isPaused = false;
-      // Bug 2: reduced-motion uses setTimeout for autoplay — must restart it on resume
-      if (this.reducedMotion) {
-        this._autoplayTimeout = setTimeout(() => this._next(), this.speed);
-        return;
-      }
-      this.progressTween?.resume();
-      this.kenBurnsTween?.resume();
-    }
   }
 
   /* ============================================================
