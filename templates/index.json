@@ -9,6 +9,90 @@
  */
 {
   "sections": {
+    "presha_hero_carousel": {
+      "type": "presha-hero-carousel",
+      "blocks": {
+        "rail_card_MQrJja": {
+          "type": "rail_card",
+          "name": "Rare Finds",
+          "settings": {
+            "label": "SHOP BY",
+            "name": "Rare Finds",
+            "link": ""
+          }
+        },
+        "rail_card_QqVc7z": {
+          "type": "rail_card",
+          "name": "Pokemon ",
+          "settings": {
+            "label": "SHOP",
+            "name": "Pokémon Collectibles",
+            "link": ""
+          }
+        },
+        "rail_card_LUgyrt": {
+          "type": "rail_card",
+          "name": "Trending",
+          "settings": {
+            "label": "SHOP BY",
+            "name": "Trending Now",
+            "link": ""
+          }
+        },
+        "rail_card_LFnNJQ": {
+          "type": "rail_card",
+          "name": "Presha Vault",
+          "settings": {
+            "label": "SHOP BY",
+            "name": "Presha Vault",
+            "link": ""
+          }
+        },
+        "slide_bJNbje": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/slide1.webp",
+            "label": "New Arrival",
+            "headline": "Own the Dark",
+            "cta_text": "Shop Now",
+            "cta_link": "shopify://collections/jordan"
+          }
+        },
+        "slide_77yjH6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/slide2.webp",
+            "label": "LA Exclusive",
+            "headline": "Not For Everyone.",
+            "cta_text": "Shop The Collection",
+            "cta_link": ""
+          }
+        },
+        "slide_zk9DbW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/slide3.webp",
+            "label": "New At Presha",
+            "headline": "Five Colours. One Obsession",
+            "cta_text": "Shop GoYard",
+            "cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "rail_card_MQrJja",
+        "rail_card_QqVc7z",
+        "rail_card_LUgyrt",
+        "rail_card_LFnNJQ",
+        "slide_bJNbje",
+        "slide_77yjH6",
+        "slide_zk9DbW"
+      ],
+      "settings": {
+        "autoplay_speed": 5000,
+        "show_discovery_rail": true
+      }
+    },
     "presha_marquee": {
       "type": "presha-marquee",
       "blocks": {
@@ -1234,15 +1318,6 @@
         "trust_3"
       ],
       "settings": {}
-    },
-    "presha_hero_carousel": {
-      "type": "presha-hero-carousel",
-      "blocks": {},
-      "block_order": [],
-      "settings": {
-        "autoplay_speed": 5000,
-        "show_discovery_rail": true
-      }
     }
   },
   "order": [
