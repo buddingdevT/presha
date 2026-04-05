@@ -145,8 +145,10 @@
 .presha-hero {
   position: relative;
   width: 100%;
-  height: calc(100vh - 100px);    /* fallback — 100px = 40px announcement bar + 60px header */
-  height: calc(100svh - 100px);
+  /*height: calc(100vh - 100px);*/    /* 40px announcement bar + 60px header */
+  /*height: calc(100svh - 100px);*/
+  height: 100vh;    /* 40px announcement bar + 60px header */
+  height: 100svh;
   min-height: 500px;
   overflow: hidden;
   background: #0a0a0a;
@@ -214,7 +216,7 @@
 /* ── Slide content block ── */
 .presha-hero__content {
   position: absolute;
-  bottom: 18%;
+  bottom: 24%;
   left: 5%;
   z-index: 2;
   max-width: 600px;
@@ -314,13 +316,26 @@
   right: 0;
 }
 
+@keyframes preshaFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
 .presha-hero__indicator-fill {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
   background: #ffffff;
   border-radius: 1px;
-  transform-origin: left center;
-  /* transform managed entirely by GSAP — no CSS transform here */
+}
+
+.presha-hero__indicator-fill.is-filling {
+  animation-name: preshaFill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* animation-duration set inline by JS */
 }
 
 /* ── Discovery rail ── */
@@ -500,6 +515,10 @@
   .presha-hero__slide-img {
     transition: none !important;
   }
+  .presha-hero__indicator-fill.is-filling {
+    animation: none;
+    width: 100%;
+  }
 }
 </style>
 
@@ -520,7 +539,6 @@
       this.fills          = Array.from(el.querySelectorAll('.presha-hero__indicator-fill'));
       this.speed          = parseInt(el.dataset.autoplaySpeed, 10) || 5000;
       this.current        = 0;
-      this.progressTween  = null;
       this.kenBurnsTween  = null;
       this.crossfadeTween = null;
       this.textTl         = null;
@@ -554,7 +572,6 @@
       gsap.killTweensOf(this.slides);
       clearTimeout(this._autoplayTimeout);
       clearTimeout(this._touchTimer);
-      this.progressTween?.kill();
       this.kenBurnsTween?.kill();
       this.crossfadeTween?.kill();
       this.textTl?.kill();
@@ -572,7 +589,6 @@
       this.current = index;
 
       // Kill running tweens and timers
-      if (this.progressTween)    { this.progressTween.kill();  this.progressTween  = null; }
       if (this.kenBurnsTween)    { this.kenBurnsTween.kill();   this.kenBurnsTween  = null; }
       if (this._autoplayTimeout) { clearTimeout(this._autoplayTimeout); this._autoplayTimeout = null; }
       // Bug 4: kill any in-flight crossfade opacity tweens and the text timeline
@@ -591,7 +607,9 @@
 
       /* ── Reset all fills ── */
       this.fills.forEach((fill, i) => {
-        gsap.set(fill, { scaleX: i < index ? 1 : 0, transformOrigin: 'left center' });
+        fill.classList.remove('is-filling');
+        fill.style.width = i < index ? '100%' : '0%';
+        fill.style.animationDuration = '';
       });
 
       /* ── Exit outgoing slide ── */
@@ -691,24 +709,14 @@
         }
       }
 
-      /* ── Progress bar ── */
+      /* ── Progress bar (CSS keyframe animation) ── */
       const activeFill = this.fills[index];
       if (activeFill) {
-        if (!this.reducedMotion) {
-          this.progressTween = gsap.fromTo(activeFill,
-            { scaleX: 0, transformOrigin: 'left center' },
-            {
-              scaleX: 1,
-              transformOrigin: 'left center',
-              duration: this.speed / 1000,
-              ease: 'none',
-              onComplete: () => this._next()
-            }
-          );
-        } else {
-          gsap.set(activeFill, { scaleX: 1 });
-          this._autoplayTimeout = setTimeout(() => this._next(), this.speed);
-        }
+        // Force reflow so removing/re-adding is-filling restarts the animation
+        void activeFill.offsetWidth;
+        activeFill.style.animationDuration = `${this.speed / 1000}s`;
+        activeFill.classList.add('is-filling');
+        this._autoplayTimeout = setTimeout(() => this._next(), this.speed);
       }
     }
 
