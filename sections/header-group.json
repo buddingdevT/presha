@@ -35,7 +35,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu-copy",
+            "menu": "main-menu",
             "color_scheme": "scheme-red-hover",
             "type_font_primary_size": "0.75rem",
             "menu_font_style": "inverse",
