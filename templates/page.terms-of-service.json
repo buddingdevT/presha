@@ -1,0 +1,102 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "presha-policy-page",
+      "blocks": {
+        "overview": {
+          "type": "clause",
+          "settings": {
+            "heading": "About these terms",
+            "body": "<p>These placeholder terms explain the basic conditions for using the Presha Trends storefront. By browsing the site or placing an order, customers agree to follow the final terms published here and any policies linked at checkout.</p>"
+          }
+        },
+        "eligibility": {
+          "type": "clause",
+          "settings": {
+            "heading": "Using the store",
+            "body": "<p>Customers should provide accurate information, use the site lawfully and keep account details secure. Presha Trends may refuse, cancel or limit orders where information appears inaccurate, stock is unavailable, fraud is suspected or a transaction cannot be completed.</p>"
+          }
+        },
+        "products": {
+          "type": "clause",
+          "settings": {
+            "heading": "Products and authenticity",
+            "body": "<p>Presha Trends focuses on authenticated luxury streetwear, sneakers and collectibles. Product descriptions, images, condition notes, sizing and availability are provided to help customers make informed choices. Final wording should confirm authentication process details, condition grading and any resale marketplace disclaimers.</p>"
+          }
+        },
+        "orders": {
+          "type": "clause",
+          "settings": {
+            "heading": "Orders and payment",
+            "body": "<p>Orders are subject to acceptance, payment authorization and stock availability. Prices, promotions, taxes, duties, delivery fees and currency display may change. Customers are responsible for reviewing order details before checkout.</p>"
+          }
+        },
+        "shipping": {
+          "type": "clause",
+          "settings": {
+            "heading": "Shipping and delivery",
+            "body": "<p>Shipping options, timelines, duties and delivery requirements may vary by destination. Delivery estimates are not guarantees unless explicitly stated. The final terms should align with the live Shipping Policy and the carrier services available at launch.</p>"
+          }
+        },
+        "returns": {
+          "type": "clause",
+          "settings": {
+            "heading": "Returns and exchanges",
+            "body": "<p>Return, refund and exchange eligibility depends on the final Returns &amp; Refunds policy, product condition, authentication tags, packaging and any item-specific restrictions. Customers should review that policy before ordering.</p>"
+          }
+        },
+        "content": {
+          "type": "clause",
+          "settings": {
+            "heading": "Brand content and intellectual property",
+            "body": "<p>The Presha Trends name, visuals, site design, copy, photography and other brand materials are protected and should not be copied or reused without permission. Third-party brand names and marks belong to their respective owners.</p>"
+          }
+        },
+        "liability": {
+          "type": "clause",
+          "settings": {
+            "heading": "Service changes and liability",
+            "body": "<p>Presha Trends may update the store, product availability, pricing, policies and services over time. The final legal terms should include counsel-reviewed limitations, disclaimers, governing law, dispute resolution and consumer rights language that applies to the business.</p>"
+          }
+        },
+        "contact": {
+          "type": "clause",
+          "settings": {
+            "heading": "Contact",
+            "body": "<p>Questions about these terms should be sent through the official contact channels listed on the site. Replace this placeholder with the final legal contact email, business name and business address before launch.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "overview",
+        "eligibility",
+        "products",
+        "orders",
+        "shipping",
+        "returns",
+        "content",
+        "liability",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "Terms",
+        "title": "Terms of Service",
+        "updated_date": "Last updated: April 2026",
+        "intro": "<p>These placeholder terms outline the expected rules for shopping with Presha Trends. They are written to be clear, editable and ready for legal review before launch.</p>",
+        "review_note": "<p><strong>Placeholder:</strong> These terms are draft content for editing and legal review. Confirm the final operating entity, business address, governing law, dispute process, payment terms, delivery obligations, resale disclaimers and return rules before publishing.</p>"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -110,3 +110,13 @@
 - [ ] Toggle the discovery rail on/off via **Theme Editor → Hero Carousel → Show discovery rail**
 - [ ] Add, remove, or reorder slide blocks and rail card blocks directly in the Theme Editor
 
+
+---
+
+## Policy Pages (2026-04-09)
+- [ ] **Action Required:** In **Shopify Admin -> Online Store -> Pages**, create a page titled `Privacy Policy` with the handle `/pages/privacy-policy`.
+- [ ] Assign the `privacy-policy` theme template to that page so it uses `templates/page.privacy-policy.json`.
+- [ ] **Action Required:** In **Shopify Admin -> Online Store -> Pages**, create a page titled `Terms of Service` with the handle `/pages/terms-of-service`.
+- [ ] Assign the `terms-of-service` theme template to that page so it uses `templates/page.terms-of-service.json`.
+- [ ] Review and replace the placeholder legal copy before launch. Confirm the final business entity, address, legal contact email, governing law, privacy rights, payment provider language, shipping duties, return rules and dispute process.
+- [ ] Optional: edit the policy section text and clauses in Theme Editor after the page templates are assigned.

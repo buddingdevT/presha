@@ -57,7 +57,9 @@
           <li><a href="/pages/authentication">Authentication</a></li>
           <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
           <li><a href="/pages/returns-refunds">Returns &amp; Refunds</a></li>
+          {% comment %}
           <li><a href="/pages/track-order">Track Order</a></li>
+          {% endcomment %}
           <li><a href="/pages/contact-us">Contact Us</a></li>
         </ul>
       </nav>
@@ -68,9 +70,11 @@
         <ul class="pf__links">
           <li><a href="/pages/our-story">Our Story</a></li>
           <li><a href="/blogs/journal">Journal</a></li>
+          {% comment %}
           <li><a href="/pages/careers">Careers</a></li>
-          <li><a href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a></li>
-          <li><a href="{{ routes.root_url }}policies/terms-of-service">Terms of Service</a></li>
+          {% endcomment %}
+          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/pages/terms-of-service">Terms of Service</a></li>
         </ul>
       </nav>
 

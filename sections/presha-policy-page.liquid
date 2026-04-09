@@ -1,0 +1,278 @@
+{%- comment -%}
+  Presha Trends policy page template section.
+  Placeholder policy copy must be reviewed by the owner and legal counsel before launch.
+{%- endcomment -%}
+
+<section class="presha-policy" aria-labelledby="PreshaPolicyTitle-{{ section.id }}">
+  <div class="presha-policy__inner">
+    <div class="presha-policy__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="presha-policy__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 id="PreshaPolicyTitle-{{ section.id }}" class="presha-policy__title">
+        {{ section.settings.title | default: page.title }}
+      </h1>
+
+      {%- if section.settings.updated_date != blank -%}
+        <p class="presha-policy__updated">{{ section.settings.updated_date }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.intro != blank -%}
+        <div class="presha-policy__intro rte">
+          {{ section.settings.intro }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.review_note != blank -%}
+      <div class="presha-policy__notice rte">
+        {{ section.settings.review_note }}
+      </div>
+    {%- endif -%}
+
+    <div class="presha-policy__content">
+      {%- for block in section.blocks -%}
+        <article class="presha-policy__clause" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h2 class="presha-policy__clause-heading">{{ block.settings.heading }}</h2>
+          {%- endif -%}
+
+          {%- if block.settings.body != blank -%}
+            <div class="presha-policy__clause-body rte">
+              {{ block.settings.body }}
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-policy {
+    background: #f5f1ec;
+    color: #000000;
+    padding: 96px 0 104px;
+  }
+
+  .presha-policy__inner {
+    width: min(100% - 40px, 920px);
+    margin: 0 auto;
+  }
+
+  .presha-policy__header {
+    max-width: 760px;
+    margin: 0 0 40px;
+  }
+
+  .presha-policy__eyebrow {
+    margin: 0 0 14px;
+    color: #6d001a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .presha-policy__title {
+    margin: 0;
+    color: #000000;
+    font-family: 'The Glamore', var(--font-heading--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .presha-policy__updated {
+    margin: 18px 0 0;
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .presha-policy__intro {
+    margin: 28px 0 0;
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .presha-policy__notice {
+    margin: 0 0 48px;
+    padding: 18px 20px;
+    border-left: 3px solid #6d001a;
+    background: #ffffff;
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .presha-policy__content {
+    display: grid;
+    gap: 36px;
+  }
+
+  .presha-policy__clause {
+    padding-top: 36px;
+    border-top: 1px solid #ddd9d3;
+  }
+
+  .presha-policy__clause-heading {
+    margin: 0 0 14px;
+    color: #000000;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  .presha-policy__clause-body {
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .presha-policy__clause-body :is(p, ul, ol),
+  .presha-policy__intro :is(p, ul, ol),
+  .presha-policy__notice :is(p, ul, ol) {
+    margin-top: 0;
+  }
+
+  .presha-policy__clause-body :is(p, ul, ol):last-child,
+  .presha-policy__intro :is(p, ul, ol):last-child,
+  .presha-policy__notice :is(p, ul, ol):last-child {
+    margin-bottom: 0;
+  }
+
+  .presha-policy__clause-body a,
+  .presha-policy__intro a,
+  .presha-policy__notice a {
+    color: #6d001a;
+    text-underline-offset: 0.18em;
+  }
+
+  @media screen and (max-width: 749px) {
+    .presha-policy {
+      padding: 72px 0 80px;
+    }
+
+    .presha-policy__inner {
+      width: min(100% - 32px, 920px);
+    }
+
+    .presha-policy__header {
+      margin-bottom: 32px;
+    }
+
+    .presha-policy__intro {
+      font-size: 16px;
+    }
+
+    .presha-policy__notice {
+      margin-bottom: 40px;
+      padding: 16px;
+      font-size: 14px;
+    }
+
+    .presha-policy__content {
+      gap: 28px;
+    }
+
+    .presha-policy__clause {
+      padding-top: 28px;
+    }
+
+    .presha-policy__clause-heading {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .presha-policy__title {
+      font-size: 64px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .presha-policy__title {
+      font-size: 76px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presha Policy Page",
+  "tag": "section",
+  "class": "presha-policy-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Policy"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Policy"
+    },
+    {
+      "type": "text",
+      "id": "updated_date",
+      "label": "Updated date",
+      "default": "Last updated: April 2026"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro copy",
+      "default": "<p>This placeholder policy explains how Presha Trends approaches this topic. It should be reviewed and edited by the store owner before launch.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "review_note",
+      "label": "Review note",
+      "default": "<p><strong>Placeholder:</strong> This copy is provided for editing and legal review. Confirm the final wording, operating entity, contact details, jurisdictions, payment providers, shipping terms and dispute process before publishing.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "clause",
+      "name": "Policy clause",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Policy heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body",
+          "default": "<p>Add policy copy here. Keep it specific to Presha Trends and confirm the final wording before publishing.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Policy Page"
+    }
+  ]
+}
+{% endschema %}

@@ -287,3 +287,28 @@
 - `shopify theme check sections/presha-marquee.liquid` is not supported by the installed CLI command shape.
 - Repo-wide `shopify theme check` was attempted but timed out before returning results; `git diff --check` passed.
 
+
+---
+
+## 2026-04-09 - Policy Pages and Footer Legal Links
+
+**What was built:**
+- Added a reusable `presha-policy-page` section for editorial policy/legal pages, using Soft Ivory background, black body text, burgundy overline/accent treatment, and Gilroy-first body typography.
+- Added editable placeholder `Privacy Policy` content via the `page.privacy-policy` alternate template.
+- Added editable placeholder `Terms of Service` content via the `page.terms-of-service` alternate template.
+- Updated footer Privacy Policy and Terms of Service links to point to `/pages/privacy-policy` and `/pages/terms-of-service`.
+- Liquid-commented the `Track Order` footer link under Support and the `Careers` footer link under Company so they do not render for now.
+- Updated `ADMIN_TODOS.md` with required Shopify Admin page creation and template assignment steps.
+
+**Files changed:**
+- `sections/presha-policy-page.liquid` - New reusable editable policy page section
+- `templates/page.privacy-policy.json` - New Privacy Policy alternate page template with placeholder copy
+- `templates/page.terms-of-service.json` - New Terms of Service alternate page template with placeholder copy
+- `sections/presha-footer.liquid` - Footer legal links updated; Track Order and Careers commented out
+- `ADMIN_TODOS.md` - Added required Admin steps for creating policy pages
+- `PROGRESS.md` - Added this progress entry
+
+**Notes:**
+- Theme code cannot create Shopify Admin page records by itself. The owner must create the two pages and assign the new templates before the footer links resolve.
+- Placeholder legal copy should be reviewed and replaced before launch.
+- File-scoped `shopify theme check --path` runs timed out before returning results; local JSON parsing and `git diff --check` passed.
