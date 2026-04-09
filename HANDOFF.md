@@ -173,12 +173,101 @@ presha/
 
 ---
 
+## Session Update — Later 2026-04-09 Work
+
+- Synced the latest GitHub and Shopify Theme Editor state before new edits:
+  - `git pull --ff-only origin main` confirmed the local repo was current.
+  - `shopify theme pull --store agw1a7-eu.myshopify.com --theme 194145845329 --force` succeeded and did not leave content diffs in Git.
+
+- Finalized the policy pages:
+  - `658c3cf Policy Pages - finalize copy and editor support`
+  - `a5d091d Policy Pages - add contact email`
+  - `sections/presha-policy-page.liquid` now supports a hybrid mode:
+    - if the Shopify page body has content, the page renders Page Editor content
+    - if the Shopify page body is blank, the page renders the curated template clauses
+  - `templates/page.privacy-policy.json` and `templates/page.terms-of-service.json` now contain Presha-specific copy.
+  - `preshatrends@gmail.com` is used as the current privacy/support contact email.
+
+- Added the Shipping Policy page:
+  - `fe13135 Shipping Policy - add page template`
+  - Added `templates/page.shipping-policy.json`
+  - Owner approved the shipping policy page and received the HTML copy for the Shopify page body, including a lighter-divider version for Page Editor use.
+
+- Refreshed the homepage Authentication section UI:
+  - `35c02e2 Authentication - refresh UI styling`
+  - Updated `sections/presha-authentication.liquid`
+  - Layout approved by owner; some color/design choices may be revisited later.
+
+- Added the dedicated Authentication page and wired the homepage CTA:
+  - `89ed61b Authentication Page - add dedicated template`
+  - `b6a8d2b Authentication Page - fix schema name`
+  - Added `sections/presha-authentication-page.liquid`
+  - Added `templates/page.authentication.json`
+  - Updated `templates/index.json` so the homepage Authentication CTA now links to `/pages/authentication`
+  - Footer Support already linked to `/pages/authentication`
+  - Shopify initially rejected the new section because the schema `name` exceeded 25 characters; that was fixed in `b6a8d2b`, and the retry push succeeded.
+  - Layout approved by owner; some color/design choices may be revisited later.
+
+- Added follow-up notes to project docs:
+  - `d28d35d Docs - note authentication follow-up`
+  - `CLAUDE.md` and `PROGRESS.md` now note that the Authentication page layout is approved for now and the color/design direction may be revisited later.
+
+- Current Git state:
+  - Branch: `main`
+  - `HEAD`: `d28d35d Docs - note authentication follow-up`
+  - `origin/main`: `d28d35d Docs - note authentication follow-up`
+  - Working tree: clean
+
+- Current open follow-ups:
+  - `sections/presha-marquee.liquid` is still broken on preview and needs a fresh investigation.
+  - In Shopify Admin, create/confirm and assign templates for:
+    - `/pages/shipping-policy` → template `shipping-policy`
+    - `/pages/authentication` → template `authentication`
+  - Authentication page colors/design choices may be revisited later.
+  - Do not touch the homepage redesign spec/plan unless the owner explicitly asks:
+    - `docs/superpowers/specs/2026-04-09-homepage-redesign-design.md`
+    - `docs/superpowers/plans/2026-04-09-homepage-redesign.md`
+
+### Corrections / Current Truth
+
+- Earlier notes in this file about policy-page copy being placeholder or requiring replacement are no longer current.
+  - Current truth:
+    - `f68a3ae Policy Pages - add legal templates`
+    - `658c3cf Policy Pages - finalize copy and editor support`
+    - `a5d091d Policy Pages - add contact email`
+  - The Privacy Policy and Terms of Service templates now contain Presha-specific copy and use `preshatrends@gmail.com` as the current support/privacy contact.
+
+- Earlier notes about local-only homepage redesign commits are no longer current.
+  - Current truth:
+    - `e83e194 Homepage redesign - add full design spec` is on `origin/main`
+    - `5915168 Homepage redesign - add implementation plan` is on `origin/main`
+  - Even so, do not modify those homepage redesign files unless the owner explicitly asks.
+
+- Earlier workflow notes that some recent commits were not yet pushed to GitHub are also no longer current.
+  - Current truth:
+    - `10bd46e Header - add nav hover underline` is on `origin/main`
+    - `35516a5 Scrolling Marquee - attempt CSS loop` is on `origin/main`
+    - `f68a3ae Policy Pages - add legal templates` is on `origin/main`
+    - `35c02e2 Authentication - refresh UI styling` is on `origin/main`
+    - `89ed61b Authentication Page - add dedicated template` is on `origin/main`
+    - `b6a8d2b Authentication Page - fix schema name` is on `origin/main`
+    - `d28d35d Docs - note authentication follow-up` is on `origin/main`
+
+- For the Authentication page specifically:
+  - Current truth:
+    - layout is approved by the owner
+    - some color/design choices may be revisited later
+    - homepage CTA and footer support link should both point to `/pages/authentication`
+
+---
+
 ## Next Tasks (Priority Order)
 
 1. **Fix Scrolling Marquee** — investigate and resolve the animation blocking issue
-2. **Make planned edits to Gifts / Trending Now / Email Signup / Footer** — built sections, but still open for refinement
-3. **Collection setup** — assist store owner in creating required Shopify collections
-4. **Other pages** — Collection page, Product Detail Page, About, Cart (not started)
+2. **Resolve remaining Shopify Admin page/template assignments** — especially Shipping Policy and Authentication
+3. **Make planned edits to Gifts / Trending Now / Email Signup / Footer** — built sections, but still open for refinement
+4. **Collection setup** — assist store owner in creating required Shopify collections
+5. **Other pages** — Collection page, Product Detail Page, About, Cart (not started)
 
 ---
 
