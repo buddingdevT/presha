@@ -396,3 +396,20 @@
 - `templates/index.json` - Homepage Authentication CTA now links to `/pages/authentication`
 - `ADMIN_TODOS.md` - Added Authentication page admin step
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Returns & Refunds Page
+
+**What was built:**
+- Added a dedicated `Returns & Refunds` page template to support the existing footer Support link at `/pages/returns-refunds`.
+- Reused the shared `presha-policy-page` section so the page matches the other policy/editorial support pages.
+- Wrote Presha-specific copy covering eligibility, request timing, condition requirements, approval flow, refund timing, non-returnable cases and damaged/incorrect orders.
+- Added a second matching alternate template file using the `returns-and-refunds` suffix so Shopify has a fallback if the page handle or template naming in Admin uses the longer slug format.
+- Kept page-editor override support consistent with the other policy pages: Shopify page body content will render when present, otherwise the curated template clauses render.
+
+**Files changed:**
+- `templates/page.returns-refunds.json` - New Returns & Refunds page template for the footer URL
+- `templates/page.returns-and-refunds.json` - Matching alternate template for Admin/template naming flexibility
+- `ADMIN_TODOS.md` - Added the Returns & Refunds page/template assignment step
+- `PROGRESS.md` - Added this progress entry

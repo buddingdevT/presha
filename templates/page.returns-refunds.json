@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "presha-policy-page",
+      "blocks": {
+        "overview": {
+          "type": "clause",
+          "settings": {
+            "heading": "Eligibility overview",
+            "body": "<p>Presha Trends handles returns and refunds with care because we specialise in authenticated luxury streetwear, rare sneakers, accessories and collectibles. Eligibility depends on the product category, item condition, authentication and security tags, original packaging, order status and any item-specific restrictions shown on the product page or at checkout.</p><p>Please review the product details carefully before placing your order. Certain items may be final sale, non-returnable or exchange-only because of their rarity, hygiene considerations, launch nature or authentication handling requirements.</p>"
+          }
+        },
+        "window": {
+          "type": "clause",
+          "settings": {
+            "heading": "Return request window",
+            "body": "<p>If your order is eligible for return, contact Presha Trends as soon as possible after delivery and include your order number, the item name and the reason for the request. Return requests should be submitted promptly after receipt so we can review the condition and next steps while the order is still recent.</p><p>Requests submitted late may be declined if the return window has passed, the item has been used, or we can no longer verify that the product remains in its delivered condition.</p>"
+          }
+        },
+        "condition": {
+          "type": "clause",
+          "settings": {
+            "heading": "Condition requirements",
+            "body": "<p>Returned items must be sent back in the same condition in which they were delivered. Products should be unworn, unused, unaltered and complete with their original packaging, accessories, inserts, dust bags, spare laces, boxes and any Presha Trends or third-party authentication, security or tamper-evident tags still attached.</p><p>Returns may be refused if an item shows wear, creasing, odour, marks, sole use, missing packaging, removed security tags or any sign that the product has been altered after delivery.</p>"
+          }
+        },
+        "process": {
+          "type": "clause",
+          "settings": {
+            "heading": "How to request a return",
+            "body": "<p>To request a return or refund review, email preshatrends@gmail.com with your order number, delivery name, the item you want to return and clear photos where relevant. Do not send an item back without written confirmation from Presha Trends.</p><p>If a return is approved, we will share the return instructions, the return address and any courier or packaging requirements that apply to that order. Customers are responsible for following those instructions exactly so the return can be assessed correctly on arrival.</p>"
+          }
+        },
+        "refunds": {
+          "type": "clause",
+          "settings": {
+            "heading": "Refund review and timing",
+            "body": "<p>Approved refunds are reviewed after the returned item is received and inspected. If the item passes inspection and meets the conditions of the approved return, Presha Trends will process the refund through the original payment method unless another remedy is required by law or agreed in writing.</p><p>Bank, card issuer and payment-provider processing times vary, so the refunded amount may take additional business days to appear after we confirm the refund has been issued.</p>"
+          }
+        },
+        "nonreturnable": {
+          "type": "clause",
+          "settings": {
+            "heading": "Non-returnable situations",
+            "body": "<p>Unless required by applicable law, Presha Trends may refuse returns, exchanges or refunds for final-sale items, products marked non-returnable, items returned without approval, products that fail inspection, items missing packaging or security tags, products damaged after delivery, and orders affected by misuse, wear or customer-caused loss.</p><p>Shipping charges, duties, taxes, customs fees and other third-party charges are generally non-refundable unless the law in your jurisdiction states otherwise.</p>"
+          }
+        },
+        "damaged": {
+          "type": "clause",
+          "settings": {
+            "heading": "Damaged, incorrect or incomplete orders",
+            "body": "<p>If your order arrives damaged, incomplete or incorrect, contact us promptly after delivery and include your order number, a description of the issue and clear supporting photos. Keep all packaging and order contents available until the matter is reviewed.</p><p>Presha Trends will assess the issue and, where appropriate, provide a suitable resolution such as a refund, replacement, exchange, store credit or another remedy consistent with the circumstances and applicable law.</p>"
+          }
+        },
+        "contact": {
+          "type": "clause",
+          "settings": {
+            "heading": "Contact",
+            "body": "<p>For returns and refund questions, contact Presha Trends at preshatrends@gmail.com and include your order number wherever possible.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "overview",
+        "window",
+        "condition",
+        "process",
+        "refunds",
+        "nonreturnable",
+        "damaged",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "Support",
+        "title": "Returns & Refunds",
+        "updated_date": "Last updated: April 2026",
+        "prefer_page_content": true,
+        "intro": "<p>This Returns &amp; Refunds Policy explains how Presha Trends reviews eligible return requests, refund outcomes and order issues for products purchased through our Dubai-based storefront.</p>",
+        "review_note": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
