@@ -346,3 +346,18 @@
 - `templates/page.privacy-policy.json` - Privacy choices and contact clauses now use `preshatrends@gmail.com`
 - `templates/page.terms-of-service.json` - Terms governing-law and contact clauses now use `preshatrends@gmail.com`
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Shipping Policy Page
+
+**What was built:**
+- Added a dedicated `Shipping Policy` page template using the reusable `presha-policy-page` section.
+- Wrote Presha-specific shipping policy copy covering order processing, dispatch timing, delivery estimates, duties, address accuracy, tracking, courier handoff and restricted destinations.
+- Kept page-editor support consistent with the other legal pages: if the Shopify page body has content, that body content will render instead of the template clauses.
+- Updated `ADMIN_TODOS.md` with the Shipping Policy page/template assignment step.
+
+**Files changed:**
+- `templates/page.shipping-policy.json` - New Shipping Policy page template with curated fallback copy
+- `ADMIN_TODOS.md` - Added Shipping Policy page/template assignment step
+- `PROGRESS.md` - Added this progress entry

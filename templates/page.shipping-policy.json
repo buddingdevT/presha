@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "presha-policy-page",
+      "blocks": {
+        "processing": {
+          "type": "clause",
+          "settings": {
+            "heading": "Order processing",
+            "body": "<p>Presha Trends processes orders during our normal business workflow in Dubai. Because we specialise in authenticated luxury streetwear, rare sneakers, accessories and collectibles, some orders may require an additional review step before dispatch to confirm stock, condition, packaging or fraud checks.</p><p>Orders are usually prepared after payment has been authorised. Orders placed on weekends, public holidays or during major launches may require additional processing time.</p>"
+          }
+        },
+        "delivery": {
+          "type": "clause",
+          "settings": {
+            "heading": "Delivery areas and timing",
+            "body": "<p>We ship from Dubai and aim to serve customers in the United Arab Emirates and selected international destinations. Available shipping methods and delivery estimates are shown at checkout where supported.</p><p>Delivery times are estimates only. Actual delivery may vary depending on destination, customs processing, courier capacity, address verification, payment review and other factors outside our direct control.</p>"
+          }
+        },
+        "charges": {
+          "type": "clause",
+          "settings": {
+            "heading": "Shipping charges, duties and taxes",
+            "body": "<p>Shipping charges are calculated at checkout or otherwise confirmed before your order is completed. International orders may be subject to customs duties, import taxes, clearance fees or local handling charges set by the destination country.</p><p>Unless we clearly state otherwise, these charges are the customer's responsibility. Presha Trends is not responsible for delays caused by customs or for additional import costs charged after dispatch.</p>"
+          }
+        },
+        "address": {
+          "type": "clause",
+          "settings": {
+            "heading": "Address accuracy and failed delivery",
+            "body": "<p>Customers are responsible for providing complete and accurate shipping details. If an order is delayed, returned, re-routed or undeliverable because of incorrect address information, refusal to accept delivery, repeated failed delivery attempts or failure to complete customs requirements, additional shipping or handling costs may apply.</p><p>If a parcel is returned to Presha Trends, we may contact you to arrange re-delivery where possible.</p>"
+          }
+        },
+        "tracking": {
+          "type": "clause",
+          "settings": {
+            "heading": "Tracking and handover to courier",
+            "body": "<p>When tracking is available, tracking details will be sent to the email address used for your order after dispatch. Once an order has been handed to the courier, delivery progress is managed by the carrier and may be affected by routing, customs, weather or local service conditions.</p>"
+          }
+        },
+        "risk": {
+          "type": "clause",
+          "settings": {
+            "heading": "Risk and delivery responsibility",
+            "body": "<p>Risk in the goods may pass when the order is delivered to the address provided or handed to the shipping carrier, subject to the consumer rights that apply in your location. Customers should inspect deliveries promptly and contact us if an item arrives damaged, incomplete or appears tampered with.</p>"
+          }
+        },
+        "restricted": {
+          "type": "clause",
+          "settings": {
+            "heading": "Restricted destinations and order holds",
+            "body": "<p>Presha Trends may limit, pause or cancel shipping to certain destinations where delivery restrictions, sanctions, fraud risk, customs barriers or carrier limitations make fulfilment impractical or unsafe. If we cannot ship your order after purchase, we will contact you using the details provided at checkout.</p>"
+          }
+        },
+        "contact": {
+          "type": "clause",
+          "settings": {
+            "heading": "Contact",
+            "body": "<p>For shipping questions, contact Presha Trends at preshatrends@gmail.com and include your order number where available.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "processing",
+        "delivery",
+        "charges",
+        "address",
+        "tracking",
+        "risk",
+        "restricted",
+        "contact"
+      ],
+      "settings": {
+        "eyebrow": "Shipping",
+        "title": "Shipping Policy",
+        "updated_date": "Last updated: April 2026",
+        "prefer_page_content": true,
+        "intro": "<p>This Shipping Policy explains how Presha Trends handles dispatch, delivery timing and shipping responsibilities for orders placed through our Dubai-based storefront.</p>",
+        "review_note": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

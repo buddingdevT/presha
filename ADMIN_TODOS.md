@@ -116,6 +116,7 @@
 ## Policy Pages (2026-04-09)
 - [x] Privacy Policy URL resolved at `/pages/privacy-policy`.
 - [x] Terms of Service URL resolved at `/pages/terms-of-service`.
+- [ ] Create or confirm the Shipping Policy page at `/pages/shipping-policy` and assign the `shipping-policy` theme template.
 - [x] Policy templates now include Presha Trends specific customer-facing copy.
 - [ ] Optional: edit the policy page body in **Shopify Admin -> Online Store -> Pages**. If page body content exists, the theme will render that Page Editor content; otherwise it renders the curated template copy.
 - [ ] Optional: adjust policy intro, clause blocks, or page-content preference in Theme Editor.
