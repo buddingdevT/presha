@@ -265,3 +265,25 @@
 **Notes:**
 - No Shopify Admin action required.
 
+---
+
+## 2026-04-09 - Scrolling Marquee CSS Loop Attempt
+
+**What was built:**
+- Replaced the JS `requestAnimationFrame` marquee loop with a CSS keyframe animation.
+- Rendered the marquee content twice in Liquid so the track can loop cleanly with `translate3d(-50%, 0, 0)`.
+- Added a scoped Shopify section wrapper overflow override so the full-width strip can control its own clipping.
+- Kept the existing Theme Editor `speed`, background color, text color, and block content settings intact.
+- Added hover pause support for pointer devices and `prefers-reduced-motion` handling.
+- Updated the marquee font stack to prioritize Gilroy with existing theme fallbacks.
+
+**Files changed:**
+- `sections/presha-marquee.liquid` - CSS-driven marquee loop and cleanup of the previous runtime animation script
+- `PROGRESS.md` - Added this progress entry
+
+**Notes:**
+- No Shopify Admin action required.
+- Owner reviewed the Shopify preview and confirmed the marquee is still not working; leave this as an open issue for the next pass.
+- `shopify theme check sections/presha-marquee.liquid` is not supported by the installed CLI command shape.
+- Repo-wide `shopify theme check` was attempted but timed out before returning results; `git diff --check` passed.
+

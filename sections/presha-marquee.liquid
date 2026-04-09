@@ -1,32 +1,50 @@
 {%- comment -%}
-  PRESHA MARQUEE — JS-driven infinite scroll ticker
-  Uses requestAnimationFrame for guaranteed cross-browser scrolling.
+  PRESHA MARQUEE - CSS-driven infinite scroll ticker.
+  The content is rendered twice so translateX(-50%) loops seamlessly.
 {%- endcomment -%}
 
-<div id="preshaMarqueeSection-{{ section.id }}" class="presha-marquee-section" style="background-color: {{ section.settings.bg_color }};">
+{%- assign animation_duration = 1000 | divided_by: section.settings.speed | at_least: 8 -%}
+
+<div
+  id="preshaMarqueeSection-{{ section.id }}"
+  class="presha-marquee-section"
+  style="
+    --presha-marquee-bg: {{ section.settings.bg_color }};
+    --presha-marquee-text: {{ section.settings.text_color }};
+    --presha-marquee-duration: {{ animation_duration }}s;
+  "
+>
   <div class="presha-marquee-clip">
-    <div id="preshaMarqueeTrack-{{ section.id }}" class="presha-marquee-row">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'item' -%}
-          <span class="presha-marquee-item" {{ block.shopify_attributes }}>
-            {{ block.settings.text }}
-          </span>
-          <span class="presha-marquee-bullet" aria-hidden="true">&nbsp;•&nbsp;</span>
-        {%- endif -%}
+    <div class="presha-marquee-track">
+      {%- for copy_index in (1..2) -%}
+        <div class="presha-marquee-row"{% if copy_index == 2 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'item' -%}
+              <span class="presha-marquee-item" {% if copy_index == 1 %}{{ block.shopify_attributes }}{% endif %}>
+                {{ block.settings.text }}
+              </span>
+              <span class="presha-marquee-bullet" aria-hidden="true">&nbsp;&middot;&nbsp;</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
       {%- endfor -%}
     </div>
   </div>
 </div>
 
 <style>
-  /* Full-width section bleed */
+  #shopify-section-{{ section.id }} {
+    overflow: visible;
+  }
+
   .presha-marquee-section {
     position: relative;
     width: 100vw;
     left: 50%;
     margin-left: -50vw;
-    padding: 18px 0;    /* ← EDIT: strip height */
+    padding: 18px 0;
     overflow: hidden;
+    background-color: var(--presha-marquee-bg);
   }
 
   .presha-marquee-clip {
@@ -34,105 +52,72 @@
     width: 100%;
   }
 
-  /* The scrolling row — JS moves this via translateX */
+  .presha-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: presha-marquee-scroll var(--presha-marquee-duration) linear infinite;
+  }
+
   .presha-marquee-row {
     display: inline-flex;
     white-space: nowrap;
     align-items: center;
-    will-change: transform;
+    min-width: max-content;
   }
 
-  /* Text items */
   .presha-marquee-item {
     display: inline-block;
-    font-family: var(--font-body--family, system-ui, sans-serif);
-    font-size: 13px;          /* ← EDIT: text size */
-    font-weight: 700;         /* ← EDIT: text weight */
-    letter-spacing: 0.12em;   /* ← EDIT: letter spacing */
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: {{ section.settings.text_color }};
-    padding: 0 24px;          /* ← EDIT: spacing per phrase */
+    color: var(--presha-marquee-text);
+    padding: 0 24px;
   }
 
   .presha-marquee-bullet {
     display: inline-block;
-    color: {{ section.settings.text_color }};
+    color: var(--presha-marquee-text);
     opacity: 0.4;
     font-size: 10px;
   }
 
+  @keyframes presha-marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (hover: hover) {
+    .presha-marquee-section:hover .presha-marquee-track {
+      animation-play-state: paused;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .presha-marquee-track {
+      animation: none;
+      transform: none;
+    }
+  }
+
   @media screen and (max-width: 749px) {
-    .presha-marquee-section { padding: 14px 0; }
+    .presha-marquee-section {
+      padding: 14px 0;
+    }
+
     .presha-marquee-item {
-      font-size: 12px;   /* ← EDIT: mobile text size */
+      font-size: 12px;
       padding: 0 16px;
     }
   }
 </style>
-
-<script>
-(function() {
-  var speed = {{ section.settings.speed }};   // px per second — higher = faster
-  var sectionEl = document.getElementById('preshaMarqueeSection-{{ section.id }}');
-  var track = document.getElementById('preshaMarqueeTrack-{{ section.id }}');
-
-  if (!sectionEl || !track) return;
-
-  // Clone the row so it loops seamlessly
-  var clone = track.cloneNode(true);
-  clone.removeAttribute('id');
-  clone.setAttribute('aria-hidden', 'true');
-  track.parentNode.appendChild(clone);
-
-  // Wrap both in a flex container so they sit side by side
-  var wrapper = document.createElement('div');
-  wrapper.style.cssText = 'display:flex; width:max-content; will-change:transform;';
-  track.parentNode.insertBefore(wrapper, track);
-  wrapper.appendChild(track);
-  wrapper.appendChild(clone);
-
-  var offset = 0;
-  var trackWidth = 0;
-  var paused = false;
-  var lastTime = null;
-
-  function getTrackWidth() {
-    trackWidth = track.offsetWidth;
-  }
-
-  function step(timestamp) {
-    if (!lastTime) lastTime = timestamp;
-    var delta = (timestamp - lastTime) / 1000; // seconds
-    lastTime = timestamp;
-
-    if (!paused && trackWidth > 0) {
-      offset += speed * delta;
-      if (offset >= trackWidth) {
-        offset -= trackWidth;
-      }
-      wrapper.style.transform = 'translateX(-' + offset + 'px)';
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  // Pause on hover
-  sectionEl.addEventListener('mouseenter', function() { paused = true; });
-  sectionEl.addEventListener('mouseleave', function() { paused = false; lastTime = null; });
-
-  // Respect reduced motion preference
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  // Wait for fonts to load before measuring
-  document.fonts ? document.fonts.ready.then(function() {
-    getTrackWidth();
-    requestAnimationFrame(step);
-  }) : (getTrackWidth(), requestAnimationFrame(step));
-
-})();
-</script>
 
 {% schema %}
 {
