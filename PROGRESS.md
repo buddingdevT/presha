@@ -413,3 +413,21 @@
 - `templates/page.returns-and-refunds.json` - Matching alternate template for Admin/template naming flexibility
 - `ADMIN_TODOS.md` - Added the Returns & Refunds page/template assignment step
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Contact Page UI Refresh
+
+**What was built:**
+- Replaced the generic Horizon contact page structure with a dedicated Presha contact page layout.
+- Added an editorial hero, branded support panel, support-detail cards and a cleaner two-column contact experience aligned with the existing Presha support pages.
+- Built a custom native Shopify contact form with fields for name, email, phone, order number, topic and message, plus styled success and error states.
+- Kept page-body rendering support so optional Shopify Page Editor content can appear in the contact page info column.
+- Added a dedicated `contact-us` page template while also updating the existing `page.contact` template to use the new Presha layout.
+
+**Files changed:**
+- `sections/presha-contact-page.liquid` - New dedicated Presha contact page section
+- `templates/page.contact.json` - Replaced the generic contact template with the Presha contact layout
+- `templates/page.contact-us.json` - Added dedicated contact-us template for the footer URL
+- `ADMIN_TODOS.md` - Added the Contact Us page/template assignment step
+- `PROGRESS.md` - Added this progress entry
