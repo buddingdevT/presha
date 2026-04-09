@@ -114,9 +114,8 @@
 ---
 
 ## Policy Pages (2026-04-09)
-- [ ] **Action Required:** In **Shopify Admin -> Online Store -> Pages**, create a page titled `Privacy Policy` with the handle `/pages/privacy-policy`.
-- [ ] Assign the `privacy-policy` theme template to that page so it uses `templates/page.privacy-policy.json`.
-- [ ] **Action Required:** In **Shopify Admin -> Online Store -> Pages**, create a page titled `Terms of Service` with the handle `/pages/terms-of-service`.
-- [ ] Assign the `terms-of-service` theme template to that page so it uses `templates/page.terms-of-service.json`.
-- [ ] Review and replace the placeholder legal copy before launch. Confirm the final business entity, address, legal contact email, governing law, privacy rights, payment provider language, shipping duties, return rules and dispute process.
-- [ ] Optional: edit the policy section text and clauses in Theme Editor after the page templates are assigned.
+- [x] Privacy Policy URL resolved at `/pages/privacy-policy`.
+- [x] Terms of Service URL resolved at `/pages/terms-of-service`.
+- [x] Policy templates now include Presha Trends specific customer-facing copy.
+- [ ] Optional: edit the policy page body in **Shopify Admin -> Online Store -> Pages**. If page body content exists, the theme will render that Page Editor content; otherwise it renders the curated template copy.
+- [ ] Optional: adjust policy intro, clause blocks, or page-content preference in Theme Editor.

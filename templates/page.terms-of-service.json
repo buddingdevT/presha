@@ -16,63 +16,70 @@
           "type": "clause",
           "settings": {
             "heading": "About these terms",
-            "body": "<p>These placeholder terms explain the basic conditions for using the Presha Trends storefront. By browsing the site or placing an order, customers agree to follow the final terms published here and any policies linked at checkout.</p>"
+            "body": "<p>These Terms of Service apply when you browse, contact, create an account or place an order through Presha Trends. By using the storefront, you agree to these terms and to the policies linked from the site or checkout, including any shipping, returns, refund and privacy terms that apply to your order.</p>"
           }
         },
         "eligibility": {
           "type": "clause",
           "settings": {
             "heading": "Using the store",
-            "body": "<p>Customers should provide accurate information, use the site lawfully and keep account details secure. Presha Trends may refuse, cancel or limit orders where information appears inaccurate, stock is unavailable, fraud is suspected or a transaction cannot be completed.</p>"
+            "body": "<p>You agree to use the Presha Trends storefront lawfully, provide accurate information, keep your account details secure and avoid interfering with the site or checkout. We may refuse, cancel or limit an order where information appears inaccurate, stock is unavailable, fraud or misuse is suspected, payment cannot be authorised or the order cannot be fulfilled safely.</p>"
           }
         },
         "products": {
           "type": "clause",
           "settings": {
             "heading": "Products and authenticity",
-            "body": "<p>Presha Trends focuses on authenticated luxury streetwear, sneakers and collectibles. Product descriptions, images, condition notes, sizing and availability are provided to help customers make informed choices. Final wording should confirm authentication process details, condition grading and any resale marketplace disclaimers.</p>"
+            "body": "<p>Presha Trends curates authenticated luxury streetwear, sneakers, accessories and collectibles. We work to present product descriptions, images, sizing, condition notes and availability clearly so customers can make confident decisions.</p><p>Because resale products may be limited, rare, pre-owned or sourced through specialist channels, availability can change quickly. Third-party brand names, marks and references are used to identify products and remain the property of their respective owners.</p>"
           }
         },
         "orders": {
           "type": "clause",
           "settings": {
             "heading": "Orders and payment",
-            "body": "<p>Orders are subject to acceptance, payment authorization and stock availability. Prices, promotions, taxes, duties, delivery fees and currency display may change. Customers are responsible for reviewing order details before checkout.</p>"
+            "body": "<p>Orders are subject to acceptance, payment authorisation and stock availability. Prices, promotions, duties, taxes, delivery fees and currency displays may change before an order is confirmed. You are responsible for reviewing product, size, condition, shipping and payment details before checkout.</p><p>If a product becomes unavailable after checkout or we cannot complete an order, we may cancel the order and arrange a refund through the original payment method where applicable.</p>"
           }
         },
         "shipping": {
           "type": "clause",
           "settings": {
             "heading": "Shipping and delivery",
-            "body": "<p>Shipping options, timelines, duties and delivery requirements may vary by destination. Delivery estimates are not guarantees unless explicitly stated. The final terms should align with the live Shipping Policy and the carrier services available at launch.</p>"
+            "body": "<p>Shipping options, delivery estimates, duties and import charges may vary by destination. Delivery timelines are estimates unless we state otherwise. Customers are responsible for providing accurate delivery details and for any customs duties, taxes or import requirements that apply to the destination country.</p><p>Risk in a product may pass when the order is handed to the carrier or delivered according to the shipping method used, subject to the consumer rights that apply in your location.</p>"
           }
         },
         "returns": {
           "type": "clause",
           "settings": {
             "heading": "Returns and exchanges",
-            "body": "<p>Return, refund and exchange eligibility depends on the final Returns &amp; Refunds policy, product condition, authentication tags, packaging and any item-specific restrictions. Customers should review that policy before ordering.</p>"
+            "body": "<p>Return, refund and exchange eligibility depends on the product type, condition, authentication tags, packaging, item-specific restrictions and the policy shown on the site at the time of purchase. Customers should review the applicable return and refund information before placing an order.</p><p>Items that are worn, damaged after delivery, altered, missing authentication or security tags, or returned outside the stated process may not be eligible for return or exchange, unless applicable law requires otherwise.</p>"
           }
         },
         "content": {
           "type": "clause",
           "settings": {
             "heading": "Brand content and intellectual property",
-            "body": "<p>The Presha Trends name, visuals, site design, copy, photography and other brand materials are protected and should not be copied or reused without permission. Third-party brand names and marks belong to their respective owners.</p>"
+            "body": "<p>The Presha Trends name, visuals, site design, copy, photography, product presentation and other brand materials are protected and may not be copied, scraped, reproduced, modified or reused without permission.</p><p>Third-party product names, brand names, logos and marks belong to their respective owners. Presha Trends is an independent resale and curation store and is not endorsed by or affiliated with those third-party brands unless clearly stated.</p>"
           }
         },
         "liability": {
           "type": "clause",
           "settings": {
             "heading": "Service changes and liability",
-            "body": "<p>Presha Trends may update the store, product availability, pricing, policies and services over time. The final legal terms should include counsel-reviewed limitations, disclaimers, governing law, dispute resolution and consumer rights language that applies to the business.</p>"
+            "body": "<p>We may update the storefront, product availability, pricing, policies, features and services over time. We aim to keep information accurate, but occasional errors in pricing, availability, images, descriptions or technical operation may occur.</p><p>To the fullest extent permitted by applicable law, Presha Trends is not responsible for indirect losses, delays outside our reasonable control, third-party service interruptions or misuse of the storefront. Nothing in these terms limits any consumer rights that cannot legally be limited.</p>"
+          }
+        },
+        "law": {
+          "type": "clause",
+          "settings": {
+            "heading": "Governing law",
+            "body": "<p>Presha Trends is based in Dubai. These terms are intended to be interpreted under the laws of the United Arab Emirates, subject to any mandatory consumer protection rights that apply in your location.</p><p>If a concern arises, contact us first through the official Presha Trends contact channels so we can try to resolve it directly.</p>"
           }
         },
         "contact": {
           "type": "clause",
           "settings": {
             "heading": "Contact",
-            "body": "<p>Questions about these terms should be sent through the official contact channels listed on the site. Replace this placeholder with the final legal contact email, business name and business address before launch.</p>"
+            "body": "<p>Questions about these terms should be sent through the official contact channels listed on this site. Please include your order number where your question relates to a purchase.</p>"
           }
         }
       },
@@ -85,14 +92,16 @@
         "returns",
         "content",
         "liability",
+        "law",
         "contact"
       ],
       "settings": {
         "eyebrow": "Terms",
         "title": "Terms of Service",
         "updated_date": "Last updated: April 2026",
-        "intro": "<p>These placeholder terms outline the expected rules for shopping with Presha Trends. They are written to be clear, editable and ready for legal review before launch.</p>",
-        "review_note": "<p><strong>Placeholder:</strong> These terms are draft content for editing and legal review. Confirm the final operating entity, business address, governing law, dispute process, payment terms, delivery obligations, resale disclaimers and return rules before publishing.</p>"
+        "prefer_page_content": true,
+        "intro": "<p>These terms set the rules for shopping with Presha Trends, a Dubai-based destination for authenticated luxury streetwear, rare sneakers, accessories and collectibles.</p>",
+        "review_note": ""
       }
     }
   },

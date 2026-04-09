@@ -1,7 +1,13 @@
 {%- comment -%}
   Presha Trends policy page template section.
-  Placeholder policy copy must be reviewed by the owner and legal counsel before launch.
 {%- endcomment -%}
+
+{%- liquid
+  assign use_page_content = false
+  if section.settings.prefer_page_content and page.content != blank
+    assign use_page_content = true
+  endif
+-%}
 
 <section class="presha-policy" aria-labelledby="PreshaPolicyTitle-{{ section.id }}">
   <div class="presha-policy__inner">
@@ -31,21 +37,27 @@
       </div>
     {%- endif -%}
 
-    <div class="presha-policy__content">
-      {%- for block in section.blocks -%}
-        <article class="presha-policy__clause" {{ block.shopify_attributes }}>
-          {%- if block.settings.heading != blank -%}
-            <h2 class="presha-policy__clause-heading">{{ block.settings.heading }}</h2>
-          {%- endif -%}
+    {%- if use_page_content -%}
+      <article class="presha-policy__page-content rte">
+        {{ page.content }}
+      </article>
+    {%- else -%}
+      <div class="presha-policy__content">
+        {%- for block in section.blocks -%}
+          <article class="presha-policy__clause" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h2 class="presha-policy__clause-heading">{{ block.settings.heading }}</h2>
+            {%- endif -%}
 
-          {%- if block.settings.body != blank -%}
-            <div class="presha-policy__clause-body rte">
-              {{ block.settings.body }}
-            </div>
-          {%- endif -%}
-        </article>
-      {%- endfor -%}
-    </div>
+            {%- if block.settings.body != blank -%}
+              <div class="presha-policy__clause-body rte">
+                {{ block.settings.body }}
+              </div>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -144,21 +156,51 @@
     line-height: 1.7;
   }
 
+  .presha-policy__page-content {
+    padding: 44px 0 0;
+    border-top: 1px solid #ddd9d3;
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .presha-policy__page-content h2,
+  .presha-policy__page-content h3 {
+    margin: 36px 0 14px;
+    color: #000000;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  .presha-policy__page-content h2 {
+    font-size: 22px;
+  }
+
+  .presha-policy__page-content h3 {
+    font-size: 18px;
+  }
+
   .presha-policy__clause-body :is(p, ul, ol),
   .presha-policy__intro :is(p, ul, ol),
-  .presha-policy__notice :is(p, ul, ol) {
+  .presha-policy__notice :is(p, ul, ol),
+  .presha-policy__page-content :is(p, ul, ol) {
     margin-top: 0;
   }
 
   .presha-policy__clause-body :is(p, ul, ol):last-child,
   .presha-policy__intro :is(p, ul, ol):last-child,
-  .presha-policy__notice :is(p, ul, ol):last-child {
+  .presha-policy__notice :is(p, ul, ol):last-child,
+  .presha-policy__page-content :is(p, ul, ol):last-child {
     margin-bottom: 0;
   }
 
   .presha-policy__clause-body a,
   .presha-policy__intro a,
-  .presha-policy__notice a {
+  .presha-policy__notice a,
+  .presha-policy__page-content a {
     color: #6d001a;
     text-underline-offset: 0.18em;
   }
@@ -196,6 +238,10 @@
 
     .presha-policy__clause-heading {
       font-size: 20px;
+    }
+
+    .presha-policy__page-content {
+      padding-top: 36px;
     }
   }
 
@@ -237,16 +283,21 @@
       "default": "Last updated: April 2026"
     },
     {
+      "type": "checkbox",
+      "id": "prefer_page_content",
+      "label": "Use Shopify page editor content when available",
+      "default": true
+    },
+    {
       "type": "richtext",
       "id": "intro",
       "label": "Intro copy",
-      "default": "<p>This placeholder policy explains how Presha Trends approaches this topic. It should be reviewed and edited by the store owner before launch.</p>"
+      "default": "<p>Presha Trends sets out this policy so customers can shop with confidence.</p>"
     },
     {
       "type": "richtext",
       "id": "review_note",
-      "label": "Review note",
-      "default": "<p><strong>Placeholder:</strong> This copy is provided for editing and legal review. Confirm the final wording, operating entity, contact details, jurisdictions, payment providers, shipping terms and dispute process before publishing.</p>"
+      "label": "Optional notice"
     }
   ],
   "blocks": [
@@ -264,7 +315,7 @@
           "type": "richtext",
           "id": "body",
           "label": "Body",
-          "default": "<p>Add policy copy here. Keep it specific to Presha Trends and confirm the final wording before publishing.</p>"
+          "default": "<p>Add policy copy here.</p>"
         }
       ]
     }

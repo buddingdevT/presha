@@ -294,21 +294,43 @@
 
 **What was built:**
 - Added a reusable `presha-policy-page` section for editorial policy/legal pages, using Soft Ivory background, black body text, burgundy overline/accent treatment, and Gilroy-first body typography.
-- Added editable placeholder `Privacy Policy` content via the `page.privacy-policy` alternate template.
-- Added editable placeholder `Terms of Service` content via the `page.terms-of-service` alternate template.
+- Added editable `Privacy Policy` content via the `page.privacy-policy` alternate template.
+- Added editable `Terms of Service` content via the `page.terms-of-service` alternate template.
 - Updated footer Privacy Policy and Terms of Service links to point to `/pages/privacy-policy` and `/pages/terms-of-service`.
 - Liquid-commented the `Track Order` footer link under Support and the `Careers` footer link under Company so they do not render for now.
 - Updated `ADMIN_TODOS.md` with required Shopify Admin page creation and template assignment steps.
 
 **Files changed:**
 - `sections/presha-policy-page.liquid` - New reusable editable policy page section
-- `templates/page.privacy-policy.json` - New Privacy Policy alternate page template with placeholder copy
-- `templates/page.terms-of-service.json` - New Terms of Service alternate page template with placeholder copy
+- `templates/page.privacy-policy.json` - New Privacy Policy alternate page template
+- `templates/page.terms-of-service.json` - New Terms of Service alternate page template
 - `sections/presha-footer.liquid` - Footer legal links updated; Track Order and Careers commented out
 - `ADMIN_TODOS.md` - Added required Admin steps for creating policy pages
 - `PROGRESS.md` - Added this progress entry
 
 **Notes:**
 - Theme code cannot create Shopify Admin page records by itself. The owner must create the two pages and assign the new templates before the footer links resolve.
-- Placeholder legal copy should be reviewed and replaced before launch.
+- Policy copy was later rewritten as Presha-specific customer-facing copy.
 - File-scoped `shopify theme check --path` runs timed out before returning results; local JSON parsing and `git diff --check` passed.
+
+---
+
+## 2026-04-09 - Policy Pages Final Copy and Page Editor Support
+
+**What was built:**
+- Pulled the latest GitHub state and Shopify Theme Editor state before making changes.
+- Updated the reusable `presha-policy-page` section so it can render Shopify Admin page body content when it exists, while keeping the curated theme-template clauses as the fallback.
+- Removed storefront-facing temporary-copy and legal-review messaging from the policy section defaults and policy templates.
+- Rewrote the Privacy Policy copy for Presha Trends as a Dubai-based luxury streetwear, sneaker, accessories and collectibles storefront.
+- Rewrote the Terms of Service copy for Presha Trends with resale/authentication, order, delivery, returns, IP and UAE governing-law language.
+- Updated `ADMIN_TODOS.md` to mark the Privacy Policy and Terms of Service URLs as resolved.
+
+**Files changed:**
+- `sections/presha-policy-page.liquid` - Added page-editor content rendering support and cleaned policy section defaults
+- `templates/page.privacy-policy.json` - Replaced generic copy with Presha-specific privacy policy text
+- `templates/page.terms-of-service.json` - Replaced generic copy with Presha-specific terms text
+- `ADMIN_TODOS.md` - Marked policy URLs resolved and documented the Page Editor editing path
+- `PROGRESS.md` - Added this progress entry
+
+**Notes:**
+- If the Shopify page body is blank, the template renders the built-in policy clauses. If the admin adds body content in the page editor, that page body takes priority.

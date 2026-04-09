@@ -16,56 +16,56 @@
           "type": "clause",
           "settings": {
             "heading": "Information we collect",
-            "body": "<p>We may collect information you provide when you browse, place an order, create an account, contact us, join the newsletter or interact with Presha Trends. This may include your name, email address, phone number, shipping and billing address, order details, support messages and account preferences.</p>"
+            "body": "<p>We collect the information needed to run a trusted luxury resale experience. This may include your name, email address, phone number, shipping and billing address, account details, order history, size or product preferences, messages you send us, newsletter signups and information connected to authentication, delivery and customer support.</p><p>When you browse the store, we may also receive technical information such as device type, browser type, pages viewed, referral source, approximate location, cookies, analytics identifiers and checkout activity.</p>"
           }
         },
         "usage": {
           "type": "clause",
           "settings": {
             "heading": "How we use information",
-            "body": "<p>We use information to operate the store, process orders, arrange delivery, provide customer support, improve the shopping experience, prevent fraud, send service updates and, where permitted, share brand and product updates you can opt out of.</p>"
+            "body": "<p>We use customer information to process orders, confirm payments, arrange shipping, provide authentication-related support, respond to questions, manage accounts, prevent fraud, protect the store, improve the shopping experience and keep customers informed about orders or service updates.</p><p>Where permitted, we may also use your information to share Presha Trends product drops, editorial updates, community news and offers. You can opt out of marketing emails using the unsubscribe link in those messages.</p>"
           }
         },
         "payments": {
           "type": "clause",
           "settings": {
-            "heading": "Payments and service providers",
-            "body": "<p>Payments, delivery, analytics, email, fraud prevention and site operations may be handled with trusted service providers. These providers should only use information as needed to provide their services to Presha Trends and our customers.</p>"
+            "heading": "Payments, delivery and partners",
+            "body": "<p>Presha Trends uses Shopify and selected service providers to operate the storefront, process payments, prevent fraud, send emails, measure performance and deliver orders. Payment details are handled through secure payment providers and are not used by Presha Trends for any purpose beyond completing and supporting your transaction.</p><p>We may share the information needed for couriers, payment processors, analytics providers, email platforms, fraud-prevention tools, professional advisers and technical partners to provide their services to us.</p>"
           }
         },
         "cookies": {
           "type": "clause",
           "settings": {
             "heading": "Cookies and analytics",
-            "body": "<p>Our storefront may use cookies and similar technologies to keep the site working, remember preferences, understand store performance and support marketing measurement. You can manage cookie settings through your browser, though some store features may not work correctly if cookies are disabled.</p>"
+            "body": "<p>Our storefront uses cookies and similar technologies to keep the site working, remember preferences, support checkout, understand store performance and measure marketing activity. You can manage cookies through your browser settings, although some parts of the store may not work correctly if essential cookies are disabled.</p>"
           }
         },
         "international": {
           "type": "clause",
           "settings": {
-            "heading": "International orders",
-            "body": "<p>Presha Trends is based in Dubai and may support customers in multiple regions. Information may be processed in the countries where our store, partners and service providers operate. The final policy should confirm the relevant operating entity and legal basis for any required international transfer language.</p>"
+            "heading": "Dubai base and international processing",
+            "body": "<p>Presha Trends is based in Dubai and serves customers who may shop from the United Arab Emirates and other regions. Your information may be processed in the UAE and in other countries where Shopify, our payment providers, couriers and technical partners operate.</p><p>When information is processed outside your country, we take reasonable steps to work with providers that use appropriate safeguards for the information they handle.</p>"
           }
         },
         "choices": {
           "type": "clause",
           "settings": {
-            "heading": "Your choices",
-            "body": "<p>You can contact us to ask about your information, update your account details or request help with privacy questions. Marketing emails include an unsubscribe option. The final policy should confirm any region-specific privacy rights that apply to Presha Trends customers.</p>"
+            "heading": "Your choices and rights",
+            "body": "<p>You can contact us through the official Presha Trends contact channels to ask about your personal information, request a correction, update your account details, unsubscribe from marketing or raise a privacy concern.</p><p>Depending on where you live, you may also have rights to access, delete, restrict or object to certain uses of your personal information. We will respond to privacy requests in line with applicable data-protection laws and reasonable identity-verification steps.</p>"
           }
         },
         "security": {
           "type": "clause",
           "settings": {
             "heading": "Security and retention",
-            "body": "<p>We use reasonable safeguards designed to protect customer information. We keep information for as long as needed to operate the store, complete transactions, meet legal or accounting requirements, resolve disputes and protect the business.</p>"
+            "body": "<p>We use reasonable technical and organisational safeguards designed to protect customer information. No online service can guarantee absolute security, but we work to keep the storefront, checkout and support process protected.</p><p>We keep information for as long as needed to operate the store, complete transactions, support customers, meet legal, tax and accounting requirements, resolve disputes and protect Presha Trends from misuse or fraud.</p>"
           }
         },
         "contact": {
           "type": "clause",
           "settings": {
             "heading": "Contact",
-            "body": "<p>For privacy questions, contact Presha Trends through the official contact channels listed on the site. Replace this placeholder with the final legal contact email, business name and business address before launch.</p>"
+            "body": "<p>For privacy questions, contact Presha Trends through the official contact channels listed on this site. Please include enough detail for us to understand your request and verify the account or order involved.</p>"
           }
         }
       },
@@ -83,8 +83,9 @@
         "eyebrow": "Privacy",
         "title": "Privacy Policy",
         "updated_date": "Last updated: April 2026",
-        "intro": "<p>Presha Trends respects customer trust. This placeholder policy explains the information we may collect, how it may be used and the choices customers may have when shopping with us.</p>",
-        "review_note": "<p><strong>Placeholder:</strong> This privacy policy is draft content for editing and legal review. Confirm the final operating entity, legal contact details, Shopify and payment provider language, regional privacy rights and cookie requirements before publishing.</p>"
+        "prefer_page_content": true,
+        "intro": "<p>Presha Trends respects the trust behind every order, enquiry and product drop. This policy explains how we collect, use and protect customer information when you shop our Dubai-based luxury streetwear, sneaker and collectibles store.</p>",
+        "review_note": ""
       }
     }
   },
