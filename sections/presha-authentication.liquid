@@ -70,10 +70,20 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    padding: 80px 20px;
-    font-family: var(--font-body--family, system-ui, -apple-system, sans-serif);
-    color: #ffffff;
+    padding: 96px 20px;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, -apple-system, sans-serif);
+    color: #f5f1ec;
     overflow: hidden;
+    position: relative;
+  }
+  .presha-auth::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0) 42%),
+      linear-gradient(180deg, rgba(245, 241, 236, 0.04) 0%, rgba(245, 241, 236, 0) 100%);
+    pointer-events: none;
   }
   .presha-auth-container {
     max-width: 1200px;
@@ -82,11 +92,13 @@
     display: flex;
     align-items: center;
     gap: 60px;
+    position: relative;
+    z-index: 1;
   }
 
   /* Left Column */
   .presha-auth-left {
-    flex: 1; /* 50% width */
+    flex: 1;
     display: flex;
     justify-content: flex-start;
   }
@@ -95,44 +107,52 @@
     width: 100%;
     max-width: 500px;
     aspect-ratio: 4 / 5;
-    background-color: #111;
+    background-color: #0a0a0a;
+    border-radius: 8px;
+    overflow: visible;
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.28);
   }
   .presha-auth-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 8px;
   }
 
   /* Overlay Badge */
   .presha-auth-badge {
     position: absolute;
-    bottom: -30px;
-    right: -30px;
+    right: -22px;
+    bottom: 38px;
     background-color: #6d001a;
-    padding: 30px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    min-width: 200px;
-    min-height: 200px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.36);
+    width: 168px;
+    height: 168px;
+    border-radius: 2px;
+    transform: rotate(12deg);
   }
   .presha-auth-badge-icon {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     color: #ffffff;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    transform: rotate(-12deg);
   }
   .presha-auth-badge-text {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.14em;
     color: #ffffff;
     text-transform: uppercase;
-    line-height: 1.4;
+    line-height: 1.45;
+    transform: rotate(-12deg);
   }
 
   /* Right Column */
@@ -146,69 +166,85 @@
   .presha-auth-eyebrow {
     font-size: 11px;
     color: #6d001a;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     display: block;
   }
   .presha-auth-heading {
-    margin: 0 0 24px 0;
-    font-family: var(--font-heading--family, 'Impact', system-ui, sans-serif);
-    font-size: clamp(36px, 4vw, 56px);
+    margin: 0 0 22px 0;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', system-ui, sans-serif);
+    font-size: clamp(34px, 4.4vw, 58px);
     font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    color: #ffffff;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: #f5f1ec;
     text-transform: uppercase;
+    text-wrap: balance;
   }
   .presha-auth-desc {
     font-size: 16px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    color: rgba(245, 241, 236, 0.76);
     margin-bottom: 40px;
     max-width: 580px;
+  }
+  .presha-auth-desc p {
+    margin: 0;
   }
 
   /* Features */
   .presha-auth-features {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 0;
     margin-bottom: 48px;
+    border-top: 1px solid rgba(245, 241, 236, 0.12);
   }
   .presha-auth-feature {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 18px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid rgba(245, 241, 236, 0.12);
   }
   .presha-auth-feature-icon {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
+    width: 42px;
+    height: 42px;
     color: #6d001a;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(109, 0, 26, 0.42);
+    border-radius: 9999px;
+    background: rgba(109, 0, 26, 0.12);
+  }
+  .presha-auth-feature-icon svg {
+    width: 19px;
+    height: 19px;
   }
   .presha-auth-feature-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
+    padding-top: 2px;
   }
   .presha-auth-feature-title {
     margin: 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    color: #ffffff;
+    letter-spacing: 0.12em;
+    color: #f5f1ec;
     text-transform: uppercase;
+    line-height: 1.35;
   }
   .presha-auth-feature-subtext {
     margin: 0;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
-    line-height: 1.5;
+    font-size: 14px;
+    color: rgba(245, 241, 236, 0.62);
+    line-height: 1.6;
   }
 
   /* Button */
@@ -219,16 +255,19 @@
     background-color: #6d001a;
     color: #ffffff;
     text-decoration: none;
-    padding: 18px 32px;
+    min-height: 50px;
+    padding: 14px 28px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    border-radius: 9999px;
+    transition: background-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
   }
   .presha-auth-btn:hover {
-    background-color: #8a0022;
+    background-color: #580015;
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(109, 0, 26, 0.28);
   }
 
   /* Responsive Constraints */
@@ -240,18 +279,18 @@
     }
     .presha-auth-left {
       width: 100%;
-      padding-right: 30px; /* Leave space for badge overhang */
+      padding-right: 22px;
     }
     .presha-auth-image-wrap {
       max-width: 500px;
       aspect-ratio: 4 / 5;
     }
     .presha-auth-badge {
-      right: -20px;
-      bottom: -20px;
-      min-width: 160px;
-      min-height: 160px;
-      padding: 20px;
+      right: -14px;
+      bottom: 22px;
+      width: 148px;
+      height: 148px;
+      padding: 18px;
     }
     .presha-auth-right {
       width: 100%;
@@ -260,18 +299,50 @@
 
   @media screen and (max-width: 749px) {
     .presha-auth {
-      padding: 60px 20px 80px;
+      padding: 72px 20px 80px;
+    }
+    .presha-auth-container {
+      gap: 44px;
     }
     .presha-auth-badge {
-      right: 0;
-      bottom: 0;
-      transform: translate(10px, 10px);
-      min-width: 140px;
-      min-height: 140px;
+      right: 12px;
+      bottom: 12px;
+      width: 126px;
+      height: 126px;
+      padding: 14px;
+      transform: rotate(10deg);
     }
     .presha-auth-badge-icon {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
+    }
+    .presha-auth-badge-text {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+    }
+    .presha-auth-heading {
+      font-size: 34px;
+    }
+    .presha-auth-desc {
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+    .presha-auth-features {
+      margin-bottom: 36px;
+    }
+    .presha-auth-feature {
+      gap: 14px;
+      padding: 16px 0 18px;
+    }
+    .presha-auth-feature-icon {
+      width: 38px;
+      height: 38px;
+    }
+    .presha-auth-feature-title {
+      font-size: 12px;
+    }
+    .presha-auth-feature-subtext {
+      font-size: 13px;
     }
     .presha-auth-btn {
       width: 100%;

@@ -361,3 +361,19 @@
 - `templates/page.shipping-policy.json` - New Shipping Policy page template with curated fallback copy
 - `ADMIN_TODOS.md` - Added Shipping Policy page/template assignment step
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Authentication UI Refresh
+
+**What was built:**
+- Refined the Presha Authentication section UI to better match the design system without changing the section structure or settings model.
+- Replaced the off-brand heavy heading treatment with a Gilroy-first editorial heading stack.
+- Improved the dark section presentation with warmer ivory text, a subtle surface overlay and stronger spacing rhythm.
+- Reworked the guarantee badge into a sharper premium accent block and tightened the image presentation.
+- Redesigned the feature list into cleaner divided rows with framed burgundy icons and more readable supporting copy.
+- Updated the CTA to a pill button with the correct hover color and stronger polish on mobile and desktop.
+
+**Files changed:**
+- `sections/presha-authentication.liquid` - Authentication section visual refresh
+- `PROGRESS.md` - Added this progress entry
