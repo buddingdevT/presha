@@ -334,3 +334,15 @@
 
 **Notes:**
 - If the Shopify page body is blank, the template renders the built-in policy clauses. If the admin adds body content in the page editor, that page body takes priority.
+
+---
+
+## 2026-04-09 - Policy Pages Contact Email
+
+**What was updated:**
+- Added `preshatrends@gmail.com` as the customer contact email in the Privacy Policy and Terms of Service template copy.
+
+**Files changed:**
+- `templates/page.privacy-policy.json` - Privacy choices and contact clauses now use `preshatrends@gmail.com`
+- `templates/page.terms-of-service.json` - Terms governing-law and contact clauses now use `preshatrends@gmail.com`
+- `PROGRESS.md` - Added this progress entry

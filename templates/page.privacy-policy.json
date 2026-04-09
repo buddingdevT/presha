@@ -51,7 +51,7 @@
           "type": "clause",
           "settings": {
             "heading": "Your choices and rights",
-            "body": "<p>You can contact us through the official Presha Trends contact channels to ask about your personal information, request a correction, update your account details, unsubscribe from marketing or raise a privacy concern.</p><p>Depending on where you live, you may also have rights to access, delete, restrict or object to certain uses of your personal information. We will respond to privacy requests in line with applicable data-protection laws and reasonable identity-verification steps.</p>"
+            "body": "<p>You can contact us at preshatrends@gmail.com to ask about your personal information, request a correction, update your account details, unsubscribe from marketing or raise a privacy concern.</p><p>Depending on where you live, you may also have rights to access, delete, restrict or object to certain uses of your personal information. We will respond to privacy requests in line with applicable data-protection laws and reasonable identity-verification steps.</p>"
           }
         },
         "security": {
@@ -65,7 +65,7 @@
           "type": "clause",
           "settings": {
             "heading": "Contact",
-            "body": "<p>For privacy questions, contact Presha Trends through the official contact channels listed on this site. Please include enough detail for us to understand your request and verify the account or order involved.</p>"
+            "body": "<p>For privacy questions, contact Presha Trends at preshatrends@gmail.com. Please include enough detail for us to understand your request and verify the account or order involved.</p>"
           }
         }
       },
