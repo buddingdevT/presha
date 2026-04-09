@@ -256,6 +256,7 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 - [ ] Cart Page
 - [ ] Account Page
 - [x] Authentication Page (layout approved; revisit color/design choices later)
+- [x] Our Story Page (approved for now; future edits/design refinements expected)
 - [ ] (more TBD)
 
 ## Product & Shopify Setup Notes

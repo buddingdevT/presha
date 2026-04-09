@@ -441,6 +441,8 @@
 - Built a branded editorial layout with a dark hero, positioning panel, brand-story narrative section, value cards, quote block and closing CTA.
 - Kept the page aligned with the Presha design system using Soft Ivory backgrounds, black-dominant typography, burgundy accents, Glamore display moments and Gilroy-led body/UI treatment.
 - Wired the closing CTA to the Contact Us page so the story page supports both brand positioning and conversion.
+- Owner approved the page for now; future content and design refinements are still expected later.
+- Owner approved the page for now; future content and design refinements are still expected later.
 
 **Files changed:**
 - `sections/presha-our-story-page.liquid` - New dedicated Presha story page section
