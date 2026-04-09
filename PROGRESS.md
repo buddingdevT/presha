@@ -248,3 +248,20 @@
 - Scrolling Marquee remains the highest-priority functional issue.
 - `presha-gifts.liquid`, `presha-email-signup.liquid`, `presha-trending-now.liquid`, and `presha-footer.liquid` should be treated as built sections with future refinement expected.
 
+---
+
+## 2026-04-09 — Header Nav Hover Underline
+
+**What was built:**
+- Added a design-system aligned hover state for top-level desktop nav links using burgundy `#6D001A` on solid/scrolled header states.
+- Added an animated underline that fills left-to-right on hover, keyboard focus, active page links, and open mega-menu links.
+- Preserved contrast over the transparent hero header by switching the underline/text hover treatment to white until the mega menu opens.
+- Added a subtle inset separator on the mega-menu panel and strengthened the header row divider while a mega menu is active.
+- Added `prefers-reduced-motion` handling for the underline/color micro-interaction.
+
+**Files changed:**
+- `sections/header.liquid` — Header nav hover, active, underline, and mega-menu separation CSS
+
+**Notes:**
+- No Shopify Admin action required.
+
