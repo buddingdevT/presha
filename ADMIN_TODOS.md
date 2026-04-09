@@ -135,3 +135,9 @@
 ## Contact Page (2026-04-09)
 - [ ] Create or confirm the page at `/pages/contact-us` and assign the `contact-us` theme template for the new Presha contact layout.
 - [ ] Optional: add extra editorial/support copy in the Shopify page body. If page body content exists, it will render in the contact page info column.
+
+---
+
+## Our Story Page (2026-04-09)
+- [ ] Create or confirm the page at `/pages/our-story` and assign the `our-story` theme template.
+- [ ] Optional: refine the story copy, value cards or CTA in Theme Editor after the template is assigned.

@@ -431,3 +431,19 @@
 - `templates/page.contact-us.json` - Added dedicated contact-us template for the footer URL
 - `ADMIN_TODOS.md` - Added the Contact Us page/template assignment step
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Our Story Page
+
+**What was built:**
+- Added a dedicated Presha Our Story page section and template for the footer Company link at `/pages/our-story`.
+- Built a branded editorial layout with a dark hero, positioning panel, brand-story narrative section, value cards, quote block and closing CTA.
+- Kept the page aligned with the Presha design system using Soft Ivory backgrounds, black-dominant typography, burgundy accents, Glamore display moments and Gilroy-led body/UI treatment.
+- Wired the closing CTA to the Contact Us page so the story page supports both brand positioning and conversion.
+
+**Files changed:**
+- `sections/presha-our-story-page.liquid` - New dedicated Presha story page section
+- `templates/page.our-story.json` - New Our Story page template for the footer URL
+- `ADMIN_TODOS.md` - Added the Our Story page/template assignment step
+- `PROGRESS.md` - Added this progress entry

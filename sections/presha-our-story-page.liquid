@@ -1,0 +1,545 @@
+<section class="presha-story-page" aria-labelledby="PreshaStoryTitle-{{ section.id }}">
+  <div class="presha-story-page__hero">
+    <div class="presha-story-page__hero-inner">
+      <div class="presha-story-page__hero-copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="presha-story-page__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 id="PreshaStoryTitle-{{ section.id }}" class="presha-story-page__title">
+          {{ section.settings.title | default: page.title }}
+        </h1>
+
+        {%- if section.settings.intro != blank -%}
+          <div class="presha-story-page__intro rte">
+            {{ section.settings.intro }}
+          </div>
+        {%- endif -%}
+
+        <div class="presha-story-page__metrics">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'metric' -%}
+              <article class="presha-story-page__metric" {{ block.shopify_attributes }}>
+                <p class="presha-story-page__metric-value">{{ block.settings.value }}</p>
+                <h2 class="presha-story-page__metric-title">{{ block.settings.title }}</h2>
+                <p class="presha-story-page__metric-text">{{ block.settings.text }}</p>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="presha-story-page__hero-panel">
+        <p class="presha-story-page__panel-label">{{ section.settings.panel_label }}</p>
+        <h2 class="presha-story-page__panel-title">{{ section.settings.panel_title }}</h2>
+        <div class="presha-story-page__panel-text rte">
+          {{ section.settings.panel_text }}
+        </div>
+        <div class="presha-story-page__panel-pills">
+          <span class="presha-story-page__panel-pill">{{ section.settings.panel_pill_one }}</span>
+          <span class="presha-story-page__panel-pill">{{ section.settings.panel_pill_two }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="presha-story-page__chapter">
+    <div class="presha-story-page__chapter-inner">
+      <div class="presha-story-page__chapter-copy">
+        <p class="presha-story-page__section-eyebrow">{{ section.settings.chapter_eyebrow }}</p>
+        <h2 class="presha-story-page__section-title">{{ section.settings.chapter_title }}</h2>
+        <div class="presha-story-page__body rte">
+          {{ section.settings.chapter_text }}
+        </div>
+      </div>
+
+      <div class="presha-story-page__chapter-cards">
+        <article class="presha-story-page__note">
+          <p class="presha-story-page__note-label">{{ section.settings.note_label_one }}</p>
+          <h3 class="presha-story-page__note-title">{{ section.settings.note_title_one }}</h3>
+          <p class="presha-story-page__note-text">{{ section.settings.note_text_one }}</p>
+        </article>
+
+        <article class="presha-story-page__note">
+          <p class="presha-story-page__note-label">{{ section.settings.note_label_two }}</p>
+          <h3 class="presha-story-page__note-title">{{ section.settings.note_title_two }}</h3>
+          <p class="presha-story-page__note-text">{{ section.settings.note_text_two }}</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="presha-story-page__values">
+    <div class="presha-story-page__values-inner">
+      <div class="presha-story-page__values-heading">
+        <p class="presha-story-page__section-eyebrow">{{ section.settings.values_eyebrow }}</p>
+        <h2 class="presha-story-page__section-title">{{ section.settings.values_title }}</h2>
+      </div>
+
+      <div class="presha-story-page__value-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'value' -%}
+            <article class="presha-story-page__value-card" {{ block.shopify_attributes }}>
+              <p class="presha-story-page__value-label">{{ block.settings.label }}</p>
+              <h3 class="presha-story-page__value-title">{{ block.settings.title }}</h3>
+              <div class="presha-story-page__value-text rte">
+                {{ block.settings.text }}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="presha-story-page__quote">
+    <div class="presha-story-page__quote-inner">
+      <p class="presha-story-page__quote-mark">"</p>
+      <div class="presha-story-page__quote-text rte">
+        {{ section.settings.quote_text }}
+      </div>
+      <p class="presha-story-page__quote-credit">{{ section.settings.quote_credit }}</p>
+    </div>
+  </div>
+
+  <div class="presha-story-page__cta">
+    <div class="presha-story-page__cta-inner">
+      <p class="presha-story-page__section-eyebrow">{{ section.settings.cta_eyebrow }}</p>
+      <h2 class="presha-story-page__section-title">{{ section.settings.cta_title }}</h2>
+      <div class="presha-story-page__body rte">
+        {{ section.settings.cta_text }}
+      </div>
+      <a {% if section.settings.cta_link != blank %}href="{{ section.settings.cta_link }}"{% endif %} class="presha-story-page__cta-link">
+        {{ section.settings.cta_label }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-story-page {
+    background: #f5f1ec;
+    color: #000000;
+  }
+
+  .presha-story-page__hero,
+  .presha-story-page__chapter,
+  .presha-story-page__values,
+  .presha-story-page__quote,
+  .presha-story-page__cta {
+    width: 100%;
+  }
+
+  .presha-story-page__hero {
+    padding: 92px 0 56px;
+    background:
+      linear-gradient(180deg, rgba(245, 241, 236, 0.05) 0%, rgba(245, 241, 236, 0) 100%),
+      #0a0a0a;
+    color: #f5f1ec;
+  }
+
+  .presha-story-page__chapter,
+  .presha-story-page__values,
+  .presha-story-page__quote,
+  .presha-story-page__cta {
+    padding: 64px 0;
+  }
+
+  .presha-story-page__hero-inner,
+  .presha-story-page__chapter-inner,
+  .presha-story-page__values-inner,
+  .presha-story-page__quote-inner,
+  .presha-story-page__cta-inner {
+    width: min(100% - 32px, 1200px);
+    margin: 0 auto;
+  }
+
+  .presha-story-page__hero-inner,
+  .presha-story-page__chapter-inner {
+    display: grid;
+    gap: 24px;
+  }
+
+  .presha-story-page__eyebrow,
+  .presha-story-page__section-eyebrow,
+  .presha-story-page__panel-label,
+  .presha-story-page__value-label,
+  .presha-story-page__note-label {
+    margin: 0 0 12px;
+    color: #6d001a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .presha-story-page__title {
+    margin: 0;
+    font-family: 'The Glamore', var(--font-heading--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .presha-story-page__section-title,
+  .presha-story-page__panel-title {
+    margin: 0;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  .presha-story-page__intro,
+  .presha-story-page__body,
+  .presha-story-page__panel-text,
+  .presha-story-page__metric-text,
+  .presha-story-page__note-text,
+  .presha-story-page__value-text,
+  .presha-story-page__quote-text {
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .presha-story-page__intro {
+    margin-top: 24px;
+    color: rgba(245, 241, 236, 0.76);
+    max-width: 42rem;
+  }
+
+  .presha-story-page__metrics {
+    display: grid;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .presha-story-page__metric,
+  .presha-story-page__hero-panel {
+    border: 1px solid rgba(245, 241, 236, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .presha-story-page__metric {
+    padding: 20px 18px;
+  }
+
+  .presha-story-page__metric-value {
+    margin: 0 0 10px;
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .presha-story-page__metric-title {
+    margin: 0 0 8px;
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .presha-story-page__metric-text {
+    margin: 0;
+    color: rgba(245, 241, 236, 0.64);
+    font-size: 14px;
+  }
+
+  .presha-story-page__hero-panel {
+    padding: 24px;
+  }
+
+  .presha-story-page__panel-text {
+    margin-top: 14px;
+    color: rgba(245, 241, 236, 0.74);
+  }
+
+  .presha-story-page__panel-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .presha-story-page__panel-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    background: rgba(109, 0, 26, 0.16);
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .presha-story-page__body,
+  .presha-story-page__note-text,
+  .presha-story-page__value-text,
+  .presha-story-page__quote-text {
+    color: #4a4a4a;
+  }
+
+  .presha-story-page__chapter-cards,
+  .presha-story-page__value-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .presha-story-page__note,
+  .presha-story-page__value-card {
+    padding: 22px 20px;
+    border: 1px solid #ddd9d3;
+    border-radius: 8px;
+    background: #ffffff;
+  }
+
+  .presha-story-page__note-title,
+  .presha-story-page__value-title {
+    margin: 0;
+    color: #000000;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .presha-story-page__note-text {
+    margin: 10px 0 0;
+  }
+
+  .presha-story-page__value-text {
+    margin-top: 12px;
+  }
+
+  .presha-story-page__quote {
+    background: #ffffff;
+    border-top: 1px solid #ddd9d3;
+    border-bottom: 1px solid #ddd9d3;
+  }
+
+  .presha-story-page__quote-inner {
+    max-width: 920px;
+  }
+
+  .presha-story-page__quote-mark {
+    margin: 0 0 10px;
+    color: #6d001a;
+    font-family: 'The Glamore', var(--font-heading--family, 'Cormorant Garamond', Georgia, serif);
+    font-size: 72px;
+    line-height: 0.8;
+  }
+
+  .presha-story-page__quote-text {
+    font-size: 24px;
+    line-height: 1.45;
+    color: #000000;
+  }
+
+  .presha-story-page__quote-credit {
+    margin: 18px 0 0;
+    color: #6d001a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .presha-story-page__cta {
+    background: #f5f1ec;
+  }
+
+  .presha-story-page__cta-inner {
+    max-width: 920px;
+    text-align: left;
+  }
+
+  .presha-story-page__cta-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 24px;
+    padding: 12px 26px;
+    border-radius: 9999px;
+    background: #6d001a;
+    color: #ffffff;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.22s ease, transform 0.22s ease;
+  }
+
+  .presha-story-page__cta-link:hover {
+    background: #580015;
+    transform: translateY(-1px);
+  }
+
+  .presha-story-page__intro :is(p, ul, ol),
+  .presha-story-page__body :is(p, ul, ol),
+  .presha-story-page__panel-text :is(p, ul, ol),
+  .presha-story-page__value-text :is(p, ul, ol),
+  .presha-story-page__quote-text :is(p, ul, ol) {
+    margin-top: 0;
+  }
+
+  .presha-story-page__intro :is(p, ul, ol):last-child,
+  .presha-story-page__body :is(p, ul, ol):last-child,
+  .presha-story-page__panel-text :is(p, ul, ol):last-child,
+  .presha-story-page__value-text :is(p, ul, ol):last-child,
+  .presha-story-page__quote-text :is(p, ul, ol):last-child {
+    margin-bottom: 0;
+  }
+
+  .presha-story-page__intro a,
+  .presha-story-page__body a,
+  .presha-story-page__panel-text a,
+  .presha-story-page__value-text a,
+  .presha-story-page__quote-text a {
+    color: #6d001a;
+    text-underline-offset: 0.18em;
+  }
+
+  @media screen and (min-width: 750px) {
+    .presha-story-page__hero {
+      padding: 108px 0 64px;
+    }
+
+    .presha-story-page__chapter,
+    .presha-story-page__values,
+    .presha-story-page__quote,
+    .presha-story-page__cta {
+      padding: 80px 0;
+    }
+
+    .presha-story-page__title {
+      font-size: 68px;
+    }
+
+    .presha-story-page__metrics {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .presha-story-page__value-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .presha-story-page__section-title,
+    .presha-story-page__panel-title {
+      font-size: 36px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .presha-story-page__hero-inner {
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      align-items: start;
+      gap: 40px;
+    }
+
+    .presha-story-page__chapter-inner {
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .presha-story-page__title {
+      font-size: 82px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presha Story Page",
+  "tag": "section",
+  "class": "presha-story-page-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Where culture meets curation" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Presha Trends was built for people who care about product, story and trust in equal measure. We approach luxury streetwear and rare sneakers with a curator's eye and a resale standard that respects the culture.</p>" },
+    { "type": "text", "id": "panel_label", "label": "Panel label", "default": "Position" },
+    { "type": "text", "id": "panel_title", "label": "Panel title", "default": "A Dubai-based point of view on global street luxury" },
+    { "type": "richtext", "id": "panel_text", "label": "Panel text", "default": "<p>Presha Trends sits at the intersection of fashion, rarity and confidence. We are building more than a storefront. We are building a destination for curated product, trusted authentication and a sharper luxury resale experience.</p>" },
+    { "type": "text", "id": "panel_pill_one", "label": "Panel pill one", "default": "Dubai-based" },
+    { "type": "text", "id": "panel_pill_two", "label": "Panel pill two", "default": "Luxury streetwear" },
+    { "type": "text", "id": "chapter_eyebrow", "label": "Chapter eyebrow", "default": "What drives us" },
+    { "type": "text", "id": "chapter_title", "label": "Chapter title", "default": "Presha is built around trust, taste and cultural clarity" },
+    { "type": "richtext", "id": "chapter_text", "label": "Chapter text", "default": "<p>In luxury resale, product matters, but context matters just as much. We care about how an item fits into culture, why it deserves attention and how it reaches the customer with confidence still intact.</p><p>That is why Presha Trends focuses on selection, presentation and verification with equal discipline. We want the experience to feel elevated from the first click to the final delivery.</p>" },
+    { "type": "text", "id": "note_label_one", "label": "Note one label", "default": "Curation" },
+    { "type": "text", "id": "note_title_one", "label": "Note one title", "default": "We choose with restraint" },
+    { "type": "textarea", "id": "note_text_one", "label": "Note one text", "default": "Presha is not about volume for the sake of volume. The goal is a tighter, stronger edit that reflects quality, relevance and cultural weight." },
+    { "type": "text", "id": "note_label_two", "label": "Note two label", "default": "Experience" },
+    { "type": "text", "id": "note_title_two", "label": "Note two title", "default": "We present products with intent" },
+    { "type": "textarea", "id": "note_text_two", "label": "Note two text", "default": "From the way a page reads to the way support responds, every touchpoint should feel premium, deliberate and easier to trust." },
+    { "type": "text", "id": "values_eyebrow", "label": "Values eyebrow", "default": "What we stand for" },
+    { "type": "text", "id": "values_title", "label": "Values title", "default": "The standard behind the brand" },
+    { "type": "richtext", "id": "quote_text", "label": "Quote text", "default": "<p>Presha exists to make luxury streetwear feel considered again: curated with taste, backed by trust and delivered with the confidence the culture deserves.</p>" },
+    { "type": "text", "id": "quote_credit", "label": "Quote credit", "default": "Presha Trends" },
+    { "type": "text", "id": "cta_eyebrow", "label": "CTA eyebrow", "default": "Stay close" },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Need help with a piece or want to know more?" },
+    { "type": "richtext", "id": "cta_text", "label": "CTA text", "default": "<p>If you want to ask about a product, authentication or an order, reach out directly and the Presha team will guide you.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Contact Presha" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "metric",
+      "name": "Metric",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "Curated" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Selection first" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "A tighter point of view on luxury streetwear, sneakers and collectible culture." }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Value card",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Trust" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Authentication matters" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Confidence should be part of the product, not an afterthought. We treat verification and presentation as core parts of the customer experience.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Story Page",
+      "blocks": [
+        { "type": "metric", "settings": { "value": "Curated", "title": "Selection first", "text": "A tighter point of view on luxury streetwear, sneakers and collectible culture." } },
+        { "type": "metric", "settings": { "value": "Dubai", "title": "Global perspective", "text": "Built in Dubai with an international understanding of fashion, rarity and customer expectations." } },
+        { "type": "metric", "settings": { "value": "Verified", "title": "Trust built in", "text": "Authentication and confidence are part of the Presha standard from the start." } },
+        { "type": "value", "settings": { "label": "Trust", "title": "Authentication matters", "text": "<p>Confidence should be part of the product, not an afterthought. We treat verification and presentation as core parts of the customer experience.</p>" } },
+        { "type": "value", "settings": { "label": "Taste", "title": "Curate with discipline", "text": "<p>Presha is guided by selection, not noise. We focus on the pieces that carry cultural energy, design relevance and lasting appeal.</p>" } },
+        { "type": "value", "settings": { "label": "Presentation", "title": "Luxury should feel intentional", "text": "<p>Every page, every detail and every support interaction should reflect clarity, confidence and premium care.</p>" } },
+        { "type": "value", "settings": { "label": "Culture", "title": "Streetwear with context", "text": "<p>We are interested in more than product alone. We care about why it matters, where it sits in culture and how it should be experienced.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "presha-our-story-page",
+      "blocks": {
+        "metric_one": {
+          "type": "metric",
+          "settings": {
+            "value": "Curated",
+            "title": "Selection first",
+            "text": "A tighter point of view on luxury streetwear, sneakers and collectible culture."
+          }
+        },
+        "metric_two": {
+          "type": "metric",
+          "settings": {
+            "value": "Dubai",
+            "title": "Global perspective",
+            "text": "Built in Dubai with an international understanding of fashion, rarity and customer expectations."
+          }
+        },
+        "metric_three": {
+          "type": "metric",
+          "settings": {
+            "value": "Verified",
+            "title": "Trust built in",
+            "text": "Authentication and confidence are part of the Presha standard from the start."
+          }
+        },
+        "value_one": {
+          "type": "value",
+          "settings": {
+            "label": "Trust",
+            "title": "Authentication matters",
+            "text": "<p>Confidence should be part of the product, not an afterthought. We treat verification and presentation as core parts of the customer experience.</p>"
+          }
+        },
+        "value_two": {
+          "type": "value",
+          "settings": {
+            "label": "Taste",
+            "title": "Curate with discipline",
+            "text": "<p>Presha is guided by selection, not noise. We focus on the pieces that carry cultural energy, design relevance and lasting appeal.</p>"
+          }
+        },
+        "value_three": {
+          "type": "value",
+          "settings": {
+            "label": "Presentation",
+            "title": "Luxury should feel intentional",
+            "text": "<p>Every page, every detail and every support interaction should reflect clarity, confidence and premium care.</p>"
+          }
+        },
+        "value_four": {
+          "type": "value",
+          "settings": {
+            "label": "Culture",
+            "title": "Streetwear with context",
+            "text": "<p>We are interested in more than product alone. We care about why it matters, where it sits in culture and how it should be experienced.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "metric_one",
+        "metric_two",
+        "metric_three",
+        "value_one",
+        "value_two",
+        "value_three",
+        "value_four"
+      ],
+      "settings": {
+        "eyebrow": "Our story",
+        "title": "Where culture meets curation",
+        "intro": "<p>Presha Trends was built for people who care about product, story and trust in equal measure. We approach luxury streetwear and rare sneakers with a curator's eye and a resale standard that respects the culture.</p>",
+        "panel_label": "Position",
+        "panel_title": "A Dubai-based point of view on global street luxury",
+        "panel_text": "<p>Presha Trends sits at the intersection of fashion, rarity and confidence. We are building more than a storefront. We are building a destination for curated product, trusted authentication and a sharper luxury resale experience.</p>",
+        "panel_pill_one": "Dubai-based",
+        "panel_pill_two": "Luxury streetwear",
+        "chapter_eyebrow": "What drives us",
+        "chapter_title": "Presha is built around trust, taste and cultural clarity",
+        "chapter_text": "<p>In luxury resale, product matters, but context matters just as much. We care about how an item fits into culture, why it deserves attention and how it reaches the customer with confidence still intact.</p><p>That is why Presha Trends focuses on selection, presentation and verification with equal discipline. We want the experience to feel elevated from the first click to the final delivery.</p>",
+        "note_label_one": "Curation",
+        "note_title_one": "We choose with restraint",
+        "note_text_one": "Presha is not about volume for the sake of volume. The goal is a tighter, stronger edit that reflects quality, relevance and cultural weight.",
+        "note_label_two": "Experience",
+        "note_title_two": "We present products with intent",
+        "note_text_two": "From the way a page reads to the way support responds, every touchpoint should feel premium, deliberate and easier to trust.",
+        "values_eyebrow": "What we stand for",
+        "values_title": "The standard behind the brand",
+        "quote_text": "<p>Presha exists to make luxury streetwear feel considered again: curated with taste, backed by trust and delivered with the confidence the culture deserves.</p>",
+        "quote_credit": "Presha Trends",
+        "cta_eyebrow": "Stay close",
+        "cta_title": "Need help with a piece or want to know more?",
+        "cta_text": "<p>If you want to ask about a product, authentication or an order, reach out directly and the Presha team will guide you.</p>",
+        "cta_label": "Contact Presha",
+        "cta_link": "/pages/contact-us"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
