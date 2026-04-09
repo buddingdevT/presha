@@ -201,3 +201,23 @@
 - Rail card thumbnails also uploaded via Theme Editor per block
 - Collections for rail cards need to be created in Shopify Admin — see ADMIN_TODOS
 
+---
+
+## 2026-04-08 — Header Overall Appearance
+
+**What was built:**
+- Header height increased from 60px to 72px for more commanding editorial presence
+- Nav font bumped to 13px (0.8125rem) with 0.1em letter-spacing for wider tracking
+- Scroll separation added: box-shadow + subtle burgundy bottom border (rgba 107,26,42 at 18% opacity) that fade in smoothly (0.35s) when the header is solid, invisible over hero/dark sections. Border uses decomposed longhand properties to preserve the Horizon theme divider system.
+- Red hover bug fixed — removed `#ff0000 !important` custom CSS override from header-group.json
+- Lenis 1.1.14 smooth scroll added globally with GSAP ScrollTrigger ticker integration
+
+**Files changed:**
+- `sections/header-group.json` — red hover removed, font size updated to 0.8125rem
+- `sections/header.liquid` — height 72px, letter-spacing, shadow + border separation CSS
+- `layout/theme.liquid` — Lenis CDN + init script
+
+**Notes:**
+- Letter-spacing selector `.header-menu .menu-list__link` scopes to desktop nav only but affects all levels (top-level + sub-items). Acceptable; revisit if submenu tracking becomes a concern.
+- Lenis uses GSAP ticker integration (not ScrollTrigger.scrollerProxy). Works for all current animations; if container-based ScrollTrigger animations are added later, proxy registration will be needed.
+
