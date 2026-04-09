@@ -747,6 +747,29 @@
     content-visibility: visible;
   }
 
+  /* Presha — header separation from white page sections */
+  /* Box shadow on the outer header component */
+  #header-component {
+    transition: box-shadow 0.35s ease;
+    box-shadow: none;
+  }
+
+  #header-component:not([transparent]),
+  #header-component[transparent='not-sticky'][data-sticky-state='active'] {
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.09);
+  }
+
+  /* Subtle burgundy bottom border on the top row */
+  .header__row--top {
+    border-bottom: 1px solid rgba(107, 26, 42, 0);
+    transition: border-color 0.35s ease;
+  }
+
+  #header-component:not([transparent]) .header__row--top,
+  #header-component[transparent='not-sticky'][data-sticky-state='active'] .header__row--top {
+    border-color: rgba(107, 26, 42, 0.18);
+  }
+
   /* Presha — wider tracking on top-level nav for editorial feel */
   .header-menu .menu-list__link {
     letter-spacing: 0.1em;
