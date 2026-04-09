@@ -120,3 +120,11 @@
 - [x] Policy templates now include Presha Trends specific customer-facing copy.
 - [ ] Optional: edit the policy page body in **Shopify Admin -> Online Store -> Pages**. If page body content exists, the theme will render that Page Editor content; otherwise it renders the curated template copy.
 - [ ] Optional: adjust policy intro, clause blocks, or page-content preference in Theme Editor.
+
+---
+
+## Authentication Page (2026-04-09)
+- [ ] Create or confirm the page at `/pages/authentication` and assign the `authentication` theme template.
+- [x] Homepage Authentication section CTA now points to `/pages/authentication`.
+- [x] Footer Support link already points to `/pages/authentication`.
+- [ ] Optional: edit the Authentication page content and process blocks in Theme Editor after the page template is assigned.

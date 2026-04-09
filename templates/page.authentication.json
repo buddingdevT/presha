@@ -1,0 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "presha-authentication-page",
+      "blocks": {
+        "highlight_1": {
+          "type": "highlight",
+          "settings": {
+            "value": "10-point",
+            "title": "Inspection standard",
+            "text": "A structured review process designed for premium resale."
+          }
+        },
+        "highlight_2": {
+          "type": "highlight",
+          "settings": {
+            "value": "Dubai-based",
+            "title": "Handled with care",
+            "text": "Every item is reviewed with the level of scrutiny luxury customers expect."
+          }
+        },
+        "highlight_3": {
+          "type": "highlight",
+          "settings": {
+            "value": "Presha Verified",
+            "title": "Only approved stock goes live",
+            "text": "If an item does not meet our standard, it does not reach the storefront."
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Initial intake",
+            "text": "<p>We begin with a structured review of the product, source and visible condition before the item moves deeper into our process.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Detail verification",
+            "text": "<p>Our team checks construction details, branding, shape, materials, labels, hardware, packaging and finishing against known standards for the item and category.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Approval before listing",
+            "text": "<p>Only items that pass our internal review move forward to sale. Where needed, we carry out added checks before an item is cleared for the storefront.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "highlight_1",
+        "highlight_2",
+        "highlight_3",
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "Authentication",
+        "title": "Presha Verified",
+        "intro": "<p>At Presha Trends, every item must earn its place. We take authentication seriously because trust sits at the center of luxury resale. Our process is built to protect customers shopping for rare sneakers, luxury streetwear, accessories and collectibles through our Dubai-based store.</p>",
+        "stamp_label": "Guaranteed",
+        "stamp_subtext": "Authentic",
+        "process_eyebrow": "Our process",
+        "process_title": "How we verify",
+        "assurance_eyebrow": "Buy with confidence",
+        "assurance_title": "What our authentication standard means",
+        "assurance_text": "<p>We review products with a luxury resale mindset: condition, construction, branding, packaging and consistency all matter. If a product does not meet our authentication standard, it does not move forward to sale.</p><p>Where an item includes original packaging, accessories or identifying documents, we review those details alongside the product itself. Some items may also go through additional review where the category, rarity or sourcing path requires it.</p><p>If you have questions about an item before purchase, contact Presha Trends and we will guide you through the details we can share.</p>",
+        "contact_text": "Need help with a product before you buy or want to ask about our verification process?",
+        "contact_link_label": "Contact Us",
+        "contact_link": "/pages/contact-us"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

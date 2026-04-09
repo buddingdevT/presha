@@ -1,0 +1,663 @@
+<section class="presha-auth-page" aria-labelledby="PreshaAuthPageTitle-{{ section.id }}">
+  <div class="presha-auth-page__hero">
+    <div class="presha-auth-page__hero-inner">
+      <div class="presha-auth-page__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="presha-auth-page__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 id="PreshaAuthPageTitle-{{ section.id }}" class="presha-auth-page__title">
+          {{ section.settings.title }}
+        </h1>
+
+        {%- if section.settings.intro != blank -%}
+          <div class="presha-auth-page__intro rte">
+            {{ section.settings.intro }}
+          </div>
+        {%- endif -%}
+
+        <div class="presha-auth-page__highlights">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'highlight' -%}
+              <article class="presha-auth-page__highlight" {{ block.shopify_attributes }}>
+                <span class="presha-auth-page__highlight-value">{{ block.settings.value }}</span>
+                <h2 class="presha-auth-page__highlight-title">{{ block.settings.title }}</h2>
+                <p class="presha-auth-page__highlight-text">{{ block.settings.text }}</p>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="presha-auth-page__media">
+        <div class="presha-auth-page__image-wrap">
+          {%- if section.settings.image != blank -%}
+            <img
+              src="{{ section.settings.image | image_url: width: 1400 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              class="presha-auth-page__image"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img src="{{ 'auth4.webp' | asset_url }}" alt="Presha Authentication" class="presha-auth-page__image" loading="lazy">
+          {%- endif -%}
+
+          <div class="presha-auth-page__stamp">
+            <span class="presha-auth-page__stamp-label">{{ section.settings.stamp_label }}</span>
+            <span class="presha-auth-page__stamp-subtext">{{ section.settings.stamp_subtext }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="presha-auth-page__section">
+    <div class="presha-auth-page__section-inner">
+      <div class="presha-auth-page__section-heading">
+        <p class="presha-auth-page__section-eyebrow">{{ section.settings.process_eyebrow }}</p>
+        <h2 class="presha-auth-page__section-title">{{ section.settings.process_title }}</h2>
+      </div>
+
+      <div class="presha-auth-page__steps">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <article class="presha-auth-page__step" {{ block.shopify_attributes }}>
+              <span class="presha-auth-page__step-number">{{ block.settings.number }}</span>
+              <h3 class="presha-auth-page__step-title">{{ block.settings.title }}</h3>
+              <div class="presha-auth-page__step-text rte">{{ block.settings.text }}</div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="presha-auth-page__section presha-auth-page__section--light">
+    <div class="presha-auth-page__section-inner presha-auth-page__section-inner--narrow">
+      <p class="presha-auth-page__section-eyebrow">{{ section.settings.assurance_eyebrow }}</p>
+      <h2 class="presha-auth-page__section-title">{{ section.settings.assurance_title }}</h2>
+      <div class="presha-auth-page__assurance rte">
+        {{ section.settings.assurance_text }}
+      </div>
+      <div class="presha-auth-page__contact">
+        <p class="presha-auth-page__contact-text">{{ section.settings.contact_text }}</p>
+        {%- if section.settings.contact_link_label != blank -%}
+          <a
+            {% if section.settings.contact_link != blank %}href="{{ section.settings.contact_link }}"{% endif %}
+            class="presha-auth-page__contact-link"
+          >
+            {{ section.settings.contact_link_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .presha-auth-page {
+    background: #0a0a0a;
+    color: #f5f1ec;
+  }
+
+  .presha-auth-page__hero,
+  .presha-auth-page__section {
+    width: 100%;
+  }
+
+  .presha-auth-page__hero {
+    padding: 96px 0 72px;
+    background:
+      linear-gradient(180deg, rgba(245, 241, 236, 0.04) 0%, rgba(245, 241, 236, 0) 100%),
+      #0a0a0a;
+  }
+
+  .presha-auth-page__section {
+    padding: 72px 0;
+    border-top: 1px solid rgba(245, 241, 236, 0.12);
+  }
+
+  .presha-auth-page__section--light {
+    background: #f5f1ec;
+    color: #000000;
+    border-top: none;
+  }
+
+  .presha-auth-page__hero-inner,
+  .presha-auth-page__section-inner {
+    width: min(100% - 40px, 1200px);
+    margin: 0 auto;
+  }
+
+  .presha-auth-page__section-inner--narrow {
+    width: min(100% - 40px, 920px);
+  }
+
+  .presha-auth-page__hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 56px;
+    align-items: center;
+  }
+
+  .presha-auth-page__eyebrow,
+  .presha-auth-page__section-eyebrow {
+    margin: 0 0 14px;
+    color: #6d001a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__title {
+    margin: 0;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: clamp(40px, 6vw, 84px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .presha-auth-page__intro,
+  .presha-auth-page__assurance,
+  .presha-auth-page__step-text {
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .presha-auth-page__intro {
+    margin: 24px 0 0;
+    color: rgba(245, 241, 236, 0.76);
+    max-width: 640px;
+  }
+
+  .presha-auth-page__highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .presha-auth-page__highlight {
+    padding: 20px 18px;
+    border: 1px solid rgba(245, 241, 236, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .presha-auth-page__highlight-value {
+    display: block;
+    margin-bottom: 10px;
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .presha-auth-page__highlight-title {
+    margin: 0 0 8px;
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__highlight-text {
+    margin: 0;
+    color: rgba(245, 241, 236, 0.62);
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .presha-auth-page__image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.32);
+  }
+
+  .presha-auth-page__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .presha-auth-page__stamp {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    width: 138px;
+    min-height: 138px;
+    padding: 18px 14px;
+    border-radius: 2px;
+    background: #6d001a;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
+  }
+
+  .presha-auth-page__stamp-label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__stamp-subtext {
+    display: block;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .presha-auth-page__section-title {
+    margin: 0;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .presha-auth-page__step {
+    padding: 24px 22px;
+    border: 1px solid rgba(245, 241, 236, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .presha-auth-page__step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 18px;
+    border-radius: 9999px;
+    border: 1px solid rgba(109, 0, 26, 0.42);
+    background: rgba(109, 0, 26, 0.12);
+    color: #6d001a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__step-title {
+    margin: 0 0 10px;
+    color: #f5f1ec;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .presha-auth-page__step-text {
+    color: rgba(245, 241, 236, 0.66);
+  }
+
+  .presha-auth-page__assurance {
+    margin-top: 24px;
+    color: #4a4a4a;
+    max-width: 760px;
+  }
+
+  .presha-auth-page__contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .presha-auth-page__contact-text {
+    margin: 0;
+    color: #4a4a4a;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .presha-auth-page__contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 26px;
+    border-radius: 9999px;
+    background: #6d001a;
+    color: #ffffff;
+    font-family: 'Gilroy', var(--font-body--family, 'Jost', Arial, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.22s ease, transform 0.22s ease;
+  }
+
+  .presha-auth-page__contact-link:hover {
+    background: #580015;
+    transform: translateY(-1px);
+  }
+
+  .presha-auth-page__intro :is(p, ul, ol),
+  .presha-auth-page__step-text :is(p, ul, ol),
+  .presha-auth-page__assurance :is(p, ul, ol) {
+    margin-top: 0;
+  }
+
+  .presha-auth-page__intro :is(p, ul, ol):last-child,
+  .presha-auth-page__step-text :is(p, ul, ol):last-child,
+  .presha-auth-page__assurance :is(p, ul, ol):last-child {
+    margin-bottom: 0;
+  }
+
+  .presha-auth-page__assurance a,
+  .presha-auth-page__step-text a,
+  .presha-auth-page__intro a {
+    color: #6d001a;
+    text-underline-offset: 0.18em;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .presha-auth-page__hero-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .presha-auth-page__copy,
+    .presha-auth-page__media {
+      max-width: 760px;
+    }
+
+    .presha-auth-page__highlights,
+    .presha-auth-page__steps {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .presha-auth-page__hero {
+      padding: 72px 0 56px;
+    }
+
+    .presha-auth-page__section {
+      padding: 56px 0;
+    }
+
+    .presha-auth-page__hero-inner,
+    .presha-auth-page__section-inner,
+    .presha-auth-page__section-inner--narrow {
+      width: min(100% - 32px, 1200px);
+    }
+
+    .presha-auth-page__title {
+      font-size: 40px;
+    }
+
+    .presha-auth-page__highlights,
+    .presha-auth-page__steps {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .presha-auth-page__stamp {
+      right: 12px;
+      bottom: 12px;
+      width: 120px;
+      min-height: 120px;
+      padding: 14px 12px;
+    }
+
+    .presha-auth-page__stamp-subtext {
+      font-size: 18px;
+    }
+
+    .presha-auth-page__contact {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .presha-auth-page__contact-link {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Presha Authentication Page",
+  "tag": "section",
+  "class": "presha-auth-page-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Authentication"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Presha Verified"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro",
+      "default": "<p>At Presha Trends, every item must earn its place. We take authentication seriously because trust sits at the center of luxury resale.</p>"
+    },
+    {
+      "type": "text",
+      "id": "stamp_label",
+      "label": "Stamp label",
+      "default": "Guaranteed"
+    },
+    {
+      "type": "text",
+      "id": "stamp_subtext",
+      "label": "Stamp subtext",
+      "default": "Authentic"
+    },
+    {
+      "type": "text",
+      "id": "process_eyebrow",
+      "label": "Process eyebrow",
+      "default": "Our process"
+    },
+    {
+      "type": "text",
+      "id": "process_title",
+      "label": "Process title",
+      "default": "How we verify"
+    },
+    {
+      "type": "text",
+      "id": "assurance_eyebrow",
+      "label": "Assurance eyebrow",
+      "default": "Buy with confidence"
+    },
+    {
+      "type": "text",
+      "id": "assurance_title",
+      "label": "Assurance title",
+      "default": "What our authentication standard means"
+    },
+    {
+      "type": "richtext",
+      "id": "assurance_text",
+      "label": "Assurance text",
+      "default": "<p>We review products with a luxury resale mindset: condition, construction, branding, packaging and consistency all matter. If a product does not meet our authentication standard, it does not move forward to sale.</p><p>Where an item includes original packaging, accessories or identifying documents, we review those details alongside the product itself. Some items may also go through additional review where the category, rarity or sourcing path requires it.</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact text",
+      "default": "Still have questions about our verification process or a specific item?"
+    },
+    {
+      "type": "text",
+      "id": "contact_link_label",
+      "label": "Contact button label",
+      "default": "Contact Presha"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "10-point"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Inspection standard"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "A structured review process designed for premium resale."
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Initial intake"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>We begin with a structured review of the product, source and visible condition before the item moves deeper into our process.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Presha Authentication Page",
+      "blocks": [
+        {
+          "type": "highlight",
+          "settings": {
+            "value": "10-point",
+            "title": "Inspection standard",
+            "text": "A structured review process designed for premium resale."
+          }
+        },
+        {
+          "type": "highlight",
+          "settings": {
+            "value": "Dubai-based",
+            "title": "Handled with care",
+            "text": "Every item is reviewed with the level of scrutiny luxury customers expect."
+          }
+        },
+        {
+          "type": "highlight",
+          "settings": {
+            "value": "Presha Verified",
+            "title": "Only approved stock goes live",
+            "text": "If an item does not meet our standard, it does not reach the storefront."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Initial intake",
+            "text": "<p>We begin with a structured review of the product, source and visible condition before the item moves deeper into our process.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Detail verification",
+            "text": "<p>Our team checks construction details, branding, shape, materials, labels, hardware, packaging and finishing against known standards for the item and category.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Approval before listing",
+            "text": "<p>Only items that pass our internal review move forward to sale. Where needed, we carry out added checks before an item is cleared for the storefront.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

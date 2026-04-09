@@ -377,3 +377,21 @@
 **Files changed:**
 - `sections/presha-authentication.liquid` - Authentication section visual refresh
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-09 - Authentication Page
+
+**What was built:**
+- Added a dedicated Presha Authentication page section and page template for `/pages/authentication`.
+- Built a branded authentication page with a strong hero, trust highlights, verification process steps and assurance copy.
+- Linked the homepage Authentication section CTA to `/pages/authentication` in the homepage template.
+- Confirmed the footer Support link already points to `/pages/authentication`.
+- Updated `ADMIN_TODOS.md` with the page creation and template assignment step.
+
+**Files changed:**
+- `sections/presha-authentication-page.liquid` - New dedicated Authentication page section
+- `templates/page.authentication.json` - New Authentication page template
+- `templates/index.json` - Homepage Authentication CTA now links to `/pages/authentication`
+- `ADMIN_TODOS.md` - Added Authentication page admin step
+- `PROGRESS.md` - Added this progress entry
