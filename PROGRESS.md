@@ -388,6 +388,7 @@
 - Linked the homepage Authentication section CTA to `/pages/authentication` in the homepage template.
 - Confirmed the footer Support link already points to `/pages/authentication`.
 - Updated `ADMIN_TODOS.md` with the page creation and template assignment step.
+- Owner approved the layout for now and wants to revisit some of the color/design choices later.
 
 **Files changed:**
 - `sections/presha-authentication-page.liquid` - New dedicated Authentication page section
