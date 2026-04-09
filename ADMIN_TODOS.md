@@ -55,7 +55,7 @@
   - `/collections/new-balance`
   - `/collections/on-running`
   - `/collections/yeezy`
-- [ ] **Action Required — Replace text-based SVGs:** Chrome Hearts and Yeezy logos are currently text-based SVGs (not actual vector logos). Source proper vector SVG files and replace `assets/brand-chrome-hearts.svg` and `assets/brand-yeezy.svg`.
+- [x] **Resolved for homepage brand strip:** Chrome Hearts and Yeezy now use Theme Editor uploaded images instead of the old text-based SVG placeholders.
 - [ ] (Optional): Update collection URLs per brand block in Theme Editor if your collection handles differ from above.
 - [ ] (Optional): Add or remove brands via Theme Editor → Brand Logos → Add block. Up to 12 brands supported.
 
@@ -82,9 +82,9 @@
 ## Hero Carousel Section (2026-04-03)
 
 ### Slide images — REQUIRED before hero looks correct
-- [ ] **Theme Editor → Homepage → Hero Carousel → Slide 1 block** — Upload `slide1.webp` via "Slide Image" image picker
-- [ ] **Theme Editor → Homepage → Hero Carousel → Slide 2 block** — Upload `slide2.webp` via "Slide Image" image picker
-- [ ] **Theme Editor → Homepage → Hero Carousel → Slide 3 block** — Upload `slide3.webp` via "Slide Image" image picker
+- [x] **Theme Editor → Homepage → Hero Carousel → Slide 1 block** — `slide1.webp` uploaded via "Slide Image" image picker
+- [x] **Theme Editor → Homepage → Hero Carousel → Slide 2 block** — `slide2.webp` uploaded via "Slide Image" image picker
+- [x] **Theme Editor → Homepage → Hero Carousel → Slide 3 block** — `slide3.webp` uploaded via "Slide Image" image picker
 
 ### Rail card thumbnails — REQUIRED before rail looks correct
 - [ ] **Theme Editor → Homepage → Hero Carousel → Rail Card 1 (Trending Now)** — Upload a thumbnail image via "Thumbnail Image" image picker

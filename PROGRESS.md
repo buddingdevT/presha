@@ -221,3 +221,30 @@
 - Letter-spacing selector `.header-menu .menu-list__link` scopes to desktop nav only but affects all levels (top-level + sub-items). Acceptable; revisit if submenu tracking becomes a concern.
 - Lenis uses GSAP ticker integration (not ScrollTrigger.scrollerProxy). Works for all current animations; if container-based ScrollTrigger animations are added later, proxy registration will be needed.
 
+---
+
+## 2026-04-09 — Handoff Reconciliation & Authentication Image
+
+**What was updated:**
+- Reconciled `HANDOFF.md`, `CLAUDE.md`, and `ADMIN_TODOS.md` with owner-confirmed project state:
+  - Hero carousel slide images (`slide1.webp`, `slide2.webp`, `slide3.webp`) are uploaded in Theme Editor.
+  - Gifts For Her / Him, Email Signup, Trending Now, and Footer are built, but future edits are still expected.
+  - Shop by Brand should follow the current Theme Editor brand list, not the older 8-brand SVG-only handoff list.
+  - Chrome Hearts and Yeezy now use Theme Editor uploaded images on the homepage brand strip, so the old text-SVG replacement note no longer applies there.
+- Kept `HANDOFF.md` as the canonical AI handoff file.
+- Updated the Presha Authentication section fallback image to use the local theme asset `auth4.webp`.
+
+**Files changed:**
+- `HANDOFF.md` — Added and updated as the canonical handoff document
+- `CLAUDE.md` — Updated homepage tracker statuses
+- `ADMIN_TODOS.md` — Marked hero slide uploads and brand logo placeholder issue as resolved
+- `PROGRESS.md` — Added this reconciliation entry
+- `.gitignore` — Ignored local `.superpowers/` brainstorm/server state
+- `sections/presha-authentication.liquid` — Updated fallback image to `auth4.webp`
+- `assets/auth4.webp` — Added authentication image asset
+- `designassets/auth4.webp`, `designassets/autht1.webp`, `designassets/slide1.webp`, `designassets/slide2.webp`, `designassets/slide3.webp` — Added current designer assets
+
+**Notes:**
+- Scrolling Marquee remains the highest-priority functional issue.
+- `presha-gifts.liquid`, `presha-email-signup.liquid`, `presha-trending-now.liquid`, and `presha-footer.liquid` should be treated as built sections with future refinement expected.
+

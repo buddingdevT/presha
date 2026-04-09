@@ -1,19 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Mad Kicks Hero Section — Reverse Engineering Breakdown
 
 ## Overview

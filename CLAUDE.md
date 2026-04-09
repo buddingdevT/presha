@@ -239,15 +239,15 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 3. - [x] Hero Section
 4. - [/] Scrolling Marquee (⚠️ animation not working — revisit)
 5. - [x] Shop by Brands
-6. - [ ] Gifts for Her / Him
-7. - [ ] Trending Now
+6. - [x] Gifts for Her / Him (built; future edits pending)
+7. - [x] Trending Now (built; future edits pending)
 8. - [x] Presha Authentication
 9. - [x] Featured Categories
 10. - [x] Journal
 11. - [x] Reviews
-12. - [ ] Email Signup
+12. - [x] Email Signup (built; future edits pending)
 13. - [x] Trust Bar
-14. - [ ] Footer
+14. - [x] Footer (built; future edits pending)
 
 ### Other Pages
 - [ ] Collection / Category Page
