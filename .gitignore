@@ -9,3 +9,4 @@ Thumbs.db
 bash.exe.stackdump
 .playwright-mcp/
 .superpowers/
+.worktrees/
