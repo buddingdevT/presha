@@ -1,0 +1,509 @@
+<!-- ============================================================
+  PRESHA COLLECTION A — Brand Row (Chrome Hearts / Hermès layout)
+
+  Reusable section: renders an editorial brand header + horizontally
+  scrollable product row. Designed for premium brand showcases.
+
+  THEME EDITOR SETUP:
+  - Set "Eyebrow" (small label above brand name, e.g. "Exclusive Drop")
+  - Set "Brand Name" (large italic Cormorant heading, e.g. "Chrome Hearts")
+  - Link a Collection — products pulled automatically up to Product Limit
+  - Product Limit: 4–12 (step 2), default 8
+
+  EMPTY STATE:
+  - If no collection is linked or collection is empty, 4 placeholder
+    cards are shown so the section is visible in the Theme Editor.
+
+  ADMIN TODOS:
+  - Create collections for each brand row (Chrome Hearts, Hermès, etc.)
+  - Add products to those collections
+  - Assign collection in Theme Editor per instance of this section
+============================================================ -->
+
+<style>
+  /* ── Section wrapper ── */
+  .presha-col-a {
+    background: #F5F1EC;
+    padding: 56px 0 64px;
+  }
+  .presha-col-a__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Header row: left (eyebrow + rule + brand name) + right (view all) ── */
+  .presha-col-a__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+  }
+
+  /* Eyebrow */
+  .presha-col-a__eyebrow {
+    display: block;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6D001A;
+    margin-bottom: 8px;
+  }
+
+  /* Burgundy horizontal rule — animated via GSAP (width 0 → 48px) */
+  .presha-col-a__rule {
+    width: 0;          /* start collapsed; GSAP animates to 48px */
+    height: 1px;
+    background: #6D001A;
+    margin-bottom: 10px;
+    will-change: width;
+  }
+
+  /* Brand name — the editorial centrepiece */
+  .presha-col-a__brand-name {
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-size: clamp(2.75rem, 7vw, 5rem);
+    font-style: italic;
+    font-weight: 600;
+    color: #0A0A0A;
+    line-height: 0.9;
+    margin: 0;
+    /* clip-path used by GSAP entrance — text slides up from below */
+    clip-path: inset(100% 0 0 0);
+    will-change: clip-path;
+  }
+
+  /* View All link */
+  .presha-col-a__view-all {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 24px;
+    align-self: flex-end;
+  }
+  /* Burgundy sweep underline on hover */
+  .presha-col-a__view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #6D001A;
+    transition: width 0.3s ease;
+  }
+  .presha-col-a__view-all:hover::after,
+  .presha-col-a__view-all:focus::after {
+    width: 100%;
+  }
+  .presha-col-a__view-all:hover {
+    color: #6D001A;
+  }
+  .presha-col-a__view-all:focus-visible {
+    outline: 2px solid #6D001A;
+    outline-offset: 3px;
+  }
+
+  /* ── Scroll track ── */
+  .presha-col-a__track {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;           /* Firefox */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .presha-col-a__track::-webkit-scrollbar {
+    display: none;                   /* Chrome / Safari */
+  }
+
+  /* ── Product card ── */
+  .presha-col-a__card {
+    flex: 0 0 200px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    scroll-snap-align: start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .presha-col-a__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+  .presha-col-a__card:focus-visible {
+    outline: 2px solid #6D001A;
+    outline-offset: 3px;
+  }
+
+  /* Card image */
+  .presha-col-a__card-img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Placeholder image block (shown when no product/image available) */
+  .presha-col-a__card-img-placeholder {
+    width: 100%;
+    height: 270px;
+    background: #E8E4DE;
+    display: block;
+  }
+
+  /* Verified badge — burgundy circle top-left of image */
+  .presha-col-a__verified {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #6D001A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .presha-col-a__verified svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Ivory hover overlay strip — pure CSS, no JS */
+  .presha-col-a__card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: linear-gradient(to top, rgba(245, 241, 236, 0.55) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .presha-col-a__card:hover::after {
+    opacity: 1;
+  }
+
+  /* Card body */
+  .presha-col-a__card-body {
+    padding: 12px 12px 14px;
+  }
+  .presha-col-a__card-vendor {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5rem;
+    font-variant: small-caps;
+    letter-spacing: 0.07em;
+    color: #999;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .presha-col-a__card-name {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.8125rem;    /* 13px */
+    font-weight: 600;
+    color: #0A0A0A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .presha-col-a__card-price {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.875rem;     /* 14px */
+    font-weight: 700;
+    color: #0A0A0A;
+    line-height: 1;
+  }
+
+  /* ── Mobile (≤ 749px) ── */
+  @media (max-width: 749px) {
+    .presha-col-a {
+      padding: 40px 0 48px;
+    }
+    .presha-col-a__container {
+      padding: 0 16px;
+    }
+    .presha-col-a__header {
+      margin-bottom: 24px;
+    }
+    /* Card width + image height drop on mobile */
+    .presha-col-a__card {
+      flex: 0 0 160px;
+    }
+    .presha-col-a__card-img,
+    .presha-col-a__card-img-placeholder {
+      height: 210px;
+    }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .presha-col-a__card {
+      transition: none;
+    }
+    .presha-col-a__card::after {
+      transition: none;
+    }
+    .presha-col-a__view-all::after {
+      transition: none;
+    }
+  }
+</style>
+
+<section
+  class="presha-col-a"
+  id="presha-col-a-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="presha-collection-a"
+>
+  <div class="presha-col-a__container">
+
+    <!-- ── Section header ── -->
+    <div class="presha-col-a__header">
+
+      <!-- Left: eyebrow + animated rule + large brand name -->
+      <div>
+        <span class="presha-col-a__eyebrow" id="col-a-eyebrow-{{ section.id }}">
+          {{- section.settings.eyebrow | default: 'Collection' -}}
+        </span>
+        <div class="presha-col-a__rule" id="col-a-rule-{{ section.id }}" aria-hidden="true"></div>
+        <h2 class="presha-col-a__brand-name" id="col-a-name-{{ section.id }}">
+          {{- section.settings.brand_name | default: 'Brand Name' -}}
+        </h2>
+      </div>
+
+      <!-- Right: View All (only when collection is linked) -->
+      {%- if section.settings.collection != blank -%}
+        <a
+          href="{{ section.settings.collection.url }}"
+          class="presha-col-a__view-all"
+          aria-label="View all {{ section.settings.brand_name }} products"
+        >
+          View All
+        </a>
+      {%- endif -%}
+
+    </div><!-- /.presha-col-a__header -->
+
+    <!-- ── Horizontal scroll track ── -->
+    <div class="presha-col-a__track" id="col-a-track-{{ section.id }}">
+
+      {%- if section.settings.collection != blank -%}
+
+        {%- assign products_to_show = section.settings.collection.products -%}
+
+        {%- if products_to_show.size > 0 -%}
+          {%- for product in products_to_show limit: section.settings.product_limit -%}
+            <a
+              href="{{ product.url }}"
+              class="presha-col-a__card"
+              aria-label="{{ product.title | escape }}"
+            >
+              <!-- Image -->
+              {%- if product.featured_image != blank -%}
+                <img
+                  src="{{ product.featured_image | image_url: width: 400 }}"
+                  srcset="{{ product.featured_image | image_url: width: 280 }} 280w,
+                          {{ product.featured_image | image_url: width: 400 }} 400w"
+                  sizes="200px"
+                  alt=""
+                  loading="lazy"
+                  width="200"
+                  height="270"
+                  class="presha-col-a__card-img"
+                >
+              {%- else -%}
+                <div class="presha-col-a__card-img-placeholder" aria-hidden="true"></div>
+              {%- endif -%}
+
+              <!-- Verified badge -->
+              <div class="presha-col-a__verified" role="img" aria-label="Presha Verified">
+                <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+
+              <!-- Card info -->
+              <div class="presha-col-a__card-body">
+                <div class="presha-col-a__card-vendor">{{ product.vendor | escape }}</div>
+                <div class="presha-col-a__card-name">{{ product.title | escape }}</div>
+                <div class="presha-col-a__card-price">{{ product.price | money }}</div>
+              </div>
+            </a>
+          {%- endfor -%}
+
+        {%- else -%}
+          <!-- Collection linked but empty — show placeholders -->
+          {%- for i in (1..4) -%}
+            <div class="presha-col-a__card" aria-hidden="true">
+              <div class="presha-col-a__card-img-placeholder"></div>
+              <div class="presha-col-a__verified" role="img" aria-label="Presha Verified">
+                <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="presha-col-a__card-body">
+                <div class="presha-col-a__card-vendor">Brand</div>
+                <div class="presha-col-a__card-name">Product Name</div>
+                <div class="presha-col-a__card-price">—</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+      {%- else -%}
+        <!-- No collection set — show 4 placeholder cards for Theme Editor visibility -->
+        {%- for i in (1..4) -%}
+          <div class="presha-col-a__card" aria-hidden="true">
+            <div class="presha-col-a__card-img-placeholder"></div>
+            <div class="presha-col-a__verified" role="img" aria-label="Presha Verified">
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="presha-col-a__card-body">
+              <div class="presha-col-a__card-vendor">Brand</div>
+              <div class="presha-col-a__card-name">Product Name</div>
+              <div class="presha-col-a__card-price">—</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+
+    </div><!-- /.presha-col-a__track -->
+
+  </div><!-- /.presha-col-a__container -->
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  var sectionId = '{{ section.id }}';
+
+  // Guard: GSAP + ScrollTrigger must be loaded globally in theme.liquid
+  if (!window.gsap || !window.ScrollTrigger) return;
+
+  // Respect prefers-reduced-motion
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) {
+    // Ensure brand name is visible without animation
+    var nameEl = document.getElementById('col-a-name-' + sectionId);
+    if (nameEl) nameEl.style.clipPath = 'inset(0% 0 0 0)';
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  var eyebrow = document.getElementById('col-a-eyebrow-' + sectionId);
+  var rule    = document.getElementById('col-a-rule-' + sectionId);
+  var name    = document.getElementById('col-a-name-' + sectionId);
+  var track   = document.getElementById('col-a-track-' + sectionId);
+  var cards   = track ? track.querySelectorAll('.presha-col-a__card') : [];
+
+  if (!eyebrow || !rule || !name) return;
+
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#presha-col-a-' + sectionId,
+      start: 'top 80%',
+      once: true
+    }
+  });
+
+  // 1. Eyebrow fades up
+  tl.fromTo(eyebrow,
+    { opacity: 0, y: 12 },
+    { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+  );
+
+  // 2. Burgundy rule animates in width 0 → 48px
+  tl.fromTo(rule,
+    { width: 0 },
+    { width: 48, duration: 0.4, ease: 'power2.inOut' },
+    '-=0.2'
+  );
+
+  // 3. Brand name clips up (editorial reveal from below)
+  tl.fromTo(name,
+    { clipPath: 'inset(100% 0 0 0)' },
+    { clipPath: 'inset(0% 0 0 0)', duration: 0.7, ease: 'power3.out' },
+    '-=0.3'
+  );
+
+  // 4. Cards stagger in
+  if (cards.length > 0) {
+    tl.fromTo(cards,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.07, ease: 'power2.out' },
+      '-=0.2'
+    );
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Collection A",
+  "tag": "div",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Collection",
+      "info": "Small uppercase label above the brand name (e.g. 'Exclusive Drop', 'New In')"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Brand Name",
+      "info": "Large italic editorial heading — this is the visual centrepiece of the section"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Products are pulled directly from this collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Number of products",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 8,
+      "info": "Maximum products to display in the scroll row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection A",
+      "settings": {
+        "eyebrow": "Collection",
+        "brand_name": "Brand Name"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -449,3 +449,51 @@
 - `templates/page.our-story.json` - New Our Story page template for the footer URL
 - `ADMIN_TODOS.md` - Added the Our Story page/template assignment step
 - `PROGRESS.md` - Added this progress entry
+
+---
+
+## 2026-04-17 — Shopify Theme Pull (Homepage Redesign Sync)
+
+**What was pulled:**
+Ran `shopify theme pull` to sync the latest state from the live Shopify theme. The homepage redesign (previously on the `feature/homepage-redesign` branch) has been applied directly on Shopify. This pull brings all of those changes into the local repo and merges them into `main`.
+
+**New section files (pulled from Shopify):**
+- `sections/presha-collection-a.liquid` — Chrome Hearts collection section: ivory bg, editorial brand name, portrait product cards, GSAP scroll stagger (509 lines)
+- `sections/presha-collection-b.liquid` — FOG Essentials section: burgundy bg, 40/60 editorial split, anchor image (653 lines)
+- `sections/presha-collection-c.liquid` — Supreme section: blush bg, full-width hero banner + scroll row (630 lines)
+- `sections/presha-collection-collectibles.liquid` — Collectibles section: burgundy bg, frosted glass cards, drag scroll (552 lines)
+
+**Major updates:**
+- `templates/index.json` — Homepage completely restructured to the new 16-section order:
+  1. Hero Carousel
+  2. Scrolling Marquee (⚠️ still broken)
+  3. Shop by Brand
+  4. Trending Now
+  5. Chrome Hearts (Collection A)
+  6. FOG Essentials (Collection B)
+  7. Featured Categories
+  8. Supreme (Collection C)
+  9. Gifts For Her / Him
+  10. Presha Authentication
+  11. Hermès (Collection Hermes — referenced in index but section file TBD)
+  12. Collectibles
+  13. Featured Journal
+  14. Reviews & Press
+  15. Email Signup
+  16. Trust Bar
+- `sections/presha-trending-now.liquid` — Full rewrite: blocks-based editorial hero card + horizontal scroll row; dark `#0A0A0A` background; rank badges (#1/#2/#3); condition badges (DS/9.5/10 etc.); up to 10 product blocks
+- `sections/header-group.json` — Menu handle changed `main-menu-mega` → `mega-menu`; style changed `text` → `featured_collections`; drawer accordion enabled; drawer dividers enabled
+
+**Minor updates (Theme Editor settings sync):**
+- `sections/presha-brand-logos.liquid` — Settings sync
+- `sections/presha-email-signup.liquid` — Settings/layout sync
+- `sections/presha-featured-journal.liquid` — Settings sync
+- `sections/presha-trust-bar.liquid` — Settings sync
+- `sections/presha-footer.liquid` — Footer settings sync
+- `assets/section-presha-gifts.css` — New scoped CSS file for the gifts section
+
+**Notes:**
+- The `feature/homepage-redesign` local branch can now be considered merged into the Shopify theme state and is superseded by this sync.
+- `presha_collection_hermes` appears in `templates/index.json` — verify whether a dedicated section file for Hermès exists or if it reuses an existing collection section file.
+- Scrolling Marquee (`presha-marquee.liquid`) remains broken — needs fresh investigation.
+- Collections that need to exist in Shopify Admin before new sections show products: `chrome-hearts`, `fog-essentials`, `supreme`, `collectibles`, `hermes`, `trending-now`.

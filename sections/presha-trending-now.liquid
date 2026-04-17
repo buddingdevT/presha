@@ -1,210 +1,705 @@
 <!-- ============================================================
-  PRESHA TRENDING NOW — Product Carousel
-  Horizontal scrollable product carousel pulled from a collection.
-  Fully editable from Theme Editor (collection, texts, badge).
+  PRESHA TRENDING NOW — Editorial Hero + Scroll Row
+
+  THEME EDITOR SETUP:
+  - Add product blocks (up to 10). First block with rank "#1"
+    becomes the hero card. All others appear in the scroll row.
+  - Per block: set product, optional rank (#1/#2/#3), optional condition
+  - Condition values: DS | 9.5/10 | 9/10 | 8/10 | 7/10
+  - If no product has rank "#1", the first block becomes hero.
+
+  ADMIN TODOS:
+  - Upload products to each block via Theme Editor
 ============================================================ -->
 
-{{ 'section-presha-trending.css' | asset_url | stylesheet_tag }}
+<style>
+  .presha-trending {
+    background: #0A0A0A;
+    padding: 60px 0;
+  }
+  .presha-trending__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-{%- assign collection = section.settings.collection -%}
-{%- assign product_limit = section.settings.product_limit | default: 12 -%}
+  /* Header */
+  .presha-trending__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+  }
+  .presha-trending__eyebrow {
+    display: block;
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6D001A;
+    margin-bottom: 6px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__heading {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-style: italic;
+    color: #F5F1EC;
+    line-height: 1;
+    margin: 0;
+  }
+  .presha-trending__header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .presha-trending__view-all {
+    font-size: 0.5625rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+  .presha-trending__view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: #6D001A;
+    transition: width 0.3s ease;
+  }
+  .presha-trending__view-all:hover::after,
+  .presha-trending__view-all:focus::after { width: 100%; }
+  .presha-trending__view-all:hover { color: rgba(255,255,255,0.55); }
 
-<section class="presha-trending" id="presha-trending">
+  .presha-trending__arrows {
+    display: flex;
+    gap: 8px;
+  }
+  .presha-trending__arrow {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: transparent;
+    color: #F5F1EC;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .presha-trending__arrow:hover {
+    background: #6D001A;
+    border-color: #6D001A;
+  }
+  .presha-trending__arrow:focus-visible {
+    outline: 2px solid rgba(245,241,236,0.8);
+    outline-offset: 2px;
+  }
+  .presha-trending__card:focus-visible,
+  .presha-trending__hero:focus-visible {
+    outline: 2px solid rgba(245,241,236,0.8);
+    outline-offset: 3px;
+  }
+
+  /* Body layout */
+  .presha-trending__body {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  /* Hero card */
+  .presha-trending__hero {
+    flex: 0 0 165px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #161616;
+    text-decoration: none;
+    display: block;
+  }
+  .presha-trending__hero-img {
+    width: 100%; height: 240px;
+    object-fit: cover; display: block;
+  }
+  .presha-trending__hero-img-placeholder {
+    width: 100%; height: 240px;
+    background: #222; display: block;
+  }
+  .presha-trending__hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.05) 55%, transparent 100%);
+  }
+
+  /* Verified circle badge */
+  .presha-trending__verified {
+    position: absolute; top: 10px; left: 10px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #6D001A;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .presha-trending__verified svg { width: 13px; height: 13px; }
+
+  /* Rank tag */
+  .presha-trending__rank {
+    position: absolute; top: 10px; right: 10px;
+    background: #6D001A;
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-style: italic;
+    padding: 3px 8px;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  /* Condition badge (hero) */
+  .presha-trending__condition-hero {
+    position: absolute; top: 38px; right: 10px;
+    background: rgba(0,0,0,0.65);
+    color: #F5F1EC;
+    font-size: 0.5rem;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.14);
+    white-space: nowrap;
+  }
+  .presha-trending__condition-label {
+    font-weight: 300;
+    font-size: 0.4375rem;
+    color: rgba(255,255,255,0.35);
+    margin-left: 2px;
+  }
+
+  /* Ghost rank number */
+  .presha-trending__hero-ghost {
+    position: absolute; bottom: 56px; left: 10px;
+    font-size: 5rem;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Hero info overlay */
+  .presha-trending__hero-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 14px;
+  }
+  .presha-trending__hero-brand {
+    font-size: 0.5rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__hero-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__hero-price {
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #fff;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+
+  /* Scroll column */
+  .presha-trending__scroll-col {
+    flex: 1;
+    min-width: 0;
+  }
+  .presha-trending__scroll-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 12px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .presha-trending__track::-webkit-scrollbar { display: none; }
+  .presha-trending__scroll-hint {
+    font-size: 0.5rem;
+    color: rgba(255,255,255,0.18);
+    margin-top: 10px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+
+  /* Scroll cards */
+  .presha-trending__card {
+    flex: 0 0 118px;
+    background: #161616;
+    border-radius: 9px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #1f1f1f;
+    text-decoration: none;
+    display: block;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease;
+  }
+  .presha-trending__card:hover { transform: translateY(-2px); }
+  .presha-trending__card-img {
+    width: 100%; height: 118px;
+    object-fit: cover; display: block;
+  }
+  .presha-trending__card-img-placeholder {
+    width: 100%; height: 118px;
+    background: #222; display: block;
+  }
+
+  /* Badge row: verified left, condition right */
+  .presha-trending__card-badges {
+    position: absolute; top: 6px; left: 6px; right: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .presha-trending__card-verified {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #6D001A;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .presha-trending__card-verified svg { width: 11px; height: 11px; }
+  .presha-trending__card-condition {
+    background: rgba(0,0,0,0.65);
+    color: #F5F1EC;
+    font-size: 0.4375rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.12);
+    white-space: nowrap;
+  }
+  /* Rank tag on scroll cards (optional) */
+  .presha-trending__card-rank {
+    position: absolute; top: 6px; right: 6px;
+    background: #6D001A;
+    color: #fff;
+    font-size: 0.5625rem;
+    font-weight: 800;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-style: italic;
+    padding: 2px 7px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  .presha-trending__card-body {
+    padding: 9px 10px 11px;
+  }
+  .presha-trending__card-brand {
+    font-size: 0.46875rem;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 3px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__card-name {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #F5F1EC;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+  .presha-trending__card-price {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+  }
+
+  /* Mobile */
+  @media (max-width: 749px) {
+    .presha-trending { padding: 40px 0; }
+    .presha-trending__body { flex-direction: column; gap: 20px; }
+    .presha-trending__hero { flex: none; width: 100%; }
+    .presha-trending__hero-img,
+    .presha-trending__hero-img-placeholder { height: 280px; }
+    .presha-trending__scroll-col { width: 100%; }
+    .presha-trending__header-right { flex-direction: row; align-items: center; gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .presha-trending__container { padding: 0 16px; }
+    .presha-trending__hero-img,
+    .presha-trending__hero-img-placeholder { height: 240px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .presha-trending__view-all::after { transition: none; }
+    .presha-trending__arrow { transition: none; }
+    .presha-trending__card { transition: none; }
+  }
+</style>
+
+{%- liquid
+  assign hero_block = nil
+  for block in section.blocks
+    if block.settings.rank == '#1' and hero_block == nil
+      assign hero_block = block
+    endif
+  endfor
+  if hero_block == nil and section.blocks.size > 0
+    assign hero_block = section.blocks[0]
+  endif
+  assign coll_products = nil
+  assign coll_hero = nil
+  if section.blocks.size == 0 and section.settings.collection != blank
+    assign coll_products = section.settings.collection.products
+    if coll_products.size > 0
+      assign coll_hero = coll_products[0]
+    endif
+  endif
+-%}
+
+<section
+  class="presha-trending"
+  id="presha-trending-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="presha-trending-now"
+>
   <div class="presha-trending__container">
 
-    <!-- Header row: eyebrow + heading on left, arrows on right -->
+    <!-- Header -->
     <div class="presha-trending__header">
-      <div class="presha-trending__header-text">
-        {%- if section.settings.eyebrow != blank -%}
-          <span class="presha-trending__eyebrow">{{ section.settings.eyebrow }}</span>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="presha-trending__heading">{{ section.settings.heading }}</h2>
-        {%- endif -%}
+      <div>
+        <span class="presha-trending__eyebrow">{{ section.settings.eyebrow | default: 'Right Now' }}</span>
+        <h2 class="presha-trending__heading">{{ section.settings.heading | default: 'Trending Now' }}</h2>
       </div>
-      <div class="presha-trending__arrows">
-        <button class="presha-trending__arrow presha-trending__arrow--prev" aria-label="Previous" type="button">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="presha-trending__arrow presha-trending__arrow--next" aria-label="Next" type="button">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+      <div class="presha-trending__header-right">
+        {%- if section.settings.view_all_url != blank -%}
+          <a href="{{ section.settings.view_all_url }}" class="presha-trending__view-all">View All</a>
+        {%- endif -%}
+        <div class="presha-trending__arrows">
+          <button class="presha-trending__arrow presha-trending__arrow--prev" aria-label="Previous">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2.5L4.5 7L9 11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="presha-trending__arrow presha-trending__arrow--next" aria-label="Next">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2.5L9.5 7L5 11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Product carousel track -->
-    <div class="presha-trending__track-wrapper">
-      <div class="presha-trending__track">
+    <!-- Body: hero + scroll row -->
+    <div class="presha-trending__body" id="trending-body-{{ section.id }}">
 
-        {%- if collection != blank and collection.products.size > 0 -%}
-          {%- for product in collection.products limit: product_limit -%}
-            <a href="{{ product.url }}" class="presha-trending__card">
-              <div class="presha-trending__img-wrap">
-                {%- if product.featured_image != blank -%}
-                  <img class="presha-trending__img"
-                       src="{{ product.featured_image | image_url: width: 480 }}"
-                       srcset="{{ product.featured_image | image_url: width: 320 }} 320w,
-                               {{ product.featured_image | image_url: width: 480 }} 480w,
-                               {{ product.featured_image | image_url: width: 640 }} 640w"
-                       sizes="(max-width: 480px) 70vw, (max-width: 749px) 45vw, 280px"
-                       alt="{{ product.title | escape }}"
-                       loading="lazy"
-                       width="480" height="480">
-                {%- else -%}
-                  <div class="presha-trending__img-placeholder">
-                    {{ 'product-1' | placeholder_svg_tag: 'presha-trending__placeholder-svg' }}
+      <!-- Hero card -->
+      {%- if hero_block != nil -%}
+        {%- assign hero_product = hero_block.settings.product -%}
+        {%- assign hero_condition = hero_block.settings.condition -%}
+        <a
+          href="{% if hero_product != blank %}{{ hero_product.url }}{% else %}#{% endif %}"
+          class="presha-trending__hero"
+          id="trending-hero-{{ section.id }}"
+          {{ hero_block.shopify_attributes }}
+        >
+
+          {%- if hero_product != blank and hero_product.featured_image != blank -%}
+            <img
+              class="presha-trending__hero-img"
+              src="{{ hero_product.featured_image | image_url: width: 480 }}"
+              srcset="{{ hero_product.featured_image | image_url: width: 320 }} 320w,
+                      {{ hero_product.featured_image | image_url: width: 480 }} 480w"
+              alt="{{ hero_product.title | escape }}"
+              loading="lazy" width="165" height="240"
+            >
+          {%- else -%}
+            <div class="presha-trending__hero-img-placeholder"></div>
+          {%- endif -%}
+          <div class="presha-trending__hero-overlay"></div>
+
+          <!-- Verified badge -->
+          <div class="presha-trending__verified" role="img" aria-label="Presha Verified">
+            <svg viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <!-- Rank tag -->
+          {%- if hero_block.settings.rank != blank and hero_block.settings.rank != 'none' -%}
+            <div class="presha-trending__rank">{{ hero_block.settings.rank }}</div>
+          {%- endif -%}
+
+          <!-- Condition badge -->
+          {%- if hero_condition != blank -%}
+            <div class="presha-trending__condition-hero">
+              {{- hero_condition -}}
+              {%- unless hero_condition == 'DS' -%}
+                <span class="presha-trending__condition-label">condition</span>
+              {%- endunless -%}
+            </div>
+          {%- endif -%}
+
+          <!-- Ghost number -->
+          <div class="presha-trending__hero-ghost" aria-hidden="true">1</div>
+
+          <!-- Info overlay -->
+          <div class="presha-trending__hero-info">
+            {%- if hero_product != blank -%}
+              <div class="presha-trending__hero-brand">{{ hero_product.vendor }}</div>
+              <div class="presha-trending__hero-name">{{ hero_product.title }}</div>
+              <div class="presha-trending__hero-price">{{ hero_product.price | money }}</div>
+            {%- else -%}
+              <div class="presha-trending__hero-brand">Brand</div>
+              <div class="presha-trending__hero-name">Product Name</div>
+              <div class="presha-trending__hero-price">AED —</div>
+            {%- endif -%}
+          </div>
+        </a>
+
+      {%- elsif coll_hero != nil -%}
+        <!-- Collection fallback hero — used when no blocks are configured -->
+        <a href="{{ coll_hero.url }}" class="presha-trending__hero" id="trending-hero-{{ section.id }}">
+          {%- if coll_hero.featured_image != blank -%}
+            <img
+              class="presha-trending__hero-img"
+              src="{{ coll_hero.featured_image | image_url: width: 480 }}"
+              srcset="{{ coll_hero.featured_image | image_url: width: 320 }} 320w,
+                      {{ coll_hero.featured_image | image_url: width: 480 }} 480w"
+              alt="{{ coll_hero.title | escape }}"
+              loading="lazy" width="165" height="240"
+            >
+          {%- else -%}
+            <div class="presha-trending__hero-img-placeholder"></div>
+          {%- endif -%}
+          <div class="presha-trending__hero-overlay"></div>
+          <div class="presha-trending__verified" role="img" aria-label="Presha Verified">
+            <svg viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="presha-trending__rank">#1</div>
+          <div class="presha-trending__hero-ghost" aria-hidden="true">1</div>
+          <div class="presha-trending__hero-info">
+            <div class="presha-trending__hero-brand">{{ coll_hero.vendor }}</div>
+            <div class="presha-trending__hero-name">{{ coll_hero.title }}</div>
+            <div class="presha-trending__hero-price">{{ coll_hero.price | money }}</div>
+          </div>
+        </a>
+
+      {%- endif -%}
+
+      <!-- Scroll row -->
+      <div class="presha-trending__scroll-col">
+        <div class="presha-trending__scroll-label">Also trending →</div>
+        <div class="presha-trending__track" id="trending-track-{{ section.id }}">
+          {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block == hero_block -%}{%- continue -%}{%- endif -%}
+            {%- assign card_product = block.settings.product -%}
+            {%- assign card_condition = block.settings.condition -%}
+            {%- assign card_rank = block.settings.rank -%}
+            <a
+              href="{% if card_product != blank %}{{ card_product.url }}{% else %}#{% endif %}"
+              class="presha-trending__card"
+              data-block-index="{{ forloop.index }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if card_product != blank and card_product.featured_image != blank -%}
+                <img
+                  class="presha-trending__card-img"
+                  src="{{ card_product.featured_image | image_url: width: 240 }}"
+                  srcset="{{ card_product.featured_image | image_url: width: 160 }} 160w,
+                          {{ card_product.featured_image | image_url: width: 240 }} 240w"
+                  sizes="118px"
+                  alt="{{ card_product.title | escape }}"
+                  loading="lazy" width="118" height="118"
+                >
+              {%- else -%}
+                <div class="presha-trending__card-img-placeholder"></div>
+              {%- endif -%}
+
+              <!-- Badge row: verified left, condition right -->
+              <div class="presha-trending__card-badges">
+                <div class="presha-trending__card-verified" role="img" aria-label="Presha Verified">
+                  <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                {%- if card_condition != blank -%}
+                  <div class="presha-trending__card-condition">
+                    {{- card_condition -}}
+                    {%- unless card_condition == 'DS' -%}
+                      <span class="presha-trending__condition-label">condition</span>
+                    {%- endunless -%}
                   </div>
-                {%- endif -%}
-
-                {%- if section.settings.show_badge -%}
-                  <span class="presha-trending__badge">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a3a"/><path d="M4 7.2L6.2 9.4L10 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    PRESHA VERIFIED
-                  </span>
                 {%- endif -%}
               </div>
 
-              <div class="presha-trending__info">
-                {%- if product.vendor != blank -%}
-                  <span class="presha-trending__vendor">{{ product.vendor | upcase }}</span>
+              <!-- Optional rank tag -->
+              {%- if card_rank != blank and card_rank != 'none' -%}
+                <div class="presha-trending__card-rank">{{ card_rank }}</div>
+              {%- endif -%}
+
+              <div class="presha-trending__card-body">
+                {%- if card_product != blank -%}
+                  <div class="presha-trending__card-brand">{{ card_product.vendor }}</div>
+                  <div class="presha-trending__card-name">{{ card_product.title }}</div>
+                  <div class="presha-trending__card-price">{{ card_product.price | money }}</div>
+                {%- else -%}
+                  <div class="presha-trending__card-brand">Brand</div>
+                  <div class="presha-trending__card-name">Product name</div>
+                  <div class="presha-trending__card-price">AED —</div>
                 {%- endif -%}
-                <span class="presha-trending__title">{{ product.title }}</span>
-                <span class="presha-trending__price">{{ product.price | money }}</span>
               </div>
             </a>
           {%- endfor -%}
-
-        {%- else -%}
-          <!-- Fallback: static placeholder cards when no collection is selected -->
-          {%- for i in (1..5) -%}
-            {%- assign placeholder_brands = 'JORDAN BRAND,SUPREME,OFF-WHITE™,CHROME HEARTS,NEW BALANCE' | split: ',' -%}
-            {%- assign placeholder_titles = "Retro High OG 'Chicago',Box Logo Hooded Sweatshirt,Classic Industrial Belt,Floral Cross Ring,550 'White Grey'" | split: ',' -%}
-            {%- assign placeholder_prices = '$1,450.00,$680.00,$245.00,$985.00,$320.00' | split: ',' -%}
-            {%- assign idx = forloop.index0 -%}
-            <div class="presha-trending__card">
-              <div class="presha-trending__img-wrap">
-                <div class="presha-trending__img-placeholder">
-                  {{ 'product-1' | placeholder_svg_tag: 'presha-trending__placeholder-svg' }}
+          {%- elsif coll_products != nil -%}
+          <!-- Collection fallback scroll cards -->
+          {%- for product in coll_products limit: section.settings.product_limit offset: 1 -%}
+            <a href="{{ product.url }}" class="presha-trending__card">
+              {%- if product.featured_image != blank -%}
+                <img
+                  class="presha-trending__card-img"
+                  src="{{ product.featured_image | image_url: width: 240 }}"
+                  srcset="{{ product.featured_image | image_url: width: 160 }} 160w,
+                          {{ product.featured_image | image_url: width: 240 }} 240w"
+                  sizes="118px"
+                  alt="{{ product.title | escape }}"
+                  loading="lazy" width="118" height="118"
+                >
+              {%- else -%}
+                <div class="presha-trending__card-img-placeholder"></div>
+              {%- endif -%}
+              <div class="presha-trending__card-badges">
+                <div class="presha-trending__card-verified" role="img" aria-label="Presha Verified">
+                  <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                {%- if section.settings.show_badge -%}
-                  <span class="presha-trending__badge">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#1a7a3a"/><path d="M4 7.2L6.2 9.4L10 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    PRESHA VERIFIED
-                  </span>
-                {%- endif -%}
               </div>
-              <div class="presha-trending__info">
-                <span class="presha-trending__vendor">{{ placeholder_brands[idx] }}</span>
-                <span class="presha-trending__title">{{ placeholder_titles[idx] }}</span>
-                <span class="presha-trending__price">{{ placeholder_prices[idx] }}</span>
+              <div class="presha-trending__card-body">
+                <div class="presha-trending__card-brand">{{ product.vendor }}</div>
+                <div class="presha-trending__card-name">{{ product.title }}</div>
+                <div class="presha-trending__card-price">{{ product.price | money }}</div>
               </div>
-            </div>
+            </a>
           {%- endfor -%}
-        {%- endif -%}
-
+          {%- endif -%}
+        </div>
+        <div class="presha-trending__scroll-hint" aria-hidden="true">← drag · use arrows to browse</div>
       </div>
-    </div>
 
-  </div>
+    </div><!-- /.presha-trending__body -->
+  </div><!-- /.presha-trending__container -->
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var section = document.getElementById('presha-trending');
-    if (!section) return;
+(function() {
+  var sectionId = '{{ section.id }}';
+  var track = document.getElementById('trending-track-' + sectionId);
+  var prevBtn = document.querySelector('#presha-trending-' + sectionId + ' .presha-trending__arrow--prev');
+  var nextBtn = document.querySelector('#presha-trending-' + sectionId + ' .presha-trending__arrow--next');
 
-    var track = section.querySelector('.presha-trending__track');
-    var prevBtn = section.querySelector('.presha-trending__arrow--prev');
-    var nextBtn = section.querySelector('.presha-trending__arrow--next');
+  if (!track || !prevBtn || !nextBtn) return;
 
-    if (!track || !prevBtn || !nextBtn) return;
+  var firstCard = track.querySelector('.presha-trending__card');
+  var CARD_WIDTH = firstCard ? (firstCard.offsetWidth + 10) : 128; // card width + gap
 
-    /* --- Arrow navigation: scroll by one card width --- */
-    function getScrollAmount() {
-      var card = track.querySelector('.presha-trending__card');
-      if (!card) return 300;
-      var style = getComputedStyle(track);
-      var gap = parseFloat(style.columnGap) || parseFloat(style.gap) || 16;
-      return card.offsetWidth + gap;
-    }
-
-    prevBtn.addEventListener('click', function () {
-      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', function () {
-      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    });
-
-    /* --- Update arrow opacity at edges --- */
-    function updateArrows() {
-      var maxScroll = track.scrollWidth - track.clientWidth;
-      prevBtn.classList.toggle('presha-trending__arrow--disabled', track.scrollLeft <= 2);
-      nextBtn.classList.toggle('presha-trending__arrow--disabled', track.scrollLeft >= maxScroll - 2);
-    }
-    track.addEventListener('scroll', updateArrows, { passive: true });
-    updateArrows();
-
-    /* --- GSAP entrance --- */
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.from(section.querySelector('.presha-trending__header'), {
-        y: 30, opacity: 0, duration: 0.6, ease: 'power2.out',
-        scrollTrigger: { trigger: section, start: 'top 85%', once: true }
-      });
-
-      gsap.from(track.querySelectorAll('.presha-trending__card'), {
-        y: 40, opacity: 0, duration: 0.6, ease: 'power2.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: track, start: 'top 85%', once: true }
-      });
-    }
+  prevBtn.addEventListener('click', function() {
+    track.scrollBy({ left: -CARD_WIDTH * 2, behavior: 'smooth' });
   });
+  nextBtn.addEventListener('click', function() {
+    track.scrollBy({ left: CARD_WIDTH * 2, behavior: 'smooth' });
+  });
+
+  // GSAP ScrollTrigger entrance animation
+  if (window.gsap && window.ScrollTrigger) {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reducedMotion) {
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#presha-trending-' + sectionId,
+          start: 'top 80%',
+          once: true
+        }
+      });
+      tl.from('#presha-trending-' + sectionId + ' .presha-trending__eyebrow, #presha-trending-' + sectionId + ' .presha-trending__heading', {
+        opacity: 0, y: 20, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+      })
+      .from('#presha-trending-' + sectionId + ' .presha-trending__hero', {
+        opacity: 0, x: -20, duration: 0.7, ease: 'power2.out'
+      }, '-=0.4')
+      .from('#presha-trending-' + sectionId + ' .presha-trending__card', {
+        opacity: 0, y: 16, duration: 0.5, stagger: 0.06, ease: 'power2.out'
+      }, '-=0.4');
+    }
+  }
+})();
 </script>
 
 {% schema %}
 {
   "name": "Trending Now",
-  "tag": "section",
-  "class": "presha-trending-section",
+  "tag": "div",
+  "class": "shopify-section",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Right Now" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trending Now" },
+    { "type": "url", "id": "view_all_url", "label": "View All link (optional)" },
+    { "type": "collection", "id": "collection", "label": "Collection (fallback)", "info": "Used when no product blocks are added — pulls products automatically from this collection" },
+    { "type": "range", "id": "product_limit", "label": "Max products (fallback)", "min": 4, "max": 12, "step": 2, "default": 8 }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow Text",
-      "default": "HOT THIS WEEK"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "TRENDING NOW"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "range",
-      "id": "product_limit",
-      "label": "Max Products",
-      "min": 4,
-      "max": 20,
-      "step": 1,
-      "default": 12
-    },
-    {
-      "type": "checkbox",
-      "id": "show_badge",
-      "label": "Show 'Presha Verified' badge",
-      "default": true
+      "type": "product",
+      "name": "Trending Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        {
+          "type": "select",
+          "id": "rank",
+          "label": "Rank tag",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "#1", "label": "#1 (hero slot)" },
+            { "value": "#2", "label": "#2" },
+            { "value": "#3", "label": "#3" }
+          ],
+          "default": "none",
+          "info": "Set one product to #1 — it becomes the hero card. #2 and #3 show optional rank tags on scroll cards."
+        },
+        {
+          "type": "select",
+          "id": "condition",
+          "label": "Condition",
+          "options": [
+            { "value": "", "label": "Not set (hide badge)" },
+            { "value": "DS", "label": "DS (Dead Stock)" },
+            { "value": "9.5/10", "label": "9.5/10" },
+            { "value": "9/10", "label": "9/10" },
+            { "value": "8/10", "label": "8/10" },
+            { "value": "7/10", "label": "7/10" }
+          ],
+          "default": "",
+          "info": "DS shows no label. All others show 'condition' in faded text."
+        }
+      ]
     }
   ],
-  "presets": [
-    {
-      "name": "Trending Now"
-    }
-  ]
+  "max_blocks": 10,
+  "presets": [{ "name": "Trending Now" }]
 }
 {% endschema %}

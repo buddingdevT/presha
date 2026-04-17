@@ -141,3 +141,42 @@
 ## Our Story Page (2026-04-09)
 - [ ] Create or confirm the page at `/pages/our-story` and assign the `our-story` theme template.
 - [ ] Optional: refine the story copy, value cards or CTA in Theme Editor after the template is assigned.
+
+---
+
+## Homepage Redesign — Collection Sections (2026-04-17)
+
+These 5 new editorial collection sections are now on the homepage. Each needs the correct Shopify collection assigned and configured in Theme Editor.
+
+### Chrome Hearts (`presha_collection_chrome_hearts` → `presha-collection-a`)
+- [ ] **Shopify Admin → Products → Collections** — Create collection with handle `chrome-hearts`
+- [ ] **Theme Editor → Homepage → Chrome Hearts section** — Set Collection to `chrome-hearts`, set eyebrow/brand name, upload portrait product images
+
+### FOG Essentials / Bathing Ape (`presha_collection_fog` → `presha-collection-b`)
+- [ ] Currently set to `a-bathing-ape` collection — confirm final brand or create collection with handle `fog-essentials` (or `a-bathing-ape`)
+- [ ] **Theme Editor → Homepage → FOG section** — Set Collection, update eyebrow/brand name, upload anchor image
+
+### Supreme (`presha_collection_supreme` → `presha-collection-c`)
+- [ ] **Shopify Admin → Products → Collections** — Create collection with handle `supreme`
+- [ ] **Theme Editor → Homepage → Supreme section** — Set Collection, upload hero banner image
+
+### Hermès (`presha_collection_hermes` → `presha-collection-a`)
+- [ ] Currently set to `adidas` as placeholder — create collection with handle `hermes`
+- [ ] **Theme Editor → Homepage → Hermès section** — Set Collection to `hermes`, set eyebrow/brand name, upload portrait images
+
+### Collectibles (`presha_collection_collectibles` → `presha-collection-collectibles`)
+- [ ] Currently set to `nike` as placeholder — create collection with handle `collectibles`
+- [ ] **Theme Editor → Homepage → Collectibles section** — Set Collection, set eyebrow/heading, update view-all link
+
+### Trending Now (updated section)
+- [ ] **Theme Editor → Homepage → Trending Now** — Add product blocks (up to 10). First block with rank "#1" becomes the hero card.
+- [ ] Set each product, rank (#1/#2/#3), and condition (DS / 9.5/10 / 9/10 etc.) per block
+
+---
+
+## Navigation — Mega Menu (2026-04-17)
+
+The header now uses the `mega-menu` navigation menu handle (was `main-menu-mega`).
+
+- [ ] **Shopify Admin → Online Store → Navigation** — Confirm a menu named `mega-menu` exists with the correct nav links (Featured, Sneakers, Streetwear, Accessories, Collectibles). If not, either create it or rename the existing `main-menu-mega` to `mega-menu`.
+- [ ] Menu style is set to `featured_collections` — this shows collection images in the mega menu. Ensure collections are set up before testing the nav.

@@ -1,0 +1,630 @@
+<!-- ============================================================
+  PRESHA COLLECTION C — Hero Banner + Scroll
+
+  Full-width hero banner with gradient overlay and editorial brand
+  name, followed by a horizontally scrollable product card row.
+  All wrapped in a blush (#F7EDEF) background. Designed for brand
+  showcase sections like Supreme, where a cinematic banner image
+  leads the layout and the scroll row beneath it carries the product.
+
+  LAYOUT:
+  - Hero banner: full-width, border-radius 14px, gradient overlay,
+    brand name / eyebrow / tagline overlaid bottom-left
+  - Product row: horizontal scroll, white cards on blush background
+  - View All link: top-right of product row header
+
+  THEME EDITOR SETUP:
+  - Set "Eyebrow" (e.g. "Collection", "New Drop")
+  - Set "Brand Name" (e.g. "Supreme")
+  - Set "Collection tagline" (optional short descriptor below brand)
+  - Upload a "Hero Banner Image" (landscape — min 1280×420px)
+  - Link a Collection — products pulled automatically up to Product Limit
+  - Product Limit: 4–12 (step 2), default 8
+
+  EMPTY STATE:
+  - No collection linked or empty: 4 placeholder cards shown
+  - No hero image: blush placeholder block shown
+
+  ADMIN TODOS:
+  - Create a collection for Supreme (or the relevant brand)
+  - Upload a wide landscape hero banner image (1280×420px minimum)
+  - Assign collection + image in Theme Editor per section instance
+============================================================ -->
+
+<style>
+  /* ── Section wrapper ──────────────────────────────────────────── */
+  .presha-col-c {
+    background: #F7EDEF;
+    padding-bottom: 60px;
+    /* No top padding — banner sits flush to section top edge */
+  }
+
+  .presha-col-c__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Hero banner ──────────────────────────────────────────────── */
+  .presha-col-c__banner {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    /* GPU hint — GSAP will animate this element */
+    will-change: transform, opacity;
+  }
+
+  /* Banner image */
+  .presha-col-c__banner-img {
+    display: block;
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  /* Gradient overlay — darkens bottom for legible text */
+  .presha-col-c__banner-gradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.15) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Banner placeholder — shown when no image is uploaded */
+  .presha-col-c__banner-placeholder {
+    width: 100%;
+    height: 420px;
+    background: #D4C8CE;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .presha-col-c__banner-placeholder span {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(109, 0, 26, 0.35);
+  }
+
+  /* Brand identity block — overlaid bottom-left of banner */
+  .presha-col-c__banner-identity {
+    position: absolute;
+    bottom: 24px;
+    left: 28px;
+    /* GSAP clip-path entrance — text slides up from below */
+    clip-path: inset(100% 0 0 0);
+    will-change: clip-path;
+  }
+
+  .presha-col-c__banner-eyebrow {
+    display: block;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 4px;
+  }
+
+  .presha-col-c__banner-brand {
+    display: block;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-style: italic;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 0.85;
+    margin: 0;
+  }
+
+  .presha-col-c__banner-descriptor {
+    display: block;
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 8px;
+  }
+
+  /* ── Section below the banner ─────────────────────────────────── */
+  .presha-col-c__below {
+    padding: 24px 0 0;
+  }
+
+  /* Header row: left label (implicit) + right view-all link */
+  .presha-col-c__header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  /* View All link — burgundy with animated underline sweep */
+  .presha-col-c__view-all {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6D001A;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  /* Burgundy sweep underline */
+  .presha-col-c__view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #6D001A;
+    transition: width 0.3s ease-out;
+  }
+  .presha-col-c__view-all:hover::after,
+  .presha-col-c__view-all:focus::after {
+    width: 100%;
+  }
+  .presha-col-c__view-all:hover {
+    color: #6D001A;
+  }
+  .presha-col-c__view-all:focus-visible {
+    outline: 2px solid #6D001A;
+    outline-offset: 3px;
+  }
+
+  /* ── Horizontal scroll track ──────────────────────────────────── */
+  .presha-col-c__track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;            /* Firefox */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .presha-col-c__track::-webkit-scrollbar {
+    display: none;                    /* Chrome / Safari */
+  }
+
+  /* ── Product card ─────────────────────────────────────────────── */
+  .presha-col-c__card {
+    flex: 0 0 196px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    will-change: transform;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .presha-col-c__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  }
+  .presha-col-c__card:focus-visible {
+    outline: 2px solid #6D001A;
+    outline-offset: 3px;
+  }
+
+  /* Card image */
+  .presha-col-c__card-img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+
+  /* Placeholder image block (no product image) */
+  .presha-col-c__card-img-placeholder {
+    display: block;
+    width: 100%;
+    height: 260px;
+    background: #EDE4E7;
+  }
+
+  /* Verified badge — burgundy circle, white checkmark, top-left of image */
+  .presha-col-c__verified {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #6D001A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .presha-col-c__verified svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Card body */
+  .presha-col-c__card-body {
+    padding: 10px 10px 12px;
+  }
+  .presha-col-c__card-vendor {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.46875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.35);
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .presha-col-c__card-name {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: #0A0A0A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+  .presha-col-c__card-price {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #0A0A0A;
+    line-height: 1;
+  }
+
+  /* ── Mobile (≤ 749px) ─────────────────────────────────────────── */
+  @media (max-width: 749px) {
+    .presha-col-c__container {
+      padding: 0 16px;
+    }
+
+    /* Banner shrinks to 220px on mobile */
+    .presha-col-c__banner-img {
+      height: 220px;
+    }
+    .presha-col-c__banner-placeholder {
+      height: 220px;
+    }
+
+    /* Brand identity nudged inward on smaller viewport */
+    .presha-col-c__banner-identity {
+      bottom: 16px;
+      left: 18px;
+    }
+
+    /* Cards shrink on mobile */
+    .presha-col-c__card {
+      flex: 0 0 160px;
+    }
+    .presha-col-c__card-img,
+    .presha-col-c__card-img-placeholder {
+      height: 210px;
+    }
+  }
+
+  /* ── Reduced motion — disable hover transitions ───────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .presha-col-c__card {
+      transition: none;
+    }
+    .presha-col-c__view-all::after {
+      transition: none;
+    }
+  }
+</style>
+
+<section
+  class="presha-col-c"
+  id="presha-col-c-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="presha-collection-c"
+>
+  <div class="presha-col-c__container">
+
+    <!-- ── Hero banner ── -->
+    {%- if section.settings.hero_image != blank -%}
+      <div
+        class="presha-col-c__banner"
+        id="col-c-banner-{{ section.id }}"
+      >
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 1280 }}"
+          srcset="{{ section.settings.hero_image | image_url: width: 800 }} 800w,
+                  {{ section.settings.hero_image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.hero_image | image_url: width: 1600 }} 1600w"
+          sizes="(max-width: 749px) 100vw, 1280px"
+          alt="{{ section.settings.hero_image.alt | escape }}"
+          width="1280"
+          height="420"
+          loading="eager"
+          class="presha-col-c__banner-img"
+        >
+
+        <!-- Bottom-to-top gradient overlay for text legibility -->
+        <div class="presha-col-c__banner-gradient" aria-hidden="true"></div>
+
+        <!-- Brand identity: eyebrow + brand name + tagline -->
+        <div
+          class="presha-col-c__banner-identity"
+          id="col-c-identity-{{ section.id }}"
+        >
+          <span class="presha-col-c__banner-eyebrow">
+            {{- section.settings.eyebrow | default: 'Collection' -}}
+          </span>
+          <span class="presha-col-c__banner-brand">
+            {{- section.settings.brand_name | default: 'Brand Name' -}}
+          </span>
+          {%- if section.settings.descriptor != blank -%}
+            <span class="presha-col-c__banner-descriptor">
+              {{- section.settings.descriptor | escape -}}
+            </span>
+          {%- endif -%}
+        </div>
+
+      </div><!-- /.presha-col-c__banner -->
+
+    {%- else -%}
+
+      <!-- No image — blush placeholder block -->
+      <div class="presha-col-c__banner-placeholder" aria-hidden="true">
+        <span>Hero banner image</span>
+      </div>
+
+    {%- endif -%}
+
+    <!-- ── Section below banner: header + scroll row ── -->
+    <div class="presha-col-c__below">
+
+      <!-- Header row — View All link top-right -->
+      <div class="presha-col-c__header">
+        {%- if section.settings.collection != blank -%}
+          <a
+            href="{{ section.settings.collection.url }}"
+            class="presha-col-c__view-all"
+            aria-label="View all {{ section.settings.brand_name | escape }} products"
+          >
+            View All
+          </a>
+        {%- endif -%}
+      </div><!-- /.presha-col-c__header -->
+
+      <!-- Horizontal product scroll track -->
+      <div class="presha-col-c__track" id="col-c-track-{{ section.id }}">
+
+        {%- if section.settings.collection != blank -%}
+
+          {%- assign products_to_show = section.settings.collection.products -%}
+
+          {%- if products_to_show.size > 0 -%}
+            {%- for product in products_to_show limit: section.settings.product_limit -%}
+              <a
+                href="{{ product.url }}"
+                class="presha-col-c__card"
+                aria-label="{{ product.title | escape }}"
+              >
+                <!-- Product image -->
+                {%- if product.featured_image != blank -%}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 280 }}"
+                    srcset="{{ product.featured_image | image_url: width: 280 }} 280w,
+                            {{ product.featured_image | image_url: width: 400 }} 400w"
+                    sizes="196px"
+                    alt=""
+                    loading="lazy"
+                    width="196"
+                    height="260"
+                    class="presha-col-c__card-img"
+                  >
+                {%- else -%}
+                  <div class="presha-col-c__card-img-placeholder" aria-hidden="true"></div>
+                {%- endif -%}
+
+                <!-- Verified badge — burgundy circle, white checkmark -->
+                <div class="presha-col-c__verified" role="img" aria-label="Presha Verified">
+                  <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Card info -->
+                <div class="presha-col-c__card-body">
+                  <div class="presha-col-c__card-vendor">{{ product.vendor | escape }}</div>
+                  <div class="presha-col-c__card-name">{{ product.title | escape }}</div>
+                  <div class="presha-col-c__card-price">{{ product.price | money }}</div>
+                </div>
+              </a>
+            {%- endfor -%}
+
+          {%- else -%}
+            <!-- Collection linked but empty — 4 placeholder cards -->
+            {%- for i in (1..4) -%}
+              <div class="presha-col-c__card" aria-hidden="true">
+                <div class="presha-col-c__card-img-placeholder"></div>
+                <div class="presha-col-c__verified" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="presha-col-c__card-body">
+                  <div class="presha-col-c__card-vendor">Brand</div>
+                  <div class="presha-col-c__card-name">Product Name</div>
+                  <div class="presha-col-c__card-price">—</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+
+        {%- else -%}
+          <!-- No collection set — 4 placeholder cards for Theme Editor visibility -->
+          {%- for i in (1..4) -%}
+            <div class="presha-col-c__card" aria-hidden="true">
+              <div class="presha-col-c__card-img-placeholder"></div>
+              <div class="presha-col-c__verified" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="presha-col-c__card-body">
+                <div class="presha-col-c__card-vendor">Brand</div>
+                <div class="presha-col-c__card-name">Product Name</div>
+                <div class="presha-col-c__card-price">—</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+      </div><!-- /.presha-col-c__track -->
+
+    </div><!-- /.presha-col-c__below -->
+
+  </div><!-- /.presha-col-c__container -->
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  var sectionId = '{{ section.id }}';
+
+  // Guard: GSAP + ScrollTrigger must be loaded globally in theme.liquid
+  if (!window.gsap || !window.ScrollTrigger) return;
+
+  // Respect prefers-reduced-motion — reveal all elements instantly, skip animation
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) {
+    // Reset clip-path on brand identity block immediately so text is visible
+    var identityElRM = document.getElementById('col-c-identity-' + sectionId);
+    if (identityElRM) identityElRM.style.clipPath = 'inset(0% 0 0 0)';
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  var banner   = document.getElementById('col-c-banner-' + sectionId);
+  var identity = document.getElementById('col-c-identity-' + sectionId);
+  var track    = document.getElementById('col-c-track-' + sectionId);
+  var cards    = track ? track.querySelectorAll('.presha-col-c__card') : [];
+
+  // Build the single entrance timeline
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#presha-col-c-' + sectionId,
+      start: 'top 80%',
+      once: true
+    }
+  });
+
+  // 1. Hero banner slides up from below — cinematic entrance
+  if (banner) {
+    tl.fromTo(
+      banner,
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }
+    );
+  }
+
+  // 2. Brand identity clips up from below — editorial text reveal
+  if (identity) {
+    tl.fromTo(
+      identity,
+      { clipPath: 'inset(100% 0 0 0)' },
+      { clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'power3.out' },
+      banner ? '-=0.3' : '0'   // overlap with banner if it exists
+    );
+  }
+
+  // 3. Product cards stagger in from below
+  if (cards.length > 0) {
+    tl.fromTo(
+      cards,
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.07, ease: 'power2.out' },
+      '-=0.2'
+    );
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Collection C",
+  "tag": "div",
+  "class": "shopify-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Collection",
+      "info": "Small uppercase label above the brand name on the banner (e.g. 'New Drop', 'Exclusive')"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Brand Name",
+      "info": "Large italic Cormorant Garamond heading overlaid on the banner"
+    },
+    {
+      "type": "text",
+      "id": "descriptor",
+      "label": "Collection tagline",
+      "info": "Optional short descriptor displayed below the brand name on the banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Banner Image",
+      "info": "Wide landscape image for the hero banner. Recommended: 1280×420px minimum."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Products are pulled directly from this collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Number of products",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 8,
+      "info": "Maximum products to display in the scroll row"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection C",
+      "settings": {
+        "eyebrow": "Collection",
+        "brand_name": "Supreme"
+      }
+    }
+  ]
+}
+{% endschema %}

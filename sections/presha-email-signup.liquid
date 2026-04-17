@@ -79,19 +79,19 @@
   }
   .presha-newsletter-heading {
     margin: 0;
-    font-family: 'Impact', 'Oswald', system-ui, sans-serif;
-    font-size: clamp(48px, 6vw, 76px);
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    color: #111827;
-    text-transform: uppercase;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #F5F1EC;
   }
   .presha-newsletter-subtext {
     margin: 0;
     font-size: 18px;
     line-height: 1.5;
-    color: #4b5563;
+    color: rgba(245,241,236,0.65);
   }
 
   /* Right: Form */
@@ -116,19 +116,19 @@
     flex: 1;
     padding: 20px 28px;
     font-size: 16px;
-    color: #111827;
-    background-color: #ffffff;
-    border: none;
+    color: #F5F1EC;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 50px;
     outline: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     transition: box-shadow 0.2s ease;
   }
   .presha-newsletter-input::placeholder {
-    color: #9ca3af;
+    color: rgba(245,241,236,0.4);
   }
   .presha-newsletter-input:focus {
-    box-shadow: 0 0 0 2px #6d001a;
+    box-shadow: 0 0 0 2px rgba(245, 241, 236, 0.8);
   }
 
   .presha-newsletter-btn {
@@ -153,7 +153,7 @@
   .presha-newsletter-disclaimer {
     margin: 0 0 0 20px;
     font-size: 12px;
-    color: #9ca3af;
+    color: rgba(245,241,236,0.5);
   }
   
   .presha-newsletter-msg {

@@ -36,7 +36,7 @@
           "settings": {
             "label": "SHOP BY",
             "name": "Trending Now",
-            "link": ""
+            "link": "shopify://collections/trending-now"
           }
         },
         "rail_card_LFnNJQ": {
@@ -260,836 +260,33 @@
         "heading": "SHOP BY BRAND"
       }
     },
-    "presha_gifts": {
-      "type": "presha-gifts",
-      "blocks": {
-        "gift_her": {
-          "type": "gift_tile",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Mar_30_2026_07_20_52_PM.png",
-            "eyebrow": "FIND HER PERFECT GIFT",
-            "heading": "Gifts for Her",
-            "button_text": "SHOP NOW",
-            "link": ""
-          }
-        },
-        "gift_him": {
-          "type": "gift_tile",
-          "settings": {
-            "image": "shopify://shop_images/IMG_9174.jpg",
-            "eyebrow": "FIND HIS PERFECT PAIR",
-            "heading": "Gifts for Him",
-            "button_text": "SHOP NOW",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "gift_her",
-        "gift_him"
-      ],
-      "settings": {}
-    },
     "presha_trending": {
       "type": "presha-trending-now",
       "settings": {
         "eyebrow": "HOT THIS WEEK",
         "heading": "TRENDING NOW",
+        "view_all_url": "shopify://collections/trending-now",
         "collection": "trending-now",
-        "product_limit": 12,
-        "show_badge": true
+        "product_limit": 8
       }
     },
-    "1769647631664937e5": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_321a089_gXkeDb": {
-          "type": "ai_gen_block_321a089",
-          "name": "Shop by category",
-          "settings": {
-            "category_label": "SHOP BY",
-            "collection_1": "audemars-piguet",
-            "collection_2": "black",
-            "collection_3": "shorts",
-            "collection_4": "jacquemus",
-            "collection_5": "frontpage",
-            "collection_6": "patek-philippe",
-            "section_padding_top": 40,
-            "section_padding_bottom": 40,
-            "card_gap": 20,
-            "card_padding": 20,
-            "card_min_width": 280,
-            "card_max_width": 320,
-            "card_min_width_mobile": 240,
-            "card_max_width_mobile": 280,
-            "card_background": "#000000",
-            "card_border_radius": 16,
-            "blur_amount": 8,
-            "image_size": 100,
-            "image_size_mobile": 70,
-            "image_border_radius": 12,
-            "image_placeholder_bg": "#ffffff",
-            "label_font_size": 11,
-            "label_font_size_mobile": 9,
-            "title_font_size": 18,
-            "title_font_size_mobile": 16,
-            "label_color": "#ffffff",
-            "title_color": "#ffffff",
-            "background_color": "#000000",
-            "shadow_x": 0,
-            "shadow_y": 6,
-            "shadow_blur": 12,
-            "shadow_color": "#000000"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_321a089_gXkeDb"
-      ],
-      "disabled": true,
+    "presha_collection_chrome_hearts": {
+      "type": "presha-collection-a",
       "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": true,
-        "overlay_color": "#000000",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "eyebrow": "Collection",
+        "brand_name": "{{ section.settings.collection.title }}",
+        "collection": "chrome-hearts",
+        "product_limit": 8
       }
     },
-    "blocks_fdCed7": {
-      "type": "_blocks",
-      "blocks": {
-        "text_nKfJRY": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h5>SHOP BY BRANDS</h5>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 42,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_a933fd1_n7RdbT": {
-          "type": "ai_gen_block_a933fd1",
-          "settings": {
-            "heading": "",
-            "heading_alignment": "center",
-            "heading_size": 16,
-            "heading_color": "#000000",
-            "desktop_width_percent": 50,
-            "columns_desktop": 6,
-            "columns_mobile": "1",
-            "grid_gap": 40,
-            "image_aspect_ratio": 150,
-            "border_radius": 10,
-            "placeholder_bg_color": "#f4f4f4",
-            "overlay_color": "#000000",
-            "title_color": "#ffffff",
-            "title_size": 12,
-            "category_1_image": "shopify://shop_images/Untitled_40_29_f023bca0-bb07-4993-8b50-15e679f32fcc.webp",
-            "category_1_title": "",
-            "category_1_link": "",
-            "category_2_image": "shopify://shop_images/4_600x_218b98a5-9bec-42c4-afbe-28657ae2cb2c.webp",
-            "category_2_title": "",
-            "category_2_link": "",
-            "category_3_image": "shopify://shop_images/b5e0c83c-6ccf-4695-bbc6-f3c226eeffd3.jpg",
-            "category_3_title": "",
-            "category_3_link": "",
-            "category_4_image": "shopify://shop_images/Untitled_40_29_f023bca0-bb07-4993-8b50-15e679f32fcc.webp",
-            "category_4_title": "",
-            "category_4_link": "",
-            "category_5_image": "shopify://shop_images/4_600x_218b98a5-9bec-42c4-afbe-28657ae2cb2c.webp",
-            "category_5_title": "",
-            "category_5_link": "",
-            "category_6_image": "shopify://shop_images/Untitleddesign_600x_73ed48c8-aca3-4e69-9c8a-16167273c168.webp",
-            "category_6_title": "",
-            "category_6_link": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_nKfJRY",
-        "ai_gen_block_a933fd1_n7RdbT"
-      ],
-      "disabled": true,
-      "name": "Scrolling category banner",
+    "presha_collection_fog": {
+      "type": "presha-collection-b",
       "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "product_list_fa6P9H": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>GO YARD</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
-        }
-      },
-      "disabled": true,
-      "name": "GO YARD Featured collection",
-      "settings": {
-        "collection": "goyard",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 10,
-        "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "product_list_jFQpmj": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_dgp6rG": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>GOYARD</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_w7R478": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_dgp6rG",
-            "product_list_button_w7R478"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_6gpBEn": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_FpdnQ3": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_ciKjAp": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_6gpBEn",
-            "product_title_FpdnQ3",
-            "price_ciKjAp"
-          ]
-        }
-      },
-      "name": "GOYARD Featured collection",
-      "settings": {
-        "collection": "goyard",
-        "layout_type": "carousel",
-        "carousel_on_mobile": true,
-        "max_products": 6,
-        "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 30,
-        "rows_gap": 24,
-        "icons_style": "chevron",
-        "icons_shape": "circle",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-end",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "product_list_i3bdF7": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_kBXcUn": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>AIR JORDAN</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_tcc9rA": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_kBXcUn",
-            "product_list_button_tcc9rA"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_peQYDC": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_JyRXpX": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_3KR3ca": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_peQYDC",
-            "product_title_JyRXpX",
-            "price_3KR3ca"
-          ]
-        }
-      },
-      "name": "AIR JORDAN Featured collection",
-      "settings": {
-        "collection": "jordan",
-        "layout_type": "carousel",
-        "carousel_on_mobile": true,
-        "max_products": 6,
-        "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 30,
-        "rows_gap": 24,
-        "icons_style": "chevron",
-        "icons_shape": "circle",
-        "section_width": "page-width",
-        "horizontal_alignment": "center",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "presha_authentication": {
-      "type": "presha-authentication",
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "title": "EXPERT MULTI-POINT INSPECTION",
-            "subtext": "Thorough physical inspection by certified specialists."
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "title": "BLOCKCHAIN VERIFICATION",
-            "subtext": "Digital certificates of authenticity for select premium items."
-          }
-        }
-      },
-      "block_order": [
-        "feature_1",
-        "feature_2"
-      ],
-      "settings": {
-        "bg_color": "#201416",
-        "eyebrow": "THE PRESHA PROMISE",
-        "heading": "PRESHA VERIFIED",
-        "description": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.</p>",
-        "btn_label": "LEARN ABOUT AUTHENTICATION",
-        "btn_link": "/pages/authentication"
+        "eyebrow": "Collection",
+        "brand_name": "{{ section.settings.collection.title }}",
+        "anchor_image": "shopify://shop_images/a-bathing-ape-logo-png_seeklogo-330394.png",
+        "collection": "a-bathing-ape",
+        "product_limit": 8
       }
     },
     "presha_featured_categories": {
@@ -1097,6 +294,7 @@
       "blocks": {
         "cat_jordan": {
           "type": "category",
+          "name": "Air Jordan",
           "settings": {
             "category_name": "Air Jordan",
             "collection_url": "/collections/jordan"
@@ -1104,6 +302,7 @@
         },
         "cat_nike": {
           "type": "category",
+          "name": "Nike",
           "settings": {
             "category_name": "Nike",
             "collection_url": "/collections/nike"
@@ -1111,13 +310,15 @@
         },
         "cat_on_running": {
           "type": "category",
+          "name": "Loewe x On",
           "settings": {
-            "category_name": "On Running",
+            "category_name": "Loewe X On",
             "collection_url": "/collections/on-running"
           }
         },
         "cat_onitsuka": {
           "type": "category",
+          "name": "Onitsuka Tiger",
           "settings": {
             "category_name": "Onitsuka Tiger",
             "collection_url": "/collections/onitsuka-tiger"
@@ -1164,6 +365,97 @@
       ],
       "settings": {
         "heading": "Featured Categories"
+      }
+    },
+    "presha_collection_supreme": {
+      "type": "presha-collection-c",
+      "settings": {
+        "eyebrow": "Collection",
+        "brand_name": "{{ section.settings.collection.title }}",
+        "descriptor": "Box Logo Drops · Apparel · Caps",
+        "hero_image": "shopify://shop_images/slide3.webp",
+        "collection": "accessories",
+        "product_limit": 8
+      }
+    },
+    "presha_gifts": {
+      "type": "presha-gifts",
+      "blocks": {
+        "gift_her": {
+          "type": "gift_tile",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Mar_30_2026_07_20_52_PM.png",
+            "eyebrow": "FIND HER PERFECT GIFT",
+            "heading": "Gifts for Her",
+            "button_text": "SHOP NOW",
+            "link": ""
+          }
+        },
+        "gift_him": {
+          "type": "gift_tile",
+          "settings": {
+            "image": "shopify://shop_images/IMG_9174.jpg",
+            "eyebrow": "FIND HIS PERFECT PAIR",
+            "heading": "Gifts for Him",
+            "button_text": "SHOP NOW",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "gift_her",
+        "gift_him"
+      ],
+      "settings": {}
+    },
+    "presha_authentication": {
+      "type": "presha-authentication",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "EXPERT MULTI-POINT INSPECTION",
+            "subtext": "Thorough physical inspection by certified specialists."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "BLOCKCHAIN VERIFICATION",
+            "subtext": "Digital certificates of authenticity for select premium items."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2"
+      ],
+      "settings": {
+        "bg_color": "#201416",
+        "eyebrow": "THE PRESHA PROMISE",
+        "heading": "PRESHA VERIFIED",
+        "description": "<p>Every single item sold on Presha Trends undergoes a rigorous 10-point inspection by our team of expert authenticators. From the box labels to the microscopic stitching details, we ensure your investment is legitimate.</p>",
+        "btn_label": "LEARN ABOUT AUTHENTICATION",
+        "btn_link": "/pages/authentication"
+      }
+    },
+    "presha_collection_hermes": {
+      "type": "presha-collection-a",
+      "settings": {
+        "eyebrow": "Collection",
+        "brand_name": "{{ section.settings.collection.title }}",
+        "collection": "adidas",
+        "product_limit": 8
+      }
+    },
+    "presha_collection_collectibles": {
+      "type": "presha-collection-collectibles",
+      "settings": {
+        "eyebrow": "Rare & Collectible",
+        "heading": "{{ section.settings.collection.title }}",
+        "collection": "nike",
+        "product_limit": 8,
+        "view_all_url": "shopify://collections/nike"
       }
     },
     "presha_featured_journal": {
@@ -1262,7 +554,7 @@
       ],
       "settings": {
         "eyebrow_text": "TRUSTED WORLDWIDE",
-        "background_color": "#d5d5d5",
+        "background_color": "#f7edef",
         "eyebrow_color": "#7a8a9e",
         "press_text_color": "#2c3e50",
         "card_background": "#ffffff",
@@ -1276,8 +568,8 @@
     "presha_email_signup": {
       "type": "presha-email-signup",
       "settings": {
-        "bg_color": "#eeeeee",
-        "heading": "JOIN THE PRESHA\nCOMMUNITY!",
+        "bg_color": "#0a0a0a",
+        "heading": "Join the Presha\nCommunity",
         "subtext": "Get exclusive access to rare drops, member-only collections, and the latest from the Presha Journal.",
         "placeholder": "jane@email.com",
         "btn_label": "Subscribe",
@@ -1324,15 +616,15 @@
     "presha_hero_carousel",
     "presha_marquee",
     "presha_brand_logos",
-    "presha_gifts",
     "presha_trending",
-    "1769647631664937e5",
-    "blocks_fdCed7",
-    "product_list_fa6P9H",
-    "product_list_jFQpmj",
-    "product_list_i3bdF7",
-    "presha_authentication",
+    "presha_collection_chrome_hearts",
+    "presha_collection_fog",
     "presha_featured_categories",
+    "presha_collection_supreme",
+    "presha_gifts",
+    "presha_authentication",
+    "presha_collection_hermes",
+    "presha_collection_collectibles",
     "presha_featured_journal",
     "presha_reviews_press",
     "presha_email_signup",
