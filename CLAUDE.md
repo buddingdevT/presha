@@ -44,8 +44,11 @@ Everything built must be fully functional at the end.
 Screenshots in /design-refs/ are FINAL designs — build them exactly as shown.
 Do not deviate, improvise, or make creative liberties unless explicitly instructed.
 If a design ref is updated by the project owner, the new version becomes the new final.
-Assume nothing has been built yet. Cross-reference existing theme files 
-to check what's already in place before writing new code.
+Do not assume nothing has been built. Cross-reference existing theme files,
+`templates/index.json`, `PROGRESS.md`, and `ADMIN_TODOS.md` to check what is
+already in place before writing new code.
+
+For the current project state, latest checkpoint, current homepage order, and session handoff context, open `AGENT_GUIDE.md` first.
 
 ---
 
@@ -231,33 +234,17 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 - Wishlist icon is a placeholder — functionality to be added later
 
 ## Pages & Sections Tracker
-> **Note:** Section order and content are subject to change as designs are confirmed. Treat this as the current working structure, not a final spec.
+This file no longer tracks live project state.
 
-### Homepage — Section Order
-1. - [x] Announcement Bar
-2. - [x] Navigation / Header
-3. - [x] Hero Section
-4. - [/] Scrolling Marquee (⚠️ animation not working — revisit)
-5. - [x] Shop by Brands
-6. - [x] Gifts for Her / Him (built; future edits pending)
-7. - [x] Trending Now (built; future edits pending)
-8. - [x] Presha Authentication
-9. - [x] Featured Categories
-10. - [x] Journal
-11. - [x] Reviews
-12. - [x] Email Signup (built; future edits pending)
-13. - [x] Trust Bar
-14. - [x] Footer (built; future edits pending)
+Use `AGENT_GUIDE.md` for:
 
-### Other Pages
-- [ ] Collection / Category Page
-- [ ] Product Detail Page
-- [ ] About Page
-- [ ] Cart Page
-- [ ] Account Page
-- [x] Authentication Page (layout approved; revisit color/design choices later)
-- [x] Our Story Page (approved for now; future edits/design refinements expected)
-- [ ] (more TBD)
+- current homepage structure
+- latest completed work
+- known blockers
+- current priorities
+- session handoff notes
+
+This file should only hold enduring project context, not fast-changing state.
 
 ## Product & Shopify Setup Notes
 - Products are mostly one-of-one (resell) — inventory logic must reflect this
@@ -265,6 +252,8 @@ We are NOT copying Mad Kicks. We are studying the category standard and exceedin
 - Metafields may be needed for custom product data — scope per section
 - Wishlist: no app integrated yet — static icon only for now
 - Product setup will be done in parallel as frontend is built
+- The April 17 homepage redesign is in code, but several sections still depend on Shopify Admin collection creation, image uploads, and Theme Editor assignment.
+- `mega-menu` is now the active navigation menu handle in `sections/header-group.json`.
 
 ## Design References
 All design screenshots live in /design-refs/

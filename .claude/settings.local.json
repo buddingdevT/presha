@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -d .worktrees)",
+      "Bash(ls -d worktrees)",
+      "Bash(python3 -c \"import json,sys; json.load\\(open\\('templates/index.json'\\)\\); print\\('JSON valid'\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('templates/index.json','utf8'\\)\\); console.log\\('JSON valid'\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const txt=fs.readFileSync\\('templates/index.json','utf8'\\); const jsonStart=txt.indexOf\\('{'\\); JSON.parse\\(txt.slice\\(jsonStart\\)\\); console.log\\('JSON valid'\\)\")",
+      "Bash(python3 -c ':*)",
+      "Bash(shopify theme:*)",
+      "Bash(head -n 302 templates/index.json)",
+      "Bash(tail -n +1064 templates/index.json)",
+      "Bash(cat /tmp/index_top.json /tmp/index_bottom.json)"
+    ]
+  }
+}
