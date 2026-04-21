@@ -354,10 +354,10 @@ Current session handoff:
 
 - Date: 2026-04-21
 - Agent: Codex
-- What was done: Audited the repo, reconciled stale docs against the actual codebase, and created this single-file onboarding/handoff guide.
-- Files changed: `CLAUDE.md`, `AGENT_GUIDE.md`
-- Shopify push status: Not pushed. Doc-only reconciliation work.
-- Git status / commit: Local modifications present in `CLAUDE.md` and `AGENT_GUIDE.md`; no commit created in this session.
+- What was done: Audited the repo, created the canonical `AGENT_GUIDE.md`, removed the old `HANDOFF.md`, simplified `CLAUDE.md` so it points to the guide for live state, added a project-local `/handoff` command, committed the docs cleanup, pushed it to `main`, and verified the local `origin` remote uses the new GitHub repository URL.
+- Files changed: `AGENT_GUIDE.md`, `CLAUDE.md`, `.claude/commands/handoff.md`, `.claude/settings.local.json`, `HANDOFF.md` (removed)
+- Shopify push status: Not pushed to Shopify. Git/documentation workflow only.
+- Git status / commit: Clean working tree on `main`, synced with `origin/main`. Latest commit: `e6d5292` (`Docs - add agent guide and handoff command`).
 - Remaining blockers: Broken marquee, incomplete Shopify Admin collection/image/menu setup, and unfinished core commerce pages.
 - Recommended next step: Either fix `sections/presha-marquee.liquid` or do a targeted homepage/admin readiness audit.
 
