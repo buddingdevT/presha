@@ -3,6 +3,8 @@
 > Items that require action in the Shopify Admin panel by the store owner.
 > Mark `[x]` when completed.
 
+Audit note: this checklist was reconciled against the live homepage config in `templates/index.json` on 2026-04-21. If this file and the homepage JSON disagree, trust `templates/index.json` first and then update this checklist.
+
 ---
 
 ## Header & Announcement Bar (2026-03-27)
@@ -46,7 +48,7 @@
 ---
 
 ## Shop by Brand — Logo Strip (2026-03-30)
-- [ ] **Action Required — Create collections:** The brand cards link to collection pages. Create these collections in **Shopify Admin → Products → Collections**:
+- [x] **Action Required — Create collections:** The brand cards link to collection pages. Create these collections in **Shopify Admin → Products → Collections**:
   - `/collections/nike`
   - `/collections/jordan`
   - `/collections/adidas`
@@ -63,7 +65,7 @@
 
 ## Gifts For Her / Him Section (2026-03-30)
 - [ ] **Action Required — Upload images:** Go to Theme Editor → Homepage → "Gifts For Her / Him" section. Upload a lifestyle image for each tile (e.g. Goyard bags for "Her", streetwear/sneakers for "Him").
-- [ ] **Action Required — Set link URLs:** In each tile block, set the Link to point to your gift collections (e.g. `/collections/gifts-for-her`, `/collections/gifts-for-him`). Create these collections in **Shopify Admin → Products → Collections** if they don't exist yet.
+- [x] **Action Required — Set link URLs:** In each tile block, set the Link to point to your gift collections (e.g. `/collections/gifts-for-her`, `/collections/gifts-for-him`). Create these collections in **Shopify Admin → Products → Collections** if they don't exist yet.
 - [ ] (Optional): Update the eyebrow text, heading, or button label per tile via Theme Editor.
 
 ---
@@ -72,7 +74,7 @@
 - [ ] **Action Required — Upload category images:** Go to **Theme Editor → Homepage → Featured Categories** section. For each category block (Air Jordan, Nike, On Running, Onitsuka Tiger, Adidas, New Balance, Yeezy, Asics), click the block and upload a lifestyle photo via **"Category Image"** image picker.
   - Recommended: portrait orientation (3:4 aspect ratio), min 800px wide
   - Lifestyle sneaker photography (feet wearing shoes, editorial-style product shots)
-- [ ] **Action Required — Create collections:** The category cards link to collection pages. Create these in **Shopify Admin → Products → Collections** if they don't exist:
+- [x] **Action Required — Create collections:** The category cards link to collection pages. Create these in **Shopify Admin → Products → Collections** if they don't exist:
   - `/collections/jordan`, `/collections/nike`, `/collections/on-running`, `/collections/onitsuka-tiger`
   - `/collections/adidas`, `/collections/new-balance`, `/collections/yeezy`, `/collections/asics`
 - [ ] (Optional): Add, remove, or reorder categories via Theme Editor → Featured Categories → Add/reorder blocks. Up to 10 categories supported.
@@ -93,8 +95,8 @@
 - [ ] **Theme Editor → Homepage → Hero Carousel → Rail Card 4 (Loewe × On)** — Upload a thumbnail image
 
 ### Collections — REQUIRED for rail card links to work
-- [ ] **Shopify Admin → Products → Collections** — Create these collections (or confirm handles match):
-  - `/collections/trending`
+- [x] **Shopify Admin → Products → Collections** — Create these collections (or confirm handles match):
+  - `/collections/trending-now`
   - `/collections/pokemon`
   - `/collections/rare-find`
   - `/collections/loewe-x-on`
@@ -116,8 +118,8 @@
 ## Policy Pages (2026-04-09)
 - [x] Privacy Policy URL resolved at `/pages/privacy-policy`.
 - [x] Terms of Service URL resolved at `/pages/terms-of-service`.
-- [ ] Create or confirm the Shipping Policy page at `/pages/shipping-policy` and assign the `shipping-policy` theme template.
-- [ ] Create or confirm the Returns & Refunds page at `/pages/returns-refunds` and assign the `returns-refunds` theme template.
+- [x] Create or confirm the Shipping Policy page at `/pages/shipping-policy` and assign the `shipping-policy` theme template.
+- [x] Create or confirm the Returns & Refunds page at `/pages/returns-refunds` and assign the `returns-refunds` theme template.
 - [x] Policy templates now include Presha Trends specific customer-facing copy.
 - [ ] Optional: edit the policy page body in **Shopify Admin -> Online Store -> Pages**. If page body content exists, the theme will render that Page Editor content; otherwise it renders the curated template copy.
 - [ ] Optional: adjust policy intro, clause blocks, or page-content preference in Theme Editor.
@@ -125,7 +127,7 @@
 ---
 
 ## Authentication Page (2026-04-09)
-- [ ] Create or confirm the page at `/pages/authentication` and assign the `authentication` theme template.
+- [x] Create or confirm the page at `/pages/authentication` and assign the `authentication` theme template.
 - [x] Homepage Authentication section CTA now points to `/pages/authentication`.
 - [x] Footer Support link already points to `/pages/authentication`.
 - [ ] Optional: edit the Authentication page content and process blocks in Theme Editor after the page template is assigned.
@@ -133,13 +135,13 @@
 ---
 
 ## Contact Page (2026-04-09)
-- [ ] Create or confirm the page at `/pages/contact-us` and assign the `contact-us` theme template for the new Presha contact layout.
+- [x] Create or confirm the page at `/pages/contact-us` and assign the `contact-us` theme template for the new Presha contact layout.
 - [ ] Optional: add extra editorial/support copy in the Shopify page body. If page body content exists, it will render in the contact page info column.
 
 ---
 
 ## Our Story Page (2026-04-09)
-- [ ] Create or confirm the page at `/pages/our-story` and assign the `our-story` theme template.
+- [x] Create or confirm the page at `/pages/our-story` and assign the `our-story` theme template.
 - [ ] Optional: refine the story copy, value cards or CTA in Theme Editor after the template is assigned.
 
 ---
@@ -149,23 +151,24 @@
 These 5 new editorial collection sections are now on the homepage. Each needs the correct Shopify collection assigned and configured in Theme Editor.
 
 ### Chrome Hearts (`presha_collection_chrome_hearts` → `presha-collection-a`)
-- [ ] **Shopify Admin → Products → Collections** — Create collection with handle `chrome-hearts`
+- [x] **Shopify Admin → Products → Collections** — Create collection with handle `chrome-hearts`
 - [ ] **Theme Editor → Homepage → Chrome Hearts section** — Set Collection to `chrome-hearts`, set eyebrow/brand name, upload portrait product images
 
 ### FOG Essentials / Bathing Ape (`presha_collection_fog` → `presha-collection-b`)
-- [ ] Currently set to `a-bathing-ape` collection — confirm final brand or create collection with handle `fog-essentials` (or `a-bathing-ape`)
+- [x] Currently set to `a-bathing-ape` collection — confirm final brand or create collection with handle `fog-essentials` (or `a-bathing-ape`)
 - [ ] **Theme Editor → Homepage → FOG section** — Set Collection, update eyebrow/brand name, upload anchor image
 
 ### Supreme (`presha_collection_supreme` → `presha-collection-c`)
-- [ ] **Shopify Admin → Products → Collections** — Create collection with handle `supreme`
-- [ ] **Theme Editor → Homepage → Supreme section** — Set Collection, upload hero banner image
+- [x] Live homepage config is currently using `accessories` as the collection handle placeholder — decide whether this section should stay Accessories or be reassigned to a true `supreme` collection.
+- [x] **Shopify Admin → Products → Collections** — If the section should truly be Supreme, create collection with handle `supreme`.
+- [ ] **Theme Editor → Homepage → Supreme section** — Set the final Collection and upload hero banner image.
 
 ### Hermès (`presha_collection_hermes` → `presha-collection-a`)
-- [ ] Currently set to `adidas` as placeholder — create collection with handle `hermes`
+- [x] Currently set to `adidas` as placeholder — create collection with handle `hermes`
 - [ ] **Theme Editor → Homepage → Hermès section** — Set Collection to `hermes`, set eyebrow/brand name, upload portrait images
 
 ### Collectibles (`presha_collection_collectibles` → `presha-collection-collectibles`)
-- [ ] Currently set to `nike` as placeholder — create collection with handle `collectibles`
+- [x] Currently set to `nike` as placeholder — create collection with handle `collectibles`
 - [ ] **Theme Editor → Homepage → Collectibles section** — Set Collection, set eyebrow/heading, update view-all link
 
 ### Trending Now (updated section)

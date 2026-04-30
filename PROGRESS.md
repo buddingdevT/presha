@@ -497,3 +497,20 @@ Ran `shopify theme pull` to sync the latest state from the live Shopify theme. T
 - `presha_collection_hermes` appears in `templates/index.json` — verify whether a dedicated section file for Hermès exists or if it reuses an existing collection section file.
 - Scrolling Marquee (`presha-marquee.liquid`) remains broken — needs fresh investigation.
 - Collections that need to exist in Shopify Admin before new sections show products: `chrome-hearts`, `fog-essentials`, `supreme`, `collectibles`, `hermes`, `trending-now`.
+
+---
+
+## 2026-04-29 — Theme Sync & Refinements
+
+**What was synced from Shopify:**
+- **Featured Journal:** Connected the homepage journal section to the `news` blog.
+- **Navigation:** Updated header configuration to use `main-menu` handle.
+- **Product Page Updates:**
+    - Switched media presentation from `grid` to `carousel`.
+    - Enabled `thumbnails` for slideshow and mobile controls.
+    - Enabled `sticky_add_to_cart`.
+    - Updated media icons to `chevron` style.
+
+**Documentation:**
+- Created `DEV_REFINEMENTS.md` to track prioritized roadmap items (Trending Now automation, Collection sync bug, spacing refinements, and commerce core redesign).
+- Updated `ADMIN_TODOS.md` to mark completed collection and support page setup tasks.

@@ -35,11 +35,12 @@ Historical note: older `PROGRESS.md` entries may still reference retired docs su
 ## 3. Current Repo State
 
 - Current branch: `main`
-- Latest confirmed project checkpoint: `70af2b7 Sync - pull homepage redesign from Shopify theme`
-- `origin/main` matches that checkpoint
-- Working tree was clean during the last repo audit except for local untracked `.claude/`
+- Latest major storefront sync checkpoint: `70af2b7 Sync - pull homepage redesign from Shopify theme`
+- Latest repo commit on `main`: `ee4429a Docs - refresh agent handoff`
+- `origin/main` matches the current local `main`
+- Working tree was clean during the latest repo audit
 
-This matters because the most recent major change was not a small feature edit. It was a sync that pulled the newer Shopify homepage redesign into the repo.
+This matters because the most important recent storefront change was not a small feature edit. It was the Shopify sync that pulled the newer homepage redesign into the repo. The commits after that are documentation reconciliation, not a newer homepage build.
 
 ---
 
@@ -238,6 +239,8 @@ The biggest remaining Admin dependencies are:
 
 Important: a missing collection or missing Theme Editor asset can make a finished section look incomplete even when the code is fine.
 
+Current homepage config also still contains placeholder collection assignments in a few sections, so always verify live `templates/index.json` values before assuming the intended final collection is already wired.
+
 ---
 
 ## 11. Current Navigation Truth
@@ -268,7 +271,8 @@ The April 17 homepage redesign introduced four important reusable/custom merchan
 
 - `presha-collection-c.liquid`
   - hero-banner plus scroll-row layout
-  - currently used for Supreme
+  - currently used for the homepage section labeled Supreme
+  - current live `templates/index.json` assignment is still `accessories`, so treat that as a placeholder until Shopify Admin / Theme Editor cleanup is done
 
 - `presha-collection-collectibles.liquid`
   - bespoke dark/frosted collectibles row
@@ -354,10 +358,10 @@ Current session handoff:
 
 - Date: 2026-04-21
 - Agent: Codex
-- What was done: Audited the repo, created the canonical `AGENT_GUIDE.md`, removed the old `HANDOFF.md`, simplified `CLAUDE.md` so it points to the guide for live state, added a project-local `/handoff` command, committed the docs cleanup, pushed it to `main`, and verified the local `origin` remote uses the new GitHub repository URL.
+- What was done: Audited the repo, created the canonical `AGENT_GUIDE.md`, removed the old `HANDOFF.md`, simplified `CLAUDE.md` so it points to the guide for live state, added a project-local `/handoff` command, refreshed the handoff block, pushed the docs updates to `main`, and verified the local `origin` remote uses the current GitHub repository URL.
 - Files changed: `AGENT_GUIDE.md`, `CLAUDE.md`, `.claude/commands/handoff.md`, `.claude/settings.local.json`, `HANDOFF.md` (removed)
 - Shopify push status: Not pushed to Shopify. Git/documentation workflow only.
-- Git status / commit: Clean working tree on `main`, synced with `origin/main`. Latest commit: `e6d5292` (`Docs - add agent guide and handoff command`).
+- Git status / commit: Clean working tree on `main`, synced with `origin/main`. Latest commit: `ee4429a` (`Docs - refresh agent handoff`).
 - Remaining blockers: Broken marquee, incomplete Shopify Admin collection/image/menu setup, and unfinished core commerce pages.
 - Recommended next step: Either fix `sections/presha-marquee.liquid` or do a targeted homepage/admin readiness audit.
 
