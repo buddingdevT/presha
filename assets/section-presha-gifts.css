@@ -5,7 +5,7 @@
 
 .presha-gifts {
   background: #EDE9E3;
-  padding: 0 16px;
+  padding: 60px 16px;
   max-width: 1320px;
   margin: 0 auto;
 }
@@ -135,7 +135,7 @@
 ============================================================ */
 @media (min-width: 750px) {
   .presha-gifts {
-    padding: 0 40px;
+    padding: 80px 40px;
   }
 
   .presha-gifts__grid {
