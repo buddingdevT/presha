@@ -1,6 +1,6 @@
 /* ============================================================
    PRESHA GIFTS FOR HER / HIM
-   Editorial split tiles — two lifestyle image cards
+   Reverted to minimalist tiles with tall editorial proportions
 ============================================================ */
 
 .presha-gifts {
@@ -15,52 +15,11 @@
   padding: 0 20px;
 }
 
-/* --- Section Header --------------------------------------- */
-.presha-gifts__header {
-  margin-bottom: 48px;
-  text-align: left;
-}
-
-.presha-gifts__header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.presha-gifts__section-eyebrow {
-  display: block;
-  font-family: var(--font-body-family, 'Gilroy', 'Jost', sans-serif);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #6D001A;
-  margin-bottom: 8px;
-}
-
-.presha-gifts__section-rule {
-  width: 0; /* Animated via GSAP to 48px */
-  height: 1px;
-  background: #6D001A;
-  margin-bottom: 12px;
-}
-
-.presha-gifts__section-heading {
-  font-family: 'The Glamore', 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 400;
-  font-style: italic;
-  color: #000000;
-  margin: 0;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-
 /* --- Tile Grid -------------------------------------------- */
 .presha-gifts__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 
 /* --- Tile ------------------------------------------------- */
@@ -69,21 +28,22 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5; /* Taller editorial proportion on mobile */
   text-decoration: none;
   color: #fff;
   background: #161616;
 }
 
+/* Hover Effect: Background Image Zoom */
 .presha-gifts__tile:hover .presha-gifts__img {
-  transform: scale(1.05);
+  transform: scale(1.1); /* Pronounced zoom for premium feel */
 }
 
 .presha-gifts__tile:hover .presha-gifts__overlay {
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
     rgba(0, 0, 0, 0.05) 100%
   );
 }
@@ -100,7 +60,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); /* Smooth cinematic transition */
 }
 
 .presha-gifts__placeholder {
@@ -129,11 +89,11 @@
     transparent 100%
   );
   pointer-events: none;
-  transition: background 0.5s ease;
+  transition: background 0.6s ease;
   z-index: 1;
 }
 
-/* --- Content (Inside Tile) -------------------------------- */
+/* --- Content (Typography Restored) ------------------------ */
 .presha-gifts__content {
   position: absolute;
   bottom: 0;
@@ -147,39 +107,36 @@
   z-index: 2;
 }
 
-.presha-gifts__tile-eyebrow {
-  font-family: var(--font-body-family, 'Gilroy', 'Jost', sans-serif);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+.presha-gifts__eyebrow {
+  font-family: var(--font-body-family, 'Jost', sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #ffffff;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-.presha-gifts__tile-heading {
-  font-family: 'The Glamore', 'Cormorant Garamond', serif;
+.presha-gifts__heading {
+  font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
   font-style: italic;
-  font-weight: 400;
-  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 500;
+  font-size: 32px;
   line-height: 1.1;
   margin: 0;
-  color: #ffffff;
 }
 
 .presha-gifts__btn {
   display: inline-block;
-  margin-top: 12px;
-  padding: 12px 32px;
-  border: 1.5px solid #ffffff;
-  border-radius: 9999px; /* Pill shape per design system */
-  font-family: var(--font-body-family, 'Gilroy', 'Jost', sans-serif);
+  margin-top: 8px;
+  padding: 10px 28px;
+  border: 1.5px solid #fff;
+  border-radius: 4px;
+  font-family: var(--font-body-family, 'Jost', sans-serif);
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: background 0.3s ease, color 0.3s ease;
-  color: #ffffff;
 }
 
 /* ============================================================
@@ -190,21 +147,21 @@
     padding: 0 40px;
   }
 
-  .presha-gifts__header {
-    margin-bottom: 56px;
-  }
-
   .presha-gifts__grid {
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .presha-gifts__tile {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4; /* Taller portrait on tablet */
+  }
+
+  .presha-gifts__heading {
+    font-size: 38px;
   }
 
   .presha-gifts__content {
-    padding: 40px;
+    padding: 40px 36px;
   }
 }
 
@@ -213,15 +170,28 @@
 ============================================================ */
 @media (min-width: 1024px) {
   .presha-gifts__grid {
-    gap: 32px;
+    gap: 24px;
   }
 
   .presha-gifts__tile {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 5; /* Significant height for editorial impact */
+  }
+
+  .presha-gifts__heading {
+    font-size: 44px;
   }
 
   .presha-gifts__content {
-    padding: 48px;
+    padding: 48px 44px;
+  }
+
+  .presha-gifts__eyebrow {
+    font-size: 12px;
+  }
+
+  .presha-gifts__btn {
+    padding: 12px 32px;
+    font-size: 13px;
   }
 }
 
