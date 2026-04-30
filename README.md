@@ -31,29 +31,6 @@ This project is meticulously crafted by **HollowKraft Collective** to outperform
 
 ---
 
-## 📂 Architecture
-The storefront is built on a highly modular architecture:
-- `sections/` — Contains custom-built editorial blocks (Hero Carousel, Trending Now, Collection Layouts).
-- `assets/` — Brand-specific SVGs, custom JS logic (Lenis init, Header behavior).
-- `layout/theme.liquid` — The central hub for global GSAP integration and performance optimization.
-
----
-
-## 🛠️ Development & Sync
-This repository is managed using the Shopify CLI.
-
-**Pull latest theme changes:**
-```bash
-shopify theme pull --store agw1a7-eu.myshopify.com --theme 194145845329
-```
-
-**Push changes to development:**
-```bash
-shopify theme push --store agw1a7-eu.myshopify.com --theme 194145845329
-```
-
----
-
 ## 🎨 Creative Direction & Attribution
 This storefront is a product of the **HollowKraft Collective**. Every interaction, line of code, and layout choice is designed to uphold the collective's standard of "Premium by Design."
 
