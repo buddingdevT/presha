@@ -362,22 +362,73 @@
 </style>
 
 {%- liquid
-  assign hero_block = nil
+  assign hero_product = nil
+  assign hero_rank = nil
+  assign hero_condition = nil
+  assign hero_block_active = false
+
+  # 1. Check for manual blocks first
   for block in section.blocks
-    if block.settings.rank == '#1' and hero_block == nil
-      assign hero_block = block
+    if block.settings.rank == '#1' and hero_product == nil
+      assign hero_product = block.settings.product
+      assign hero_rank = '#1'
+      assign hero_condition = block.settings.condition
+      assign hero_block_active = block
     endif
   endfor
-  if hero_block == nil and section.blocks.size > 0
-    assign hero_block = section.blocks[0]
+
+  # 2. If no #1 block, check collection for rank:#1 tag
+  if hero_product == nil and section.settings.collection != blank
+    for product in section.settings.collection.products
+      for tag in product.tags
+        if tag == 'rank:#1'
+          assign hero_product = product
+          assign hero_rank = '#1'
+          break
+        endif
+      endfor
+      if hero_product != nil
+        break
+      endif
+    endfor
   endif
-  assign coll_products = nil
-  assign coll_hero = nil
-  if section.blocks.size == 0 and section.settings.collection != blank
-    assign coll_products = section.settings.collection.products
-    if coll_products.size > 0
-      assign coll_hero = coll_products[0]
+
+  # 3. Fallback to first block if still no hero
+  if hero_product == nil and section.blocks.size > 0
+    assign hero_product = section.blocks[0].settings.product
+    assign hero_rank = section.blocks[0].settings.rank
+    assign hero_condition = section.blocks[0].settings.condition
+    assign hero_block_active = section.blocks[0]
+  endif
+
+  # 4. Fallback to first collection product if still no hero
+  if hero_product == nil and section.settings.collection != blank
+    assign hero_product = section.settings.collection.products[0]
+  endif
+
+  # 5. Extract tags for rank and condition if not manually set
+  if hero_product != nil
+    if hero_rank == nil or hero_rank == 'none'
+      for tag in hero_product.tags
+        if tag contains 'rank:#'
+          assign hero_rank = tag | split: ':' | last
+          break
+        endif
+      endfor
     endif
+    if hero_condition == blank
+      for tag in hero_product.tags
+        if tag contains 'condition:'
+          assign hero_condition = tag | split: ':' | last
+          break
+        endif
+      endfor
+    endif
+  endif
+
+  assign coll_products = nil
+  if section.settings.collection != blank
+    assign coll_products = section.settings.collection.products
   endif
 -%}
 
@@ -414,17 +465,15 @@
     <div class="presha-trending__body" id="trending-body-{{ section.id }}">
 
       <!-- Hero card -->
-      {%- if hero_block != nil -%}
-        {%- assign hero_product = hero_block.settings.product -%}
-        {%- assign hero_condition = hero_block.settings.condition -%}
+      {%- if hero_product != nil -%}
         <a
-          href="{% if hero_product != blank %}{{ hero_product.url }}{% else %}#{% endif %}"
+          href="{{ hero_product.url | default: '#' }}"
           class="presha-trending__hero"
           id="trending-hero-{{ section.id }}"
-          {{ hero_block.shopify_attributes }}
+          {% if hero_block_active %}{{ hero_block_active.shopify_attributes }}{% endif %}
         >
 
-          {%- if hero_product != blank and hero_product.featured_image != blank -%}
+          {%- if hero_product.featured_image != blank -%}
             <img
               class="presha-trending__hero-img"
               src="{{ hero_product.featured_image | image_url: width: 480 }}"
@@ -444,8 +493,8 @@
           </div>
 
           <!-- Rank tag -->
-          {%- if hero_block.settings.rank != blank and hero_block.settings.rank != 'none' -%}
-            <div class="presha-trending__rank">{{ hero_block.settings.rank }}</div>
+          {%- if hero_rank != blank and hero_rank != 'none' -%}
+            <div class="presha-trending__rank">{{ hero_rank }}</div>
           {%- endif -%}
 
           <!-- Condition badge -->
@@ -459,50 +508,17 @@
           {%- endif -%}
 
           <!-- Ghost number -->
-          <div class="presha-trending__hero-ghost" aria-hidden="true">1</div>
+          <div class="presha-trending__hero-ghost" aria-hidden="true">
+            {{ hero_rank | remove: '#' | default: '1' }}
+          </div>
 
           <!-- Info overlay -->
           <div class="presha-trending__hero-info">
-            {%- if hero_product != blank -%}
-              <div class="presha-trending__hero-brand">{{ hero_product.vendor }}</div>
-              <div class="presha-trending__hero-name">{{ hero_product.title }}</div>
-              <div class="presha-trending__hero-price">{{ hero_product.price | money }}</div>
-            {%- else -%}
-              <div class="presha-trending__hero-brand">Brand</div>
-              <div class="presha-trending__hero-name">Product Name</div>
-              <div class="presha-trending__hero-price">AED —</div>
-            {%- endif -%}
+            <div class="presha-trending__hero-brand">{{ hero_product.vendor | default: 'Brand' }}</div>
+            <div class="presha-trending__hero-name">{{ hero_product.title | default: 'Product Name' }}</div>
+            <div class="presha-trending__hero-price">{{ hero_product.price | money }}</div>
           </div>
         </a>
-
-      {%- elsif coll_hero != nil -%}
-        <!-- Collection fallback hero — used when no blocks are configured -->
-        <a href="{{ coll_hero.url }}" class="presha-trending__hero" id="trending-hero-{{ section.id }}">
-          {%- if coll_hero.featured_image != blank -%}
-            <img
-              class="presha-trending__hero-img"
-              src="{{ coll_hero.featured_image | image_url: width: 480 }}"
-              srcset="{{ coll_hero.featured_image | image_url: width: 320 }} 320w,
-                      {{ coll_hero.featured_image | image_url: width: 480 }} 480w"
-              alt="{{ coll_hero.title | escape }}"
-              loading="lazy" width="165" height="240"
-            >
-          {%- else -%}
-            <div class="presha-trending__hero-img-placeholder"></div>
-          {%- endif -%}
-          <div class="presha-trending__hero-overlay"></div>
-          <div class="presha-trending__verified" role="img" aria-label="Presha Verified">
-            <svg viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="presha-trending__rank">#1</div>
-          <div class="presha-trending__hero-ghost" aria-hidden="true">1</div>
-          <div class="presha-trending__hero-info">
-            <div class="presha-trending__hero-brand">{{ coll_hero.vendor }}</div>
-            <div class="presha-trending__hero-name">{{ coll_hero.title }}</div>
-            <div class="presha-trending__hero-price">{{ coll_hero.price | money }}</div>
-          </div>
-        </a>
-
       {%- endif -%}
 
       <!-- Scroll row -->
@@ -511,17 +527,38 @@
         <div class="presha-trending__track" id="trending-track-{{ section.id }}">
           {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
-            {%- if block == hero_block -%}{%- continue -%}{%- endif -%}
             {%- assign card_product = block.settings.product -%}
+            {%- if card_product == hero_product or card_product == nil -%}{%- continue -%}{%- endif -%}
+
             {%- assign card_condition = block.settings.condition -%}
             {%- assign card_rank = block.settings.rank -%}
+
+            {%- comment -%} Extract tags if not manually set {%- endcomment -%}
+            {%- if card_rank == 'none' or card_rank == blank -%}
+              {%- for tag in card_product.tags -%}
+                {%- if tag contains 'rank:#' -%}
+                  {%- assign card_rank = tag | split: ':' | last -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if card_condition == blank -%}
+              {%- for tag in card_product.tags -%}
+                {%- if tag contains 'condition:' -%}
+                  {%- assign card_condition = tag | split: ':' | last -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
             <a
-              href="{% if card_product != blank %}{{ card_product.url }}{% else %}#{% endif %}"
+              href="{{ card_product.url }}"
               class="presha-trending__card"
               data-block-index="{{ forloop.index }}"
               {{ block.shopify_attributes }}
             >
-              {%- if card_product != blank and card_product.featured_image != blank -%}
+              {%- if card_product.featured_image != blank -%}
                 <img
                   class="presha-trending__card-img"
                   src="{{ card_product.featured_image | image_url: width: 240 }}"
@@ -556,21 +593,28 @@
               {%- endif -%}
 
               <div class="presha-trending__card-body">
-                {%- if card_product != blank -%}
-                  <div class="presha-trending__card-brand">{{ card_product.vendor }}</div>
-                  <div class="presha-trending__card-name">{{ card_product.title }}</div>
-                  <div class="presha-trending__card-price">{{ card_product.price | money }}</div>
-                {%- else -%}
-                  <div class="presha-trending__card-brand">Brand</div>
-                  <div class="presha-trending__card-name">Product name</div>
-                  <div class="presha-trending__card-price">AED —</div>
-                {%- endif -%}
+                <div class="presha-trending__card-brand">{{ card_product.vendor | escape }}</div>
+                <div class="presha-trending__card-name">{{ card_product.title | escape }}</div>
+                <div class="presha-trending__card-price">{{ card_product.price | money }}</div>
               </div>
             </a>
           {%- endfor -%}
           {%- elsif coll_products != nil -%}
           <!-- Collection fallback scroll cards -->
-          {%- for product in coll_products limit: section.settings.product_limit offset: 1 -%}
+          {%- for product in coll_products limit: section.settings.product_limit -%}
+            {%- if product == hero_product -%}{%- continue -%}{%- endif -%}
+
+            {%- assign card_rank = nil -%}
+            {%- assign card_condition = nil -%}
+
+            {%- for tag in product.tags -%}
+              {%- if tag contains 'rank:#' -%}
+                {%- assign card_rank = tag | split: ':' | last -%}
+              {%- elsif tag contains 'condition:' -%}
+                {%- assign card_condition = tag | split: ':' | last -%}
+              {%- endif -%}
+            {%- endfor -%}
+
             <a href="{{ product.url }}" class="presha-trending__card">
               {%- if product.featured_image != blank -%}
                 <img
@@ -589,10 +633,24 @@
                 <div class="presha-trending__card-verified" role="img" aria-label="Presha Verified">
                   <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
+                {%- if card_condition != blank -%}
+                  <div class="presha-trending__card-condition">
+                    {{- card_condition -}}
+                    {%- unless card_condition == 'DS' -%}
+                      <span class="presha-trending__condition-label">condition</span>
+                    {%- endunless -%}
+                  </div>
+                {%- endif -%}
               </div>
+
+              <!-- Optional rank tag -->
+              {%- if card_rank != blank and card_rank != 'none' -%}
+                <div class="presha-trending__card-rank">{{ card_rank }}</div>
+              {%- endif -%}
+
               <div class="presha-trending__card-body">
-                <div class="presha-trending__card-brand">{{ product.vendor }}</div>
-                <div class="presha-trending__card-name">{{ product.title }}</div>
+                <div class="presha-trending__card-brand">{{ product.vendor | escape }}</div>
+                <div class="presha-trending__card-name">{{ product.title | escape }}</div>
                 <div class="presha-trending__card-price">{{ product.price | money }}</div>
               </div>
             </a>

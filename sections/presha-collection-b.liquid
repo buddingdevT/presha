@@ -408,7 +408,7 @@
             </span>
             <div class="presha-col-b__rule" id="col-b-rule-{{ section.id }}" aria-hidden="true"></div>
             <h2 class="presha-col-b__brand-name" id="col-b-name-{{ section.id }}">
-              {{- section.settings.brand_name | default: 'Brand Name' -}}
+              {{- section.settings.brand_name | default: section.settings.collection.title | default: 'Brand Name' -}}
             </h2>
           </div>
 
@@ -614,7 +614,6 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name",
-      "default": "Brand Name",
       "info": "Large italic editorial heading — the visual centrepiece of the right column"
     },
     {

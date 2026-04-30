@@ -374,7 +374,7 @@
             {{- section.settings.eyebrow | default: 'Collection' -}}
           </span>
           <span class="presha-col-c__banner-brand">
-            {{- section.settings.brand_name | default: 'Brand Name' -}}
+            {{- section.settings.brand_name | default: section.settings.collection.title | default: 'Brand Name' -}}
           </span>
           {%- if section.settings.descriptor != blank -%}
             <span class="presha-col-c__banner-descriptor">
@@ -585,7 +585,6 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name",
-      "default": "Brand Name",
       "info": "Large italic Cormorant Garamond heading overlaid on the banner"
     },
     {

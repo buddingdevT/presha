@@ -32,10 +32,11 @@
 
       {%- for block in section.blocks -%}
         {%- if block.type == 'category' -%}
+          {%- assign category_title = block.settings.category_name | default: block.settings.collection.title | default: 'Category' -%}
           <a
             class="presha-fcats__card"
-            href="{{ block.settings.collection_url | default: '#' }}"
-            aria-label="Shop {{ block.settings.category_name }}"
+            href="{{ block.settings.collection.url | default: '#' }}"
+            aria-label="Shop {{ category_title }}"
             role="listitem"
             {{ block.shopify_attributes }}
           >
@@ -47,7 +48,7 @@
                   | image_tag:
                     loading: 'lazy',
                     class: 'presha-fcats__card-img',
-                    alt: block.settings.category_name,
+                    alt: category_title,
                     sizes: '(max-width: 749px) 55vw, (max-width: 1079px) 30vw, 280px'
                 }}
               {%- else -%}
@@ -61,7 +62,7 @@
                 </div>
               {%- endif -%}
             </div>
-            <span class="presha-fcats__card-label">{{ block.settings.category_name }}</span>
+            <span class="presha-fcats__card-label">{{ category_title }}</span>
           </a>
         {%- endif -%}
       {%- endfor -%}
@@ -342,7 +343,7 @@
           "type": "text",
           "id": "category_name",
           "label": "Category Name",
-          "default": "Sneakers"
+          "info": "Optional override for the collection title."
         },
         {
           "type": "image_picker",
@@ -351,9 +352,9 @@
           "info": "Upload a lifestyle photo. Portrait (3:4) works best. Recommended: min 800px wide."
         },
         {
-          "type": "url",
-          "id": "collection_url",
-          "label": "Collection URL",
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
           "info": "Links this card to a collection page."
         }
       ]
@@ -366,14 +367,14 @@
         "heading": "Featured Categories"
       },
       "blocks": [
-        { "type": "category", "settings": { "category_name": "Air Jordan", "collection_url": "/collections/jordan" } },
-        { "type": "category", "settings": { "category_name": "Nike", "collection_url": "/collections/nike" } },
-        { "type": "category", "settings": { "category_name": "On Running", "collection_url": "/collections/on-running" } },
-        { "type": "category", "settings": { "category_name": "Onitsuka Tiger", "collection_url": "/collections/onitsuka-tiger" } },
-        { "type": "category", "settings": { "category_name": "Adidas", "collection_url": "/collections/adidas" } },
-        { "type": "category", "settings": { "category_name": "New Balance", "collection_url": "/collections/new-balance" } },
-        { "type": "category", "settings": { "category_name": "Yeezy", "collection_url": "/collections/yeezy" } },
-        { "type": "category", "settings": { "category_name": "Asics", "collection_url": "/collections/asics" } }
+        { "type": "category", "settings": { "category_name": "Air Jordan", "collection": "jordan" } },
+        { "type": "category", "settings": { "category_name": "Nike", "collection": "nike" } },
+        { "type": "category", "settings": { "category_name": "On Running", "collection": "on-running" } },
+        { "type": "category", "settings": { "category_name": "Onitsuka Tiger", "collection": "onitsuka-tiger" } },
+        { "type": "category", "settings": { "category_name": "Adidas", "collection": "adidas" } },
+        { "type": "category", "settings": { "category_name": "New Balance", "collection": "new-balance" } },
+        { "type": "category", "settings": { "category_name": "Yeezy", "collection": "yeezy" } },
+        { "type": "category", "settings": { "category_name": "Asics", "collection": "asics" } }
       ]
     }
   ]
