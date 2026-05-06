@@ -210,6 +210,15 @@
     padding: 8px 40px 16px;      /* top/sides/bottom — extra bottom for shadow */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: grab;
+  }
+
+  .presha-brand-logos__track:active {
+    cursor: grabbing;
+  }
+
+  .presha-brand-logos__track.is-dragging {
+    scroll-snap-type: none;
   }
 
   .presha-brand-logos__track::-webkit-scrollbar {
@@ -237,12 +246,17 @@
     border-radius: 12px;         /* CHANGE: card corner radius                 */
     opacity: 0;                  /* GSAP animates to 1                         */
     cursor: pointer;
+    -webkit-user-drag: none;
     -webkit-tap-highlight-color: transparent;
     will-change: opacity, transform, box-shadow;
     transition:
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       opacity 0.3s ease;
+  }
+
+  .presha-brand-logos__track.is-dragging .presha-brand-logos__card {
+    pointer-events: none;
   }
 
   /* ── Card hover — lift + drop shadow ─────────────────────────────────────── */
@@ -271,6 +285,7 @@
     white-space: nowrap;
     padding: 0 12px;
     transition: color 0.3s ease;
+    user-select: none;
   }
 
   /* Text turns burgundy on hover                                               */
@@ -290,6 +305,8 @@
     height: auto;
     object-fit: contain;
     transition: opacity 0.3s ease;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   /* ── Tablet (750px–1079px) ───────────────────────────────────────────────── */
@@ -380,6 +397,52 @@
 (function () {
   var sectionEl = document.getElementById('presha-brand-logos-{{ section.id }}');
   if (!sectionEl) return;
+
+  /* ── Drag to scroll functionality ── */
+  var track = sectionEl.querySelector('.presha-brand-logos__track');
+  if (track) {
+    var isDown = false;
+    var startX;
+    var scrollLeft;
+    var isDragging = false;
+
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      isDragging = false;
+      track.classList.add('is-dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', function () {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mouseup', function () {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+
+    track.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      isDragging = true;
+      var x = e.pageX - track.offsetLeft;
+      var walk = (x - startX) * 2; /* Multiplier for speed */
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    /* Prevent link clicks if user was dragging */
+    var links = track.querySelectorAll('a');
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        if (isDragging) {
+          e.preventDefault();
+        }
+      });
+    });
+  }
 
   var headingWrap = sectionEl.querySelector('.presha-brand-logos__heading-wrap');
   var cards = sectionEl.querySelectorAll('.presha-brand-logos__card');
