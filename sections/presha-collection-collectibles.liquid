@@ -312,7 +312,7 @@
           class="presha-col-col__heading"
           id="col-col-heading-{{ section.id }}"
         >
-          {{- section.settings.heading | default: 'Collectibles' -}}
+          {{- section.settings.collection.title | default: section.settings.heading | default: 'Collectibles' -}}
         </h2>
       </div>
 

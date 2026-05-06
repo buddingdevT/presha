@@ -70,9 +70,6 @@
     color: #0A0A0A;
     line-height: 0.9;
     margin: 0;
-    /* clip-path used by GSAP entrance — text slides up from below */
-    clip-path: inset(100% 0 0 0);
-    will-change: clip-path;
   }
 
   /* View All link */
@@ -488,7 +485,7 @@
   // 3. Brand name clips up (editorial reveal from below)
   tl.fromTo(name,
     { clipPath: 'inset(100% 0 0 0)' },
-    { clipPath: 'inset(0% 0 0 0)', duration: 0.7, ease: 'power3.out' },
+    { clipPath: 'inset(0% 0 0 0)', duration: 0.7, ease: 'power3.out', clearProps: 'clipPath' },
     '-=0.3'
   );
 

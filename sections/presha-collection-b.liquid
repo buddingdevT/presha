@@ -626,7 +626,7 @@
   // 4. Brand name clips up (editorial reveal from below)
   tl.fromTo(nameEl,
     { clipPath: 'inset(100% 0 0 0)' },
-    { clipPath: 'inset(0% 0 0 0)', duration: 0.7, ease: 'power3.out' },
+    { clipPath: 'inset(0% 0 0 0)', duration: 0.7, ease: 'power3.out', clearProps: 'clipPath' },
     '-=0.25'
   );
 

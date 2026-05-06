@@ -374,7 +374,7 @@
             {{- section.settings.eyebrow | default: 'Collection' -}}
           </span>
           <span class="presha-col-c__banner-brand">
-            {{- section.settings.brand_name | default: section.settings.collection.title | default: 'Brand Name' -}}
+            {{- section.settings.collection.title | default: section.settings.brand_name | default: 'Brand Name' -}}
           </span>
           {%- if section.settings.descriptor != blank -%}
             <span class="presha-col-c__banner-descriptor">
