@@ -283,7 +283,7 @@
       "type": "presha-collection-b",
       "settings": {
         "eyebrow": "Collection",
-        "brand_name": "{{ section.settings.collection.title }}",
+        "brand_name": "",
         "anchor_image": "shopify://shop_images/a-bathing-ape-logo-png_seeklogo-330394.png",
         "collection": "a-bathing-ape",
         "product_limit": 8
@@ -297,7 +297,7 @@
           "name": "Air Jordan",
           "settings": {
             "category_name": "Air Jordan",
-            "collection_url": "/collections/jordan"
+            "collection": ""
           }
         },
         "cat_nike": {
@@ -305,7 +305,7 @@
           "name": "Nike",
           "settings": {
             "category_name": "Nike",
-            "collection_url": "/collections/nike"
+            "collection": ""
           }
         },
         "cat_on_running": {
@@ -313,7 +313,7 @@
           "name": "Loewe x On",
           "settings": {
             "category_name": "Loewe X On",
-            "collection_url": "/collections/on-running"
+            "collection": ""
           }
         },
         "cat_onitsuka": {
@@ -321,35 +321,35 @@
           "name": "Onitsuka Tiger",
           "settings": {
             "category_name": "Onitsuka Tiger",
-            "collection_url": "/collections/onitsuka-tiger"
+            "collection": ""
           }
         },
         "cat_adidas": {
           "type": "category",
           "settings": {
             "category_name": "Adidas",
-            "collection_url": "/collections/adidas"
+            "collection": ""
           }
         },
         "cat_new_balance": {
           "type": "category",
           "settings": {
             "category_name": "New Balance",
-            "collection_url": "/collections/new-balance"
+            "collection": ""
           }
         },
         "cat_yeezy": {
           "type": "category",
           "settings": {
             "category_name": "Yeezy",
-            "collection_url": "/collections/yeezy"
+            "collection": ""
           }
         },
         "cat_asics": {
           "type": "category",
           "settings": {
             "category_name": "Asics",
-            "collection_url": "/collections/asics"
+            "collection": ""
           }
         }
       },
@@ -371,7 +371,7 @@
       "type": "presha-collection-c",
       "settings": {
         "eyebrow": "Collection",
-        "brand_name": "{{ section.settings.collection.title }}",
+        "brand_name": "",
         "descriptor": "Box Logo Drops · Apparel · Caps",
         "hero_image": "shopify://shop_images/slide3.webp",
         "collection": "accessories",
@@ -406,7 +406,10 @@
         "gift_her",
         "gift_him"
       ],
-      "settings": {}
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_vertical": 80
+      }
     },
     "presha_authentication": {
       "type": "presha-authentication",
@@ -443,7 +446,7 @@
       "type": "presha-collection-a",
       "settings": {
         "eyebrow": "Collection",
-        "brand_name": "{{ section.settings.collection.title }}",
+        "brand_name": "",
         "collection": "adidas",
         "product_limit": 8
       }
@@ -452,7 +455,7 @@
       "type": "presha-collection-collectibles",
       "settings": {
         "eyebrow": "Rare & Collectible",
-        "heading": "{{ section.settings.collection.title }}",
+        "heading": "",
         "collection": "nike",
         "product_limit": 8,
         "view_all_url": "shopify://collections/nike"
@@ -465,6 +468,7 @@
         "heading": "PRESHA JOURNAL",
         "link_label": "READ ALL ARTICLES",
         "link_url": "",
+        "view_all_label": "VIEW ALL ARTICLES",
         "blog": "news"
       }
     },
