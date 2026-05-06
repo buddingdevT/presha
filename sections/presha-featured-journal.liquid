@@ -7,10 +7,10 @@
         <span class="presha-journal-eyebrow">{{ section.settings.eyebrow }}</span>
         <h2 class="presha-journal-heading">{{ section.settings.heading }}</h2>
       </div>
-      {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+      {%- if section.settings.view_all_label != blank -%}
         <div class="presha-journal-link-wrap">
-          <a href="{{ section.settings.link_url }}" class="presha-journal-link">
-            {{ section.settings.link_label }}
+          <a href="{% if section.settings.blog != blank %}{{ blogs[section.settings.blog].url }}{% else %}{{ section.settings.link_url | default: '#' }}{% endif %}" class="presha-journal-view-all">
+            {{ section.settings.view_all_label }}
           </a>
         </div>
       {%- endif -%}
@@ -98,10 +98,49 @@
         </div>
       {%- endif -%}
     </div>
+
   </div>
 </section>
 
 {% stylesheet %}
+  /* View All link */
+  .presha-journal-view-all {
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 24px;
+    align-self: flex-end;
+  }
+  .presha-journal-view-all::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #6D001A;
+    transition: width 0.3s ease;
+  }
+  .presha-journal-view-all:hover::after,
+  .presha-journal-view-all:focus::after {
+    width: 100%;
+  }
+  .presha-journal-view-all:hover {
+    color: #6D001A;
+  }
+  .presha-journal-view-all:focus-visible {
+    outline: 2px solid #6D001A;
+    outline-offset: 3px;
+  }
+
   .presha-journal {
     width: 100%;
     background-color: #ffffff;
@@ -281,13 +320,19 @@
     {
       "type": "text",
       "id": "link_label",
-      "label": "Link label",
+      "label": "Top link label",
       "default": "READ ALL ARTICLES"
     },
     {
       "type": "url",
       "id": "link_url",
-      "label": "Link URL"
+      "label": "Top link URL"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Button Label",
+      "default": "VIEW ALL ARTICLES"
     },
     {
       "type": "blog",
