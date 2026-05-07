@@ -514,3 +514,27 @@ Ran `shopify theme pull` to sync the latest state from the live Shopify theme. T
 **Documentation:**
 - Created `DEV_REFINEMENTS.md` to track prioritized roadmap items (Trending Now automation, Collection sync bug, spacing refinements, and commerce core redesign).
 - Updated `ADMIN_TODOS.md` to mark completed collection and support page setup tasks.
+
+---
+
+## 2026-05-06 — Core Functionality Fixes & Asset Integration
+
+**What was built/fixed:**
+- **Journals Section:** Added a functional "View All" link to the Presha Journals section (`presha-featured-journal.liquid`), styled to match the minimal aesthetic of the collections sections (small, uppercase, burgundy hover sweep).
+- **Drag-to-Scroll:** Implemented custom JavaScript drag-to-scroll functionality across all horizontal carousels (Shop By Brand, Collection A, B, C, and Collectibles) to improve the desktop browsing experience.
+- **Collection Titles Bug:** Fixed a bug where collection titles would disappear after the GSAP entrance animation in Safari. Removed CSS `clip-path` and added `clearProps: 'clipPath'` to the GSAP tweens.
+- **Collection Sync Logic:** Updated the Liquid logic in all collection sections to prioritize the attached collection's title (`section.settings.collection.title`) over the manual heading, resolving the sync issue where the name didn't update immediately.
+- **Hero Carousel Assets:** Added a new `asset_image` schema setting to the Hero Carousel rail cards. Mapped local images (`preshvault.png`, `pokemonthumbnail.png`, `rarefinds.png`, `trendnow.png`) directly to the rail cards in `templates/index.json`.
+- **Theme Sync:** Pulled the latest changes from Shopify, bringing down the newly uploaded assets and syncing the local repository.
+
+**Files changed:**
+- `sections/presha-featured-journal.liquid`
+- `sections/header-announcements.liquid` (Fixed invalid block schema error)
+- `sections/presha-brand-logos.liquid`
+- `sections/presha-collection-a.liquid`
+- `sections/presha-collection-b.liquid`
+- `sections/presha-collection-c.liquid`
+- `sections/presha-collection-collectibles.liquid`
+- `sections/presha-hero-carousel.liquid`
+- `templates/index.json`
+- `DEV_REFINEMENTS.md` (Marked completed tasks as resolved)

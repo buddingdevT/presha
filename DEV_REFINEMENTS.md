@@ -10,13 +10,11 @@ This document tracks the prioritized refinements, design tasks, and functional b
 *   **Issue:** The section only works as expected when products are added manually one-by-one. It does not correctly handle automated collection population with the required editorial tags/badges.
 *   **Goal:** Allow the section to work for collections (automated) while maintaining the ranking and condition badge logic currently seen in the manual mode.
 
-### ⚠️ Collection Component: Selection Sync
-*   **Issue:** When an admin selects a collection in the Theme Editor, the name/data doesn't appear immediately. It requires the admin to manually type or interact with the field to "wake it up."
-*   **Goal:** Ensure the component reactive state updates immediately upon selection.
+### ✅ Collection Component: Selection Sync
+*   **Status:** Resolved. The logic in the collection sections (A, B, C, Collectibles) was updated to prioritize `section.settings.collection.title` ensuring it reacts immediately.
 
-### ⚠️ Gifts Section: Spacing Refinement
-*   **Issue:** The "Gifts for Her/Him" tiles have no top/bottom margin or padding. They are sitting flush against the section boundaries.
-*   **Goal:** Apply vertical padding/margins that match the left/right rhythm of the site.
+### ✅ Gifts Section: Spacing Refinement
+*   **Status:** Resolved.
 
 ---
 
@@ -26,9 +24,8 @@ This document tracks the prioritized refinements, design tasks, and functional b
 *   **Issue:** The infinite scroll animation is currently non-functional in the storefront preview.
 *   **Goal:** Implement a robust GSAP or CSS-based solution that ensures smooth, continuous scrolling.
 
-### 🐛 Announcement Bar Error (`header-announcements.liquid`)
-*   **Issue:** `Invalid block '_announcement': type is invalid` error identified during theme push.
-*   **Goal:** Reconcile the schema blocks with the theme editor configuration to resolve the push error.
+### ✅ Announcement Bar Error (`header-announcements.liquid`)
+*   **Status:** Resolved. Block type was added to schema to resolve push errors.
 
 ### ✨ General Section Polish
 *   **Footer:** Refine layout and links for a more premium feel.
