@@ -356,14 +356,14 @@ Current session handoff:
 
 ## Session Handoff
 
-- Date: 2026-04-21
-- Agent: Codex
-- What was done: Audited the repo, created the canonical `AGENT_GUIDE.md`, removed the old `HANDOFF.md`, simplified `CLAUDE.md` so it points to the guide for live state, added a project-local `/handoff` command, refreshed the handoff block, pushed the docs updates to `main`, and verified the local `origin` remote uses the current GitHub repository URL.
-- Files changed: `AGENT_GUIDE.md`, `CLAUDE.md`, `.claude/commands/handoff.md`, `.claude/settings.local.json`, `HANDOFF.md` (removed)
-- Shopify push status: Not pushed to Shopify. Git/documentation workflow only.
-- Git status / commit: Clean working tree on `main`, synced with `origin/main`. Latest commit: `ee4429a` (`Docs - refresh agent handoff`).
-- Remaining blockers: Broken marquee, incomplete Shopify Admin collection/image/menu setup, and unfinished core commerce pages.
-- Recommended next step: Either fix `sections/presha-marquee.liquid` or do a targeted homepage/admin readiness audit.
+- Date: 2026-05-06
+- Agent: Gemini CLI
+- What was done: Conducted a comprehensive audit of missing image assets across the homepage and featured sections. Analyzed Mad Kicks for visual inspiration and engineered high-end AI generation prompts for the 4 Hero Discovery Rail thumbnails (Vault, Pokemon, Trending, Rare Finds) and the 8 Brand Category images (Jordan, Nike, Loewe, etc.). All prompts were specifically tailored to depict real-world "Grail" products in a luxury Dubai-editorial aesthetic. Updated PROGRESS.md to reflect this work.
+- Files changed: `PROGRESS.md`, `AGENT_GUIDE.md`
+- Shopify push status: Not pushed to Shopify (Documentation/Strategy turn only).
+- Git status / commit: Not committed.
+- Remaining blockers: Broken marquee, incomplete Shopify Admin collection/image setup for newer sections, and unfinished core commerce pages (PDP/Collection/Cart).
+- Recommended next step: Generate the remaining editorial anchor images (FOG, Supreme, Gifts) or proceed with implementing the core commerce redesign for the PDP.
 
 ---
 

@@ -517,6 +517,24 @@ Ran `shopify theme pull` to sync the latest state from the live Shopify theme. T
 
 ---
 
+## 2026-05-06 — Image Asset Audit & Prompt Engineering
+
+**What was completed:**
+- **Image Audit:** Conducted a full audit of `templates/index.json` and design references to identify all missing or placeholder image assets.
+- **Competitive Analysis:** Analyzed `madkicks.com` for visual inspiration, focusing on their "Premium Hype" aesthetic, studio lighting, and editorial composition.
+- **AI Prompt Engineering:** Created highly detailed, brand-aligned AI generation prompts for the following missing assets:
+    - **Hero Discovery Rail (4 Thumbnails):** Presha Vault, Pokémon Collectibles, Trending Now (Abstract Pulse/Molten Metal), and Rare Finds (Silver/Gold artifacts).
+    - **Brand Categories (8 Images):** Air Jordan (1 'Lost & Found'), Nike (Dunk 'Grey Fog'), Loewe x On (Cloudtilt), Onitsuka Tiger (Mexico 66), Adidas (Samba OG), New Balance (990v6), Yeezy (350 V2 Bone), and Asics (Gel-Kayano 14).
+- **Quality Control:** Ensured all prompts specify real-world sneaker models and colorways to maintain authenticity, while using Presha's specific design tokens (Soft Ivory, Burgundy, Matte Black).
+
+**Remaining Visual Gaps:**
+- Editorial Collection Anchors (FOG, Supreme, Collectibles)
+- Gifts Section Tiles
+- Featured Journal thumbnails
+- Support Page Hero images
+
+---
+
 ## 2026-05-06 — Core Functionality Fixes & Asset Integration
 
 **What was built/fixed:**
