@@ -108,7 +108,16 @@
             {{ block.shopify_attributes }}
           >
             <div class="presha-hero__rail-thumb">
-              {%- if block.settings.image != blank -%}
+              {%- if block.settings.asset_image != blank -%}
+                <img
+                  src="{{ block.settings.asset_image | asset_url }}"
+                  alt="{{ block.settings.name | escape }}"
+                  class="presha-hero__rail-img"
+                  loading="lazy"
+                  width="120"
+                  height="120"
+                >
+              {%- elsif block.settings.image != blank -%}
                 {{
                   block.settings.image
                   | image_url: width: 120
@@ -870,6 +879,12 @@
           "id": "image",
           "label": "Thumbnail image",
           "info": "Recommended: square, minimum 120x120px."
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Asset Image Filename",
+          "info": "E.g., 'preshvault.png'. If set, this overrides the Thumbnail image above and loads directly from the theme's assets folder."
         },
         {
           "type": "text",

@@ -16,6 +16,7 @@
           "type": "rail_card",
           "name": "Rare Finds",
           "settings": {
+            "asset_image": "rarefinds.png",
             "label": "SHOP BY",
             "name": "Rare Finds",
             "link": ""
