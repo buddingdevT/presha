@@ -19,10 +19,9 @@
   assign pinned_countries = "" | split: ""
   
   for code in pinned_codes
-    assign matched_country = localization.available_countries | where: "iso_code", code | first
-    if matched_country
-      assign country_array = matched_country | sort # trick to push to array
-      assign pinned_countries = pinned_countries | concat: country_array
+    assign matched_country_array = localization.available_countries | where: "iso_code", code
+    if matched_country_array.size > 0
+      assign pinned_countries = pinned_countries | concat: matched_country_array
     endif
   endfor
 
@@ -32,7 +31,7 @@
 
   for country in other_popular
     unless pinned_codes contains country.iso_code
-      assign country_array = country | sort
+      assign country_array = localization.available_countries | where: "iso_code", country.iso_code
       assign popular_countries = popular_countries | concat: country_array
     endunless
   endfor
@@ -42,7 +41,8 @@
     assign show_country_filter = true
   endif
 
-  assign show_popular_countries = true # Always show if we have pinned countries
+  # Always show if we have pinned countries
+  assign show_popular_countries = true
   
   assign show_currencies = false
   if currencies.size > 1
