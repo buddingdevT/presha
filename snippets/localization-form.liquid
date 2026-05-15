@@ -200,6 +200,9 @@
               {{- 'content.no_results_found' | t -}}
             </span>
             {%- for country in localization.available_countries -%}
+              {%- comment -%} Presha — Skip pinned countries to avoid duplication in the main list {%- endcomment -%}
+              {% if pinned_codes contains country.iso_code %}{% continue %}{% endif %}
+
               {% liquid
                 assign aliases = ''
                 case country.iso_code

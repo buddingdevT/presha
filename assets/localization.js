@@ -111,8 +111,12 @@ class LocalizationFormComponent extends Component {
    * @param {Event} event - The event object.
    */
   selectCountry = (countryCode, event) => {
-    event.preventDefault();
-    const { countryInput, languageInput, form } = this.refs;
+    if (event) event.preventDefault();
+    
+    const { countryInput, languageInput } = this.refs;
+    const form = this.refs.form || this.querySelector('form');
+
+    if (!countryCode || !countryInput || !form) return;
 
     // Set the country value
     countryInput.value = countryCode;
@@ -126,10 +130,17 @@ class LocalizationFormComponent extends Component {
 
       if (hasLanguage) {
         languageInput.value = preferredLanguage;
+        this.resizeLanguageInput();
       }
     }
 
-    form?.submit();
+    // Submit the form
+    if (typeof form.submit === 'function') {
+      form.submit();
+    } else {
+      // Fallback if form.submit is shadowed by an element named "submit"
+      HTMLFormElement.prototype.submit.call(form);
+    }
   };
 
   /**
