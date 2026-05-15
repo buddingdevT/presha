@@ -2,6 +2,25 @@ import { Component } from '@theme/component';
 import { isClickedOutside, normalizeString, onAnimationEnd } from '@theme/utilities';
 
 /**
+ * Maps country codes to their preferred default language codes.
+ * This ensures that selecting a country also sets a relevant language automatically.
+ */
+const COUNTRY_LANGUAGE_MAP = {
+  AE: 'en', // UAE -> English (Primary for Luxury Streetwear in Dubai)
+  SA: 'ar', // Saudi Arabia -> Arabic
+  KW: 'ar', // Kuwait -> Arabic
+  QA: 'ar', // Qatar -> Arabic
+  OM: 'ar', // Oman -> Arabic
+  BH: 'ar', // Bahrain -> Arabic
+  GB: 'en', // UK -> English
+  US: 'en', // US -> English
+  FR: 'fr', // France -> French
+  DE: 'de', // Germany -> German
+  IT: 'it', // Italy -> Italian
+  ES: 'es', // Spain -> Spanish
+};
+
+/**
  * A custom element that displays a localization form.
  *
  * @typedef {object} FormRefs
@@ -86,16 +105,30 @@ class LocalizationFormComponent extends Component {
   };
 
   /**
-   * Selects a country.
+   * Selects a country and automatically attempts to sync the language.
    *
-   * @param {string} countryName - The name of the country to select.
+   * @param {string} countryCode - The ISO code of the country to select (e.g., 'AE').
    * @param {Event} event - The event object.
    */
-  selectCountry = (countryName, event) => {
+  selectCountry = (countryCode, event) => {
     event.preventDefault();
-    const { countryInput, form } = this.refs;
+    const { countryInput, languageInput, form } = this.refs;
 
-    countryInput.value = countryName;
+    // Set the country value
+    countryInput.value = countryCode;
+
+    // Smart Sync: Attempt to find a preferred language for this country
+    const preferredLanguage = COUNTRY_LANGUAGE_MAP[countryCode.toUpperCase()];
+
+    if (preferredLanguage && languageInput) {
+      // Check if the preferred language is available in the shop's current language list
+      const hasLanguage = Array.from(languageInput.options).some((option) => option.value === preferredLanguage);
+
+      if (hasLanguage) {
+        languageInput.value = preferredLanguage;
+      }
+    }
+
     form?.submit();
   };
 

@@ -12,22 +12,38 @@
 {%- enddoc -%}
 
 {%- liquid
-  comment
-    From Tyler in July: Noting here that it might make sense for us to just be able to get localization.available_currencies and localization.popular_countries instead of needing this esoteric logic.
-  endcomment
   assign currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
-  assign popular_countries = localization.available_countries | where: 'popular?' | sort: 'name'
+  
+  # Presha — Pin top 2 markets (UAE and Saudi Arabia) to the very top
+  assign pinned_codes = "AE,SA" | split: ","
+  assign pinned_countries = "" | split: ""
+  
+  for code in pinned_codes
+    assign matched_country = localization.available_countries | where: "iso_code", code | first
+    if matched_country
+      assign country_array = matched_country | sort # trick to push to array
+      assign pinned_countries = pinned_countries | concat: country_array
+    endif
+  endfor
+
+  # Get other popular countries from Shopify settings, excluding the pinned ones
+  assign other_popular = localization.available_countries | where: 'popular?'
+  assign popular_countries = pinned_countries
+
+  for country in other_popular
+    unless pinned_codes contains country.iso_code
+      assign country_array = country | sort
+      assign popular_countries = popular_countries | concat: country_array
+    endunless
+  endfor
 
   assign show_country_filter = false
   if localization.available_countries.size > 9
     assign show_country_filter = true
   endif
 
-  assign show_popular_countries = false
-  if localization.available_countries.size > 9 and popular_countries.size > 1
-    assign show_popular_countries = true
-  endif
-
+  assign show_popular_countries = true # Always show if we have pinned countries
+  
   assign show_currencies = false
   if currencies.size > 1
     assign show_currencies = true
