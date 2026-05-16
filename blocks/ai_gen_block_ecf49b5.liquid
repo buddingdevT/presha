@@ -8,80 +8,69 @@
   .ai-alphabet-nav-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    padding: {{ block.settings.section_padding }}px 20px;
-    background-color: {{ block.settings.background_color }};
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.7);
     position: sticky;
     top: 72px; /* Header height */
-    z-index: 10;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    z-index: 50;
+    border-bottom: 1px solid rgba(109, 0, 26, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .ai-alphabet-nav-container-{{ ai_gen_id }} {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content: {{ block.settings.alignment }};
+    justify-content: center;
     align-items: center;
-    gap: {{ block.settings.letter_spacing }}px;
-    flex-wrap: {{ block.settings.wrap_on_mobile }};
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 0;
   }
+  .ai-alphabet-nav-container-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
 
   .ai-alphabet-nav-letter-{{ ai_gen_id }} {
-    font-size: {{ block.settings.letter_size }}px;
-    color: {{ block.settings.letter_color }};
+    font-family: var(--font-body-family, 'Jost', sans-serif);
+    font-size: 13px;
+    color: #000000;
     text-decoration: none;
-    font-weight: {{ block.settings.letter_weight }};
+    font-weight: 500;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    padding: 4px 2px;
-    line-height: 1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px; /* Pill/Circle shape */
+    flex-shrink: 0;
     cursor: pointer;
   }
 
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover,
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active {
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover {
     color: #6D001A;
-    transform: scale(1.1);
+    background: rgba(109, 0, 26, 0.05);
   }
 
-  /* Animated underline for active/hover */
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 1.5px;
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active {
     background-color: #6D001A;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-  }
-
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover::after,
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active::after {
-    width: 80%;
+    color: #FFFFFF !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
   }
 
   @media screen and (max-width: 749px) {
     .ai-alphabet-nav-{{ ai_gen_id }} {
-      padding: {{ block.settings.section_padding | times: 0.5 }}px 12px;
       top: 60px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      padding: 10px 12px;
     }
-    .ai-alphabet-nav-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
-
-    .ai-alphabet-nav-container-{{ ai_gen_id }} {
-      gap: {{ block.settings.letter_spacing | times: 0.6 }}px;
-      justify-content: flex-start;
-      padding-bottom: 4px;
-    }
-
     .ai-alphabet-nav-letter-{{ ai_gen_id }} {
-      font-size: {{ block.settings.letter_size | times: 0.8 }}px;
-      flex-shrink: 0;
+      font-size: 12px;
+      width: 28px;
+      height: 28px;
     }
   }
 {% endstyle %}
