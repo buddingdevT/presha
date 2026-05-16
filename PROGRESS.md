@@ -1,4 +1,27 @@
-# Presha Trends — Build Progress
+## 2026-05-15 — Homepage Refinements (Phases 1 & 2)
+
+**What was built/fixed:**
+- **Collection Title Sync Fix (Phase 1):**
+    - Standardized heading logic across `presha-collection-b`, `presha-collection-c`, and `presha-collection-collectibles`.
+    - Fixed a bug where titles in Collection C and Collectibles would disappear after the entrance animation by adding `clearProps: 'clipPath'` to the GSAP tweens.
+    - Standardized `aria-labels` and heading fallbacks to prioritize `brand_name` (manual) then `collection.title` (Shopify).
+- **Featured Categories Update (Phase 2):**
+    - Updated `templates/index.json` with the new premium brand list: Prada, Casablanca, Hermès, Enfants Riches Déprimés, Goyard, Louis Vuitton, Burberry, and Fear Of God.
+    - Updated the section defaults in `sections/presha-featured-categories.liquid` to match the new editorial direction.
+- **Trust Bar Refinement:** Reduced the overall size of the `presha-trust-bar.liquid` section by 20% for better editorial balance.
+
+**Files changed:**
+- `assets/localization.js`
+- `snippets/localization-form.liquid`
+- `sections/presha-trust-bar.liquid`
+- `sections/presha-collection-c.liquid`
+- `sections/presha-collection-collectibles.liquid`
+- `sections/presha-featured-categories.liquid`
+- `templates/index.json`
+
+**Next Steps:**
+- Revisit localization for final testing (flag/currency update validation).
+- Address the broken scrolling marquee.
 
 ---
 

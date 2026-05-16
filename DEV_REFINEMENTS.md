@@ -6,6 +6,10 @@ This document tracks the prioritized refinements, design tasks, and functional b
 
 ## 1. Critical & Functional Fixes
 
+### ⚠️ Localization: Flag & Currency Sync Validation
+*   **Status:** Refined but needs final validation.
+*   **Goal:** Ensure the flag and currency reliably update across all sessions after a country change, and that the smart language sync remains accurate for all mapped regions.
+
 ### ⚠️ Trending Now: Dynamic Collection Support
 *   **Issue:** The section only works as expected when products are added manually one-by-one. It does not correctly handle automated collection population with the required editorial tags/badges.
 *   **Goal:** Allow the section to work for collections (automated) while maintaining the ranking and condition badge logic currently seen in the manual mode.

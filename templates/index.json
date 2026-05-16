@@ -295,61 +295,61 @@
       "blocks": {
         "cat_jordan": {
           "type": "category",
-          "name": "Air Jordan",
+          "name": "Prada",
           "settings": {
-            "category_name": "Air Jordan",
+            "category_name": "Prada",
             "collection": ""
           }
         },
         "cat_nike": {
           "type": "category",
-          "name": "Nike",
+          "name": "Casablanca",
           "settings": {
-            "category_name": "Nike",
+            "category_name": "Casablanca",
             "collection": ""
           }
         },
         "cat_on_running": {
           "type": "category",
-          "name": "Loewe x On",
+          "name": "Hermès",
           "settings": {
-            "category_name": "Loewe X On",
+            "category_name": "Hermès",
             "collection": ""
           }
         },
         "cat_onitsuka": {
           "type": "category",
-          "name": "Onitsuka Tiger",
+          "name": "Enfants Riches Déprimés",
           "settings": {
-            "category_name": "Onitsuka Tiger",
+            "category_name": "Enfants Riches Déprimés",
             "collection": ""
           }
         },
         "cat_adidas": {
           "type": "category",
           "settings": {
-            "category_name": "Adidas",
+            "category_name": "Goyard",
             "collection": ""
           }
         },
         "cat_new_balance": {
           "type": "category",
           "settings": {
-            "category_name": "New Balance",
+            "category_name": "Louis Vuitton",
             "collection": ""
           }
         },
         "cat_yeezy": {
           "type": "category",
           "settings": {
-            "category_name": "Yeezy",
+            "category_name": "Burberry",
             "collection": ""
           }
         },
         "cat_asics": {
           "type": "category",
           "settings": {
-            "category_name": "Asics",
+            "category_name": "Fear Of God",
             "collection": ""
           }
         }
