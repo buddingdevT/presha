@@ -10,6 +10,12 @@
     width: 100%;
     padding: {{ block.settings.section_padding }}px 20px;
     background-color: {{ block.settings.background_color }};
+    position: sticky;
+    top: 72px; /* Header height */
+    z-index: 10;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .ai-alphabet-nav-container-{{ ai_gen_id }} {
@@ -27,25 +33,55 @@
     color: {{ block.settings.letter_color }};
     text-decoration: none;
     font-weight: {{ block.settings.letter_weight }};
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    padding: 4px 2px;
+    line-height: 1;
+    cursor: pointer;
   }
 
-  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover {
-    color: {{ block.settings.letter_hover_color }};
-    transform: translateY(-2px);
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover,
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active {
+    color: #6D001A;
+    transform: scale(1.1);
+  }
+
+  /* Animated underline for active/hover */
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1.5px;
+    background-color: #6D001A;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover::after,
+  .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active::after {
+    width: 80%;
   }
 
   @media screen and (max-width: 749px) {
     .ai-alphabet-nav-{{ ai_gen_id }} {
-      padding: {{ block.settings.section_padding | times: 0.6 }}px 16px;
+      padding: {{ block.settings.section_padding | times: 0.5 }}px 12px;
+      top: 60px;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .ai-alphabet-nav-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
 
     .ai-alphabet-nav-container-{{ ai_gen_id }} {
-      gap: {{ block.settings.letter_spacing | times: 0.5 }}px;
+      gap: {{ block.settings.letter_spacing | times: 0.6 }}px;
+      justify-content: flex-start;
+      padding-bottom: 4px;
     }
 
     .ai-alphabet-nav-letter-{{ ai_gen_id }} {
       font-size: {{ block.settings.letter_size | times: 0.8 }}px;
+      flex-shrink: 0;
     }
   }
 {% endstyle %}
@@ -55,29 +91,104 @@
     {% assign alphabet = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' %}
     
     {% for letter in alphabet %}
-      {% if block.settings.enable_links %}
-        <a 
-          href="{{ block.settings.link_prefix }}{{ letter | downcase }}" 
-          class="ai-alphabet-nav-letter-{{ ai_gen_id }}"
-        >
-          {{ letter }}
-        </a>
-      {% else %}
-        <span class="ai-alphabet-nav-letter-{{ ai_gen_id }}">{{ letter }}</span>
-      {% endif %}
+      <a 
+        href="#brand-{{ letter }}" 
+        class="ai-alphabet-nav-letter-{{ ai_gen_id }}"
+        data-letter="{{ letter }}"
+      >
+        {{ letter }}
+      </a>
     {% endfor %}
   </div>
 </alphabet-nav-{{ ai_gen_id }}>
 
 <script>
   (function() {
+    if (customElements.get('alphabet-nav-{{ ai_gen_id }}')) return;
+
     class AlphabetNav{{ ai_gen_id }} extends HTMLElement {
       constructor() {
         super();
+        this.links = this.querySelectorAll('a');
+        this.observer = null;
       }
 
       connectedCallback() {
         this.style.display = 'block';
+        this.initSmoothScroll();
+        this.initIntersectionObserver();
+      }
+
+      initSmoothScroll() {
+        this.links.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const letter = link.getAttribute('data-letter');
+            
+            // Search for <h3> containing this letter
+            const headings = document.querySelectorAll('h3');
+            const target = Array.from(headings).find(h => h.textContent.trim().toUpperCase() === letter);
+
+            if (target) {
+              const headerHeight = document.querySelector('.header-wrapper')?.offsetHeight || 72;
+              const navHeight = this.offsetHeight;
+              const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - navHeight - 20;
+
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+
+              // Push history state without jump
+              history.pushState(null, null, `#brand-${letter}`);
+            }
+          });
+        });
+      }
+
+      initIntersectionObserver() {
+        const headings = Array.from(document.querySelectorAll('h3')).filter(h => {
+          const text = h.textContent.trim().toUpperCase();
+          return text.length === 1 && /^[A-Z]$/.test(text);
+        });
+
+        if (headings.length === 0) return;
+
+        const options = {
+          root: null,
+          rootMargin: '-10% 0px -80% 0px',
+          threshold: 0
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const letter = entry.target.textContent.trim().toUpperCase();
+              this.setActiveLetter(letter);
+            }
+          });
+        }, options);
+
+        headings.forEach(heading => this.observer.observe(heading));
+      }
+
+      setActiveLetter(letter) {
+        this.links.forEach(link => {
+          if (link.getAttribute('data-letter') === letter) {
+            link.classList.add('is-active');
+            
+            // Ensure mobile visibility (scroll into view if hidden in overflow)
+            if (window.innerWidth < 750) {
+              link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+          } else {
+            link.classList.remove('is-active');
+          }
+        });
+      }
+
+      disconnectedCallback() {
+        if (this.observer) this.observer.disconnect();
       }
     }
 
