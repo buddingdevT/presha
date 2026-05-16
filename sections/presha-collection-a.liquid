@@ -282,7 +282,13 @@
         </span>
         <div class="presha-col-a__rule" id="col-a-rule-{{ section.id }}" aria-hidden="true"></div>
         <h2 class="presha-col-a__brand-name" id="col-a-name-{{ section.id }}">
-          {{- section.settings.brand_name | default: section.settings.collection.title | default: 'Brand Name' -}}
+          {%- if section.settings.collection != blank and section.settings.collection.title != blank -%}
+            {{ section.settings.collection.title }}
+          {%- elsif section.settings.brand_name != blank -%}
+            {{ section.settings.brand_name }}
+          {%- else -%}
+            Brand Name
+          {%- endif -%}
         </h2>
       </div>
 

@@ -374,7 +374,13 @@
             {{- section.settings.eyebrow | default: 'Collection' -}}
           </span>
           <span class="presha-col-c__banner-brand">
-            {{- section.settings.brand_name | default: section.settings.collection.title | default: 'Brand Name' -}}
+            {%- if section.settings.collection != blank and section.settings.collection.title != blank -%}
+              {{ section.settings.collection.title }}
+            {%- elsif section.settings.brand_name != blank -%}
+              {{ section.settings.brand_name }}
+            {%- else -%}
+              Brand Name
+            {%- endif -%}
           </span>
           {%- if section.settings.descriptor != blank -%}
             <span class="presha-col-c__banner-descriptor">

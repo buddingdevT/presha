@@ -312,7 +312,13 @@
           class="presha-col-col__heading"
           id="col-col-heading-{{ section.id }}"
         >
-          {{- section.settings.heading | default: section.settings.collection.title | default: 'Collectibles' -}}
+          {%- if section.settings.collection != blank and section.settings.collection.title != blank -%}
+            {{ section.settings.collection.title }}
+          {%- elsif section.settings.heading != blank -%}
+            {{ section.settings.heading }}
+          {%- else -%}
+            Collectibles
+          {%- endif -%}
         </h2>
       </div>
 
