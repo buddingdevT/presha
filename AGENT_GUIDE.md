@@ -305,14 +305,12 @@ Still not started or not fully established in codebase as custom final experienc
 
 ## 14. Development Rules
 
-- Work mobile-first
-- Respect breakpoints: `480 / 749 / 1024 / 1280`
-- Prefer surgical edits over broad rewrites
-- Use GSAP for motion where animation is required
-- Preserve performance and accessibility
-- Do not assume missing Shopify content means broken code
-- Always check `templates/index.json` before discussing homepage state
-- Update project memory docs when the project state materially changes
+- **Responsive-First Engineering:** Every component MUST be fluid across all breakpoints (`480 / 749 / 1024 / 1280 / 1600+`).
+- **Senior CSS Standards:** Use `clamp()`, `vw`, and `vh` for typography and spacing to maintain the editorial "High Margin" look (`15vw` on wide screens).
+- **Sticky Consistency:** Ensure sticky elements (A-Z bar) sit perfectly below the header and scroll away naturally before the footer.
+- **Micro-Interactions:** Always include hover and active states (Burgundy #6D001A) and premium indicators like scroll-progress lines.
+- **Surgical Edits:** Prefer targeted updates over broad rewrites to preserve local theme logic.
+- **Performance:** Use GSAP for motion but ensure animations clear their props (`clearProps`) to prevent layout flickering.
 
 ---
 

@@ -5,6 +5,8 @@
   assign max_items = 20
 %}
 
+<!-- DEBUG: Template name is {{ template.name }} -->
+
 {%- if template.name == 'list-collections' -%}
   <style>
     /* ── Editorial Brands Page Design ──────────────────────────── */
@@ -21,7 +23,7 @@
       position: relative !important;
       display: inline-block !important;
       z-index: 1 !important;
-      scroll-margin-top: 140px; /* Space for Header + Sticky Nav */
+      scroll-margin-top: 140px !important;
     }
 
     /* Soft Ivory Backdrop block for letters */
