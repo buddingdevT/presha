@@ -3,31 +3,31 @@
     a - z for different brand names, A B C D E F G H I J K L M N O P Q R S T U V W X Y Z all in horizontal line, remove bold and exterior blocks
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
-
 {% style %}
   .ai-alphabet-nav-{{ ai_gen_id }} {
     display: block;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 16px 0;
+    padding: 26px 0; /* Height increased by another 15% */
     background-color: #F5F1EC;
     position: sticky;
     top: var(--header-height, 72px);
+    /* Set top to match header exactly, removing any sub-pixel gaps */
+    margin-top: -2px; 
     z-index: 100;
     border-bottom: 1px solid rgba(109, 0, 26, 0.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    transition: opacity 0.3s ease;
   }
 
   .ai-alphabet-nav-container-{{ ai_gen_id }} {
     max-width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* Perfect horizontal centering */
+    align-items: center;     /* Perfect vertical centering */
     padding-inline: clamp(20px, 15vw, 400px);
-    gap: 8px;
+    gap: 12px;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -36,6 +36,15 @@
     -webkit-overflow-scrolling: touch;
   }
   .ai-alphabet-nav-container-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
+
+  @media screen and (max-width: 1024px) {
+    .ai-alphabet-nav-container-{{ ai_gen_id }} {
+      justify-content: flex-start;
+      padding-inline: 40px;
+    }
+  }
+{% endstyle %}
+
 
   .ai-alphabet-nav-{{ ai_gen_id }}::after {
     content: '';

@@ -201,21 +201,6 @@ This is not a blank theme. Most of the remaining work is refinement, bug fixing,
 
 ## 9. Current Known Issues
 
-### Highest-priority code issue
-
-`sections/presha-marquee.liquid`
-
-The scrolling marquee is still broken. The structure renders, but the scrolling animation does not work correctly in preview.
-
-Attempts already noted in project history:
-
-- CSS keyframe loops
-- JS animation loop
-- duplicated track rendering
-- overflow/translate adjustments
-
-Treat this as the top unresolved frontend issue.
-
 ### Other important reality checks
 
 - Several homepage sections depend on Shopify collections that may not exist yet.
@@ -370,6 +355,19 @@ Current session handoff:
 ---
 
 ## 17. Maintenance Note
+
+This file should stay short enough to be practical, but current enough to be trusted.
+
+Update it when any of these change:
+
+- homepage structure
+- active navigation/menu assumptions
+- latest stable checkpoint
+- top unresolved blockers
+- major completed features
+- best next step
+
+If this file and another doc disagree, verify against code and then update this file.
 
 This file should stay short enough to be practical, but current enough to be trusted.
 
