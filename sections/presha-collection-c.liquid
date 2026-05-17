@@ -374,13 +374,7 @@
             {{- section.settings.eyebrow | default: 'Collection' -}}
           </span>
           <span class="presha-col-c__banner-brand">
-            {%- if section.settings.collection != blank and section.settings.collection.title != blank -%}
-              {{ section.settings.collection.title }}
-            {%- elsif section.settings.brand_name != blank -%}
-              {{ section.settings.brand_name }}
-            {%- else -%}
-              Brand Name
-            {%- endif -%}
+            {{- section.settings.collection.title | default: section.settings.brand_name | default: 'Brand Name' -}}
           </span>
           {%- if section.settings.descriptor != blank -%}
             <span class="presha-col-c__banner-descriptor">
@@ -409,7 +403,7 @@
           <a
             href="{{ section.settings.collection.url }}"
             class="presha-col-c__view-all"
-            aria-label="View all {{ section.settings.brand_name | default: section.settings.collection.title | default: 'Brand' | escape }} products"
+            aria-label="View all {{ section.settings.brand_name | escape }} products"
           >
             View All
           </a>
@@ -600,7 +594,7 @@
     tl.fromTo(
       identity,
       { clipPath: 'inset(100% 0 0 0)' },
-      { clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'power3.out', clearProps: 'clipPath' },
+      { clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'power3.out' },
       banner ? '-=0.3' : '0'   // overlap with banner if it exists
     );
   }

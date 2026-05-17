@@ -8,14 +8,12 @@
   .ai-alphabet-nav-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    padding: 12px 20px;
-    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    background-color: #F5F1EC; /* Soft Ivory for contrast */
     position: sticky;
-    top: 72px; /* Header height */
-    z-index: 50;
-    border-bottom: 1px solid rgba(109, 0, 26, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    top: 72px; /* Sticks exactly below the header */
+    z-index: 40;
+    border-bottom: 1px solid rgba(109, 0, 26, 0.05);
   }
 
   .ai-alphabet-nav-container-{{ ai_gen_id }} {
@@ -24,30 +22,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 4px 0;
+    padding: 2px 0;
   }
   .ai-alphabet-nav-container-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
 
   .ai-alphabet-nav-letter-{{ ai_gen_id }} {
     font-family: var(--font-body-family, 'Jost', sans-serif);
-    font-size: 13px;
+    font-size: 12px;
     color: #000000;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 32px;
-    height: 32px;
+    transition: all 0.25s ease;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9999px; /* Pill/Circle shape */
+    border-radius: 50%; /* Pill/Circle shape */
     flex-shrink: 0;
     cursor: pointer;
+    text-transform: uppercase;
   }
 
   .ai-alphabet-nav-letter-{{ ai_gen_id }}:hover {
@@ -56,21 +55,23 @@
   }
 
   .ai-alphabet-nav-letter-{{ ai_gen_id }}.is-active {
-    background-color: #6D001A;
+    background-color: #6D001A !important;
     color: #FFFFFF !important;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(109, 0, 26, 0.2);
   }
 
   @media screen and (max-width: 749px) {
     .ai-alphabet-nav-{{ ai_gen_id }} {
-      top: 60px;
-      padding: 10px 12px;
+      top: 60px; /* Mobile header height */
+      padding: 8px 12px;
+    }
+    .ai-alphabet-nav-container-{{ ai_gen_id }} {
+      justify-content: flex-start;
     }
     .ai-alphabet-nav-letter-{{ ai_gen_id }} {
-      font-size: 12px;
-      width: 28px;
-      height: 28px;
+      font-size: 11px;
+      width: 26px;
+      height: 26px;
     }
   }
 {% endstyle %}

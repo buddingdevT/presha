@@ -26,6 +26,7 @@
           "type": "rail_card",
           "name": "Pokemon ",
           "settings": {
+            "asset_image": "pokemonthumbnail.png",
             "label": "SHOP",
             "name": "Pokémon Collectibles",
             "link": ""
@@ -35,6 +36,7 @@
           "type": "rail_card",
           "name": "Trending",
           "settings": {
+            "asset_image": "trendnow.png",
             "label": "SHOP BY",
             "name": "Trending Now",
             "link": "shopify://collections/trending-now"
@@ -44,6 +46,7 @@
           "type": "rail_card",
           "name": "Presha Vault",
           "settings": {
+            "asset_image": "preshvault.png",
             "label": "SHOP BY",
             "name": "Presha Vault",
             "link": ""
@@ -295,61 +298,69 @@
       "blocks": {
         "cat_jordan": {
           "type": "category",
-          "name": "Prada",
+          "name": "Air Jordan",
           "settings": {
-            "category_name": "Prada",
+            "category_name": "Air Jordan",
+            "image": "shopify://shop_images/air_616cc780-b8ef-4ba3-9bdf-9024d4a35002.png",
             "collection": ""
           }
         },
         "cat_nike": {
           "type": "category",
-          "name": "Casablanca",
+          "name": "Nike",
           "settings": {
-            "category_name": "Casablanca",
+            "category_name": "Nike",
+            "image": "shopify://shop_images/nike_1.png",
             "collection": ""
           }
         },
         "cat_on_running": {
           "type": "category",
-          "name": "Hermès",
+          "name": "Loewe x On",
           "settings": {
-            "category_name": "Hermès",
+            "category_name": "Loewe X On",
+            "image": "shopify://shop_images/xon_1.png",
             "collection": ""
           }
         },
         "cat_onitsuka": {
           "type": "category",
-          "name": "Enfants Riches Déprimés",
+          "name": "Onitsuka Tiger",
           "settings": {
-            "category_name": "Enfants Riches Déprimés",
+            "category_name": "Onitsuka Tiger",
+            "image": "shopify://shop_images/onitsuka_8cc16950-0369-4bec-8d1c-e42660b5ec8b.png",
             "collection": ""
           }
         },
         "cat_adidas": {
           "type": "category",
           "settings": {
-            "category_name": "Goyard",
+            "category_name": "Adidas",
+            "image": "shopify://shop_images/adidas.png",
             "collection": ""
           }
         },
         "cat_new_balance": {
           "type": "category",
           "settings": {
-            "category_name": "Louis Vuitton",
+            "category_name": "New Balance",
+            "image": "shopify://shop_images/newbalance_434a84f0-81b2-4544-9575-ed2f5e794033.png",
             "collection": ""
           }
         },
         "cat_yeezy": {
           "type": "category",
           "settings": {
-            "category_name": "Burberry",
+            "category_name": "Yeezy",
+            "image": "shopify://shop_images/yeezy_da2f97a8-c86d-463f-a769-fc70c874b223.png",
             "collection": ""
           }
         },
         "cat_asics": {
           "type": "category",
           "settings": {
-            "category_name": "Fear Of God",
+            "category_name": "Asics",
+            "image": "shopify://shop_images/asics_5d3ca5bc-f9ab-4bc7-80d7-44bab2f78fcf.png",
             "collection": ""
           }
         }

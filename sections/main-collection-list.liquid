@@ -10,100 +10,104 @@
     /* ── Editorial Brands Page Design ──────────────────────────── */
     
     /* 1. Hero Letter Anchors (The Glamore) */
-    .section-resource-list__content .text-block h3 {
-      font-family: var(--font-heading-family, 'Cormorant Garamond', serif) !important; /* The Glamore alias */
-      font-size: clamp(4rem, 10vw, 6.5rem) !important;
+    .section-resource-list .section-resource-list__content .text-block h3 {
+      font-family: var(--font-heading-family, 'Cormorant Garamond', serif) !important;
+      font-size: clamp(4.5rem, 12vw, 7.5rem) !important;
       font-style: italic !important;
       font-weight: 600 !important;
       color: #6D001A !important;
-      line-height: 1 !important;
-      margin: 80px 0 40px 0 !important;
-      position: relative;
-      display: inline-block;
-      z-index: 1;
+      line-height: 0.8 !important;
+      margin: 100px 0 32px 0 !important;
+      position: relative !important;
+      display: inline-block !important;
+      z-index: 1 !important;
+      scroll-margin-top: 140px; /* Space for Header + Sticky Nav */
     }
 
     /* Soft Ivory Backdrop block for letters */
-    .section-resource-list__content .text-block h3::before {
-      content: '';
-      position: absolute;
-      top: 15%;
-      left: -15px;
-      width: 120%;
-      height: 75%;
-      background: #F5F1EC;
-      z-index: -1;
-      border-radius: 4px;
-      opacity: 0.8;
+    .section-resource-list .section-resource-list__content .text-block h3::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 20% !important;
+      left: -20px !important;
+      width: calc(100% + 40px) !important;
+      height: 70% !important;
+      background: #F5F1EC !important;
+      z-index: -1 !important;
+      border-radius: 4px !important;
+      opacity: 0.9 !important;
     }
 
     /* 2. Multi-Column Brand Grid (Gilroy) */
-    .section-resource-list__content nav[role="navigation"] ul {
+    .section-resource-list .section-resource-list__content nav[role="navigation"] ul {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
-      gap: 16px 40px !important;
+      gap: 12px 60px !important;
       width: 100% !important;
       padding: 0 !important;
-      margin-bottom: 60px !important;
-    }
-
-    .section-resource-list__content nav[role="navigation"] li {
-      margin: 0 !important;
+      margin: 0 0 80px 0 !important;
       list-style: none !important;
     }
 
-    .section-resource-list__content nav[role="navigation"] a {
-      font-family: var(--font-body-family, 'Jost', sans-serif) !important; /* Gilroy alias */
-      font-size: 14px !important;
+    .section-resource-list .section-resource-list__content nav[role="navigation"] li {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .section-resource-list .section-resource-list__content nav[role="navigation"] a {
+      font-family: var(--font-body-family, 'Jost', sans-serif) !important;
+      font-size: 13px !important;
       font-weight: 500 !important;
-      letter-spacing: 0.04em !important;
+      letter-spacing: 0.05em !important;
       color: #0A0A0A !important;
       text-transform: uppercase !important;
       text-decoration: none !important;
-      display: inline-block !important;
+      display: inline-flex !important;
       position: relative !important;
-      padding-bottom: 2px !important;
+      padding-bottom: 3px !important;
       transition: color 0.3s ease !important;
     }
 
     /* Burgundy Sweep Hover Effect */
-    .section-resource-list__content nav[role="navigation"] a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: #6D001A;
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .section-resource-list .section-resource-list__content nav[role="navigation"] a::after {
+      content: '' !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 0 !important;
+      height: 1.5px !important;
+      background-color: #6D001A !important;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    .section-resource-list__content nav[role="navigation"] a:hover {
+    .section-resource-list .section-resource-list__content nav[role="navigation"] a:hover {
       color: #6D001A !important;
     }
 
-    .section-resource-list__content nav[role="navigation"] a:hover::after {
-      width: 100%;
+    .section-resource-list .section-resource-list__content nav[role="navigation"] a:hover::after {
+      width: 100% !important;
     }
 
-    /* 3. Section Dividers */
-    .section-resource-list__content .text-block {
-      border-top: 1px solid rgba(109, 0, 26, 0.05);
+    /* Section Separators */
+    .section-resource-list .section-resource-list__content .text-block {
+      border-top: 1px solid rgba(109, 0, 26, 0.04) !important;
       width: 100% !important;
       max-width: 100% !important;
     }
-    .section-resource-list__content .text-block:first-of-type {
-      border-top: none;
+    .section-resource-list .section-resource-list__content .text-block:first-of-type {
+      border-top: none !important;
     }
 
-    /* Mobile Refinements */
+    /* Mobile (2 Columns) */
     @media screen and (max-width: 749px) {
-      .section-resource-list__content nav[role="navigation"] ul {
+      .section-resource-list .section-resource-list__content nav[role="navigation"] ul {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px 20px !important;
+        gap: 10px 20px !important;
+        margin-bottom: 48px !important;
       }
-      .section-resource-list__content .text-block h3 {
-        margin: 40px 0 24px 0 !important;
+      .section-resource-list .section-resource-list__content .text-block h3 {
+        margin: 60px 0 24px 0 !important;
+        scroll-margin-top: 110px;
       }
     }
   </style>
