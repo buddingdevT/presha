@@ -287,7 +287,7 @@
       "type": "presha-collection-b",
       "settings": {
         "eyebrow": "Collection",
-        "brand_name": "",
+        "brand_name": "{{ section.settings.collection.title }}",
         "anchor_image": "shopify://shop_images/a-bathing-ape-logo-png_seeklogo-330394.png",
         "collection": "a-bathing-ape",
         "product_limit": 8
@@ -298,36 +298,36 @@
       "blocks": {
         "cat_jordan": {
           "type": "category",
-          "name": "Air Jordan",
+          "name": "Prada",
           "settings": {
-            "category_name": "Air Jordan",
+            "category_name": "Prada",
             "image": "shopify://shop_images/air_616cc780-b8ef-4ba3-9bdf-9024d4a35002.png",
             "collection": ""
           }
         },
         "cat_nike": {
           "type": "category",
-          "name": "Nike",
+          "name": "Casablanca",
           "settings": {
-            "category_name": "Nike",
+            "category_name": "Casablanca",
             "image": "shopify://shop_images/nike_1.png",
             "collection": ""
           }
         },
         "cat_on_running": {
           "type": "category",
-          "name": "Loewe x On",
+          "name": "Hermès",
           "settings": {
-            "category_name": "Loewe X On",
+            "category_name": "Hermès",
             "image": "shopify://shop_images/xon_1.png",
             "collection": ""
           }
         },
         "cat_onitsuka": {
           "type": "category",
-          "name": "Onitsuka Tiger",
+          "name": "Enfants Riches Déprimés",
           "settings": {
-            "category_name": "Onitsuka Tiger",
+            "category_name": "Enfants Riches Déprimés",
             "image": "shopify://shop_images/onitsuka_8cc16950-0369-4bec-8d1c-e42660b5ec8b.png",
             "collection": ""
           }
@@ -335,7 +335,7 @@
         "cat_adidas": {
           "type": "category",
           "settings": {
-            "category_name": "Adidas",
+            "category_name": "Goyard",
             "image": "shopify://shop_images/adidas.png",
             "collection": ""
           }
@@ -343,7 +343,7 @@
         "cat_new_balance": {
           "type": "category",
           "settings": {
-            "category_name": "New Balance",
+            "category_name": "Louis Vuitton",
             "image": "shopify://shop_images/newbalance_434a84f0-81b2-4544-9575-ed2f5e794033.png",
             "collection": ""
           }
@@ -351,7 +351,7 @@
         "cat_yeezy": {
           "type": "category",
           "settings": {
-            "category_name": "Yeezy",
+            "category_name": "Burberry",
             "image": "shopify://shop_images/yeezy_da2f97a8-c86d-463f-a769-fc70c874b223.png",
             "collection": ""
           }
@@ -359,7 +359,7 @@
         "cat_asics": {
           "type": "category",
           "settings": {
-            "category_name": "Asics",
+            "category_name": "Fear Of God",
             "image": "shopify://shop_images/asics_5d3ca5bc-f9ab-4bc7-80d7-44bab2f78fcf.png",
             "collection": ""
           }
@@ -383,7 +383,7 @@
       "type": "presha-collection-c",
       "settings": {
         "eyebrow": "Collection",
-        "brand_name": "",
+        "brand_name": "{{ section.settings.collection.title }}",
         "descriptor": "Box Logo Drops · Apparel · Caps",
         "hero_image": "shopify://shop_images/slide3.webp",
         "collection": "accessories",
@@ -466,8 +466,8 @@
     "presha_collection_collectibles": {
       "type": "presha-collection-collectibles",
       "settings": {
-        "eyebrow": "Rare & Collectible",
-        "heading": "",
+        "eyebrow": "Rare & Collectibles",
+        "heading": "{{ section.settings.collection.title }}",
         "collection": "nike",
         "product_limit": 8,
         "view_all_url": "shopify://collections/nike"

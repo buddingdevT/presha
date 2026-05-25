@@ -9,12 +9,11 @@
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 26px 0; /* Height increased by another 15% */
+    padding: 22px 0; /* Height increased by 15% */
     background-color: #F5F1EC;
     position: sticky;
     top: var(--header-height, 72px);
-    /* Set top to match header exactly, removing any sub-pixel gaps */
-    margin-top: -2px; 
+    margin-top: -1px; /* Flush with header */
     z-index: 100;
     border-bottom: 1px solid rgba(109, 0, 26, 0.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
@@ -24,8 +23,8 @@
     max-width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: center; /* Perfect horizontal centering */
-    align-items: center;     /* Perfect vertical centering */
+    justify-content: center; /* Centered letters */
+    align-items: center; /* Vertical centering */
     padding-inline: clamp(20px, 15vw, 400px);
     gap: 12px;
     flex-wrap: nowrap;
@@ -43,7 +42,6 @@
       padding-inline: 40px;
     }
   }
-{% endstyle %}
 
 
   .ai-alphabet-nav-{{ ai_gen_id }}::after {

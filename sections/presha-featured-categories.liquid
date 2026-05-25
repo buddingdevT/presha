@@ -61,8 +61,17 @@
                   </svg>
                 </div>
               {%- endif -%}
+
+              {%- comment -%} Glassmorphism Overlay on Hover {%- endcomment -%}
+              <div class="presha-fcats__glass-overlay"></div>
             </div>
-            <span class="presha-fcats__card-label">{{ category_title }}</span>
+            <div class="presha-fcats__card-info">
+              {%- comment -%} 
+                Editorial Index Numbers — Commented out per user request to keep the UI minimal. 
+                <span class="presha-fcats__card-index">0{{ forloop.index }}</span>
+              {%- endcomment -%}
+              <span class="presha-fcats__card-label">{{ category_title }}</span>
+            </div>
           </a>
         {%- endif -%}
       {%- endfor -%}
@@ -77,51 +86,61 @@
   .presha-fcats {
     width: 100%;
     background-color: #ffffff;
-    padding: 64px 0 72px;
+    /* Fit viewport logic: constrained padding using vh */
+    padding: 6vh 0 8vh !important; 
+    min-height: calc(100vh - var(--header-height, 72px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     box-sizing: border-box;
     overflow: hidden;
   }
 
-  /* ── Heading — italic serif, left-aligned ────────────────────── */
+  /* ── Heading — Aligned with Trending Now (1280px / 20px) ─────── */
   .presha-fcats__heading-wrap {
-    max-width: 1380px;
-    margin: 0 auto 36px;
-    padding: 0 40px;
-    opacity: 0; /* GSAP animates to 1 */
+    max-width: 1280px !important; /* Standard site width */
+    margin: 0 auto 32px !important; 
+    padding: 0 20px !important; /* Standard site padding */
+    opacity: 0; 
     will-change: opacity, transform;
+    text-align: left !important;
+    width: 100%;
   }
 
   .presha-fcats__title {
-    font-family: 'Cormorant Garamond', var(--font-heading--family, Georgia), serif;
-    font-size: clamp(26px, 3vw, 38px);
-    font-weight: 600;
-    font-style: italic;
-    color: #1a1a1a;
-    margin: 0;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif) !important;
+    font-size: clamp(28px, 4vw, 42px) !important;
+    font-weight: 800 !important;
+    font-style: italic !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
   }
 
   /* ── Track wrap — constrains viewport overflow ───────────────── */
   .presha-fcats__track-wrap {
-    max-width: 1380px;
-    margin: 0 auto;
+    max-width: 100vw;
+    margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
-  /* ── Card track — horizontal scroll ──────────────────────────── */
+  /* ── Card track — Horizontal Scroll aligned with site padding ── */
   .presha-fcats__track {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 20px;
+    gap: 28px; 
     flex-wrap: nowrap;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 4px 40px 8px;
+    /* Padding-left matches the heading's 20px standard */
+    padding: 20px 20px 60px !important; 
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -134,30 +153,54 @@
   .presha-fcats__card {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     flex-shrink: 0;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     text-decoration: none;
-    width: 260px;
-    opacity: 0; /* GSAP stagger start */
+    width: clamp(240px, 20vw, 320px);
+    opacity: 0; 
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     will-change: opacity, transform;
-    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Staggered Rhythm — Every even card offset downwards */
+  .presha-fcats__card:nth-child(even) {
+    margin-top: 40px;
   }
 
   .presha-fcats__card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
   }
 
-  /* ── Card image wrapper — portrait aspect ratio ──────────────── */
+  /* ── Card image wrapper ──────────────────────────────────────── */
   .presha-fcats__card-img-wrap {
     width: 100%;
-    aspect-ratio: 3 / 4;
-    border-radius: 12px;
+    aspect-ratio: 3 / 4.2;
+    border-radius: 12px; /* Radius-LG */
     overflow: hidden;
-    background: #f5f5f5;
+    background: #F5F1EC; /* Soft Ivory placeholder */
     position: relative;
+    border: 1px solid rgba(109, 0, 26, 0.05); /* Subtle burgundy printed edge */
+  }
+
+  /* Glassmorphism Overlay */
+  .presha-fcats__glass-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .presha-fcats__card:hover .presha-fcats__glass-overlay {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
   }
 
   .presha-fcats__card-img {
@@ -165,40 +208,69 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Internal cinematic zoom on hover */
   .presha-fcats__card:hover .presha-fcats__card-img {
-    transform: scale(1.04);
+    transform: scale(1.08);
   }
 
-  /* ── Placeholder (when no image uploaded) ────────────────────── */
-  .presha-fcats__card-placeholder {
-    width: 100%;
-    height: 100%;
+  /* ── Card Info & Typography ──────────────────────────────────── */
+  .presha-fcats__card-info {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(145deg, #e8e8e8 0%, #d4d4d4 100%);
+    flex-direction: column;
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
   }
 
-  /* ── Card label — below the image ────────────────────────────── */
-  .presha-fcats__card-label {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-top: 14px;
-    font-family: var(--font-body--family, 'Jost', system-ui, sans-serif);
-    font-size: 15px;
-    font-weight: 500;
-    color: #1a1a1a;
-    letter-spacing: 0.01em;
-    line-height: 1.3;
+  .presha-fcats__card-index {
+    font-family: var(--font-body-family, 'Gilroy', sans-serif);
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
     transition: color 0.3s ease;
   }
 
+  .presha-fcats__card-label {
+    display: inline-block;
+    font-family: var(--font-heading-family, 'Cormorant Garamond', serif);
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: 500;
+    font-style: italic; /* Display Font Editorial Mandate */
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  /* Burgundy Sweep Hover Effect */
+  .presha-fcats__card-label::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: #6D001A;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .presha-fcats__card:hover .presha-fcats__card-label {
-    color: #6B1A2A; /* burgundy on hover */
+    color: #6D001A;
+  }
+
+  .presha-fcats__card:hover .presha-fcats__card-index {
+    color: #6D001A;
+  }
+
+  .presha-fcats__card:hover .presha-fcats__card-label::after {
+    width: 100%;
   }
 
   /* ── Tablet ──────────────────────────────────────────────────── */
@@ -206,65 +278,32 @@
     .presha-fcats {
       padding: 48px 0 56px;
     }
-
-    .presha-fcats__heading-wrap {
-      padding: 0 32px;
-      margin-bottom: 28px;
-    }
-
     .presha-fcats__track {
-      gap: 16px;
-      padding: 4px 32px 8px;
+      gap: 24px;
+      padding: 20px 8vw 40px;
     }
-
     .presha-fcats__card {
-      width: 220px;
+      width: 240px;
     }
   }
 
   /* ── Mobile ──────────────────────────────────────────────────── */
   @media screen and (max-width: 749px) {
     .presha-fcats {
-      padding: 40px 0 48px;
+      padding: 60px 0 80px;
     }
-
-    .presha-fcats__heading-wrap {
-      padding: 0 20px;
-      margin-bottom: 24px;
-    }
-
-    .presha-fcats__title {
-      font-size: 24px;
-    }
-
     .presha-fcats__track {
-      gap: 14px;
-      padding: 4px 20px 8px;
+      padding: 10px 40px 40px;
+      gap: 20px;
     }
-
     .presha-fcats__card {
-      width: 180px;
+      width: 200px;
     }
-
-    .presha-fcats__card-img-wrap {
-      border-radius: 10px;
+    .presha-fcats__card:nth-child(even) {
+      margin-top: 24px;
     }
-
     .presha-fcats__card-label {
-      font-size: 13px;
-      margin-top: 10px;
-    }
-  }
-
-  /* ── Reduced motion ──────────────────────────────────────────── */
-  @media (prefers-reduced-motion: reduce) {
-    .presha-fcats__card {
-      transition: none;
-      transform: none !important;
-    }
-    .presha-fcats__card-img {
-      transition: none;
-      transform: none !important;
+      font-size: 20px;
     }
   }
 
@@ -367,14 +406,14 @@
         "heading": "Featured Categories"
       },
       "blocks": [
-        { "type": "category", "settings": { "category_name": "Air Jordan", "collection": "jordan" } },
-        { "type": "category", "settings": { "category_name": "Nike", "collection": "nike" } },
-        { "type": "category", "settings": { "category_name": "On Running", "collection": "on-running" } },
-        { "type": "category", "settings": { "category_name": "Onitsuka Tiger", "collection": "onitsuka-tiger" } },
-        { "type": "category", "settings": { "category_name": "Adidas", "collection": "adidas" } },
-        { "type": "category", "settings": { "category_name": "New Balance", "collection": "new-balance" } },
-        { "type": "category", "settings": { "category_name": "Yeezy", "collection": "yeezy" } },
-        { "type": "category", "settings": { "category_name": "Asics", "collection": "asics" } }
+        { "type": "category", "settings": { "category_name": "Prada" } },
+        { "type": "category", "settings": { "category_name": "Casablanca" } },
+        { "type": "category", "settings": { "category_name": "Hermès" } },
+        { "type": "category", "settings": { "category_name": "Enfants Riches Déprimés" } },
+        { "type": "category", "settings": { "category_name": "Goyard" } },
+        { "type": "category", "settings": { "category_name": "Louis Vuitton" } },
+        { "type": "category", "settings": { "category_name": "Burberry" } },
+        { "type": "category", "settings": { "category_name": "Fear Of God" } }
       ]
     }
   ]
